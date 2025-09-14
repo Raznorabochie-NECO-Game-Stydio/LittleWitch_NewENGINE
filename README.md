@@ -1,6 +1,6 @@
 <div align="center">
   <p>
-    <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/game.jpg" alt="Логотип Little Witch" width="143" />
+    <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/game.jpg" alt="Логотип Little Witch" width="200" />
   </p>
   <h1>Little Witch</h1>
   <p>
