@@ -1,0 +1,26 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/Gallery.rpy", line 1, in script
+    init python:
+  File "game/Gallery.rpy", line 20, in <module>
+    g.transform(slowpan)
+NameError: name 'slowpan' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/Gallery.rpy", line 1, in script
+    init python:
+  File "C:\Users\M0K0t\Documents\Ren`py\renpy-8.3.7-sdk\renpy\ast.py", line 834, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\M0K0t\Documents\Ren`py\renpy-8.3.7-sdk\renpy\python.py", line 1187, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/Gallery.rpy", line 20, in <module>
+    g.transform(slowpan)
+NameError: name 'slowpan' is not defined
+
+Windows-10-10.0.19044 AMD64
+Ren'Py 8.3.7.25031702
+LittleWitch 0.0.3
+Sat Aug 16 11:14:07 2025

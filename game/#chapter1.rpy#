@@ -1,0 +1,1212 @@
+# Отсюда начинается игра.
+label chapter1:
+    
+     #“Привет, путник! Ты забрёл в мои туманные сны, 
+     #где звёзды шепчут древние тайны. Расскажи, что привело тебя к Ведьме 
+     #измерений? Может, вместе мы разгадаем загадки, скрытые в алых снах.”
+     
+    #Прохожу сквозь твой сон и охочусь за интересными историями и тайнами. 
+    #Я Ведьма измерений и снов, блуждающая по фракталу древа миров. 
+    #Я прохожу сквозь твои самые сокровенные мысли и заглядываю в твой подсознание. 
+    #А ты, путник, не спишь ли ты слишком крепко в эту лунную ночь?"
+    
+    #Арка начала
+    stop music
+    scene bg0000a with dissA
+    centered "{color=#d16f6a}{i}Ведьма снов и туманных дождей с черных скал. {/i}{/color}"
+    centered "{color=#d16f6a}{i}Ведьма измерений. Гуляющая сама по себе по фракталу древа миров мечтающая когда-нибудь приблизиться к Грани и обрести свое собственное Имя. {/i}{/color}"
+    centered "{color=#d16f6a}{i}И собирающая интересные истории. {/i}{/color}"
+    centered "{color=#d16f6a}{i}Обожающая в жару нагишом купаться в ледяных ручьях, спать под открытым звездным небом и любоваться им.{/i}{/color}"
+    
+    centered "{color=#ff0000}{b}{size=+8}Иллюзорные Записки Маленькой Ведьмы{/size}{/b}{/color}"
+    centered "{color=#ff0000}{b}{size=+8}Сон: Покой Льда, Песнь Океана{/size}{/b}{/color}"
+    centered "{color=#ff0000}{b}{size=+8}Глава. Сон Страны Грёз{/size}{/b}{/color}"
+    #play music  "Sound/BGM_008.mp3" fadein 1.5
+    scene bg0000 with dissolve
+    centered "{color=#7fbdbf}{i}Маленькая колдунья – шаманка, путешествующая по алым снам. {/i}{/color}"
+    centered "{color=#7fbdbf}{i}Тихоня и шалунья, любящая подглядывать за снами людей.{/i}{/color}"
+    centered "{color=#d16f6a}{i}Кругом-кругом всё кружит карусель,{/i}{/color}"
+    centered "{color=#d16f6a}{i}Кругом-кругом всё быстрей...{/i}{/color}"
+    centered "{color=#d16f6a}{i}Ты без забот приди на наш фестиваль,{/i}{/color}"
+    centered "{color=#d16f6a}{i}Кругом-кругом с ними кружись{/i}{/color}"
+    centered "{color=#d16f6a}{i}Давай-давай, ведь уже все собрались{/i}{/color}"
+    centered "{color=#d16f6a}{i}Кругом-кругом кружатся все,{/i}{/color}"
+    centered "{color=#d16f6a}{i}В страну фантазий тут все собрались.{/i}{/color}"
+    
+    scene bg0001 with dissA
+    
+    e "{i}Проснулась маленькая девочка в кровати тёплой{/i}"
+    e "{i} и выглянула в окно - там горела январская холодная звезда. {/i}"
+    e "{i}Она вынырнула из постели и выбралась в окно - там ждала её судьба.{/i}"
+    
+    scene bg0002 with dissolve
+    scene bg0002 at Zoom((1920, 1080), (0, 0, 1920, 1080), (540, 130, 370, 250), 5.0)
+    
+    e "{i} Тёмным был путь, но сверкала звезда.{/i}"
+    e "{i}Горела в ночи и манила в пути безграничных дорог, причудливых снов и невозможных приключений.{/i} "
+
+    scene bg0000
+    with dream
+    #stop music fadeout 1.0
+    e "..."
+    e "...."
+    #play music "" fabein 1.5
+    scene bg0003 at Pan((0, 0), (0, 1550), 35.0)
+    with circleirisout
+    $ renpy.pause(5.0)
+    
+    e "Мир без названия, снежный мир, холодный мир."
+    e "Под чёрными небесами несётся твердыня. "
+    e "Огромный, скованный льдом живой океан словно составляет этот безымянный мир, и только пара скальных островов вздымается из чёрных бушующих вод его. "
+    e "Безымянная планета, затерянная в тени газового гиганта, колоссальной громады вечных бурь, нависшей над ней словно скала, протянув свои прекрасно-изящные кольца. "
+
+    scene black
+    with dream
+    scene bg0004
+    $ renpy.pause(7.0) 
+    
+    scene bg0005
+    show LW_NormBust_01 at screen_center_01 onlayer sloi02 
+    show NA at loposC onlayer sloi03
+    show sn onlayer sloi04
+    with diss
+    #play nature "Zvuki/turbine_loop_1.wav" fadein 1.0
+    #$ renpy.music.set_volume (0.6, .5, channel = "nature")
+    #$ renpy.pause(0.5)
+
+    e "На берегу замерзающего океана живёт Маленькая ведьма, когда-то нашедшая этот мир. "
+    e "Впрочем, она только учится у Наставницы, Хранительницы бездны миров, "
+
+    #stop nature fadeout 1.5
+    hide NA onlayer sloi03
+    hide sn onlayer sloi04
+    scene bg0006 
+    with diss
+
+    e "и считает себя просто маленькой девочкой, такой же, как и другие девочки. "
+
+    hide  LW_NormBust_01 onlayer sloi02
+    show LW_NakBust_a_04 at screen_center_01 onlayer sloi02 
+    with dissolve
+    #show C at loposC onlayer sloi03
+    #show LW_NakBust_a_04 at screen_right_01 onlayer sloi02 with move
+    
+    e "Ну… или не совсем такой, потому что у неё нет имени. "
+    e "Называли её по-разному,"
+
+    hide LW_NakBust_a_04 onlayer sloi02 
+    show LW_NakBust_a_01 at screen_center_01 onlayer sloi02 
+    with dissolve
+    
+    e " кто на что горазд: {w=1} кто называл её Тихоней, {w=1} кто-то Шалуньей, {w=1} а некоторые и вовсе Туфелькой. "
+
+    #hide D onlayer dexm
+    hide LW_NakBust_a_01 onlayer sloi02
+    show LW_NakBust_a_07 at screen_center_01 onlayer sloi02 
+    with dissolve
+    #show SHT at loposC onlayer dexm with dissolve
+    scene bg0008 with diss
+
+    e "У неё было множество имён, {w=1} но не одного настоящего, и множество прозвищ, "
+    e "но не одного истинного, {w=1} принадлежащего только ей одной… "
+
+    #hide SHT onlayer dexm
+    hide LW_NakBust_a_07 onlayer sloi02
+    show LW_NakBust_a_08 at screen_center_01 onlayer sloi02 
+    show SNO at loposC onlayer sloi03 with dissolve
+    scene a0008 
+    with diss
+
+    
+    e " Иногда она думает о себе как о снежинке, что парит у чуждого маленького солнца... "
+
+    hide LW_NakBust_a_08 onlayer sloi02
+    hide SNO onlayer sloi03
+    scene bg0009
+    with diss
+
+    e "И даже оно не одно: {w=1} их три. "
+    e "Одно - маленькое и белое, {w=1} два других – больше: оранжевое и красное."
+    e "...."
+    
+    scene bg0007 at Pan((0, 2380), (0, 0), 45.0) with fade
+    #play nature "Zvuki/se-ocean.wav" fadein 0.5
+    #$ renpy.music.set_volume (0.5, .5, channel = "nature")
+    #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
+    #$ renpy.music.set_volume (0.5, .5, channel = "natu")
+    $ renpy.pause(5.0)
+
+
+    e "С башни старого каменного маяка глазами температуры сна мира она смотрит вверх на парящую луну в зените небосвода,"    
+    e " и ещё несколько лун серпиками виднеются в сумрачной дали. "
+    
+    $ renpy.pause(2.0)
+    #play sound "Zvuki/wind-05.mp3" fadein 0.5
+    #$ renpy.music.set_volume (0.3, .5, channel = "nature")
+
+    e "И маленькое белое солнышко, едва освещающее этот мир. "
+    e "Мир из планет и спутников водит бесконечный хоровод вокруг маленькой умирающей звезды, а сама звёздочка вокруг двух других вращающихся солнц,"
+
+    #stop nature fadeout 1.5
+    $ renpy.pause(2.0)
+
+    e " и эти другие солнца согревают её по очереди. "
+    
+    $ renpy.pause(2.0)
+    #stop natu fadeout 1.5
+    scene bg0010 with teleport
+    #play sound "Zvuki/wind-05.mp3"
+
+    
+    e "Но каждые тысячу оборотов вокруг звезды мир на планете океана превращается в маленький белый комочек, от которого отдаляются все звёзды, кроме маленькой. "
+
+    #play sound "Zvuki/veter_02.mp3" fadein 0.5
+    scene bg0011 with diss
+    #$ renpy.pause(5.0)
+
+    e "Долгая зимняя ночь, в которой царят холод и одиночество... "
+    
+    scene bg0012 with dissA
+
+    e "И хочется Ведьме согреть мир в ладошках, а временами – между бёдер..."
+    
+    #stop music fadeout 1.0
+    e "........"
+    scene bg0000 
+    with dream
+    scene bg0005 
+    show sn onlayer sloi03
+    show LW_NormBust_01 at screen_right_01 onlayer sloi02 
+    with circleirisout
+    #play music "Zvuki/Missile 45.wav" fadein 1.5
+    
+    e "Зима уже недалеко, и океан вот-вот покроется льдом до самого горизонта. "
+    
+    e "С верхней смотровой площадки при яростном свете факела термоядерного маяка, что освещает мир ночью, "
+
+    #play sound "Zvuki/turbine_loop_1.wav" fadein 0.5
+    
+    e "создавая маленькое солнце на своей вершине, невозможно будет рассмотреть край белой скорлупы, сковавшей планету, вплоть до очередного лета. "
+
+    #play sound "Zvuki/se-gale.wav" fadein 0.5
+
+    e "Вырабатывая термоядерную энергию."
+    
+    #вставит фон радиомачты
+    
+    e "Старый Маяк непрерывно посылает короткие радиосигналы в космос:"
+    
+    hide sn onlayer sloi03
+    hide LW_NormBust_01 onlayer sloi02
+    scene bg0013 at Pan((0, 2480), (0, 0), 35.0) 
+    with fade
+    #stop music fadeout 1.0
+    #stop sound
+    #play sound "Zvuki/Sound_05993.mp3" 
+
+
+    $ renpy.pause(4.0)
+    centered "{i}Бип… Бип… Бип…{/i} "
+    $ renpy.pause(4.0)
+    centered "{i}Бип… Бип… Бип…{/i} "
+    $ renpy.pause(4.0)
+    centered "{i}Бип… Бип… Бип…{/i} "
+    $ renpy.pause(4.0)
+    scene bg0014 with dissA
+
+    e "Разносилась по мертвому бездонному космосу."
+    e "Безмолвный крик, бездны миров."
+    
+    scene bg0018 with tlcenteriss
+    #play music "Zvuki/Missile 45.wav" fadein 1.5
+    #play sound "Zvuki/se-gale.wav" fadein 0.5
+
+
+
+    e "Бушующие ураганы короткого лета, истрепавшие прибрежные пески, пройдут,"
+
+    scene bg0005 
+    show sn onlayer sloi03
+    show LW_NakBust_a_02 at screen_right_01 onlayer sloi02 
+    with tlcenteriss
+    $ renpy.pause(4.0)
+    hide LW_NakBust_a_02 onlayer sloi02
+    show LW_NakBust_a_06 at screen_right_01 onlayer sloi02
+    with diss
+    #$ renpy.pause(4.0)
+    
+    e "уступив холодным ветрам, дующим с горизонта. "
+
+    hide sn onlayer sloi03
+    hide LW_NakBust_a_06 onlayer sloi02
+    #stop music fadeout 1.0
+    scene bg0000
+    with diss
+    e "..."
+    scene bg0019 with diss
+    #play music "Zvuki/OCEAN.WAV" fadein 1.5
+    $ renpy.pause(3.0)
+
+    
+    e " Мир есть океан. "
+    e "Океан бушующий, сильный, свирепый, поражающий своей красотой, своей безудержной силой. "
+
+    #stop music fadeout 1.5
+    e "....."
+    
+    #play sound "Zvuki/veter_02.mp3" fadein 0.5
+    #play music "Sound/BGM_020.mp3" fadein 2.0
+    scene bg0020 with dissA
+    #scene bg0000 with diss
+    #show LW_Spin_c_01 at left
+
+    e "Но зимой он становится тихим, спокойным и умиротворённым, и кажется, что вся планета засыпает, погружаясь в ледяной сон разума. "
+    
+    e "......"
+    scene bg0005 
+    show sn onlayer sloi03
+    show LW_NakBust_a_02 at screen_right_01
+    with leftiss
+    $ renpy.pause(3.0)
+    show LW_NakBust_a_02 at screen_center_01 with move
+    hide LW_NakBust_a_02
+    show LW_NakBust_a_06 at screen_center_01
+    with dissolve
+    #play music "Zvuki/OCEAN.WAV" fadein 1.5
+    #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
+    #$ renpy.music.set_volume (0.5, .5, channel = "natu")
+
+
+    e "Шум прибоя доносятся снизу, волны - гигантские громады мрачной воды - разбиваются об острые скалы, оставляя после себя облака мелкой ледяной взвеси,"
+
+    #play sound "Zvuki/veter_02.mp3"
+    hide LW_NakBust_a_06
+    show LW_NakBust_a_07 at screen_center_01
+    with dissolve
+    show GI at loposC onlayer sloi03
+    
+    e " иногда долетающей чуть ли не до смотровой площадки. "
+    
+    hide LW_NakBust_a_07
+    show LW_NakBust_a_08 at screen_center_01
+    with dissolve
+
+
+    e "Маленькой ведьме казалось, что и жизнь - и есть океан,"
+    e " такой же бушующий, такой же переменчивый и непредсказуемый. "
+
+    hide GI onlayer sloi03
+    #show TC at loposC onlayer demo
+    hide LW_NakBust_a_08
+    show LW_NakBust_a_05 at screen_center_01
+    with dissolve
+
+    e "Кинув очередной взгляд в мрачный туманный горизонт, она застыла, как будто кого-то ждала, надеялась, что вот-вот на горизонте появится корабль. "
+
+    hide LW_NakBust_a_05
+    show LW_NakBust_a_07 at screen_center_01
+    with dissolve
+    
+    e "Иногда на неё накатывала волна необъяснимой тоски, надежды и предчувствий. "
+    
+    #play sound "Zvuki/OCEAN.WAV" fadein 0.5
+    hide LW_NakBust_a_07
+    show LW_NorBust_a_01 at screen_center_01
+    with dissolve
+
+    e "Вдохнув морозный соленый воздух и закутавшись потеплее в широкий шарф, обмотанный вокруг её шеи, и накидку,"
+
+    #play sound "Zvuki/veter_02.mp3" fadein 0.5
+    hide LW_NorBust_a_01
+    show LW_NormBust_01 at screen_center_01 
+    with dissolve
+    #hide TC onlayer demo
+
+    e "она резко развернулась на каблуках шнурованных сапог."
+
+    hide sn onlayer sloi03
+    hide LW_NormBust_01 with moveoutleft
+    $ renpy.pause(2.0)
+    scene bg0022 
+    show LW_NormaBust_a_02 at right
+    with diss
+    
+
+    e "Ветер свистел в ушах, едва не сдувая её широкополую шляпу, которую она придерживала рукой. "
+    
+    hide LW_NormaBust_a_02
+    show LW_NormaBust_a_01 at right 
+    with dissA
+    
+    e "Он развивал её белые будто снег волосы, заплетенные в косу, и закрепленной заколкой в виде бабочки. "
+
+    hide LW_NormaBust_a_01 with moveoutleft
+    scene bg0023 with light4iss
+    $ renpy.pause(1.0)
+    #play sound "Zvuki/close2.wav"
+    #stop natu fadeout 1.6
+    #stop music fadeout 1.0
+    scene bg0000 
+    with circleirisin
+    $ renpy.pause(1.0)
+    scene bg0031 at Pan((0, 0), (0, 1550), 10.0) with dissA
+    $ renpy.pause(10.0)
+    #play music "Sound/BGM_005.mp3" fadein 1.5
+    #play sound "Zvuki/metal_mechanical_noise.mp3" fadein 3.0
+    #play nature "Zvuki/PDron.mp3" fadein 4.0
+    scene bg0025 
+    with downiss 
+    $ renpy.pause(3.0)
+    scene bg0026
+    show LW_NormFull_01 at center
+    with downiss 
+    #with circlewipe
+    #play natu "Zvuki/kabluki_po_metal.MP3" fadein 0.5
+    
+
+    e "Вот она уже спускалась по внутренней винтовой лестнице, являющейся частью стены, словно резьба в винте."
+
+    #hide LW_NormFull_01
+    #scene bg0000
+    #with circleirisin
+    #scene bg0027 with dissA
+    #with circleirisin
+    #$ renpy.pause(3.0)
+    #scene bg0000
+    #with circleirisin
+    #scene bg0028 with dissA
+    $ renpy.pause(3.0)
+    hide LW_NormFull_01
+    scene bg0000
+    with circleirisin
+    scene bg0030 with dissA
+    $ renpy.pause(3.0)
+    scene bg0000
+    with circleirisin
+    scene bg0029 with dissA
+
+    e "Ступеньки обходили причудливые старые механизмы, назначение которых ведьма не знала. "
+
+    #scene bg0030 with dissA
+    
+    e "Шум её шагов причудливым сюрреалистическим эхом разливался по внутренним помещениям маяка. "
+    
+
+    scene bg0024 at Pan((0, 0), (0, 1550), 20.0) with dissA
+
+    centered "{i}Топ, топ...{/i} "
+  
+    centered "{i}Топ, топ...{/i} "
+ 
+    centered "{i}Ниже и ниже…{/i}"
+   
+    #show LW s01 at right with dissolve
+
+    
+    e "Спускалась она, уже не придерживаясь шершавой стены. "
+    
+    #stop natu fadeout 0.5
+    #stop nature fadeout 1.5
+    #play sound "Zvuki/skrip_dveri.mp3"
+    #stop music fadeout 1.0
+    #hide LW s01 with moveoutright
+    scene bg0000 with fade
+    scene bg0032 at Pan((0, 0), (0, 1550), 10.0) with dissolve
+    $ renpy.pause(3.5)
+    scene bg0000
+    with circleirisin
+    scene bg0027 with dissA
+    with circleirisin
+    $ renpy.pause(3.0)
+    scene bg0000
+    with circleirisin
+    scene bg0028 with dissA
+    $ renpy.pause(3.0)
+    scene bg0033 with dissA
+
+    
+    e "Через минуту она открыла скрипучую дверь и вышла на каменный утес."
+    
+    #play sound "Zvuki/close2.wav"
+    scene bg0000 with dissA
+    e "..."
+   
+    #play nature "Zvuki/Shagi_po_kamnyam_3.MP3" fadein 0.5
+    #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
+    #$ renpy.music.set_volume (0.7, .5, channel = "natu")
+    scene bg0034 at Pan((0, 0), (0, 1550), 10.0) with dissolve
+    $ renpy.pause(10.0)
+
+
+    e "Скалистый берег, мрачный туманный утёс маяка, старая хижина, виднеющаяся в отдалении, "
+
+    scene bg0036 with diss
+    
+
+    e "промерзающая в лютые зимы и подпёртая бревнами с покосившейся стороны,"
+    e " еле охраняемая ветхой протекающей крышей"
+    e "- вот и всё, что оставалось в бесконечной ледяной пустыне этого мирка. "
+
+    scene bg0037
+    show WL_NakFull_a_08 at center
+    show NA at loposCFull onlayer sloi03
+    with downiss
+
+    e "Петляя среди камней, утыканных вокруг, словно зубы древнего чудовища, "
+    e "направилась к своему скромному жилищу,"
+    e "Маленькая ведьма шагами, мерившими тысячелетия, шла вперёд."
+
+    hide WL_NakFull_a_08
+    hide NA onlayer sloi03
+    #stop sound fadeout 1.0
+    #stop nature fadeout 0.5
+    #stop natu fadeout 1.9
+    scene bg0000 
+    with tcenteriss
+    e "...."
+    #play music "Sound/BGM_002.mp3" fadein 2.0
+    scene bg0038 with diss
+    
+
+    e "Этот дом был каменный."
+    e "Сейчас вокруг него стыл сумрак ночи. "
+    e "Странным казалось в нём всё, и в то же время - всё было обычным. "
+    e "Словно кто-то взял и ковырнул её воспоминания и детские мечтания,"
+    e "после чего воплотил их в камне, не став его обтёсывать, но обложил каким-то таинственным заклятием "
+    e "и перенёс назад во времени - так, чтобы когда маленькая ведьма его нашла, дом выглядел старым,"
+    e "но становилось понятным – создан он для неё и поставлен здесь для неё, и дожидается именно её."
+
+    e "..."
+    #play natu "Zvuki/drova.MP3" fadein 0.5
+    #$ renpy.music.set_volume (0.9, .5, channel = "natu")
+    scene bg0041 
+    #show Alaya_01 onlayer sloi02 
+    with tlcenteriss
+
+    
+    e "В этом доме была старая невзрачная мебель: шкаф, стол, пара стульев, комод и кровать."
+    e "И много, много пыли... "
+    e "Сняв с себя тяжелый промокший плащ, она вошла в комнату."
+
+    show LW_NorBust_c_08 at xijena, screen_left_02 with moveinleft
+    #show S02 at loposLX onlayer demo
+
+    
+    e "Она не знала, кто и когда построил этот маяк."
+    e "Она не знала, кто и когда построил хижину."
+
+    hide LW_NorBust_c_08
+    show LW_NorBust_c_06 at xijena, screen_left_02 
+    with dissolve
+    #hide S02 onlayer demo
+    #show S03 at loposLX onlayer demo
+
+    
+    e "Она не знала, кто до неё жил. "
+    e "Она лишь нашла то, что было, спустившись с неба три зимы назад."
+
+    hide LW_NorBust_c_06
+    show LW_NorBust_c_21 at xijena, screen_left_02 
+    with dissolve
+    #hide S03 onlayer demo
+    #show GI at loposLX onlayer demo
+    #LW_NorBust_c_05
+
+    
+    e "И поселилась здесь, храня тепло очага. "
+    
+    hide LW_NorBust_c_21
+    show LW_NorBust_c_05 at xijena, screen_left_02 
+    with dissolve
+
+    e "Она обжила этот дом, и он стал ей родным. "
+    e "Она уже не представляла жизни вне этого холодного мира..."
+    
+    hide LW_NorBust_c_05
+    #hide GI onlayer demo
+    scene bg0000
+    with diss
+    e "...."
+    #stop natu fadeout 1.5
+    #play sound "Zvuki/pechka.mp3" fadein 0.5
+    scene bg0044 with downiss
+    
+    e "Озябшими пальцами, подложив пару поленьев в догорающие угли и подув на них,"
+    e "чтобы едва заметные язычки пламени принялись лизать древесину,"
+
+    #play natu "Zvuki/drova.MP3" fadein 0.5
+    #$ renpy.music.set_volume (1.9, .5, channel = "natu")
+    #play sound "Zvuki/zheleznaya_reshetka.mp3"
+    scene bg0044 
+    show Cainic at pos_Cainic onlayer sloi01
+    show LW_Spin_c_02 at screen_left_03 onlayer sloi03
+    show Alaya_02 onlayer sloi04
+    with diss
+
+    e "она поставила чайник на металлическую решётку кипятиться. "
+
+    #scene bg022 with diss
+    #$ renpy.music.set_volume (0.9, .5, channel = "natu")
+    hide LW_Spin_c_02 onlayer sloi03
+    with diss
+
+    e "В хижине было не теплее, чем на улице, поэтому она поёжилась,"
+
+    scene bg0046
+    hide Cainic onlayer sloi01
+    hide Alaya_02 onlayer sloi04
+    show LW_NormBust_c_01 at xijena, screen_left_02 
+    with diss
+    #play nature "Zvuki/Zvuki.mp3" fadein 1.0
+    #$ renpy.music.set_volume (1.5, .5, channel = "nature")
+    #play sound "Zvuki/teaKettle.mp3"
+
+    e "сидя вплотную к огню и дожидаясь, пока вода в чайнике не вскипит."
+
+    hide LW_NormBust_c_01
+    show LW_NorBust_c_09 at xijena, screen_left_02 
+    with dissolve
+    
+    #voice "Voise/LW/p_29147832_653.mp3"
+
+    LW "{i}- Термодинамическое равновесие!{/i} "
+
+    hide LW_NorBust_c_09
+    show LW_NorBust_c_22 at xijena, screen_left_02 
+    with dissolve
+    
+    e "Подметила она про себя."
+    
+    hide LW_NorBust_c_22
+    show LW_NorBust_c_11 at xijena, screen_left_02 
+    show S01 at loposLX onlayer sloi03
+    with dissolve
+    
+    #voice "Voise/LW/p_29148021_378.mp3"
+
+
+    LW "{i} – Что на улице - то и дома, прям первое начало термодинамики, ни дать ни взять.{/i}"
+    
+    hide S01 onlayer sloi03
+    show STAR_S at FactorZoom(0.0, 0.1, 0.0, opaque = False), loposLX onlayer sloi03
+    hide LW_NorBust_c_11
+    show LW_NorBust_c_21 at xijena, screen_left_02 
+    with dissolve
+    
+    #hide S01 onlayer demo
+    #hide LW v01
+
+    e "Ветер стучался в закрытие ставни, "
+    
+    hide STAR_S onlayer sloi03
+    hide LW_NorBust_c_21
+    show LW_NorBust_c_20 at xijena, screen_left_02 
+    with dissolve
+    
+    e "и единственным источником света в комнате, кроме алых бликов от огня в печке, была маленькая масляная лампадка."
+    e "Тёмно-алая полутьма густых теней выхватывала только общие контуры предметов. "
+
+    #play sound "Zvuki/Tea.mp3" fadein 0.5
+    hide LW_NorBust_c_20
+    scene bg0047 
+    show Alaya_02 onlayer sloi04
+    with diss
+    
+    e "Тем временем, ведьма заварила травяной чай из собранных душистых, приторных трав,"
+    e "которые она нашла и собрала за лето, и налила себе."
+    
+    scene bg0048 
+    hide Alaya_02 onlayer sloi04
+    show Alaya_03 onlayer sloi04
+    with dissolve
+    
+    e "Руки приятно сжимали тепло нагретой глиняной кружки. Она вспомнила душистое вино, которое пила на своей далёкой родине. "
+
+    scene bg0049 with dissolve
+    
+    e "На щеках Маленькой ведьмы снова заиграл румянец от нахлынувших воспоминаний, когда она постаралась вспомнить вкус этого вина. "
+    e "Ностальгия... "
+    e "возможно, тоска по её давно покинутому дому."
+    e "На девочку вновь нахлынули воспоминания..."
+
+    #stop music fadeout 1.0
+    #stop nature fadeout 1.0
+    #stop natu fadeout 1.0
+    hide Alaya_03 onlayer sloi04
+    scene bg0000 
+    with dissA
+    e "..."
+    
+    #play music "Zvuki/atmosfera_pustoty.mp3" fadein 1.5
+    scene bg0050
+    show Alaya_04 onlayer sloi02
+    show Alaya_05 onlayer sloi03
+    show fly onlayer sloi04
+    with pixellate
+
+
+    
+    e "Воспоминания по цветущим садам Азатота, где росли медовые деревья с пурпурными листьями и чудесными сладостными плодами... "
+
+    hide Alaya_04 onlayer sloi02
+    hide Alaya_05 onlayer sloi03
+    hide fly onlayer sloi04
+    scene bg0051 
+    show LW_NFM_01 at pos_cen onlayer sloi03
+    show Mil_01 at pos_cen onlayer sloi04
+    with diss
+    $ renpy.pause(2.0)
+    scene bg0052 with dissA
+    
+
+    
+    e "Девочка была одна, она была всегда одна с того момента, когда она нашла этот мир, "
+
+    scene bg0053 with dissA
+
+    
+    e "спустившись с неба в мыльном пузыре наделенного разумом корабля-оболочки, "
+    
+    scene bg0016 with dissA
+    $ renpy.pause(2.0)
+    scene bg0060 with dissA
+
+    e "и осталась на этих скалах. "
+
+    scene bg0054 with diss
+    $ renpy.pause(2.0)
+    scene bg0055 with dissA
+
+    
+    e "Она была одна, когда путешествовала по чёрным безднам между россыпью звёзд"
+
+    scene bg0056 with diss
+    $ renpy.pause(2.0)
+    scene bg0057 with dissA
+
+    
+    e "и галактик, видела туманности раскалённого светящегося газа, "
+
+    scene bg0058 with dissA
+
+    
+    e "рисующего причудливые узоры причудливыми цветами, преодолевала пылевые холодные облака."
+
+    scene bg0059 with diss
+
+    e "Она была одна и когда покидала чёрные звёзды."
+
+    #stop music fadeout 1.0
+    scene bg0000 
+    hide LW_NFM_01 onlayer sloi03
+    hide Mil_01 onlayer sloi04
+    with dissA
+    e "......"
+    #play music "Sound/3554.mp3" fadein 2.5
+    scene bg0050 
+    show fly onlayer sloi02
+    with teleport
+
+    e "Когда-то Маленькая ведьма жила в причудливом мире,"
+
+    scene bg0061 with dissA
+
+    e " на опушке магического леса чудес, с пурпурными резными листьями"
+    e "и стелящимся в корнях синеватым студнем с красивыми язычками будто пламени,"
+    e " в уютном особняке в западном стиле с башенкой для наблюдения звезд."
+   
+    scene bg0062 with dissA
+
+
+    e "По вечерам она любила, укрывшись в клетчатый плед, разглядывать россыпи звезд на черном куполе небес, "
+    e "собирающихся в яркие неповторимые созвездия, " 
+    e "то тут, то там окрашенные в царственные облака межзвездного газа, сидя на крытом крылечке своего дома,"
+    e "неспешно потягивая сладкое вино из глиняной кружки. "
+    
+    hide fly onlayer sloi02
+    scene bg0000 with dream
+    e "..."
+    scene bg0063 at Pan((0, 1347), (1019, 0), 40.0)  with pixellate
+    show bg0064 at Pan((0, 1000), (0, 0), 38.0) with dissA
+    $ renpy.pause(10.0)
+
+    e "Любила смотреть на Иггдрасиль."
+    e "Огромное великое Древо Жизни, соединяющего миры."
+    e "Иггдрасиль - висящий в огромном мыльном пузыре, на орбите планеты, с корнями, уходивщими в космос, "
+    e "которому поклоняются как даровавшему жизнь и мудрость. "
+    e "Его изумрудная листва блистала каплями росы, отражая свет, источая гротескные видения снов непостоянных форм, "
+
+
+    hide bg0064
+    scene bg0065 at Pan((0, 0), (0, 1100), 15.0) with diss
+    $ renpy.pause(1.0)
+    scene bg0066 at Zoom((1920, 1080), (225, 150, 400, 300), (0, 0, 1920, 1080), 15.0) with dissA
+    $ renpy.pause(1.5)
+    scene bg0067 at Pan((0, 0), (0, 900), 20.0) with dissA
+    
+
+    e "а гигантский необхватный ствол покрытый мхом и грибными наростами чаг, "
+    e "источавшими призрачный свет, разрастался раскидистыми ветвями, "
+    e "на которых блестели хрустальные грозди миров, плывущие в грезах мироздания. "
+
+    scene bg0068 with diss
+
+    e "На тёмной, висящей неподвижно луне, рядом с древом, были страшные высокие башни из чёрного металла, древнего града,"
+    e "построенного и покинутого обитателями не подающейся разуму древности, Великими Драконами в начале всех начал. "
+
+    scene bg0066 with diss
+    show starA at Position(xpos = 370, ypos = 280, xanchor = 0.5, yanchor = 0.5) onlayer sloi03
+
+    e "И бездны расщелин, уходящими в таинственные глубины под кору вечного чёрного спутника, "
+    e "где обитали страшные и жуткие создания."
+    e "Там не были властны понятия пространства и времени,"
+    e "оттуда берется магия и время, "
+    
+    show DRC at Position(xpos = 900, ypos = 350, xanchor = 0.5, yanchor = 0.5) onlayer sloi04 with teleport
+
+
+    e "там обитают Великие Драконы - вечные странники междумирья. "
+    e "Иногда, если присмотреться, то можно на вечно черной поверхности различить происходящие время от времени вспышки и сияния. "
+
+    hide starA onlayer sloi03
+    hide DRC onlayer sloi04
+    scene bg0069 
+    with dissA
+
+    e "Так же говорят, что когда-то, давным давно, там жила настоящая Ведьма, "
+
+    scene bg0071 with dissA
+
+    e "присматривающая за мирами, но покинувшая свой дом,"
+
+    scene bg0070 with dissA
+
+    e "отправившись в великий град звёзд."
+
+    
+    e "Где находиться «Звездный Храм»."
+    
+    #stop music fadeout 1.0
+    scene bg0000 with circleirisin
+    e "......"
+    #scene bg0000b with dissA
+
+    #play music "Sound/BGM_011.mp3" fadein 2.0
+
+    
+    centered "{color=#7fbdbf}{i}Какой же была ты, Маленькая ведьма, в глазах твоего отца? Как ему описать тебя? Любящей, прежде всего; любящей и нежной - любящей, как кошка, или же нежной, словно лань...{/i}{/color}"
+
+    scene bg0074
+    show Alaya_04 onlayer sloi02
+    with dissA
+
+    e "Сделав ещё глоток горьковатого напитка, она приготовилась почивать."
+
+    scene bg0075 with fade
+
+    
+    e "Тонкие сны окутали Маленькую ведьму."
+
+    
+    scene bg0077 with dissA
+    hide Alaya_04 onlayer sloi02  with dissA
+    $ renpy.pause(1.0)
+    scene bg0079 
+    #show LW_sl_01
+    with dissA
+
+    e "Маленькой ведьме часто снились непонятные сны."
+
+    scene bg0096 with dissA
+    $ renpy.pause(1.0)
+    scene bg0097 with dissA
+    $ renpy.pause(1.0)
+    scene  bg0098 with dissA
+    $ renpy.pause(1.0)
+    scene bg0081 
+    #hide LW_sl_01
+    with dissA
+    
+    e "Плохие и странные, загадочные и манящие, мистические и фантастические."
+
+    scene bg0082 with dissA
+
+    e "В них Маленькая Ведьма оказывалась в разных, не похожих друг на друга местах, наблюдая и общаясь с сущностями этих странных миров. "
+    e "Маленькая Ведьма боялась этих снов, и в то же время сны манили её, заволакивая в свои чарующие объятия."
+
+    scene bg0000 with teleport
+    $ renpy.pause(.4)
+    scene bg0078 with dissA
+
+    centered "{color=#d16f6a}{i}Мир податлив и мягок – он таков, каким мы его видим. {/i}{/color}"
+    centered "{color=#d16f6a}{i}Измените своё восприятие мира - и он послушно изменится. Это основной закон магии,{/i}{/color} "
+    centered "{color=#d16f6a}{i}и он недоказуем, но однажды испытавший на себе его действие более не поставит его реальность под сомнение.{/i}{/color} "
+    
+
+    scene bg0084 with dissA
+    $ renpy.pause(.5)
+    scene bg0085 with dissA
+    
+
+    e "Так думала Маленькая ведьма, путешествующая по серебряным и алым снам, существуя в них, словно птица в небе. "
+    e "Она была в них свободна и независима, но эта свобода была словно раскаленная игла. Она чувствовала, что постоянно теряет частичку себя в чужих снах. "
+
+    scene bg0084 with dissA
+    $ renpy.pause(.5)
+    scene bg0078 with dissA
+    $ renpy.pause(1.5)
+    scene bg0086 with dissA
+
+    e "Она погрузилась в бездну воспоминаний и сновидений, чему трудно, а может - и вовсе просто невозможно подобрать разумное определение,"
+
+    scene bg0084 with dissA
+    $ renpy.pause(.5)
+    scene  bg0078 with dissA
+    $ renpy.pause(1.5)
+    scene bg0095 with dissA
+
+    e "плутая в лабиринтах смутных видений иллюзий, созерцая проплывающие перед её взором,"
+   
+    scene bg0090 with dissA
+    $ renpy.pause(1.0)
+    scene bg0099 with dissA
+    $ renpy.pause(1.0)
+    scene bg0087 with dissA
+
+
+    e "словно в калейдоскопе, миры, и чьи-то жизни. "
+
+    scene bg0083 with dissA
+    $ renpy.pause(1.0)
+    scene bg0082 with dissA
+    $ renpy.pause(1.0)
+    scene bg0089 with dissA
+
+    e "В своих тонких снах, чистых как горный лёд, она часто созерцаяла причудливые картины пейзажей. "
+
+    scene bg0090 with dissA
+    $ renpy.pause(1.0)
+    scene bg0091 with dissA
+    $ renpy.pause(1.0)
+    scene bg0092 with dissA
+
+    e "И она же путешествовала и по другим мирам, знакомясь с разными живыми, разумными существами... "
+    e "но даже так она оставалась одинокой. "
+    
+    scene bg0094 with dissA
+    
+
+    e "Она не могла назвать их друзьями, даже если они предлагали ей дружбу. "
+    e "Ведьма знала, что стоит ей проснуться - всё распадется; сны не вечны и податливы,"
+
+    scene bg0093 with dissA
+
+    e "словно узор, рисуемый морозом на стекле, распадающийся лишь от лёгкого тёплого дуновения пробуждения."
+
+    scene bg0075 with fade
+
+    e "Что видит Маленькая ведьма, созерцая этот мир? что снится ей?"
+
+    #stop music fadeout 1.0
+    scene bg0000 with fade
+    
+    e "..........."
+    e "....."
+    
+    scene bg0104 with fade
+    
+    e "В сфере, не имеющие названий, в бесчисленные системы миров и солнц, "
+    e "двигающихся с поразительной правильностью,"
+    
+    scene bg0101 with dissA
+    
+    e "где каждое светило является самостоятельным целым"
+    
+    scene bg0109 with dissA
+    
+    e " и в то же время частью целого одним из серебристых островов на сапфировом море, "
+    e "вздымающемся в бесконечном стремлении к переменам."
+    
+    scene bg0103 with dissA
+    
+    e " Она видела Владык Света, которые держат миры невидимыми узами. "
+    
+    scene bg0106 with dissA
+    
+    e " Переходя от звезды к звезде и бросая непрестанное сияние жизни"
+    e " из вечно меняющихся центров до самых последних пределов пространства."
+    
+    scene bg0100 with dissA
+    
+    e " Все это она видела в ясных образах, все космологические эпохи,"
+    e " до предела времен,"
+    e " которого ни один человек не может охватить разумом. "
+    
+    scene bg0105 with dissA
+    
+    e "Проницала она в глубину и высоту и прозревала за пределами всех сфер,"
+    e " всех форм, всех светил, всякого источника движений."
+    
+    scene bg0102 with dissA
+    
+    e " То незыблемое и безмолвно действующее Великое,"
+    e " согласно Которому тьма должна развиваться в свет, смерть - в жизнь, "
+    
+    scene bg0107 at Pan((0, 0), (0, 1550), 35.0)
+    
+    e "пустота - в полноту, бесформенность - в форму, "
+    e "добро - в нечто лучшее, лучшее - в совершеннейшее; "
+    e "это невысказываемое Великое сильнее самих богов: Оно неизменно, "
+    e "невыразимо, первоверховно."
+    e " Это - Власть созидающая, разрушающая и воссоздающая, "
+    e "направляющая все и вся к добру, красоте и истине."
+    
+
+    scene bg0000b with circleirisin
+    e "***************************************"
+    scene bg0000 with dissolve
+    scene bg0078 with dissA
+
+    centered "{color=#d16f6a}{i}Когда вечности суть я познала сама,{/i}{/color}"
+    centered "{color=#d16f6a}{i}Я тебя здесь уже найти не смогла,{/i}{/color}"
+    centered "{color=#d16f6a}{i}В тумане снов своих плывёт{/i}{/color}"
+    centered "{color=#d16f6a}{i}Ярких звёзд водоворот.{/i}{/color}"
+    centered "{color=#d16f6a}{i}Сон единый я создам, о цветах в серебряной ночи,{/i}{/color}"
+    centered "{color=#d16f6a}{i}Как тени этого яркого мира засыпают вечным сном.{/i}{/color}"
+    scene bg0000 with fade
+    centered "{color=#23a7e0}{i} Хранительница бездны миров, её Наставница знает всё. Её волей мир никогда не сходит с означенного круга. Чёрная королева мира.{/i}{/color}"
+    #play music "Sound/ghost-town2.mp3" fadein 1.5
+    e "..."
+    
+    scene bg0108 with pixellate
+
+    
+    e "Уже наступили сумерки, и было темно. "
+    e "Она мягкой походкой спустилась сначала с небольшого холма,"
+    e "покрытого высокой травой, колышущейся от дуновения ночного ветерка, на которой поблёскивали большие капли воды,"
+    e "оставшиеся после дождя. Дорога была усыпана студенистыми лужицами, собравшимися на серой земле под тонкими стеблями. "
+    e "Потянув носиком, она поняла, что скоро будет гроза. "
+    
+    #scene bg057 with rightiss
+
+
+    e "Затем шла вдоль дома на сваях, на берегу озера Хали с неестественно серебристо-белой водой. "
+    e "Остановившись, замедлив бег и по инерции ещё пройдя несколько шагов,"
+    e "Маленькая ведьма очутилась возле порога хижины. "
+
+    
+    #play sound "Zvuki/Nasic01.mp3"
+    #scene bg058 with fade
+    #show bafly_01 at splineBater_01
+    #show bafly_02 at splineBater_02
+    #show bafly_03 at splineBater_03
+    #show bafly_04 at splineBater_04
+
+    
+    
+    
+    e "Над дверью горел фонарик, освещая пядь земли внизу."
+    e "Рядом вились ночные бабочки, порхавшие в нежном танце вокруг его света. "
+    e "Их крылья уже были опалены его жаром, но они продолжали порхать возле огня. "
+    e "Огонь манил этих бабочек, действуя как наркотик. "
+
+    #play sound "Zvuki/open1.ogg"
+    #scene bg000 with light4iss
+    #scene bg040a with circleirisout
+    
+
+    e "Маленькая ведьма, словно не заметив их, спокойно вошла в хижину. "
+    e "В непостижимых, тёмных покоях вне времени под глухую,"
+    e "сводящую с ума жуткую дробь барабанов и тихие монотонные всхлипы проклятых флейт,"
+    e "под чей мерзкий грохот и протяжное дудение медленно, "
+    e "неуклюже и причудливо пляшут гигантские тени неведанных существ,"
+    e "мрачные, безумные Иные боги, чей дух и посланник — ползучий хаос"
+    e "Минуя запредельные бездны,"
+    e " оставляя позади звезды и материальные пространства"
+    e "и метеором несясь сквозь кромешный хаос к непостижимым темным покоям вне времени."
+    e "В кипящем и огненном центре Всего на своем черном троне восседает женщина. "
+
+    
+    #show LW n at left with moveinleft
+    #show TR at Position(xpos = 400, ypos = 0, xanchor = 0, yanchor = 0)
+    #show plate at right
+    #show HM n at right onlayer xra 
+    #with teleport
+
+    
+    e "Её одежда была не поддающейся человеческому описанию, по ней плыли звёзды и галактики."
+
+    #show HM s01 at right onlayer xra with dissolve
+
+    e "А на голове сверкала диадема."
+
+    #show HM r01 at razgavor, right onlayer xra with dissolve
+    #show V at loposR onlayer dexm
+    #voice "Voise/HM/p_29148220_413.mp3"
+
+    
+    HM "- А..А...А...Это ты, Тихоня?"
+
+    #show HM n at right onlayer xra with dissolve
+    #hide V onlayer dexm
+
+    e "Маленькая ведьма кивнула, проходя дальше в комнату. "
+
+    e "Женщина еле заметно улыбнулась, поднимая на неё взгляд глубоких глаз, которым доступна мудрость прожитых времен."
+
+    HM " - Давно ты не наведывалась?"
+
+    LW " - Да, пожалуй."
+
+    HM " - Что привело тебя в мои скромные чертоги?"
+    
+    e "Маленькая ведьма задумалась, перебирая в уме доступные варианты. Потом ответила:"
+
+    LW "- Наверное… {w=1} Я пришла потому, что я хочу больше узнать про магию."
+
+    HM "- И что ты хочешь, чтобы я рассказала тебе? "
+
+    e "Сказала Наставница, протягивая ей руку и приглашая себе поближе, на её запястье сверкали радужные четки, словно гирлянды миров."
+
+    LW "- Как стать настоящей Ведьмой?"
+
+    HM "- Как ты знаешь, "
+
+    HM "магию Ведьмы очень условно можно разделить на два круга внешний и внутренний. "
+
+    HM "Можно сказать, что магия внешнего круга – это искусство изменения мира путем прямого воздействия на окружающее,"
+
+    HM "а магия внутреннего круга – посредством внутренних ментальных тренировок и изменений процессов сознания. "
+
+    HM "Это также множество удивительных событий и явлений, с этими процессами связанных."
+
+    LW "- И как мне это поможет? "
+
+    HM "- Скажи мне, что тебя побуждает к изучению магии?"
+
+    LW "- Наверное... "
+    
+    LW "Я хочу понять, реален ли мир, который окружает меня..."
+
+    HM "- Любопытный вопрос..."
+
+    HM "Ответ... {w=1} Подобный ответ является лишь ментальной установкой, на которой базируется искусственная вера "
+
+    HM "и соответствующая ей внутренняя реальность игры, игры с самой собой."
+
+    LW "- А какой же ответ на самом деле? "
+
+    e "Тогда поинтересовалась Маленькая ведьма, с любопытством смотря на наставницу, наклонив голову на плечо."
+
+    HM "- Единственный честный ответ, который может быть дан"
+
+    HM " это: «- Внутри меня есть нечто, что побуждает меня следовать этому пути». "
+
+    HM "Прислушайся к себе и ощути в себе это «нечто». "
+
+    e "Тогда посоветовала Наставница своей ученице."
+
+    LW "- Это «Нечто», существующее, и есть то, что находится во внутреннем круге магии?"
+
+    HM "— Почему же ты не можешь тогда стать ведьмой? Когда у тебя все лежит на поверхности?"
+
+    HM "Ты путешествуешь по снам, ты летаешь по небу, варишь зелья, и прочее… "
+
+    HM "Но настоящей ведьмой ещё не стала."
+
+    LW "— И почему же?"
+
+    HM "— Ведьма — не та, кто просто летает по небу, варит зелья,"
+
+    HM "Все это ведьме абсолютно без надобности, так… "
+
+    HM "так.. внешние атрибуты. Ведьму определяет место, где она живёт. "
+
+    LW "— Разве мой теперешний дом – неподходящее место? "
+
+    HM "— Совершенно неподходящее. "
+
+    HM "Ведьма живёт не в доме, не в определенном месте, не в средневековых рассказах и легендах. "
+
+    HM "Настоящая ведьма живёт в пограничном состоянии – на границе разума, на границах материй, на границах миров. "
+
+    HM "Не важно: где твое тело, и где твой разум, он всегда должен быть в позиции неопределенности. "
+
+    HM "Чтобы достигнуть этого пограничного состояния, те, кто желают стать ведьмой, используют различные техники. "
+
+    LW "— Просто это в моей природе, "
+
+    LW "Магия снов, и путешествие по ним."
+
+    HM "— И, тем не менее, ты топчешься в последнее время на месте."
+
+    LW "— Я постоянно практикуюсь. "
+    
+    HM "— Это всё техническая сторона дела, ты слишком много о ней думаешь."
+
+    LW " - Расскажите тогда какую-нибудь сказку, которую я не знаю. "
+
+    e "Маленькая ведьма присела около её кресла, положив голову на подлокотник, и просяще посмотрела на Хранительницу"
+
+    LW "- Расскажите, расскажите..."
+
+    HM " - Ты знаешь все сказки мира, "
+
+    HM "ты видишь во снах все миры, которые только существуют, и знаешь все их истории, "
+    
+    HM "которые были когда-либо придуманы. "
+
+    HM "Я не могу рассказать того, что не существует и никогда не существовало."
+
+    LW " - Тогда можете придумать свою историю?"
+
+    LW "Так как вы выдумываете разные миры."
+
+    e "Наставница о чем-то задумалась; Потом она произнесла:"
+
+    HM " - Во всем виноваты читатели."
+
+    LW " - Читатели?! Почему именно читатели? "
+
+    HM " - Потому что авторам приходится выворачиваться, чтобы заинтересовать читателей."
+    
+  
+    HM "Придумывая сюжет, им приходится посылать персонажей в опасные приключения и рисковать ими."
+
+    HM "А читателям ещё попробуй угодить."
+
+    LW " - Но без читателей не было бы и писателей... "
+
+    HM "- Но и без авторов не было бы читателей, получается парадокс."
+
+    LW "- Тогда во всем виноваты критики!"
+
+    HM "- Критики?"
+
+    LW "- Критики..."
+
+    LW "Прочитав произведения автора, они критикуют его, заставляя автора придумывать самые немыслимые приключения"
+
+    LW "для своих персонажей, что бы угодить их вкусу."
+
+    e "Хранительница миров согласилась с мнением Маленькой Ведьмы"
+    
+
+    HM " - Я очень устала, и не смогу сегодня ничего придумать. {w=1} А вот завтра... "
+
+    HM " да, завтра {w=1} ты увидишь новую историю, которую ещё не знаешь." 
+
+    HM "И которая возможно поможет тебе в пути к тому что ты ищешь."
+
+    e "..."
+
+    e "Наставница погрузилась в дрёму. "
+    e "Маленькая ведьма не стала её будить, кинув на наставницу умиленный взгляд. "
+
+    
+    
+    e "Она решила ещё ненадолго остаться в этом уютном домике и потом неслышно выскользнуть наружу, "
+   
+    e "не потревожив её сны."
+
+    e "****************************************************"
