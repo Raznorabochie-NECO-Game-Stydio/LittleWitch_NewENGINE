@@ -1,11 +1,11 @@
 <div align="center">
+  <h1><b>Little Witch</b></h1>
   <p>
     <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.gif" alt="Глав. меню Little Witch" width="800" />
   </p>
-  <h1>Little Witch</h1>
 </div>
 
-Визуальная новелла о маленькой безымянной ведьме.
+### Визуальная новелла о маленькой безымянной ведьме.
 
 ---
 
