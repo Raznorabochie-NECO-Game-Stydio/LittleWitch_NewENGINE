@@ -1,13 +1,6 @@
-<style>
-.rounded-image {
-  border-radius: 20px;
-  overflow: hidden;
-}
-</style>
-
 <div align="center"; border-radius: 5px;>
   <p>
-    <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.gif" alt="Глав. меню Little Witch" width="600" class="rounded-image" />
+    <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.gif" alt="Глав. меню Little Witch" width="600" style="border-radius: 20px;" />
   </p>
   <h1>Little Witch</h1>
 </div>
