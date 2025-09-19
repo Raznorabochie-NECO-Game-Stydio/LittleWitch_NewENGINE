@@ -4,7 +4,7 @@
 <div align="center">
   <hr> 
   <p>
-    <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.gif" alt="Глав. меню Little Witch" width="1000" />
+    <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.gif" alt="Глав. меню Little Witch" width="800" />
   </p>
 </div>
 
