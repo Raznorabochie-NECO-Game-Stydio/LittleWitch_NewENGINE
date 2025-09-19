@@ -4,7 +4,7 @@
 <div align="center">
   <hr> 
   <p>
-    <video src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.mp4" alt="Глав. меню Little Witch" controls width="900" /video>
+    <video src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.webm" alt="Глав. меню Little Witch" controls width="900" /video>
   </p>
 </div>
 
