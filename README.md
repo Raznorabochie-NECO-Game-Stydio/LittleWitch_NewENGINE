@@ -1,7 +1,7 @@
 <div>
   <h1><b>Little Witch</b></h1>
 </div>
-<div>
+<div align="center">
   <hr> 
   <p>
     <img src="https://github.com/Raznorabochie-NECO-Game-Stydio/LittleWitch_NewENGINE/raw/master/main_menu.gif" alt="Глав. меню Little Witch" width="750" />
