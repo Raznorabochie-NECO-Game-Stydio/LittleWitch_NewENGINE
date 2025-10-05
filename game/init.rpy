@@ -932,7 +932,8 @@ $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
 $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 
-# генератор случайных чисел
+#генератор случайных чисел
+$ ran_dig = renpy.random.choice([1,6])
 $ gtm = 0
 $ player_guess = 0
 
