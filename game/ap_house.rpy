@@ -96,9 +96,9 @@ label lest8:
     return
 #КРЫША
 label roof:
-    menu:
+    #menu:
     
-        jump suicide
+    jump suicide
         
     return
 
