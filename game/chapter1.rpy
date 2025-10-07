@@ -1211,6 +1211,7 @@ label chapter1:
 
     e "****************************************************"
     
-    jump chapter2 with diss
+    jump chapter2 
+    #with diss
     
     return
