@@ -194,13 +194,13 @@ label pong:
 
         add pong
 
-        text _("Ты"):
+        text _("gamer"):
             xpos 240
             xanchor 0.5
             ypos 25
             size 40
 
-        text _("Противнег"):
+        text _("AI"):
             xpos (1920 - 240)
             xanchor 0.5
             ypos 25
