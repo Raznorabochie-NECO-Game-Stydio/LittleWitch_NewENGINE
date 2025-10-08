@@ -950,8 +950,8 @@ label chapter1:
     scene bg0075 with fade
 
     
-    e "Тонкие сны окутали Маленькую ведьму."
-
+    e "Маленькой ведьме часто снились непонятные сны."
+    
     
     scene bg0077 with dissA
     hide Alaya_04 onlayer sloi02  with dissA
