@@ -867,7 +867,9 @@ label chapter1:
   
     hide fly onlayer sloi02
     scene bg0000 with dream
+
     e "..."
+
     scene bg0063 at Pan((0, 1347), (1019, 0), 40.0)  with pixellate
     show bg0064 at Pan((0, 1000), (0, 0), 38.0) with dissA
     $ renpy.pause(10.0)
@@ -943,8 +945,8 @@ label chapter1:
     show Alaya_04 onlayer sloi02
     with dissA
 
-    e "Сделав ещё глоток горьковатого напитка, она приготовилась почивать."
-
+    e "Сделав ещё глоток горьковатого напитка, Маленькая Ведьма приготовилась почивать."
+    
     scene bg0075 with fade
 
     
