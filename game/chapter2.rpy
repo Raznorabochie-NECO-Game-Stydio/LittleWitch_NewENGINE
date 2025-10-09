@@ -1,6 +1,6 @@
 label chapter2:
     # глава 02
-    centered "{color=#ff0000}{b}{size=+8}Глава 2. Граница Между Сном и Явью{/size}{/b}{/color}"
+    centered "{color=#ff0000}{b}{size=+10}Глава 2. Граница Между Сном и Явью{/size}{/b}{/color}"
 
     centered "{color=#7fbdbf}{i}А на утро выпал снег.{/i}{/color}"
     centered "{color=#7fbdbf}{i}В моем саду уж не цветет сирен{/i}{/color}"
