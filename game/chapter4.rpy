@@ -1,4 +1,11 @@
 label chapter4:
+
+
+
+
+
+
+
     menu:
     
         "Налево":
@@ -6,7 +13,7 @@ label chapter4:
             menu:
                 "Обойти фонтан.":
                     jump podezd
-                "Поставить бякурен на витрину.":
+                "под арку":
                     jump podezd
             
         "Направо":
