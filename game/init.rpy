@@ -1,8 +1,13 @@
 #ПЕРСОНАЖИ
 #NVL
-define n = Character(None, color="#c8ffc8", kind=nvl)
+define n = Character(None, what_font ="GOST_A.ttf" color="#c8ffc8", kind=nvl)
 #СЮЖЕТНЫЕ 
-define LW = Character('Маленькая ведьма', color="#6f0ead")
+define LW = Character('Маленькая ведьма', color="#6f0ead"
+        outlines = [ (2, "#000000") ],
+        what_size = 35,
+        what_color = "#541f82", 
+        what_outlines = [ (2, "#000000") ],)
+        
 define HM = Character('Хранительница Миров', color="#aaaa00")
 define GO = Character('Голос Океана', color="#063271")
 define FN = Character('Неизвестные', color="#440047")
