@@ -17,7 +17,7 @@ define CO = Character('Корабль-оболочка', color="#51e9e4")
 define CC = Character('Син-Син', color="#6836A1")
 define ZBE = Character('Звездочет', color="#E5CC2A")
 define LO = Character('Лохматый', color="#2ACDE5")
-define e = Character(None, what_size = 35, what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
+define e = Character(None, what_size = 35, what_font = "segoescript.ttf", what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
                         window_background=None,what_xalign = 0.5, 
                         what_text_align = 0.5, cps = 25, 
