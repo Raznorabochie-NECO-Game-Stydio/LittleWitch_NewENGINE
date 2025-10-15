@@ -1,9 +1,22 @@
 #ПЕРСОНАЖИ
 #NVL
-define n = Character(None, color="#c8ffc8", kind=nvl)
+define n = Character(None, what_font ="GOST_A.ttf", color="#c8ffc8", kind=nvl)
 #СЮЖЕТНЫЕ 
-define LW = Character('Маленькая ведьма', color="#6f0ead")
-define HM = Character('Хранительница Миров', color="#aaaa00")
+define LW = Character('Маленькая ведьма', color="#6f0ead",
+        outlines = [ (2, "#000000") ],
+        what_size = 35,
+        what_color = "#541f82", 
+        what_outlines = [ (2, "#000000") ],
+        ctc = anim.Filmstrip(im.FactorScale("images/Ani/CTC.png", 5.0), (100, 100), (4, 1), .50, xpos=1800, ypos=1000, xanchor=0, yanchor=0),
+        ctc_position = "fixed"
+        )
+
+define HM = Character('Хранительница Миров', color="#aaaa00",
+        outlines = [ (2, "#000000") ],
+        what_size = 35,
+        what_color = "#aaaa98",
+        what_outlines = [ (2, "#000000") ])
+
 define GO = Character('Голос Океана', color="#063271")
 define FN = Character('Неизвестные', color="#440047")
 define Doll = Character('Кукла', color="#9A5D9D")
@@ -17,7 +30,7 @@ define CO = Character('Корабль-оболочка', color="#51e9e4")
 define CC = Character('Син-Син', color="#6836A1")
 define ZBE = Character('Звездочет', color="#E5CC2A")
 define LO = Character('Лохматый', color="#2ACDE5")
-define e = Character(None, what_size = 35, what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
+define e = Character(None, what_size = 35, what_font = "segoescript.ttf", what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
                         window_background=None,what_xalign = 0.5, 
                         what_text_align = 0.5, cps = 25, 
