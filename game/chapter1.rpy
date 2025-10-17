@@ -31,7 +31,7 @@ label chapter1:
     centered "{color=#ff0000}{b}{size=+35}The Little Witch{/size}{/b}{/color}"
 
 
-    #$ renpy.pause(2.0)
+    #$ renpy.pause(10.0)
     centered "{color=#d16f6a}{i}Все имена, названия городов, стран, даты и прочие критерии изменены в соответствии с чьей-то совестью. 
         Все совпадения с реальным миром, случайные или намеренные, 
         являются всего лишь одним из бесчисленного множества вариантов развития событий,
@@ -1182,7 +1182,7 @@ label chapter1:
     centered "{color=#d16f6a}{i}Ярких звёзд водоворот.{/i}{/color}"
     centered "{color=#d16f6a}{i}Сон единый я создам, о цветах в серебряной ночи,{/i}{/color}"
     centered "{color=#d16f6a}{i}Как тени этого яркого мира засыпают вечным сном.{/i}{/color}"
-    scene bg000 with dissolve
+    scene bg0000 with dissolve
     centered "{color=#23a7e0}{i} Хранительница бездны миров, её наставница знает всё. Её волей мир никогда не сходит с означенного круга. Чёрная королева мира.{/i}{/color}"
     
     #play music "Sound/ghost-town2.mp3" fadein 1.5
