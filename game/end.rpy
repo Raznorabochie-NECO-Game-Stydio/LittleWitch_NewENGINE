@@ -1,5 +1,5 @@
 label end:
-    jump main_menu
+    #jump main_menu
 return
 
     
