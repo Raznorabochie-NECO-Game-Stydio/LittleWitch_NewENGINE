@@ -83,16 +83,10 @@ label chapter3:
 
         pass
 
+    call chapter3_splashscr
 
-
-
-    centered "{color=#ff0000}{b}{size=+10}Глава 03. Иллюзорная Бесконечная Ночь и Фантастическая Женщина{/size}{/b}{/color}"
-
-    centered "{color=#7fbdbf}{i}В одиночестве она всегда,{/i}{/color}"
-    centered "{color=#7fbdbf}{i}В тумане снов своих плывет.{/i}{/color}"
-    centered "{color=#7fbdbf}{i}И девочки мечта уходит вдаль,{/i}{/color}"
-    centered "{color=#7fbdbf}{i}В веках живя в симметрии грез.{/i}{/color}"
-
+    call chapt3_splashscr
+    
     $ Cha_03 = renpy.random.choice([1, 2])
 
     if Cha_03 == 1:
