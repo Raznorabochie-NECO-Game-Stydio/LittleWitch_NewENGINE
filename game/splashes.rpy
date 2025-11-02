@@ -5,7 +5,6 @@ label splashscreen:
     $ renpy.pause(2)
     hide text with dissolve 
     $ renpy.pause(1)
-    return
 
 screen chapter1_splashscr():
     zorder 100
@@ -18,7 +17,6 @@ screen chapter1_splashscr():
             color "#ff0000"
             bold True
             align (0.5, 0.5)
-    return
 
 screen chapter2_splashscr():
     zorder 100
@@ -26,12 +24,11 @@ screen chapter2_splashscr():
     
     vbox:
         align (0.5, 0.5)
-        text "Глава 03. Иллюзорная Бесконечная Ночь и Фантастическая Женщина":
+        text "Глава 2. Граница Между Сном и Явью":
             size 36
             color "#ff0000"
             bold True
             align (0.5, 0.5)
-    return
     
 screen chapter3_splashscr():
     zorder 100
@@ -45,7 +42,7 @@ screen chapter3_splashscr():
             bold True
             align (0.5, 0.5)
 
-screen chapt3_splashscr(line):
+screen chapt_splashscr(line):
     zorder 100
     modal False
     frame:
@@ -59,28 +56,28 @@ screen chapt3_splashscr(line):
             text_align 0.5
             
 label chapt0_splashscr:
-    show screen chapt0_splashscr("В одиночестве она всегда,")
+    show screen chapt_splashscr("В одиночестве она всегда,")
     with dissolve
     pause 2.0
-    hide screen chapt0_splashscr
+    hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt0_splashscr("В тумане снов своих плывет.")
+    show screen chapt_splashscr("В тумане снов своих плывет.")
     with dissolve
     pause 2.0
-    hide screen chapt0_splashscr
+    hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt0_splashscr("И девочки мечта уходит вдаль,")
+    show screen chapt_splashscr("И девочки мечта уходит вдаль,")
     with dissolve
     pause 2.0
-    hide screen chapt0_splashscr
+    hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt0_splashscr("В веках живя в симметрии грез.")
+    show screen chapt_splashscr("В веках живя в симметрии грез.")
     with dissolve
     pause 3.0  # Дольше на последней строке
-    hide screen chapt0_splashscr
+    hide screen chapt_splashscr
     with dissolve
     return
 
@@ -92,7 +89,7 @@ label chapter1_splashscr:
     with dissolve
     return
     
-label chapt
+#label chapt
     
 label chapter2_splashscr:
     show screen chapter2_splashscr
@@ -112,28 +109,28 @@ label chapter3_splashscr:
 
 label chapt3_splashscr:
      
-    show screen chapt3_splashscr("В одиночестве она всегда,")
+    show screen chapt_splashscr("В одиночестве она всегда,")
     with dissolve
     pause 2.0
-    hide screen chapt3_splashscr
+    hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt3_splashscr("В тумане снов своих плывет.")
+    show screen chapt_splashscr("В тумане снов своих плывет.")
     with dissolve
     pause 2.0
-    hide screen chapt3_splashscr
+    hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt3_splashscr("И девочки мечта уходит вдаль,")
+    show screen chapt_splashscr("И девочки мечта уходит вдаль,")
     with dissolve
     pause 2.0
-    hide screen chapt3_splashscr
+    hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt3_splashscr("В веках живя в симметрии грез.")
+    show screen chapt_splashscr("В веках живя в симметрии грез.")
     with dissolve
     pause 3.0  # Дольше на последней строке
-    hide screen chapt3_splashscr
+    hide screen chapt_splashscr
     with dissolve
     
     return
