@@ -90,43 +90,47 @@ label chapter3:
 
 
 
+    call chapter3_splashscr
 
+    call chapt3_splashscr
+
+    
     #centered "{color=#ff0000}{b}{size=+10}Глава 03. Иллюзорная Бесконечная Ночь и Фантастическая Женщина{/size}{/b}{/color}"
 
     #centered "{color=#7fbdbf}{i}В одиночестве она всегда,{/i}{/color}"
     #entered "{color=#7fbdbf}{i}В тумане снов своих плывет.{/i}{/color}"
     #centered "{color=#7fbdbf}{i}И девочки мечта уходит вдаль,{/i}{/color}"
     #centered "{color=#7fbdbf}{i}В веках живя в симметрии грез.{/i}{/color}"
+    
+    #show screen chapter3_splashscr
+    #with dissolve
+    #pause 2.0
+    #hide screen chapter3_splashscr
+    #with dissolve
 
-    show screen chapter3_splashscr
-    with dissolve
-    pause 2.0
-    hide screen chapter3_splashscr
-    with dissolve
+    #show screen chapt3_splashscr("В одиночестве она всегда,")
+    #with dissolve
+    #pause 2.0
+    #hide screen chapt3_splashscr
+    #with dissolve
 
-    show screen chapt3_splashscr("В одиночестве она всегда,")
-    with dissolve
-    pause 2.0
-    hide screen chapt3_splashscr
-    with dissolve
+    #show screen chapt3_splashscr("В тумане снов своих плывет.")
+    #with dissolve
+    #pause 2.0
+    #hide screen chapt3_splashscr
+    #with dissolve
 
-    show screen chapt3_splashscr("В тумане снов своих плывет.")
-    with dissolve
-    pause 2.0
-    hide screen chapt3_splashscr
-    with dissolve
+    #show screen chapt3_splashscr("И девочки мечта уходит вдаль,")
+    #with dissolve
+    #pause 2.0
+    #hide screen chapt3_splashscr
+    #with dissolve
 
-    show screen chapt3_splashscr("И девочки мечта уходит вдаль,")
-    with dissolve
-    pause 2.0
-    hide screen chapt3_splashscr
-    with dissolve
-
-    show screen chapt3_splashscr("В веках живя в симметрии грез.")
-    with dissolve
-    pause 3.0  # Дольше на последней строке
-    hide screen poetic_text
-    with dissolve
+    #show screen chapt3_splashscr("В веках живя в симметрии грез.")
+    #with dissolve
+    #pause 3.0  # Дольше на последней строке
+    #hide screen poetic_text
+    #with dissolve
 
     scene bg0000
 
