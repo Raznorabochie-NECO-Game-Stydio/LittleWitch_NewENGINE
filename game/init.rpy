@@ -955,6 +955,11 @@ $ ran_dig = renpy.random.choice([1,6])
 $ gtm = 0
 $ player_guess = 0
 
+#$ ran_dig = renpy.random.choice([1,6])
+#$ gtm = 0
+#$ player_guess = 0
+# mci(MENU CHOICE ID)
+$ mci = rgen()
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)
 #renpy.music.register_channel ("natu", "sound", loop=True)
