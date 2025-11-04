@@ -1,28 +1,140 @@
 #ПЕРСОНАЖИ
 #NVL
-define n = Character(None, color="#c8ffc8", kind=nvl)
+define n = Character(None, what_font ="GOST_A.ttf", color="#c8ffc8", kind=nvl)
 #СЮЖЕТНЫЕ 
-define LW = Character('Маленькая ведьма', color="#6f0ead")
-define HM = Character('Хранительница Миров', color="#aaaa00")
-define GO = Character('Голос Океана', color="#063271")
-define FN = Character('Неизвестные', color="#440047")
-define Doll = Character('Кукла', color="#9A5D9D")
-define Cam = Character('Кампанелла', color="#9A5D9D")
-define Ananim = Character('???', color="#009fe6")
-define Shu = Character('Мара', color="#7A0026")
-define men = Character('Байкер', color="#363636")
-define monster = Character('Монстр', color="#063271")
-define FC = Character('Фосфорная Кошка', color="#8560a8")
-define CO = Character('Корабль-оболочка', color="#51e9e4")
-define CC = Character('Син-Син', color="#6836A1")
-define ZBE = Character('Звездочет', color="#E5CC2A")
-define LO = Character('Лохматый', color="#2ACDE5")
-define e = Character(None, what_size = 35, what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
+define LW = Character('Маленькая ведьма', 
+        color="#6f0ead",
+        outlines = [ (2, "#000000") ],
+        what_size = 35,
+        what_color = "#541f82", 
+        what_outlines = [ (2, "#000000") ],
+        ctc = anim.Filmstrip(im.FactorScale("images/Ani/CTC.png", 5.0), (100, 100), (4, 1), .50, xpos=1800, ypos=1000, xanchor=0, yanchor=0),
+        ctc_position = "fixed"
+        )
+
+define HM = Character('Хранительница Миров', 
+        color="#aaaa00",
+        outlines = [ (2, "#000000") ],
+        what_size = 35,
+        what_color = "#aaaa98",
+        what_outlines = [ (2, "#000000") ]
+        )
+
+define GO = Character('Голос Океана', 
+        color="#063271", 
+        outlines = [ (2, "#000000") ],
+        what_size = 25,
+        what_color = "#009fe6",
+        what_outlines = [ (2, "#000000") ]
+        )
+
+define FN = Character('Неизвестные', 
+        color="#440047", 
+        outlines = [ (2, "#000000") ],
+        what_size = 25,
+        what_color = "#6A0026",
+        what_outlines = [ (2, "#000000") ]
+        )
+
+define Doll = Character('Кукла', 
+        color="#9A5D9D",
+        outlines = [ (2, "#000000")],
+        what_size = 25,
+        what_color = "#7D0F80",
+        what_outlines = [ (2, "#000000")]
+        )
+
+define Cam = Character('Кампанелла', 
+        color="#9A5D9D",
+        outlines = [ (2, "#000000")],
+        what_size = 25,
+        what_color = "#7D0F80",
+        what_outlines = [ (2, "#000000")]
+        )
+
+define Ananim = Character('???', 
+        color="#009fe6",
+        outlines = [(2, "#000000")],
+        what_size = 25,
+        what_color = "#440047",
+        what_outlines = [(2, "#000000")]
+        )
+
+define Shu = Character('Мара', 
+        color="#7A0026",
+        outlines = [(2, "#000000")],
+        what_size = 25,
+        what_color = "#EC008C",
+        what_outlines = [(2, "#000000")]
+        )
+
+define men = Character('Байкер', 
+        color="#363636",
+        what_size = 25,
+        what_color = "#A1A1A1",
+        what_outlines = [(2, "#000000")]
+        )
+
+define monster = Character('Монстр', 
+        color="#063271", 
+        outlines = [ (2, "#000000") ],
+        what_size = 25,
+        what_color = "#009fe6",
+        what_outlines = [ (2, "#000000") ]
+        )
+
+define FC = Character('Фосфорная Кошка', 
+        color="#8560a8", 
+        outlines = [ (2, "#000000") ],
+        what_size = 25,
+        what_color = "#5674b9",
+        what_outlines = [ (2, "#000000") ]
+        )
+
+define CO = Character('Корабль-оболочка', 
+        color="#51e9e4",
+        outlines = [(2, "#000000")],
+        what_size = 25,
+        what_color = "#e4e951",
+        what_outlines = [ (2, "#000000") ]
+        )
+
+define CC = Character('Син-Син', 
+        color="#6836A1",
+        outlines = [(2, "#000000")],
+        what_size = 25,
+        what_color = "#A1368E",
+        what_outlines =[(2, "#000000")]
+        )
+
+define ZBE = Character('Звездочет', 
+        color="#E5CC2A",
+        outlines = [(2, "#000000")],
+        what_size = 25,
+        what_color = "#B9FAA5",
+        what_outlines =[(2, "#000000")]
+        )
+
+define LO = Character('Лохматый', 
+        color="#2ACDE5",
+        outlines = [(2, "#000000")],
+        what_size = 25,
+        what_color = "#37646B",
+        what_outlines =[(2, "#000000")]
+        )
+
+# основной стиль текста
+
+define e = Character(None, 
+                        what_size = 35, 
+                        what_font = "segoescript.ttf", 
+                        what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
                         window_background=None,what_xalign = 0.5, 
                         what_text_align = 0.5, cps = 25, 
                         window_xfill = False, 
-                        window_xalign = 0.5)
+                        window_xalign = 0.5
+                        )
 
 #ФОНЫ
 #ПОНГ
@@ -946,6 +1058,15 @@ $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 init python:
     import rgen
     mci = rgen.rgen()
+
+#$ ran_dig = renpy.random.choice([1,6])
+#$ gtm = 0
+#$ player_guess = 0
+# mci(MENU CHOICE ID)
+
+python:
+    import rgen
+    mci = rgen()
 
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)

@@ -1,5 +1,6 @@
-﻿label start:
-
-    jump chapter1
+﻿
+label start:
     
+    jump chapter1
+
     return
