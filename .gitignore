@@ -4,6 +4,7 @@ game/saves/persistent
 *.py~
 *.rpyb
 *.rpyb~
+*.rpymc
 *.save
 *.json
 *.txt
