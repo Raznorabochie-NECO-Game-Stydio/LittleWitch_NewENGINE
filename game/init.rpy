@@ -941,10 +941,12 @@ $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 #$ ran_dig = renpy.random.choice([1,6])
 #$ gtm = 0
 #$ player_guess = 0
+
 # mci(MENU CHOICE ID)
-python:
+init python:
     import rgen
-    mci = rgen()
+    mci = rgen.rgen()
+
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)
 #renpy.music.register_channel ("natu", "sound", loop=True)
