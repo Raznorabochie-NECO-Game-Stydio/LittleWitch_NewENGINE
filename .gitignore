@@ -8,3 +8,4 @@ game/saves/persistent
 *.save
 *.json
 *.txt
+game/tl/None/common.rpymc
