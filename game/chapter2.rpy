@@ -1,11 +1,16 @@
 label chapter2:
     # глава 02
-    centered "{color=#ff0000}{b}{size=+10}Глава 02. Граница Между Сном и Явью{/size}{/b}{/color}"
 
-    centered "{color=#7fbdbf}{i}А на утро выпал снег.{/i}{/color}"
-    centered "{color=#7fbdbf}{i}В моем саду уж не цветет сирен{/i}{/color}"
-    centered "{color=#7fbdbf}{i}В иллюзиях и в мечтаний{/i}{/color}"
-    centered "{color=#7fbdbf}{i}Девочка бродит одна по миру снегов и льда. {/i}{/color}"
+    call chapter_02_splashscr
+
+    #centered "{color=#ff0000}{b}{size=+10}Глава 02. Граница Между Сном и Явью{/size}{/b}{/color}"
+
+    call chapt_02_splashscr
+
+    #centered "{color=#7fbdbf}{i}А на утро выпал снег.{/i}{/color}"
+    #centered "{color=#7fbdbf}{i}В моем саду уж не цветет сирен{/i}{/color}"
+    #centered "{color=#7fbdbf}{i}В иллюзиях и в мечтаний{/i}{/color}"
+    #centered "{color=#7fbdbf}{i}Девочка бродит одна по миру снегов и льда. {/i}{/color}"
 
     e "Ночью пришла снежная буря, принёсшая с собой миллионы острых как бритва снежинок. "
     e "Мир преобразился в белую пустошь. "
