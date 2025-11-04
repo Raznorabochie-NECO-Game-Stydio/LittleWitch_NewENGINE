@@ -1,1 +1,9 @@
 game/saves/persistent
+*.rpy~
+*.rpyc
+*.py~
+*.rpyb
+*.rpyb~
+*.save
+*.json
+*.txt
