@@ -31,6 +31,7 @@ define config.version = "0.0.3"
 
 define gui.about = _p("""
 Автор/Главный кодер/Художник - AngelRanga\n
+Бета ридер, соавтор - Saitar1337\n
 Кодер поменьше - M0K0t\n
 Используемые материалы принадлежат их правообладателям.\n
 """)
@@ -76,13 +77,13 @@ define config.has_voice = True
 
 ## Вход и выход в игровое меню.
 
-define config.enter_transition = dissolve
-define config.exit_transition = dissolve
+define config.enter_transition = pixellate
+define config.exit_transition = pixellate
 
 
 ## Переход между экранами игрового меню.
 
-define config.intra_transition = dissolve
+define config.intra_transition = pixellate
 
 
 ## Переход, используемый после загрузки слота сохранения.
