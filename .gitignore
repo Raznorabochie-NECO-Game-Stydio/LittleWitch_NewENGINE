@@ -9,3 +9,4 @@ game/saves/persistent
 *.json
 *.txt
 game/tl/None/common.rpymc
+game/\#init.rpy\#
