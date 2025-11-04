@@ -107,3 +107,6 @@ label suicide:
     return
 
 #КОРИДОРЫ
+label kor8:
+
+    return

@@ -1072,5 +1072,3 @@ python:
 #renpy.music.register_channel ("nature", "sound", loop=True)
 #renpy.music.register_channel ("natu", "sound", loop=True)
 #renpy.music.register_channel ("natu_fon", "sound", loop=True)
-
-#КОНЦОВКИ

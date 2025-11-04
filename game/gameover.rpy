@@ -1376,7 +1376,7 @@ label game_over:
             
             pass
             
-        elif PP =1:
+        if PP = 1:
             
             centered "{color=#7fbdbf}{i}«Красная магия»{/i}{/color}"
             centered "{color=#7fbdbf}{i}По ниточке, по ниточке{/i}{/color}"
