@@ -7,6 +7,7 @@ label splashscreen:
     $ renpy.pause(1)
 
 # стиль строк к главам
+#Первая
 
 screen chapter01_splashscr():
     zorder 100
@@ -20,17 +21,21 @@ screen chapter01_splashscr():
             bold True
             align (0.5, 0.5)
 
+#Вторая
+
 screen chapter2_splashscr():
     zorder 100
     modal False
     
     vbox:
         align (0.5, 0.5)
-        text "Глава 2. Граница Между Сном и Явью":
+        text "Глава 02. Граница Между Сном и Явью":
             size 36
             color "#ff0000"
             bold True
             align (0.5, 0.5)
+
+#третья
     
 screen chapter3_splashscr():
     zorder 100
@@ -43,6 +48,21 @@ screen chapter3_splashscr():
             color "#ff0000"
             bold True
             align (0.5, 0.5)
+
+#Четвертая
+
+screen chapter4_splashscr():
+    zorder 100
+    modal False
+    
+    vbox:
+        align (0.5, 0.5)
+        text "Глава 04. Иллюзорный Город Куклы":
+            size 36
+            color "#ff0000"
+            bold True
+            align (0.5, 0.5)
+
 
 # стиль строк к эпиграфам
 
@@ -61,7 +81,7 @@ screen chapt_splashscr(line):
             text_align 0.5
 
 
-# стиль строк к эпиграфам
+# стиль строк к эпиграфам доп.
 
 screen chapt_splashscr_01(line):
     zorder 100
@@ -76,7 +96,9 @@ screen chapt_splashscr_01(line):
             italic True
             text_align 0.5
 
-            
+
+# эпиграф заставки игры
+
 label chapt0_splashscr:
     show screen chapt_splashscr("Привет, путник! Ты забрёл в мои туманные сны, ")
     with dissolve
@@ -107,6 +129,7 @@ label chapt0_splashscr:
     return
 
 # главы
+# Первая глава
 
 label chapter_01_splashscr:
     show screen chapter01_splashscr
@@ -117,8 +140,9 @@ label chapter_01_splashscr:
     return
     
 #label chapt
+#Вторая глава
     
-label chapter2_splashscr:
+label chapter_02_splashscr:
     show screen chapter2_splashscr
     with dissolve
     pause 2.0
@@ -126,7 +150,9 @@ label chapter2_splashscr:
     with dissolve
     return
 
-label chapter3_splashscr:
+#Третья глава
+
+label chapter_03_splashscr:
     show screen chapter3_splashscr
     with dissolve
     pause 2.0
@@ -134,18 +160,20 @@ label chapter3_splashscr:
     with dissolve
     return
 
+#Четвертая глава
 
-label chapter4_splashscr:
-    show screen chapter3_splashscr
+label chapter_04_splashscr:
+    show screen chapter4_splashscr
     with dissolve
     pause 2.0
-    hide screen chapter3_splashscr
+    hide screen chapter4_splashscr
     with dissolve
     return
 
 
 # Эпиграфы
 
+# Эпиграф первой главы
 
 label chapt_01_splashscr:
     show screen chapt_splashscr_01("Ведьма снов и туманных дождей с черных скал. ")
@@ -180,6 +208,8 @@ label chapt_01_splashscr:
 
 
     return
+
+#Эпиграф первой главы доп.
 
 label chapt_01_1_splashscr:
 
@@ -228,47 +258,91 @@ label chapt_01_1_splashscr:
 
     return
 
+# Эпиграф второй главы
 
-label chapt2_splashscr:
-    show screen chapt_splashscr
+label chapt_02_splashscr:
+    show screen chapt_splashscr("А на утро выпал снег.")
     with dissolve
-    pause 2.0
+    pause 4.0
     hide screen chapt_splashscr
     with dissolve
+
+    show screen chapt_splashscr("В моем саду уж не цветет сирен")
+    with dissolve
+    pause 4.0
+    hide screen chapt_splashscr
+    with dissolve
+    
+    show screen chapt_splashscr("В иллюзиях и в мечтаний")
+    with dissolve
+    pause 4.0
+    hide screen chapt_splashscr
+    with dissolve
+    
+    show screen chapt_splashscr("Девочка бродит одна по миру снегов и льда. ")
+    with dissolve
+    pause 4.0
+    hide screen chapt_splashscr
+    with dissolve
+    
+
     return
 
-label chapt3_splashscr:
+#Эпиграф третьей главы
+
+label chapt_03_splashscr:
      
     show screen chapt_splashscr("В одиночестве она всегда,")
     with dissolve
-    pause 2.0
+    pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
     show screen chapt_splashscr("В тумане снов своих плывет.")
     with dissolve
-    pause 2.0
+    pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
     show screen chapt_splashscr("И девочки мечта уходит вдаль,")
     with dissolve
-    pause 2.0
+    pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
     show screen chapt_splashscr("В веках живя в симметрии грез.")
     with dissolve
-    pause 3.0  # Дольше на последней строке
+    pause 4.0  # Дольше на последней строке
     hide screen chapt_splashscr
     with dissolve
     
     return
 
-label chapt4_splashscr:
-    show screen chapt_splashscr
+#Эпиграф четвертой главы
+
+label chapt_04_splashscr:
+    show screen chapt_splashscr("Круг единый создав, будут сотни в нём цветов.")
     with dissolve
-    pause 2.0
+    pause 4.0
     hide screen chapt_splashscr
     with dissolve
+
+    show screen chapt_splashscr("Кружится, кружится платья воздушный подол.")
+    with dissolve
+    pause 4.0
+    hide screen chapt_splashscr
+    with dissolve
+
+    show screen chapt_splashscr("В такт движениям танца он плавно парит над цветами.")
+    with dissolve
+    pause 4.0
+    hide screen chapt_splashscr
+    with dissolve
+
+    show screen chapt_splashscr("Цветочный фестиваль иллюзорного мира.")
+    with dissolve
+    pause 4.0
+    hide screen chapt_splashscr
+    with dissolve
+
     return
