@@ -1,5 +1,4 @@
-﻿
-label start:
+﻿label start:
     
     jump chapter1
 
