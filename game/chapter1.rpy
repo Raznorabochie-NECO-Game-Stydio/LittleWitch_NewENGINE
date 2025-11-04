@@ -1120,7 +1120,7 @@ label chapter1:
     #$ Cha_01 = mci
     #return
 
-    if Cha_01 == 1:
+    #if Cha_01 == 1:
     if mci == 1:
         
         scene bg0104 with fade
@@ -1177,7 +1177,7 @@ label chapter1:
 
         pass
     
-    #elif Cha_01 == 2:
+    #elif Cha_01 >= 2:
     elif mci >= 2:
 
         pass
