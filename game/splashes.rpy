@@ -5,6 +5,7 @@ label splashscreen:
     $ renpy.pause(2)
     hide text with dissolve 
     $ renpy.pause(1)
+    return
 
 screen chapter1_splashscr():
     zorder 100
