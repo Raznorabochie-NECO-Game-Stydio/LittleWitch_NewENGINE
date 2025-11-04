@@ -1055,7 +1055,6 @@ $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 #$ player_guess = 0
 
 # mci(MENU CHOICE ID)
-
 init python:
     import rgen
     mci = rgen.rgen()
@@ -1072,7 +1071,6 @@ python:
             return self.current
     
     mci = AutoMCI()
-
 
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)
