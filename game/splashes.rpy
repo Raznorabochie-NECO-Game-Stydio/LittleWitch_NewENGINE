@@ -5,6 +5,7 @@ label splashscreen:
     $ renpy.pause(3)
     hide text with dissolve 
     $ renpy.pause(1)
+    return
 
 # стиль строк к главам
 #Первая

@@ -1066,7 +1066,8 @@ init python:
 
 python:
     import rgen
-    mci = rgen()
+
+define mci = rgen.rgen()
 
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)
