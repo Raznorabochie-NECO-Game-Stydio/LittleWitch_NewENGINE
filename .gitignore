@@ -1,4 +1,5 @@
 /cache/
+/vscode/
 
 chapter1.rpyc
 chapter2.rpyc
@@ -7,3 +8,5 @@ chapter4.rpyc
 chapter4fest.rpyc
 fast_end.rpyc
 errors.txt
+
+settings.json
