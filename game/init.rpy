@@ -1066,8 +1066,16 @@ init python:
 
 python:
     import rgen
-
-define mci = rgen.rgen()
+    
+    class AutoMCI:
+        def __init__(self):
+            self.current = None
+        
+        def __call__(self):
+            self.current = rgen.rgen()
+            return self.current
+    
+    mci = AutoMCI()
 
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)
