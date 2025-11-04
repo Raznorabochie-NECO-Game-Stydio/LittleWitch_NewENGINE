@@ -4,6 +4,9 @@ game/saves/persistent
 *.py~
 *.rpyb
 *.rpyb~
+*.rpymc
 *.save
 *.json
 *.txt
+game/tl/None/common.rpymc
+game/\#init.rpy\#

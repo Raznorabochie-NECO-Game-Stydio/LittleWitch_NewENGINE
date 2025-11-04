@@ -1059,15 +1059,18 @@ init python:
     import rgen
     mci = rgen.rgen()
 
-#$ ran_dig = renpy.random.choice([1,6])
-#$ gtm = 0
-#$ player_guess = 0
-# mci(MENU CHOICE ID)
-
 python:
     import rgen
-
-define mci = rgen.rgen()
+    
+    class AutoMCI:
+        def __init__(self):
+            self.current = None
+        
+        def __call__(self):
+            self.current = rgen.rgen()
+            return self.current
+    
+    mci = AutoMCI()
 
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)
