@@ -1,8 +1,13 @@
 label fast_end:
 
-    $ DEND_01 = renpy.random.choice(['BEND_01', 'BEND_02'])
+    #$ DEND_01 = renpy.random.choice(['BEND_01', 'BEND_02'])
+    
+    $ mci = rgen.rgen() 
+    $ DEND_01 = mci
+    if DEND_01 == 1:
 
-    if DEND_01 == 'BEND_01':
+    #if DEND_01 == 'BEND_01':
+    #if mci == 1:
         
         e "Сердце Маленькой Ведьмы бешено заколотилось, а холодный липкий страх сковал её тело."
         e "В оцепенении она наблюдала за неумолимо надвигавшейся паучихой, острые жала которой готовы впрыснуть в неё яд снов…  "
@@ -38,7 +43,8 @@ label fast_end:
 
         pass
 
-    elif DEND_01 == 'BEND_02':
+    #elif DEND_01 == 'BEND_02':
+    elif DEND_01 == 2:
 
         e "Холодный липкий страх сковал Маленькую Ведьму, "
         e "что в оцепенении наблюдала за неумолимо надвигавшейся паучихой, "
@@ -62,6 +68,12 @@ label fast_end:
         e "****************************"
 
         pass
+
+    else:
+
+        #e "вариант 3"
+
+        jump fast_end
 
     centered "{color=#d16f6a}{i}{size=+45}ПЛОХАЯ КОНЦОВКА. ВЫ ПОГИБЛИ.{/size}{/i}{/color}"
     centered "{color=#7fbdbf}{i}{size=+25}Попробуйте выбрать другой вариант. {/size}{/i}{/color}"
