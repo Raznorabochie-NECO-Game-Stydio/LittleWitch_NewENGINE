@@ -1119,9 +1119,14 @@ label chapter1:
     #$ Cha_01 = renpy.random.choice([1, 2])
     #$ Cha_01 = mci
     #return
+    jump Cha_001
+    return
 
-    #if Cha_01 == 1:
-    if mci == 1:
+label Cha_001:
+
+    $ mci = rgen.rgen() 
+    $ Cha_01 = mci
+    if Cha_01 == 1:
         
         scene bg0104 with fade
     
@@ -1178,9 +1183,16 @@ label chapter1:
         pass
     
     #elif Cha_01 >= 2:
-    elif mci >= 2:
+    elif Cha_01 == 2:
 
         pass
+
+    else:
+
+        #e "вариант 3"
+
+        jump Cha_001
+
     
 
     scene bg0000b with circleirisin
