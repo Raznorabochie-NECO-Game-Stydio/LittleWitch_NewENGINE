@@ -1,14 +1,87 @@
+#генератор случайных чисел
+
+
+#$ ran_dig = renpy.random.choice([1,6])
+$ gtm = 0
+$ player_guess = 0
+#$ mci = 0
+
+# mci(MENU CHOICE ID)
+
+init python:
+    import rgen
+    mci = rgen.rgen()
+
+python:
+    import rgen
+    
+    class AutoMCI:
+        def __init__(self):
+            self.current = None
+        
+        def __call__(self):
+            self.current = rgen.rgen()
+            return self.current
+    
+    mci = AutoMCI()
+
+#python:
+#    import rgen
+
+#define mci = rgen.rgen()
+#$ mci = rgen.rgen()
+#define Cha_01 = mci
+
+#ПЕРЕМЕННЫЕ
+
+$ ppoints = 0
+$ PP = 0
+$ DollCam = False
+$ Room_01 = False
+$ Room_02 = False
+$ Room_03 = False
+$ KupeRoom01 = False
+$ KupeRoom02 = False
+$ WCRoom = False
+$ WCC = False
+$ Wite = False
+$ Jurnal = False
+$ Key = False
+$ Key_N = False
+
+$ brightness_opacity = brightness * opacity
+$ fraktal_04_opacity = fraktal_04 * opacity
+$ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
+
+
+#задаем дополнителные звуковые каналы
+#renpy.music.register_channel ("nature", "sound", loop=True)
+#renpy.music.register_channel ("natu", "sound", loop=True)
+#renpy.music.register_channel ("natu_fon", "sound", loop=True)
+
+
 #ПЕРСОНАЖИ
 #NVL
+
 define n = Character(None, what_font ="GOST_A.ttf", color="#c8ffc8", kind=nvl)
+
 #СЮЖЕТНЫЕ 
+
 define LW = Character('Маленькая ведьма', 
         color="#6f0ead",
         outlines = [ (2, "#000000") ],
         what_size = 35,
         what_color = "#541f82", 
         what_outlines = [ (2, "#000000") ],
-        ctc = anim.Filmstrip(im.FactorScale("images/Ani/CTC.png", 5.0), (100, 100), (4, 1), .50, xpos=1800, ypos=1000, xanchor=0, yanchor=0),
+        ctc = anim.Filmstrip(im.FactorScale("images/Ani/CTC.png", 5.0), 
+                            (100, 100), 
+                            (4, 1), 
+                            .50, 
+                            xpos=1800, 
+                            ypos=1000, 
+                            xanchor=0, 
+                            yanchor=0
+                            ),
         ctc_position = "fixed"
         )
 
@@ -23,7 +96,7 @@ define HM = Character('Хранительница Миров',
 define GO = Character('Голос Океана', 
         color="#063271", 
         outlines = [ (2, "#000000") ],
-        what_size = 25,
+        what_size = 35,
         what_color = "#009fe6",
         what_outlines = [ (2, "#000000") ]
         )
@@ -31,7 +104,7 @@ define GO = Character('Голос Океана',
 define FN = Character('Неизвестные', 
         color="#440047", 
         outlines = [ (2, "#000000") ],
-        what_size = 25,
+        what_size = 35,
         what_color = "#6A0026",
         what_outlines = [ (2, "#000000") ]
         )
@@ -39,7 +112,7 @@ define FN = Character('Неизвестные',
 define Doll = Character('Кукла', 
         color="#9A5D9D",
         outlines = [ (2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#7D0F80",
         what_outlines = [ (2, "#000000")]
         )
@@ -47,7 +120,7 @@ define Doll = Character('Кукла',
 define Cam = Character('Кампанелла', 
         color="#9A5D9D",
         outlines = [ (2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#7D0F80",
         what_outlines = [ (2, "#000000")]
         )
@@ -55,7 +128,7 @@ define Cam = Character('Кампанелла',
 define Ananim = Character('???', 
         color="#009fe6",
         outlines = [(2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#440047",
         what_outlines = [(2, "#000000")]
         )
@@ -63,14 +136,14 @@ define Ananim = Character('???',
 define Shu = Character('Мара', 
         color="#7A0026",
         outlines = [(2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#EC008C",
         what_outlines = [(2, "#000000")]
         )
 
 define men = Character('Байкер', 
         color="#363636",
-        what_size = 25,
+        what_size = 35,
         what_color = "#A1A1A1",
         what_outlines = [(2, "#000000")]
         )
@@ -78,7 +151,7 @@ define men = Character('Байкер',
 define monster = Character('Монстр', 
         color="#063271", 
         outlines = [ (2, "#000000") ],
-        what_size = 25,
+        what_size = 35,
         what_color = "#009fe6",
         what_outlines = [ (2, "#000000") ]
         )
@@ -86,7 +159,7 @@ define monster = Character('Монстр',
 define FC = Character('Фосфорная Кошка', 
         color="#8560a8", 
         outlines = [ (2, "#000000") ],
-        what_size = 25,
+        what_size = 35,
         what_color = "#5674b9",
         what_outlines = [ (2, "#000000") ]
         )
@@ -94,7 +167,7 @@ define FC = Character('Фосфорная Кошка',
 define CO = Character('Корабль-оболочка', 
         color="#51e9e4",
         outlines = [(2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#e4e951",
         what_outlines = [ (2, "#000000") ]
         )
@@ -102,7 +175,7 @@ define CO = Character('Корабль-оболочка',
 define CC = Character('Син-Син', 
         color="#6836A1",
         outlines = [(2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#A1368E",
         what_outlines =[(2, "#000000")]
         )
@@ -110,7 +183,7 @@ define CC = Character('Син-Син',
 define ZBE = Character('Звездочет', 
         color="#E5CC2A",
         outlines = [(2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#B9FAA5",
         what_outlines =[(2, "#000000")]
         )
@@ -118,7 +191,7 @@ define ZBE = Character('Звездочет',
 define LO = Character('Лохматый', 
         color="#2ACDE5",
         outlines = [(2, "#000000")],
-        what_size = 25,
+        what_size = 35,
         what_color = "#37646B",
         what_outlines =[(2, "#000000")]
         )
@@ -137,9 +210,13 @@ define e = Character(None,
                         )
 
 #ФОНЫ
+
 #ПОНГ
+
 image bg pong field = "images/pong/pong_field.png"
+
 ################################################################################
+
 #СЮЖЕТНЫЕ
 image bg0000 = "images/BG/Blek.jpg"
 image bg0000a = "images/BG/0000a.jpg"
@@ -356,10 +433,13 @@ image bg0109 = "images/BG/0098.jpg"
 #image F_masked = im.AlphaMask("Mask.png", "pod.png")
     
 #концовки
+
 image DEnd = "images/BG/Deathend.jpg"
 
 #СПРАЙТЫ
+
 #МАЛЕНЬКАЯ ВЕДЬМА
+
 # в полный рост
 image LW_NormFull_01 = anim. SMAnimation("ax",
     anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma01.png", 0.1, 0.1)),
@@ -686,22 +766,30 @@ image Alaya_05 = im.Alpha("images/Logo/Alaya_IU_04.png", 0.5)
 
     
 # анимации природных явлений и прочих эффектов
+
+# Нота
 image NA = Animation(
     "images/Ani/N01.png", 0.5,
     "images/Ani/N03.png", 0.5, 
     "images/Ani/N02.png", 0.5
     ) 
-    
+
+# дождь
+
 image rain = SnowBlossom(anim.Filmstrip(
     "images/Ani/H2O.png", (20, 20), (2, 1), .25), 
     count=30, border=50, xspeed=(50, 50), yspeed=(400, 400), start=0,  fast=True
     )
     
+# Бризги
+
 image sn = SnowBlossom(anim.Filmstrip(
     "images/Ani/BZ.png", (20, 20), (2, 1), .25), 
-    count=50, border=10, xspeed=(100, 400), yspeed=(100, 400), start=0,  fast=False
+    count=80, border=10, xspeed=(100, 400), yspeed=(100, 400), start=1,  fast=False
     )
     
+# Снег
+
 image snow = SnowBlossom(anim.Filmstrip(
     "images/Ani/snow.png", (20, 20), (4, 1), .25), 
     count=60, border=1, xspeed=(10, 10), yspeed=(10, 100), start=0,  fast=True
@@ -711,12 +799,14 @@ image pe = SnowBlossom("images/Ani/pepel.png",
     count=60, border=1, xspeed=(10, 10), yspeed=(10, 100), start=0,  fast=True
     )
     
+# светлячки 
+
 image fly = SnowBlossom(anim.SMAnimation(
     "rrr",
     anim.State("rrr", anim.Filmstrip("images/Ani/fly01.png", (20, 20), (2,1), .50)), 
-    anim.State("ggg", anim.Filmstrip("images/ani/fly02.png", (20, 20), (2,1), .50)),
-    anim.State("bbb", anim.Filmstrip("images/ani/fly03.png", (20, 20), (2,1), .50)),
-    anim.State("ccc", anim.Filmstrip("images/ani/fly04.png", (20, 20), (2, 1), .50)),
+    anim.State("ggg", anim.Filmstrip("images/ani/fly02.png", (20, 20), (2,1), .60)),
+    anim.State("bbb", anim.Filmstrip("images/ani/fly03.png", (20, 20), (2,1), .70)),
+    anim.State("ccc", anim.Filmstrip("images/ani/fly04.png", (20, 20), (2,1), .80)),
     
     anim.Edge("rrr", 10.0, "ggg"),
     anim.Edge("rrr", 10.0, "bbb"),
@@ -735,7 +825,7 @@ image fly = SnowBlossom(anim.SMAnimation(
     anim.Edge("ccc", 10.0, "ggg")
     ), 
      
-    count=10, border=1, xspeed=(-10, -10), yspeed=(-10, -10), start=0,  fast=True
+    count=50, border=1, xspeed=(-20, -20), yspeed=(-20, -20), start=100,  fast=True
     )
     
 image starA = Animation(
@@ -1018,7 +1108,9 @@ define color_01 = im.matrix(
                     0, 1, 0, 0, .1,
                     0, 0, .9, 0, .1,
                     0, 0, 0, 1, 0 ])
+
 #МЕНЮ ЭКСТРА
+
 image extra neutral:
     "images/sprites/xtra/001.png"
     pause 0.1
@@ -1029,59 +1121,6 @@ image extra neutral:
     "images/sprites/xtra/004.png"
     pause 0.1
     repeat
-#ПЕРЕМЕННЫЕ
-$ ppoints = 0
-$ PP = 0
-$ DollCam = False
-$ Room_01 = False
-$ Room_02 = False
-$ Room_03 = False
-$ KupeRoom01 = False
-$ KupeRoom02 = False
-$ WCRoom = False
-$ WCC = False
-$ Wite = False
-$ Jurnal = False
-$ Key = False
-$ Key_N = False
 
-$ brightness_opacity = brightness * opacity
-$ fraktal_04_opacity = fraktal_04 * opacity
-$ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
-
-#генератор случайных чисел
-
-
-#$ ran_dig = renpy.random.choice([1,6])
-$ gtm = 0
-$ player_guess = 0
-# mci(MENU CHOICE ID)
-init python:
-    import rgen
-    mci = rgen.rgen()
-python:
-    import rgen
-    
-    class AutoMCI:
-        def __init__(self):
-            self.current = None
-        
-        def __call__(self):
-            self.current = rgen.rgen()
-            return self.current
-    
-    mci = AutoMCI()
-
-#python:
-#    import rgen
-
-#define mci = rgen.rgen()
-#$ mci = rgen.rgen()
-#define Cha_01 = mci
-
-#задаем дополнителные звуковые каналы
-#renpy.music.register_channel ("nature", "sound", loop=True)
-#renpy.music.register_channel ("natu", "sound", loop=True)
-#renpy.music.register_channel ("natu_fon", "sound", loop=True)
 
 #КОНЦОВКИ
