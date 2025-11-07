@@ -1,8 +1,9 @@
 label chapter4fest:
     
-    $ Cha_04a = renpy.random.choice([1, 2])
+    #$ Cha_04a = renpy.random.choice([1, 2])
 
-    if Cha_04a == 1:
+    #if Cha_04a == 1:
+    if mci == 1:
 
         LW "- Там вдалеке определённо кто-то есть, "
 
@@ -487,7 +488,8 @@ label chapter4fest:
 
         pass
 
-    elif Cha_04a == 2:
+    #elif Cha_04a == 2:
+    elif mci >= 2:
         #block of code to run
 
         LW "- Там вдалеке определённо кто-то есть."
