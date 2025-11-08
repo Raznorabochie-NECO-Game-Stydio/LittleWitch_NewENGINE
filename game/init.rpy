@@ -209,6 +209,8 @@ define e = Character(None,
                         window_xalign = 0.5
                         )
 
+#define en = Character(None, kind=nvl)
+
 #ФОНЫ
 
 #ПОНГ
