@@ -837,6 +837,16 @@ image STU = anim.Filmstrip("images/styl/STU.png", (236, 600), (18, 1), .20)
 image send_left = anim.Filmstrip("images/Strit/send_01.png", (91, 33), (3, 1), .50)
 image send_right = anim.Filmstrip("images/Strit/send_02.png", (91, 33), (3, 1), .50)
 
+#СТАРТОВЫЙ СПЛЭШ
+image start_splash = Transform(
+    Composite(
+        (1920, 1080),
+        (0, 0), Solid("#000000"),
+        (0, 0), im.Alpha("gui/start_splash/splash_wallp.jpg", 0.347)
+    ),
+    matrixcolor=BrightnessMatrix(-0.09)
+)
+
 #МУЗЫКА
 
 #ЗВУКИ
@@ -1071,6 +1081,13 @@ python:
             return self.current
     
     mci = AutoMCI()
+#ШРИФТЫ(Задам стилем ибо могу)
+#СТИЛЬ - Чепятная машинка(typewriter)
+style typewr is text:
+    size 30
+    color "#ffffff"
+    font "gui/fonts/DS-Moster.ttf"
+
 
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)

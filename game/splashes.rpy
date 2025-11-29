@@ -1,10 +1,10 @@
 label splashscreen:
-    scene black 
-    $ renpy.pause(2)
-    show text "NECO Game Stydio" with dissolve 
+    scene start_splash 
+    $ renpy.pause(1.5)
+    show text "{=typewr}{color=#909090}{size=65}NECO Game Stydio{/size}{/color}{/}" with Dissolve(1.5)
     $ renpy.pause(3)
     hide text with dissolve 
-    $ renpy.pause(1)
+    $ renpy.pause(0.56)
     return
 
 # стиль строк к главам

@@ -1359,7 +1359,7 @@ label game_over:
         hide STRA
         scene bg000 with diss
         
-        if PP = 0:
+        if PP == 0:
             
             e "Кот, посреди зимы искавший свою Дверь в Лето. "
             e "Странный Дом на дереве и Библиотека в нём, где каждая книга – тропинка в чудный мир. "
@@ -1376,7 +1376,7 @@ label game_over:
             
             pass
             
-        if PP = 1:
+        if PP == 1:
             
             centered "{color=#7fbdbf}{i}«Красная магия»{/i}{/color}"
             centered "{color=#7fbdbf}{i}По ниточке, по ниточке{/i}{/color}"
