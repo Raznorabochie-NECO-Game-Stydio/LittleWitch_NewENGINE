@@ -65,7 +65,7 @@ define gui.text_font = "DejaVuSans.ttf"
 define gui.name_text_font = "DejaVuSans.ttf"
 
 ## Шрифт, используемый текстом вне игры.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "GOST_A.ttf"
 
 ## Размер нормального текста диалога.
 define gui.text_size = 33
