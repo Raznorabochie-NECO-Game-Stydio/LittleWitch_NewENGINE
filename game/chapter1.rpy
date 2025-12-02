@@ -34,7 +34,9 @@ label chapter1:
         #centered "{color=#d16f6a}{i}Она любит зиму и восхищается ветром. {/i}{/color}"
 
         #$ renpy.pause(2.0)    
-        centered "{color=#ff0000}{b}{size=+35}The Little Witch{/size}{/b}{/color}"
+        #centered "{rotat}The Little Witch{/rotat}"
+        centered "{color=#ff0000}{outlinecolor=#00ff00}{b}{size=+35}The Little Witch{/size}{/b}{/outlinecolor}{/color}"
+        #centered "{shader=jitter:u__jitter=1.0, 3.0}The Little Witch{/shader}"
 
 
         #$ renpy.pause(10.0)
@@ -301,7 +303,8 @@ label chapter1:
         #$ renpy.music.set_volume (0.3, .5, channel = "nature")
 
         e "И маленькое белое солнышко, едва освещающее этот мир. {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
-        e "Мир из планет и спутников водит бесконечный хоровод вокруг маленькой умирающей звезды, а сама звёздочка - вокруг двух других вращающихся солнц,{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+        e "Мир из планет и спутников водит бесконечный хоровод вокруг маленькой умирающей звезды,{space=30}{image=images/SD/SG.png}{alt}SG{/alt} "
+        e "а сама звёздочка - вокруг двух других вращающихся солнц,{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
     
         #stop nature fadeout 1.5
         $ renpy.pause(2.0)
@@ -596,12 +599,12 @@ label chapter1:
   
         centered "{i}Топ, топ...{/i} "
  
-        centered "{i}Ниже и ниже…{/i}"
+        centered "{i}Ниже и ниже…"
    
         #show LW s01 at right with dissolve
 
     
-        e "Наконец, Маленькая Ведьма спустилась на нижний этаж величественного и причудливого строения. "
+        e "Наконец, Маленькая Ведьма спустилась на нижний этаж величественного и причудливого строения. {space=30}{image=images/SD/GO.png}{alt}GO{/alt}"
     
         #stop natu fadeout 0.5
         #stop nature fadeout 1.5
@@ -633,7 +636,7 @@ label chapter1:
         #play nature "Zvuki/Shagi_po_kamnyam_3.MP3" fadein 0.5
         #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
         #$ renpy.music.set_volume (0.7, .5, channel = "natu")
-        scene bg0034 at Pan((0, 0), (0, 1550), 10.0) with dissolve
+        scene bg0034 at Pan((0, 0), (0, 2000), 10.0) with dissolve
         $ renpy.pause(10.0)
 
 
@@ -845,7 +848,7 @@ label chapter1:
         scene bg0050
         show Alaya_04 onlayer sloi02
         show Alaya_05 onlayer sloi03
-        show fly onlayer sloi04
+        show fly #onlayer sloi04
         with pixellate
 
 
@@ -854,7 +857,7 @@ label chapter1:
     
         hide Alaya_04 onlayer sloi02
         hide Alaya_05 onlayer sloi03
-        hide fly onlayer sloi04
+        hide fly #onlayer sloi04
         scene bg0051 
         show LW_NFM_01 at pos_cen onlayer sloi03
         show Mil_01 at pos_cen onlayer sloi04
@@ -935,11 +938,11 @@ label chapter1:
         show bg0064 at Pan((0, 1000), (0, 0), 38.0) with dissA
         $ renpy.pause(10.0)
 
-        e "Также она любила смотреть на Иггдрасиль - колоссальное Древо Жизни, соединяющего миры."
-        e "Великое Древо, которому поклонялись как даровавшему жизнь и мудрость – оно висело в огромном мыльном пузыре на орбите планеты, "
+        e "Также она любила смотреть на Иггдрасиль - колоссальное Древо Жизни, соединяющего миры.{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+        e "Великое Древо, которому поклонялись как даровавшему жизнь и мудрость – оно висело в огромном мыльном пузыре на орбите планеты, {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
     
-        e "а корни его уходили в космос. "
-        e "Изумрудная листва блистала каплями росы, отражая свет, источая гротескные видения снов непостоянных форм, "
+        e "а корни его уходили в космос. {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+        e "Изумрудная листва блистала каплями росы, отражая свет, источая гротескные видения снов непостоянных форм, {space=30}{image=images/SD/GO.png}{alt}GO{/alt}"
     
     
 
@@ -951,9 +954,9 @@ label chapter1:
         scene bg0067 at Pan((0, 0), (0, 900), 20.0) with dissA
     
 
-        e "а гигантский необхватный ствол, покрытый мхом и сочащимися призрачным светом грибными наростами чаг, "
-        e " разрастался раскидистыми ветвями, "
-        e "на которых блестели хрустальные грозди миров, плывущие в грезах мироздания... "
+        e "а гигантский необхватный ствол, покрытый мхом и сочащимися призрачным светом грибными наростами чаг, {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+        e " разрастался раскидистыми ветвями, {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+        e "на которых блестели хрустальные грозди миров, плывущие в грезах мироздания... {space=30}{image=images/SD/GO.png}{alt}GO{/alt}"
     
         scene bg0068 with diss
 
@@ -1181,12 +1184,12 @@ label Cha_001:
     
                 scene bg0107 at Pan((0, 0), (0, 1550), 35.0)
     
-                e "пустота - в полноту, бесформенность - в форму, "
-                e "добро - в нечто лучшее, лучшее - в совершеннейшее; "
-                e "это невысказываемое Великое сильнее самих богов: Оно неизменно, "
-                e "невыразимо, первоверховно."
-                e " Это - Власть созидающая, разрушающая и воссоздающая, "
-                e "направляющая все и вся к добру, красоте и истине."
+                e "пустота - в полноту, бесформенность - в форму,{space=30}{image=images/SD/SG.png}{alt}SG{/alt} "
+                e "добро - в нечто лучшее, лучшее - в совершеннейшее; {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+                e "это невысказываемое Великое сильнее самих богов: Оно неизменно, {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+                e "невыразимо, первоверховно.{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+                e " Это - Власть созидающая, разрушающая и воссоздающая, {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+                e "направляющая все и вся к добру, красоте и истине.{space=30}{image=images/SD/GO.png}{alt}GO{/alt}"
 
                 pass
     
@@ -1210,12 +1213,14 @@ label Cha_001:
         scene bg0000 with dissolve
         scene bg0078 with dissA
 
-        centered "{color=#d16f6a}{i}Когда вечности суть я познала сама,{/i}{/color}"
-        centered "{color=#d16f6a}{i}Я тебя здесь уже найти не смогла,{/i}{/color}"
-        centered "{color=#d16f6a}{i}В тумане снов своих плывёт{/i}{/color}"
-        centered "{color=#d16f6a}{i}Ярких звёзд водоворот.{/i}{/color}"
-        centered "{color=#d16f6a}{i}Сон единый я создам, о цветах в серебряной ночи,{/i}{/color}"
-        centered "{color=#d16f6a}{i}Как тени этого яркого мира засыпают вечным сном.{/i}{/color}"
+        call chapt_01_2_splashscr
+
+        #centered "{color=#d16f6a}{i}Когда вечности суть я познала сама,{/i}{/color}"
+        #centered "{color=#d16f6a}{i}Я тебя здесь уже найти не смогла,{/i}{/color}"
+        #centered "{color=#d16f6a}{i}В тумане снов своих плывёт{/i}{/color}"
+        #centered "{color=#d16f6a}{i}Ярких звёзд водоворот.{/i}{/color}"
+        #centered "{color=#d16f6a}{i}Сон единый я создам, о цветах в серебряной ночи,{/i}{/color}"
+        #centered "{color=#d16f6a}{i}Как тени этого яркого мира засыпают вечным сном.{/i}{/color}"
 
         scene bg0000 with dissolve
 
