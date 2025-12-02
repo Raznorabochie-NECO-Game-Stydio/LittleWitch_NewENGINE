@@ -1,3 +1,7 @@
+#шейдеры
+#define config.default_textshader = True
+#$ renpy.register_text_shader()
+
 #генератор случайных чисел
 
 
@@ -63,7 +67,12 @@ $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 #ПЕРСОНАЖИ
 #NVL
 
-define n = Character(None, what_font ="GOST_A.ttf", color="#c8ffc8", kind=nvl)
+define nn = Character(None, 
+                    what_size = 45, 
+                    what_font ="GOST_A.ttf", 
+                    color="#c8ffc8", 
+                    kind=nvl
+                    )
 
 #СЮЖЕТНЫЕ 
 
@@ -827,7 +836,7 @@ image fly = SnowBlossom(anim.SMAnimation(
     anim.Edge("ccc", 10.0, "ggg")
     ), 
      
-    count=50, border=1, xspeed=(-20, -20), yspeed=(-20, -20), start=100,  fast=True
+    count=50, border=100, xspeed=(-20, -20), yspeed=(-20, -20), start=5,  fast=True
     )
     
 image starA = Animation(
