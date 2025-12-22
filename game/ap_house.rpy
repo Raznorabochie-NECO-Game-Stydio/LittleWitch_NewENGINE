@@ -56,7 +56,6 @@ label lest5:
             
     return
     
-
 label lest6:
     menu:
         "Куда пойти?"
@@ -67,20 +66,32 @@ label lest6:
             jump lest7
             
     return    
-
-
+label lest6_5:
+    menu:
+        "Куда пойти?"
+        "Вниз":
+            jump lest6
+        
+        "В коридор":
+            jump kor6_5
+        
+        "Наверх":
+            jump lest7
+     
 label lest7:
     menu:
         "Куда пойти?"
-        "На этаж ниже":
-            jump lest6
+        "Ниже":
+            jump lest6_5
+            
+        "В коридор":
+            jump kor7
             
         "На следующий этаж":
             jump lest8
             
     return
     
-
 label lest8:
     menu:
         "Куда пойти?"
@@ -94,9 +105,9 @@ label lest8:
             jump roof
             
     return
+    
 #КРЫША
 label roof:
-    #menu:
     
     jump suicide
         
@@ -105,5 +116,158 @@ label roof:
 label suicide:
     
     return
+    
+#ДВЕРКИ
+label door1j:
+    
+    jump room1j
 
+    return
+    
+label door2j:
+
+    jump room2j
+    
+    return
+    
+label door3j:
+
+    jump kor7
+    
+    return
+    
+label door4j:
+
+    jump room4j
+    
+    return
+    
+label door5j:
+
+    jump kor7
+    
+    return
+    
+label door6j:
+
+    jump room6j
+    
+    return
+    
+label door1z:
+
+    return
+    
+label door2z:
+    
+    return
+    
+label door3z:
+
+    return
+    
+label door4z:
+    
+    return
+    
+label door5z:
+    
+    return
+    
+label door6z:
+
+    return
+    
 #КОРИДОРЫ
+label kor6_5:
+
+    return
+    
+label kor7:
+
+    menu:
+        "Куда пойти?"
+        "Обратно, на лестничную площадку":
+            jump lest7
+            
+        "В первую дверь":
+            jump door1j
+            
+        "Во вторую дверь":
+            jump door2j
+            
+        "В третью дверь":
+            jump door3j
+            
+        "В четвёртую дверь":
+            jump door4j
+            
+        "В пятую дверь":
+            jump door5j
+            
+        "В шестую дверь":
+            jump door6j
+
+    return
+    
+label kor8:
+    menu:
+        "Куда пойти?"
+        "В первую дверь":
+            jump door1z
+        "Во вторую дверь":
+            jump door2z
+        "В третью дверь":
+            jump door3z
+        "В четвёртую дверь":
+            jump door4z
+        "В пятую дверь":
+            jump door5z
+        "В шестую дверь":
+            jump door6z
+            
+    return
+    
+#КОМНАТЫ
+label room1j:
+    
+    jump kor7
+
+    return
+    
+label room2j:
+
+    menu:
+        "Куда пойти?"
+        "В другую комнату":
+            jump room2j2
+         
+        "Выйти в коридор":
+            jump kor7
+            
+    return
+    
+label room2j2:
+    
+    jump kor7
+    
+    return
+    
+label room4j:
+
+    jump kor7
+    
+    return
+    
+label room6j:
+    menu:
+        "Куда пойти?"
+        "Вернутся сюда же":
+        
+            jump room6j
+            
+        "Выйти в коридор":
+        
+            jump kor7
+            
+    return
