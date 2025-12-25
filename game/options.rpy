@@ -88,12 +88,12 @@ define config.intra_transition = pixellate
 
 ## Переход, используемый после загрузки слота сохранения.
 
-define config.after_load_transition = None
+define config.after_load_transition = pixellate
 
 
 ## Используется при входе в главное меню после того, как игра закончится.
 
-define config.end_game_transition = None
+define config.end_game_transition = pixellate
 
 
 ## Переменная, устанавливающая переход, когда старт игры не существует. Вместо
