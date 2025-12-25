@@ -75,8 +75,8 @@ label fast_end:
 
         jump fast_end
 
-    centered "{color=#d16f6a}{i}{size=+45}ПЛОХАЯ КОНЦОВКА. ВЫ ПОГИБЛИ.{/size}{/i}{/color}"
-    centered "{color=#7fbdbf}{i}{size=+25}Попробуйте выбрать другой вариант. {/size}{/i}{/color}"
+    centered "{font=font/Arial.ttf}{color=#d16f6a}{i}{size=+45}ПЛОХАЯ КОНЦОВКА. ВЫ ПОГИБЛИ.{/size}{/i}{/color}{/font}"
+    centered "{font=font/Arial.ttf}{color=#7fbdbf}{i}{size=+25}Попробуйте выбрать другой вариант. {/size}{/i}{/color}{/font}"
 
 
     jump end
