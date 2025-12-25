@@ -93,7 +93,7 @@ label chapter2:
     window hide
     nvl show #dissolve
 
-    centered "{font=GOST_A.ttf}{color=#c8ffc8}{i}{size=+10}Солёное озеро, как, впрочем, и ущелье,\n
+    centered "{font=font/GOST_A.ttf}{color=#c8ffc8}{i}{size=+10}Солёное озеро, как, впрочем, и ущелье,\n
                 в котором оно расположено - напоминают двуликого Януса,\n 
                 так непосредственны и переменчивы.\n 
                 Зимой вода в озере всегда пресная.\n
