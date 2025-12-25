@@ -69,7 +69,7 @@ $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 
 define nn = Character(None, 
                     what_size = 45, 
-                    what_font ="GOST_A.ttf", 
+                    what_font ="font/GOST_A.ttf", 
                     color="#c8ffc8", 
                     kind=nvl
                     )
@@ -209,7 +209,7 @@ define LO = Character('Лохматый',
 
 define e = Character(None, 
                         what_size = 35, 
-                        what_font = "segoescript.ttf", 
+                        what_font = "font/segoescript.ttf", 
                         what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
                         window_background=None,what_xalign = 0.5, 
