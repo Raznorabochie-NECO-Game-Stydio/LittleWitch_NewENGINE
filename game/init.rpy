@@ -1,3 +1,12 @@
+# THIS_PATH is defined in chess_displayable.rpy
+# define THIS_PATH = '00-chess-engine/'
+
+init python:
+    # for importing libraries
+    import_dir = os.path.join(renpy.config.gamedir, THIS_PATH, 'python-packages')
+    # to prevent STOCKFISH_ENGINE from getting stored and pickled
+    global_objects = {}
+    
 #ПЕРСОНАЖИ
 #NVL
 define n = Character(None, what_font ="GOST_A.ttf", color="#c8ffc8", kind=nvl)
@@ -1042,18 +1051,18 @@ image extra neutral:
 #ПЕРЕМЕННЫЕ
 $ ppoints = 0
 $ PP = 0
-$ DollCam = False
-$ Room_01 = False
-$ Room_02 = False
-$ Room_03 = False
-$ KupeRoom01 = False
-$ KupeRoom02 = False
-$ WCRoom = False
-$ WCC = False
-$ Wite = False
-$ Jurnal = False
-$ Key = False
-$ Key_N = False
+define DollCam = False
+define Room_01 = False
+define Room_02 = False
+define Room_03 = False
+define KupeRoom01 = False
+define KupeRoom02 = False
+define WCRoom = False
+define WCC = False
+define Wite = False
+define Jurnal = False
+define Key = False
+define Key_N = False
 
 $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
