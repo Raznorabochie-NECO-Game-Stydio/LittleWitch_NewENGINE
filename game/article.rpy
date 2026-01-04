@@ -1,5 +1,5 @@
 label article:
-    menu:
+    menu(nvl = True):
         "Статья 1":
             jump article1
             
