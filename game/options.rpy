@@ -34,6 +34,8 @@ define gui.about = _p("""
 Бета ридер, соавтор - Saitar1337\n
 Кодер поменьше - M0K0t\n
 Используемые материалы принадлежат их правообладателям.\n
+Шахматный движок принадлежит его автору - {a=https://lynnzheng.netlify.app/}Линн Женг{/a} по \n
+{a=https://github.com/RuolinZheng08/renpy-chess/?tab=MIT-1-ov-file#}лицензии MIT{/a}.
 """)
 
 
