@@ -2,6 +2,79 @@
 label chapter1:
 
 
+# Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
+# влияющая на то какая концовка послесловия будет продемонстрированная игроку по окончанию игры.
+        $ ppoints = 0
+
+
+        $ PP = 0
+
+# Переменная нужная для того чтобы определит, сказал ли персонаж свое имя или нет.
+        $ DollCam = False
+
+# Переменные от 00 до ХХ служащие для определения посещения комнат.
+        $ Room_01 = False
+        $ Room_02 = False
+        $ Room_03 = False
+        $ Room_04 = False
+        $ Room_05 = False
+        $ Room_06 = False
+        $ Room_07 = False
+        $ Room_08 = False
+        $ Room_09 = False
+        $ Room_10 = False
+        $ Room_11 = False
+        $ Room_12 = False
+        $ Room_13 = False
+        $ Room_14 = False
+        $ Room_15 = False
+        $ Room_16 = False
+        $ Room_17 = False
+        $ Room_18 = False
+        $ Room_19 = False
+        $ Room_20 = False
+        $ Room_21 = False
+        $ Room_22 = False
+        $ Room_23 = False
+        $ Room_24 = False
+        $ Room_25 = False
+        $ Room_26 = False
+        $ Room_27 = False
+        $ Room_28 = False
+        $ Room_29 = False
+        $ Room_30 = False
+
+# переменные необходимые как метки для определения посещения разных купе в вагона
+        $ KupeRoom01 = False
+        $ KupeRoom02 = False
+        $ KupeRoom03 = False
+        $ KupeRoom04 = False
+        $ KupeRoom05 = False
+
+
+
+
+# Переменная определяет имеется у игрока доступ в данную комнату или нет.
+        $ WCRoom = False
+        $ WCC = False
+
+# Переменная, которая меняется при посещении комнате, и впоследствии определяет, какая сцена будет показана игроку.
+        $ Wite = False
+
+# Переменная нужная для определения того был ли прочитан журнал лежащий в почтовом ящике.
+        $ Jurnal = False
+        $ Key = False
+        $ Key_01 = False
+        $ Key_02 = False
+        $ Key_03 = False
+        $ Key_04 = False
+        $ Key_05 = False
+        $ Key_06 = False
+
+
+#переменная нужная для определения если ГГ побывала в дополнительном блоке четвертой главы
+        $ Under_01 = False
+
     
 #“Привет, путник! Ты забрёл в мои туманные сны, 
 #где звёзды шепчут древние тайны. Расскажи, что привело тебя к Ведьме 
