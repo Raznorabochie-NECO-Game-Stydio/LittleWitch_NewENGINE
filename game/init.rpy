@@ -1,3 +1,12 @@
+# THIS_PATH is defined in chess_displayable.rpy
+# define THIS_PATH = '00-chess-engine/'
+
+init python:
+    # for importing libraries
+    import_dir = os.path.join(renpy.config.gamedir, THIS_PATH, 'python-packages')
+    # to prevent STOCKFISH_ENGINE from getting stored and pickled
+    global_objects = {}
+
 #шейдеры
 #define config.default_textshader = True
 #$ renpy.register_text_shader()
@@ -40,38 +49,38 @@ python:
 
 # Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
 # влияющая на то какая концовка послесловия будет продемонстрированная игроку по окончанию игры.
-$ ppoints = 0
+#$ ppoints = 0
 
 
-$ PP = 0
+#$ PP = 0
 
 # Переменная нужная для того чтобы определит, сказал ли персонаж свое имя или нет.
-$ DollCam = False
+#define DollCam = False
 
 # Переменные от 00 до ХХ служащие для определения посещения комнат.
-$ Room_01 = False
-$ Room_02 = False
-$ Room_03 = False
+#define Room_01 = False
+#define Room_02 = False
+#define Room_03 = False
 
 
-$ KupeRoom01 = False
-$ KupeRoom02 = False
+#define KupeRoom01 = False
+#define KupeRoom02 = False
 
 # Переменная определяет имеется у игрока доступ в данную комнату или нет.
-$ WCRoom = False
-$ WCC = False
+#define WCRoom = False
+#define WCC = False
 
 # Переменная, которая меняется при посещении комнате, и впоследствии определяет, какая сцена будет показана игроку.
-$ Wite = False
+#define Wite = False
 
 # Переменная нужная для определения того был ли прочитан журнал лежащий в почтовом ящике.
-$ Jurnal = False
-$ Key = False
-$ Key_N = False
+#define Jurnal = False
+#define Key = False
+#define Key_N = False
 
 
 #переменная нужная для определения если ГГ побывала в дополнительном блоке четвертой главы
-$ Underthearch_01 = False
+#define Under_01 = False
 
 $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
@@ -1075,10 +1084,10 @@ init:
 
 #МАТРИЦЫ
 define brightness = im.matrix(
-                       [ 1, 0, 0, 0, .1,
-                       0, 1, 0, 0, .1,
-                       0, 0, 1, 0, .1,
-                       0, 0, 0, 1, 0 ])
+                    [ 1, 0, 0, 0, .1,
+                    0, 1, 0, 0, .1,
+                    0, 0, 1, 0, .1,
+                    0, 0, 0, 1, 0 ])
     
 define opacity = im.matrix(
                     [ 1, 0, 0, 0, 0,
@@ -1087,10 +1096,10 @@ define opacity = im.matrix(
                     0, 0, 0, .5, 0 ])
     
 define inverted = im.matrix(
-                     [ -1,  0,  0, 0, 1,
-                     0, -1,  0, 0, 1,
-                     0,  0, -1, 0, 1,
-                     0,  0,  0, 1, 0 ])
+                    [ -1,  0,  0, 0, 1,
+                    0, -1,  0, 0, 1,
+                    0,  0, -1, 0, 1,
+                    0,  0,  0, 1, 0 ])
     
 define fraktal_01 = im.matrix(
                     [0.5, 0, 0, 0, 1,
