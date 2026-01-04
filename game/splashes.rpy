@@ -16,7 +16,7 @@ screen chapter01_splashscr():
     vbox:
         align (0.5, 0.5)
         text "Глава 01. Сон Страны Грёз":
-            size 36
+            size 36 
             color "#ff0000"
             bold True
             align (0.5, 0.5)
@@ -98,6 +98,7 @@ screen chapt_splashscr_01(line):
 
 
 # эпиграф заставки игры
+#, text_font = "GOST_A.ttf"
 
 label chapt0_splashscr:
     show screen chapt_splashscr("Привет, путник! Ты забрёл в мои туманные сны, ")
@@ -182,7 +183,7 @@ label chapt_01_splashscr:
     hide screen chapt_splashscr_01
     with dissolve
 
-    show screen chapt_splashscr_01("Ведьма измерений. Гуляющая сама по себе по фракталу древа миров. Мечтающая когда-нибудь приблизиться к Грани и обрести своё собственное Имя. ")
+    show screen chapt_splashscr_01("Ведьма измерений. Гуляющая сама по себе по фракталу древа миров.\n Мечтающая когда-нибудь приблизиться к Грани и обрести своё собственное Имя. ")
     with dissolve
     pause 10.0
     hide screen chapt_splashscr_01
@@ -194,7 +195,7 @@ label chapt_01_splashscr:
     hide screen chapt_splashscr_01
     with dissolve
 
-    show screen chapt_splashscr_01("Обожающая в жару нагишом купаться в ледяных ручьях, спать под открытым звездным небом и любоваться им.")
+    show screen chapt_splashscr_01("Обожающая в жару нагишом купаться в ледяных ручьях,\n спать под открытым звездным небом и любоваться им.")
     with dissolve
     pause 6.0
     hide screen chapt_splashscr_01
@@ -250,6 +251,49 @@ label chapt_01_1_splashscr:
     with dissolve
 
     show screen chapt_splashscr_01("В страну фантазий тут все собрались.")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+
+    return
+
+#Эпиграф первой главы доп.
+
+label chapt_01_2_splashscr:
+
+    show screen chapt_splashscr_01("Когда вечности суть я познала сама,")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Я тебя здесь уже найти не смогла,")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("В тумане снов своих плывёт")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Ярких звёзд водоворот.")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Сон единый я создам, о цветах в серебряной ночи,")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Как тени этого яркого мира засыпают вечным сном.")
     with dissolve
     pause 5.0
     hide screen chapt_splashscr_01
