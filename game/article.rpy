@@ -11,9 +11,10 @@ label article:
             # "Статья 02"
             jump article2
             
-        "Статья 3":
+        "«Черный дом»":
 
-            e "3"
+            # "Статья 03"
+            #(история про «черный дом» и девочку)
             jump article3
             
         "Статья 4":
@@ -28,7 +29,7 @@ label article:
             
         "Статья 6":
 
-            $ Key = True
+            $ Jurnal = True
 
             $ ran_dig = renpy.random.choice([1,6])
 
@@ -366,6 +367,18 @@ label article2:
     return
     
 label article3:
+
+    nvl clear
+
+    window hide
+    nvl show #dissolve
+
+
+    e "**************************"
+
+
+    nvl clear
+    window show
     
     jump article
     
