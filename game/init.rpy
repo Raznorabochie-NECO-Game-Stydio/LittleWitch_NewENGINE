@@ -1063,7 +1063,8 @@ define Wite = False
 define Jurnal = False
 define Key = False
 define Key_N = False
-
+define enigma_01 = True
+define enigma_02 = True
 $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
 $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03

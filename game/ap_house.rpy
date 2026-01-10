@@ -62,10 +62,14 @@ label lest6:
         "На этаж ниже":
             jump lest5
             
+        "Между" if enigma_01 and enigma_02 == True:
+            jump lest6_5
+             
         "На следующий этаж":
             jump lest7
             
-    return    
+    return
+
 label lest6_5:
     menu:
         "Куда пойти?"
@@ -77,11 +81,16 @@ label lest6_5:
         
         "Наверх":
             jump lest7
-     
+    
+    return
+
 label lest7:
     menu:
         "Куда пойти?"
         "Ниже":
+            jump lest6
+        
+        "Между" if enigma_01 and enigma_02 == True:
             jump lest6_5
             
         "В коридор":
