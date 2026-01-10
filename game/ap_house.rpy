@@ -113,10 +113,6 @@ label lest1:
         
     
     return
-        
-
-
-
     
     
 label lest2:
@@ -172,6 +168,7 @@ label lest6:
     # 6 этаж Хесед (Милосердие):
 
     menu:
+
         "Куда пойти?"
         "На этаж ниже":
             jump lest5
@@ -188,6 +185,7 @@ label lest6:
 label lest6_5:
     # 6,5 этаж скрытий Даат
     menu:
+
         "Куда пойти?"
         "Вниз":
             jump lest6
@@ -203,7 +201,7 @@ label lest6_5:
 label lest7:
     # 7 этаж Бина (Понимание):
     menu:
-        menu:
+
         "Куда пойти?"
         "Ниже":
             jump lest6
