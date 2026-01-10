@@ -157,7 +157,7 @@ label lest4:
     return
 
 label lest5:
-    # 5 этаж Гвура (Сила)
+    # 5 этаж Гебура (Сила)
     menu:
         "Куда пойти?"
         "На этаж ниже":
@@ -170,13 +170,19 @@ label lest5:
     
 label lest6:
     # 6 этаж Хесед (Милосердие):
+
     menu:
         "Куда пойти?"
         "На этаж ниже":
             jump lest5
             
+        "Между" if enigma_01 and enigma_02 == True:
+            jump lest6_5
+             
         "На следующий этаж":
             jump lest7
+            
+    
             
     return    
 label lest6_5:
@@ -191,12 +197,18 @@ label lest6_5:
         
         "Наверх":
             jump lest7
+
+    return
      
 label lest7:
     # 7 этаж Бина (Понимание):
     menu:
+        menu:
         "Куда пойти?"
         "Ниже":
+            jump lest6
+        
+        "Между" if enigma_01 and enigma_02 == True:
             jump lest6_5
             
         "В коридор":
