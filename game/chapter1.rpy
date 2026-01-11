@@ -1,90 +1,5 @@
 # Отсюда начинается игра.
 label chapter1:
-
-
-# Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
-# влияющая на то какая концовка послесловия будет продемонстрированная игроку по окончанию игры.
-        $ ppoints = 0
-
-
-        $ PP = 0
-
-# Переменная нужная для того чтобы определит, сказал ли персонаж свое имя или нет.
-        $ DollCam = False
-
-# Переменные от 00 до ХХ служащие для определения посещения комнат.
-        $ Room_01 = False
-        $ Room_02 = False
-        $ Room_03 = False
-        $ Room_04 = False
-        $ Room_05 = False
-        $ Room_06 = False
-        $ Room_07 = False
-        $ Room_08 = False
-        $ Room_09 = False
-        $ Room_10 = False
-        $ Room_11 = False
-        $ Room_12 = False
-        $ Room_13 = False
-        $ Room_14 = False
-        $ Room_15 = False
-        $ Room_16 = False
-        $ Room_17 = False
-        $ Room_18 = False
-        $ Room_19 = False
-        $ Room_20 = False
-        $ Room_21 = False
-        $ Room_22 = False
-        $ Room_23 = False
-        $ Room_24 = False
-        $ Room_25 = False
-        $ Room_26 = False
-        $ Room_27 = False
-        $ Room_28 = False
-        $ Room_29 = False
-        $ Room_30 = False
-
-# переменные необходимые как метки для определения посещения разных купе в вагона
-        $ KupeRoom01 = False
-        $ KupeRoom02 = False
-        $ KupeRoom03 = False
-        $ KupeRoom04 = False
-        $ KupeRoom05 = False
-
-#Переменная для доступа на скрытый этаж, и скрытую историю.
-
-        $ enigma_01 = False
-        $ enigma_02 = False
-
-
-# Переменная определяет имеется у игрока доступ в данную комнату или нет.
-        $ WCRoom = False
-        $ WCC = False
-
-# Переменная, которая меняется при посещении комнате, и впоследствии определяет, какая сцена будет показана игроку.
-        $ Wite = False
-
-# Переменная нужная для определения того был ли прочитан журнал лежащий в почтовом ящике.
-        $ Jurnal = False
-        $ Key = False
-        $ Key_01 = False
-        $ Key_02 = False
-        $ Key_03 = False
-        $ Key_04 = False
-        $ Key_05 = False
-        $ Key_06 = False
-
-# Переменная необхадимая чтобы определит пошла ли МВ по следам, или рещила сночала осмотрет осталные этожи.
-        $ traces_01 = False
-
-#переменная нужная для определения если ГГ побывала в дополнительном блоке четвертой главы
-        $ Under_01 = False
-
-# Переменная необходимая для определения того что МВ взяла пульт от телевизора
-        $ remote_controller = False
-
-#переменная необходимая для определения быль ли просмотрен определенный телевизор
-        $ TV_01 = False
     
 #“Привет, путник! Ты забрёл в мои туманные сны, 
 #где звёзды шепчут древние тайны. Расскажи, что привело тебя к Ведьме 
@@ -120,7 +35,7 @@ label chapter1:
 
         #$ renpy.pause(2.0)    
         #centered "{rotat}The Little Witch{/rotat}"
-        centered "{color=#ff0000}{outlinecolor=#00ff00}{b}{size=+35}The Little Witch{/size}{/b}{/outlinecolor}{/color}"
+        centered "{font=fonts/CeltesSP2.otf}{k=10}{color=#ff0000}{outlinecolor=#0000ff}{size=185}The Little Witch{/size}{/outlinecolor}{/color}{/k}{/font}"
         #centered "{shader=jitter:u__jitter=1.0, 3.0}The Little Witch{/shader}"
 
 
