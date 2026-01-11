@@ -136,10 +136,10 @@ define LO = Character('Лохматый',
 
 define e = Character(None, 
                         what_size = 35, 
-                        what_font = "segoescript.ttf", 
+                        what_font = "gui/fonts/segoescript.ttf", 
                         what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
-                        window_background=None,what_xalign = 0.5, 
+                        window_background="#00000000",what_xalign = 0.5, 
                         what_text_align = 0.5, cps = 25, 
                         window_xfill = False, 
                         window_xalign = 0.5
