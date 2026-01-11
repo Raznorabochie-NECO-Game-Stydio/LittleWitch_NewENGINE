@@ -1,10 +1,14 @@
 label splashscreen:
-    scene black 
-    $ renpy.pause(2)
-    show text "NECO Game Stydio" with dissolve 
+    scene start_splash 
+    $ renpy.pause(1.5)
+    show text "{=typewr}{color=#909090}{size=65}NECO Game Stydio{/size}{/color}{/}" with Dissolve(1.5)
     $ renpy.pause(3)
     hide text with dissolve 
-    $ renpy.pause(1)
+    $ renpy.pause(0.56)
+    
+    jump chapt0_splashscr
+
+    return
 
 # стиль строк к главам
 #Первая
@@ -98,34 +102,32 @@ screen chapt_splashscr_01(line):
 
 
 # эпиграф заставки игры
-#, text_font = "GOST_A.ttf"
+# text_font = "GOST_A.ttf"
 
 label chapt0_splashscr:
-    show screen chapt_splashscr("Привет, путник! Ты забрёл в мои туманные сны, ")
+    show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=65}Привет, путник!{/size}{/font}")
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt_splashscr("где звёзды шепчут древние тайны.")
+    show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=60}Ты забрёл в мои туманные сны, где звёзды шепчут древние тайны.{/size}{/font}")
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt_splashscr(" Расскажи, что привело тебя к Ведьме измерений?")
+    show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=65}Расскажи, что привело тебя к Ведьме измерений?{/size}{/font}")
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-
-    show screen chapt_splashscr(" Может, вместе мы разгадаем загадки, скрытые в алых снах.")
+    show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=65}Может, вместе мы разгадаем загадки, скрытые в алых снах.{/size}{/font}")
     with dissolve
     pause 4.0 # Дольше на последней строке
     hide screen chapt_splashscr
     with dissolve
-
     
     return
 
