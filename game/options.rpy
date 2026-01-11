@@ -30,7 +30,7 @@ define config.version = "0.0.4"
 ## Для отделения абзацев оставляйте между ними пустую строку.
 
 define gui.about = _p("""
-Автор/Главный кодер/Художник - AngelRanga\n
+Автор, Главный кодер, Художник - AngelRanga\n
 Бета ридер, соавтор - Saitar1337\n
 Кодер поменьше - M0K0t\n
 Используемые материалы принадлежат их правообладателям.\n
@@ -214,3 +214,4 @@ init python:
 ## разделённые дробью.
 
 # define build.itch_project = "renpytom/test-project"
+default persistent.QMenu = True
