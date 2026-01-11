@@ -1,5 +1,7 @@
 label chapter2:
     # глава 02
+    
+    #(Вариант AngelRanga редактор Saitar1337)
 
     call chapter_02_splashscr
 
