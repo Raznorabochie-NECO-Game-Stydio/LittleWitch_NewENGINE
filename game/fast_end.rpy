@@ -36,10 +36,6 @@ label fast_end:
 
         e "Ее глаза начали слипаться, и она провалилась в тягучую и вечную тьму… "
 
-        e "..........."
-        e "........."
-        e "......"
-
         e "*********************************"
 
         pass
@@ -78,6 +74,14 @@ label fast_end:
 
         jump fast_end
 
+    
+
+    e "........."
+    e "......"
+    e "..."
+
+    scene DEnd with dissA
+    
     centered "{font=fonts/CeltesSP2.otf}{color=#d16f6a}{i}{size=+45}ПЛОХАЯ КОНЦОВКА. ВЫ ПОГИБЛИ.{/size}{/i}{/color}{/font}"
     centered "{font=fonts/CeltesSP2.otf}{color=#7fbdbf}{i}{size=+25}Попробуйте выбрать другой вариант. {/size}{/i}{/color}{/font}"
 
