@@ -163,6 +163,7 @@ define LW = Character('Маленькая ведьма',
         what_size = 35,
         what_color = "#541f82", 
         what_outlines = [ (2, "#000000") ],
+        image = "gui/side_ramka.png",
         ctc = anim.Filmstrip(im.FactorScale("images/Ani/CTC.png", 5.0), 
                             (100, 100), 
                             (4, 1), 
@@ -544,7 +545,16 @@ image bg0109 = "images/BG/0098.jpg"
     
 #концовки
 
-image DEnd = "images/BG/Deathend.jpg"
+image DEnd = Transform(
+    Composite(
+        (1920, 1080),
+        (0, 0), im.Sepia("images/END/END_00.jpg"),
+        (0, 0), im.Alpha("images/END/END_02.jpg", 0.7),
+        (0, 0), im.Alpha("images/END/END_01.jpg", 0.347)
+    ),
+    matrixcolor=BrightnessMatrix(-0.09)
+)
+
 
 #СПРАЙТЫ
 
