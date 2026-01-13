@@ -600,7 +600,7 @@ label chapter1:
   
         centered "{i}Топ, топ...{/i} "
  
-        centered "{i}Ниже и ниже…"
+        centered "{i}Ниже и ниже…{/i}"
    
         #show LW s01 at right with dissolve
 
