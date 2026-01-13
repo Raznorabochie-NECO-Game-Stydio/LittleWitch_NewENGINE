@@ -97,6 +97,8 @@ define gui.game_menu_background = "gui/game_menu.png"
 ##
 ## Эти переменные контролируют, как диалог появляется на отдельной строчке.
 
+#style.window.background = Frame(im.Alpha("images/BG/Ramka.png",0.8), 12, 12)
+
 ## Высота текстового окна, содержащего диалог.
 define gui.textbox_height = 278
 
