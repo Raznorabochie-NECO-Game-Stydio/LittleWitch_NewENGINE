@@ -71,6 +71,20 @@ $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
 $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 
+#переменная для определения лестничных клеток
+
+define hallway_001 = False
+define hallway_002 = False
+define hallway_003 = False
+define hallway_004 = False
+define hallway_005 = False
+define hallway_006 = False
+define hallway_007 = False
+define hallway_008 = False
+define hallway_009 = False
+define hallway_010 = False
+define hallway_011 = False
+
 # Переменные от 00 до ХХ служащие для определения посещения комнат.
 define Room_01 = False
 define Room_02 = False
