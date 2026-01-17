@@ -294,8 +294,30 @@ label lest6:
         "Куда пойти?"
         "На этаж ниже":
             jump lest5
+
+        "На этаж 06":
+
+            if hallway_007 == False:
+
+                e "В полутьме лестничной клетки."
+                e "Девочка сделала несколько шагов к обшарпанной деревянной двери."
+                e "Каждая дверь — это выбор."
+                e "Каждый шаг — решение."
+                e "Она стояла на пороге, понимая: открыв эту дверь, "
+                e "она уже не будет той, кто стоял перед ней минуту назад."
+                
+                pass
+
+            else:
+
+                e "Она зашла в коридор "
+
+                pass
+
+            jump hallway_06
+
             
-        "Между" if enigma_01 and enigma_02 == True:
+        "Между" if enigma_01 and enigma_02 and TV_01 == True:
             jump lest6_5
              
         "На следующий этаж":
@@ -367,67 +389,7 @@ label suicide:
     
     return
     
-#ДВЕРКИ
-label door1j:
-    
-    jump room1j
 
-    return
-    
-label door2j:
-
-    jump room2j
-    
-    return
-    
-label door3j:
-
-    jump kor7
-    
-    return
-    
-label door4j:
-
-    jump room4j
-    
-    return
-    
-label door5j:
-
-    jump kor7
-    
-    return
-    
-label door6j:
-
-    jump room6j
-    
-    return
-    
-label door1z:
-
-    return
-    
-label door2z:
-    
-    return
-    
-label door3z:
-
-    return
-    
-label door4z:
-    
-    return
-    
-label door5z:
-    
-    return
-    
-label door6z:
-
-    return
-    
 #КОРИДОРЫ
 label kor6_5:
 
