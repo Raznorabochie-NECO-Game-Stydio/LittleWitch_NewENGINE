@@ -111,6 +111,8 @@ label chapter4:
 
         #найти немецкий шрифт времен третьего рейха
 
+        centered "{color=#001488}{size=+75}{font=fonts/Fraktur.otf}Ahnenerbe{/font}{/size}{/color}"
+
         LW "- Ahnenerbe, "
 
         e "- прочитала Маленькая Ведьма."
@@ -1355,8 +1357,10 @@ label chapter4:
                                         #TrixieCyr-Light
                                         #DS-Moster
 
+                                        scene peper_01 with dissolve
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{color=#23a7e0}{i}Мой больной похож на тебя.\n
+
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}{i}Мой больной похож на тебя.\n
                                         Врач. Госпиталь № 41, помни.\n 
                                         Через восемь часов после процедуры:\n
                                         Отсутствует позвоночник.\n
@@ -1365,13 +1369,15 @@ label chapter4:
                                         Нашёл своего больного в тебе.\n
                                         Госпиталь № 41 - выписка журнала.\n
                                         Туманный город безликих.
-                                        {/i}{/color}{/font}"
+                                        {/i}{/color}{/size}{/font}"
 
 
-
+                                        hide peper_01
 
                                         nvl clear
                                         window show
+
+                                        scene bg0000
 
                                         e "***"
 
@@ -1422,13 +1428,18 @@ label chapter4:
                                         window hide
                                         nvl show #dissolve
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{color=#23a7e0}Ненужный и бесполезный врач госпиталя №41, помни - туманный город закрыт навсегда.\n
+                                        scene peper_01 with dissolve
+
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}Ненужный и бесполезный врач госпиталя №41,\n 
+                                                    помни - туманный город закрыт навсегда.\n
                                                     Сегодня видел, как спишь.\n
                                                     Доведем до конца то, что начали.\n
                                                     Ночь под воздействием их душ причиняет сильную боль.\n
                                                     Во сне видел вечность.\n
                                                     То, что они утаили от других, вернет вам ваш палач.
-                                                    {i}{/i}{/color}{/font} "
+                                                    {/i}{/color}{/size}{/font} "
+
+                                        scene bg0000
 
                                         nvl clear
                                         window show
@@ -1521,7 +1532,11 @@ label chapter4:
 
                                                 e "Маленькая Ведьма перевернула страницу: "
 
-                                                centered "{font=fonts/TrixieCyr-Light.ttf}{i}«Однажды девочка зашла в Черный Дом...»{/i}{/font}"
+                                                scene peper_01 with dissolve
+
+                                                centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}{i}«Однажды девочка зашла в Черный Дом...»{/i}{/color}{/size}{/font}"
+
+                                                scene bg0000
 
                                                 e "У стены стоял шкаф с застеклёнными дверцами. "
                                                 e "За стеклом угадывались силуэты предметов {w=1}— колбы, много колб разных размеров. "
@@ -1857,10 +1872,14 @@ label chapter4:
                                         e "На полках стояли книги. "
                                         e "Надписи на корешках:"
 
-                                        centered "{font=fonts/DS-Moster.ttf}{i}«Вавилонская библиотека»;{/i}{/font}"
-                                        centered "{font=fonts/DS-Moster.ttf}{i}«Нормальные числа»;{/i}{/font}"
-                                        centered "{font=fonts/DS-Moster.ttf}{i}«Демон второго рода»;{/i}{/font}"
-                                        centered "{font=fonts/DS-Moster.ttf}{i}«Хроники Акаши».{/i}{/font}"
+                                        scene peper_01 with dissolve
+
+                                        centered "{font=fonts/DS-Moster.ttf}{size=+15}{color=#000000}{i}«Вавилонская библиотека»;{/i}{/color}{/size}{/font}"
+                                        centered "{font=fonts/DS-Moster.ttf}{size=+15}{color=#000000}{i}«Нормальные числа»;{/i}{/color}{/size}{/font}"
+                                        centered "{font=fonts/DS-Moster.ttf}{size=+15}{color=#000000}{i}«Демон второго рода»;{/i}{/color}{/size}{/font}"
+                                        centered "{font=fonts/DS-Moster.ttf}{size=+15}{color=#000000}{i}«Хроники Акаши».{/i}{/color}{/size}{/font}"
+
+                                        scene bg0000
 
                                         e "Девочка почувствовала, как по спине пробежал холодок. "
                                         e "Страх и тревога вновь усилились. "
@@ -2141,9 +2160,13 @@ label chapter4:
                                         e "Ведьма наклонилась, подняла её. "
                                         e "На пожелтевшем клочке бумаги неровным почерком было выведено:"
 
-                                        centered "{font=fonts/DS-Moster.ttf}{size=+10}{i}«В своих тревожных ночных видениях я видела город, \n
+                                        scene peper_01 with dissolve
+
+                                        centered "{font=fonts/DS-Moster.ttf}{size=+10}{color=#000000}{i}«В своих тревожных ночных видениях я видела город, \n
                                                     утопающий в тумане, город без лиц. \n
-                                                    Ибо там, где дремлет разум, порождаются чудовища…»{/i}{/size}{/font}"
+                                                    Ибо там, где дремлет разум, порождаются чудовища…»{/i}{/color}{/size}{/font}"
+
+                                        scene bg0000
 
                                         e "Маленькая Ведьма медленно подняла записку. "
                                         e "В глазах читалась странная смесь любопытства и тревоги."
@@ -2216,48 +2239,67 @@ label chapter4:
                                         e "Рядом — открытая тетрадь с записями."
                                         e "Страницы испещрены формулами, зарисовками и короткими заметками:"
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+10}«День 47. \n
+                                        scene peper_02 with dissolve
+
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}«День 47. \n
                                                     Механизм дыхания работает нестабильно. \n
-                                                    Нужно усилить пружину в грудной клетке».{/size}{/font}"
+                                                    Нужно усилить пружину в грудной клетке».{/color}{/size}{/font}"
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+10}«День 82. \n
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}«День 82. \n
                                                     Глаза реагируют на свет, но не фокусируются.\n
-                                                    Возможно, проблема в проводке».{/size}{/fond}"
+                                                    Возможно, проблема в проводке».{/color}{/size}{/fond}"
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+10}«День 115. \n
-                                                    Она улыбнулась. На секунду. Это было… настоящее».{/size}{/font}"
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}«День 115. \n
+                                                    Она улыбнулась. На секунду. Это было… настоящее».{/color}{/size}{/font}"
+
+                                        scene bg0000
 
                                         e "Ведьма перевернула страницу. "
                                         e "Последняя запись была размашистой, почти отчаянной:"
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+10}«Если не получится — оставлю это здесь. \n
-                                                    Кто‑то должен узнать. Кто‑то должен помнить».{/size}{/font}"
+                                        scene peper_01 with dissolve
+
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}«Если не получится — оставлю это здесь. \n
+                                                    Кто‑то должен узнать. Кто‑то должен помнить».{/color}{/size}{/font}"
+
+                                        scene bg0000
 
                                         e "Она взяла верхний лист."
                                         e "На нём — набросок человеческой фигуры, но вместо лица — гладкая маска без черт. "
                                         e "Под рисунком строка: "
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+10}«Они не должны оставаться без облика. \n
-                                                    Нужно найти способ…»{/size}{/font}"
+                                        scene peper_02 with dissolve
+
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}«Они не должны оставаться без облика. \n
+                                                    Нужно найти способ…»{/color}{/size}{/font}"
+
+                                        scene bg0000
 
                                         e "На внутренней стороне выгравировано: "
 
-                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+10}«Для тех, кто потерял лицо».{/size}{/font}"
+                                        scene peper_01 with dissolve
+
+                                        centered "{font=fonts/TrixieCyr-Light.ttf}{size=+15}{color=#000000}«Для тех, кто потерял лицо».{/color}{/size}{/font}"
+
+                                        scene bg0000
 
                                         e "Туман с улицы проникает внутрь здания, заполняя каждый угол своей холодной серой массой. "
+                                        
 
                                         centered "«Маска – забава, маска – веселый атрибут карнавала. \n
                                                     Маска – инструмент мистификации, лжи, интриги, преступления»."
 
                                         e "****************"
 
+                                        scene peper_03 with dissolve
+
                                         centered "{font=fonts/Arial.ttf}{color=#f00}{k=.817}{size=+45}{b}Куклы города.{/b}{/size}{/k}{/color}{/font}"
 
                                         nvl clear
                                         nvl show 
 
-                                        centered "{font=fonts/DS-Moster.ttf}...{/font}"
-                                        centered "{font=fonts/DS-Moster.ttf}В старом городе, где шпили — тонкие, как иглы, увенчанные чёрными \n
+                                        centered "{color=#141414}{font=fonts/DS-Moster.ttf}...{/font}{/color}"
+                                        centered "{font=fonts/DS-Moster.ttf}{color=#141414}В старом городе, где шпили — тонкие, как иглы, увенчанные чёрными \n
                                                                             крестами — вздымались в небо, а лабиринты узких улочек, мощённых \n
                                                                             булыжником, вились между домами с черепичными крышами, теснившихся \n
                                                                             друг к другу, словно старые друзья, не желающие расставаться, был \n
@@ -2271,17 +2313,17 @@ label chapter4:
                                                                             творениями, а по утрам из трубы поднимался лёгкий дымок: значит,\n
                                                                             Мастер уже разжёг печь, и колдовал над очередным замыслом.
 
-                                                        {/font}"
+                                                        {/color}{/font}"
 
-                                        centered "{font=fonts/DS-Moster.ttf}Не то чтобы Мастера избегали — просто путь к его дому не лежал ни\n 
+                                        centered "{color=#141414}{font=fonts/DS-Moster.ttf}Не то чтобы Мастера избегали — просто путь к его дому не лежал ни\n 
                                                                             для дел, ни для досуга. Никто не переступал его порог, никто не ведал, какие\n
                                                                             чудеса рождаются в его мастерской.\n
                                                                             \n
                                                                             А Мастер - делал кукол.{/font}\n
                                                                             \n 
-                                                                            {font=font/Arial.ttf}Куклы с одинаковыми лицами{/font}\n
+                                                                            {font=fonts/Arial.ttf}Куклы с одинаковыми лицами{/font}\n
                                                                             \n
-                                                                            {font=font/DS-Moster.ttf}Каждый день он трудился в своей мастерской: собирал механику, шил \n
+                                                                            {font=fonts/DS-Moster.ttf}Каждый день он трудился в своей мастерской: собирал механику, шил \n
                                                                             одежду, смешивал краски.\n
                                                                             \n 
                                                                             Куклы выходили из его рук одна за другой, но все они были… с \n
@@ -2290,9 +2332,9 @@ label chapter4:
                                                                             полуулыбке. Ни намёка на характер, ни искры живого чувства — лишь \n
                                                                             безмолвные маски, которые он надевал на них, повторяющие друг друга.
 
-                                                            {/font}"
+                                                            {/font}{/color}"
 
-                                        centered "{font=fonts/DS-Moster.ttf}Он не стремился к разнообразию. Напротив — будто намеренно \n
+                                        centered "{font=fonts/DS-Moster.ttf}{color=#141414}Он не стремился к разнообразию. Напротив — будто намеренно \n
                                                                             стирал любые признаки индивидуальности, оставляя лишь общий контур \n
                                                                             человеческого облика. И в этой монотонности, в повторяемости черт \n
                                                                             таилась своя, особая тайна — будто Мастер хранил в сердце образ некоего\n
@@ -2308,9 +2350,9 @@ label chapter4:
                                                                             ужину, иногда тихо разговаривал с ними. Но никогда не наделял их \n
                                                                             настоящими лицами — только масками.
 
-                                                            {/font}"
+                                                            {/color}{/font}"
 
-                                        centered "{font=fonts/Arial.ttf}Забвения{/font}\n
+                                        centered "{color=#141414}{font=fonts/Arial.ttf}Забвения{/font}\n
                                                     {font=fonts/DS-Moster.ttf}Однажды Мастер не вышел из дома. Не задымила его печь. Не \n
                                                                             раздался стук молоточка в мансарде. Город тихо обступил дом, но никто не\n
                                                                             решился войти.\n
@@ -2325,13 +2367,13 @@ label chapter4:
                                                                             \n
                                                                             И тогда куклы начали... двигаться.{/font}\n
                                                                             \n
-                                                                            {font=font/Arial.ttf}Первое утро без Мастера{/font}\n
+                                                                            {font=fonts/Arial.ttf}Первое утро без Мастера{/font}\n
                                                                             \n
-                                                                            {font=font/DS-Moster.ttf}В то утро одна из кукол шевельнулась.\n
+                                                                            {font=fonts/DS-Moster.ttf}В то утро одна из кукол шевельнулась.\n
 
-                                                            {/font}"
+                                                            {/font}{/color}"
 
-                                        centered "{font=fonts/DS-Moster.ttf}Не так, как раньше — когда их брали и заставляли «играть». Теперь \n
+                                        centered "{font=fonts/DS-Moster.ttf}{color=#141414}Не так, как раньше — когда их брали и заставляли «играть». Теперь \n
                                                                             они двигались сами. Сначала робко: повернули голову, приподняли руку,\n
                                                                             шагнули с полки на пол. Потом смелее. Они научились ходить — сначала \n
                                                                             неуклюже, потом всё увереннее. Научились говорить — сначала шёпотом,\n
@@ -2353,9 +2395,9 @@ label chapter4:
                                                                             \n
                                                                             Им пришлось повзрослеть.
 
-                                                            {/font}"
+                                                            {/color}{/font}"
 
-                                        centered "{font=fonts/Arial.ttf}Как куклы учились быть…{/font}\n
+                                        centered "{color=#141414}{font=fonts/Arial.ttf}Как куклы учились быть…{/font}\n
                                                     {font=fonts/DS-Moster.ttf}Теперь им предстояло жить самим.\n
                                                                             \n
                                                                             Сначала было трудно.\n
@@ -2375,9 +2417,9 @@ label chapter4:
                                                                             стареют. Но в их глазах — то, чего никогда не было у кукол: понимание.\n 
                                                                             Осознание. Жизнь.\n
 
-                                                            {/font} "
+                                                            {/font}{/color}"
 
-                                        centered "{font=fonts/DS-Moster.ttf}Иногда они собираются у старого дома Мастера. Заходят в\n 
+                                        centered "{font=fonts/DS-Moster.ttf}{color=#141414}Иногда они собираются у старого дома Мастера. Заходят в\n 
                                                                             мастерскую, где всё ещё пахнет клеем и древесной пылью. Смотрят на\n 
                                                                             инструменты, на старые маски, лежащие в углу.\n
                                                                             \n
@@ -2388,9 +2430,9 @@ label chapter4:
                                                                             это не пустота. Это пространство, в котором рождается что-то\n 
                                                                             настоящее.
 
-                                                            {/font}"
+                                                            {/color}{/font}"
 
-                                        centered "{font=fonts/Arial.ttf}Город кукол{/font}\n
+                                        centered "{color=#141414}{font=fonts/Arial.ttf}Город кукол{/font}\n
                                                     {font=fonts/DS-Moster.ttf}Прошло несколько лет.\n
                                                                             \n
                                                                             Люди постепенно покидали город. Кто-то уезжал в поисках лучшей\n 
@@ -2400,7 +2442,9 @@ label chapter4:
                                                                             Со временем в городе остались только куклы.\n
                                                                             А куклы оставались. Они больше не были игрушками. Они стали горожанами.
 
-                                                            {/font}"
+                                                            {/font}{/color}"
+
+                                        scene bg0000
 
 
                                         nvl clear
