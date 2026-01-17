@@ -11,6 +11,7 @@ init python:
 #define config.default_textshader = True
 #$ renpy.register_text_shader()
 
+
 #генератор случайных чисел
 
 
@@ -329,10 +330,10 @@ image start_splash = Transform(
 )
 
 #СЮЖЕТНЫЕ
-image bg0000 = "images/BG/Blek.jpg"
+image bg0000 = "images/texture/Blek.jpg"
 image bg0000a = "images/BG/0000a.jpg"
 image bg0000b = "images/BG/0000b.jpg"
-image bg0000c = "images/BG/Withe.jpg"
+image bg0000c = "images/texture/Withe.jpg"
 image bg0001 = "images/BG/0001.jpg"
 image bg0002 = "images/BG/0002.jpg"
 image bg0003 = "images/BG/0003.jpg"
@@ -542,6 +543,40 @@ image bg0107 = "images/BG/0096.jpg"
 image bg0108 = "images/BG/0097.jpg"
 image bg0109 = "images/BG/0098.jpg"
 #image F_masked = im.AlphaMask("Mask.png", "pod.png")
+
+
+#region бумага
+image peper_01 = Transform(
+    Composite(
+        (1920, 1080),
+        (0, 0), Solid("#000000"),
+        (0, 0), im.Sepia(im.Alpha("images/texture/peper_02.jpg", 0.347)),
+        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
+    ),
+    matrixcolor=BrightnessMatrix(-0.09)
+)
+
+image peper_02 = Transform(
+    Composite(
+        (1920, 1080),
+        (0, 0), Solid("#000000"),
+        (0, 0), im.Sepia(im.Alpha("images/texture/peper_05.jpg", 0.347)),
+        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
+    ),
+    matrixcolor=BrightnessMatrix(-0.09)
+)
+
+image peper_03 = Transform(
+    Composite(
+        (1920, 1080),
+        (0, 0), Solid("#000000"),
+        (0, 0), im.Sepia(im.Alpha("images/texture/peper_06.jpg", 0.347)),
+        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
+    ),
+    matrixcolor=BrightnessMatrix(-0.09)
+)
+
+#endregion Region name
     
 #концовки
 
@@ -552,7 +587,7 @@ image DEnd = Transform(
         (0, 0), im.Alpha("images/END/END_02.jpg", 0.7),
         (0, 0), im.Alpha("images/END/END_01.jpg", 0.347)
     ),
-    matrixcolor=BrightnessMatrix(-0.09)
+    matrixcolor=BrightnessMatrix(-0.09)   
 )
 
 
@@ -1091,6 +1126,8 @@ define tele = MultipleTransition([
     False, dissolve, "#fff", dissolve,
     True, dissolve, "#fff", dissolve, True]
     )
+
+
     
 # Эффекты перехода с использованием маски (ImageDissolve).
 define circleirisout = ImageDissolve("data/id_circleiris.png", 1.0, 8)
