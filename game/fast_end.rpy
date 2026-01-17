@@ -80,7 +80,7 @@ label fast_end:
     e "......"
     e "..."
 
-    scene DEnd with dissA
+    scene DEnd with Dissolve(5, time_warp=_warper.easein_quart) #dissA
     
     centered "{font=fonts/CeltesSP2.otf}{color=#d16f6a}{i}{size=+45}ПЛОХАЯ КОНЦОВКА. ВЫ ПОГИБЛИ.{/size}{/i}{/color}{/font}"
     centered "{font=fonts/CeltesSP2.otf}{color=#7fbdbf}{i}{size=+25}Попробуйте выбрать другой вариант. {/size}{/i}{/color}{/font}"
