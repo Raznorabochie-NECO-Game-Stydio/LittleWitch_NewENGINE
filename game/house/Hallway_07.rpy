@@ -5,20 +5,43 @@ label hallway_07:
             jump lest7
             
         "В первую дверь":
-            jump door1j
+            jump door_028
             
         "Во вторую дверь":
-            jump door2j
+            jump door_029
             
         "В третью дверь":
-            jump door3j
+            jump door_030
             
         "В четвёртую дверь":
-            jump door4j
+            jump door_031
             
         "В пятую дверь":
-            jump door5j
+            jump door_032
             
         "В шестую дверь":
-            jump door6j
+            jump door_033
 
+label door_028:
+
+    return
+
+label door_029:
+
+    return
+
+label door_030:
+
+    return
+
+label door_031:
+
+    return
+
+label door_032:
+
+    return
+
+label door_033:
+
+    return
