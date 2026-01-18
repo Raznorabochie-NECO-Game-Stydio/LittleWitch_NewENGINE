@@ -22,6 +22,8 @@ label hallway_07:
         "В шестую дверь":
             jump door_033
 
+#ДВЕРКИ
+
 label door_028:
 
     if Room_28 == False:
@@ -426,7 +428,7 @@ label door_032:
     return
 
 label door_033:
-    
+
     if Room_33 == False:
         
 
