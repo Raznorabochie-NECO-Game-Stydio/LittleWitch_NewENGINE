@@ -117,6 +117,16 @@ define Room_27 = False
 define Room_28 = False
 define Room_29 = False
 define Room_30 = False
+define Room_31 = False
+define Room_32 = False
+define Room_33 = False
+define Room_34 = False
+define Room_35 = False
+define Room_36 = False
+define Room_37 = False
+define Room_38 = False
+define Room_39 = False
+define Room_40 = False
 
 # переменные необходимые как метки для определения посещения разных купе в вагона
 define KupeRoom01 = False
