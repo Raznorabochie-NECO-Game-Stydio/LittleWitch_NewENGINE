@@ -334,10 +334,10 @@ label lest6_5:
         "Вниз":
             jump lest6
         
-        "В коридор":
+        "На этаж 06/5":
 
             #if hallway_008 == False:
-            jump hallway_06.5
+            jump hallway_06_5
         
         "Наверх":
             jump lest7
@@ -355,7 +355,7 @@ label lest7:
         "Между" if enigma_01 and enigma_02 and TV_01 == True:
             jump lest6_5
             
-        "В коридор":
+        "На этаж 07":
 
 
             if hallway_009 == False:
