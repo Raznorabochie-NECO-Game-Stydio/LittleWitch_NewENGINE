@@ -14,7 +14,7 @@ label hallway_04:
             jump door_015
             
     return
-
+#ДВЕРКИ
 label door_013:
 
     if Jurnal == True:
