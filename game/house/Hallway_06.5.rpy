@@ -15,7 +15,7 @@ label hallway_06_5:
 
 label door_040:
 
-    if Room_07 == False:
+    if Room_40 == False:
         
 
         e "Маленькая ведьма прикоснулась к холодному металлу ручки."
