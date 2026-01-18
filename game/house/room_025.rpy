@@ -12,7 +12,7 @@ label room_025:
         pass
 
 
-    elif Key_01 == True:
+    elif Key_04 == True:
 
         e ",,"
 
