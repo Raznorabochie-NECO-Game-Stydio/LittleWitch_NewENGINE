@@ -20,7 +20,7 @@ label hallway_03:
             jump door_012
             
     return
-
+#ДВЕРКИ
 label door_007:
 
     if Room_07 == False:
