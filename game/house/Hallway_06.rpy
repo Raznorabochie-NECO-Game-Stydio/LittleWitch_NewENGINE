@@ -22,7 +22,7 @@ label coridor_06:
 
 
     return
-
+#ДВЕРКИ
 label door_022:
 
     if Room_22 == False:
