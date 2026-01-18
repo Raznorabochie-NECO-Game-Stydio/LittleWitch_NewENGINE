@@ -128,6 +128,9 @@ define Room_38 = False
 define Room_39 = False
 define Room_40 = False
 
+#Переменная необхадимая чтобы сделат бесконечную череду комнат
+define Room_infiniti = 0
+
 # переменные необходимые как метки для определения посещения разных купе в вагона
 define KupeRoom01 = False
 define KupeRoom02 = False
