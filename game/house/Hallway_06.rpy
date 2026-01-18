@@ -373,7 +373,18 @@ label door_025:
 
                 pass
 
-            jump hallway_06
+        jump hallway_06
+
+    else:
+        #block of code to run:
+
+        e "Маленькая ведьма прикоснулась к холодному металлу ручки."
+
+        e "Дверь оказалась заперта."
+
+        LW "{i}- Может... мне стоит попробовать другую дверь?{/i}"
+
+        jump hallway_06
 
     return
 
