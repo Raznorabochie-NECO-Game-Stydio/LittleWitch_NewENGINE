@@ -425,8 +425,18 @@ label lest8:
 label roof:
 
     # Крыша Кетер (Корона):
+    $ hallway_011 = True
     
-    jump suicide
+    menu:
+        #"Say Statement"
+        "Вернутся вниз":
+            #block of code to run
+
+            jump lest8
+            
+        "Спригнут":
+            #block of code to run
+            jump suicide
         
     return
 
