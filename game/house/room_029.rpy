@@ -8,7 +8,7 @@ label room_029:
         e "....."
 
         $ Room_29 = True
-        jump hallway_06
+        jump hallway_07
         pass
 
 
