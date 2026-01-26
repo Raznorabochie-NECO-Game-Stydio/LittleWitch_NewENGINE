@@ -1285,6 +1285,7 @@ label chapter4:
                                 e "Она медленно направилась к двери, всё ещё оглядываясь и прислушиваясь к ночным звукам. "
 
                                 centered "{font=fonts/Arial.ttf}{size=+20}{i}«Тихий дом» {/i}{/size}{/font}"
+                                centered "{font=fonts/Arial.ttf}{size=+20}{i}«Улица Героев Армагеддона» {/i}{/size}{/font}"
 
                                 e "значилась на таблички возле двери. "
 
