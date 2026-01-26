@@ -207,6 +207,8 @@ label Underthearch:
                     {font=fonts/TrixieCyr-Light.ttf}«iDolls и TDolls»{/fond}\n
                     {font=fonts/DS-Moster.ttf} «быстро, качественно, {s}не{/s}дорого»{/font}"
 
+        centered "{font=fonts/Arial.ttf}{size=+20}{i}«Улица Азазело» {/i}{/size}{/font}"
+
         #menu:
             #"Say Statement"
             #"Зайти":
