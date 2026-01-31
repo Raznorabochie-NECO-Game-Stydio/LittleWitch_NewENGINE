@@ -1,0 +1,165 @@
+label hallway_prihojay_001:
+
+
+    menu:
+        #"Say Statement"
+        "Второй Коридор":
+            #block of code to run
+                
+            jump hallway_prihojay_002
+
+
+        "Комната 01":
+            #block of code to run
+
+
+            jump room_002_01
+
+            pass
+        "Комната 02":
+
+
+            jump room_002_02
+
+            pass
+
+
+        "Комната 03":
+
+
+            jump room_002_03
+
+            pass
+
+        "кухня":
+
+            jump room_002_kitchen
+
+            pass
+
+        "Посмотреть в окна":
+
+            e "Пейзаж действительно быль странным… "
+            e "Не то чтобы пугающим, но определённо не из этого мира. "
+            e "За мутноватыми стёклами простирались ландшафты,"
+            e " словно вырванные из сновидений: деревья с серебристой листвой, небо, "
+            e "переливающееся всеми оттенками фиолетового, и далёкие силуэты, "
+            e "напоминающие то ли горы, то ли гигантские статуи. "
+
+            e "Всё это выглядело настолько чуждо и в то же время завораживающе, "
+            e "что ведьма на мгновение забыла о своём первоначальном намерении двигаться дальше. "
+            e "Она стояла, заворожённая этим зрелищем, и в голове её роились вопросы:"
+
+            LW "Что это? "
+            LW "Как оно связано с тем, куда я направляюсь? "
+            LW "И что ждёт меня за следующей дверью?"
+
+            jump room_002_Windows
+
+            pass 
+
+        "Выход из квартиры":
+
+            jump hallway_02
+
+    return
+
+label hallway_prihojay_002:
+
+    menu:
+        #"Say Statement"
+        "туалет":
+            #block of code to run
+
+
+            jump room_002_WC
+
+            pass
+
+        "ванная":
+
+
+            jump room_002_bathroom    
+
+            pass
+
+        "Комната 04":
+
+
+            jump room_002_04
+
+            pass
+
+        "Вернутся обратно в коридор-прихожую":
+            #block of code to run
+
+            jump hallway_prihojay_001
+
+            pass
+            
+
+
+
+    return
+
+label room_002_01:
+
+
+    jump hallway_prihojay_001
+
+    return
+
+label room_002_02:
+
+
+    jump hallway_prihojay_001
+
+    return
+
+label room_002_03:
+
+    #три варианта использоват написаный генератор СЧ 
+    #в варианте 3 самым менее вероятном МВ видит тень. возможен скример 
+
+
+    jump hallway_prihojay_001
+
+    return
+
+label room_002_04:
+
+
+    jump hallway_prihojay_002
+
+    return
+
+label room_002_kitchen:
+
+
+    jump hallway_prihojay_001
+
+    return
+
+label room_002_bathroom:
+
+
+    jump hallway_prihojay_002
+    
+    return
+
+label room_002_WC:
+
+
+    jump hallway_prihojay_002
+    
+    return
+
+label room_002_Windows:
+
+    jump hallway_prihojay_001
+    
+    return
+    
+    
+    
+    
