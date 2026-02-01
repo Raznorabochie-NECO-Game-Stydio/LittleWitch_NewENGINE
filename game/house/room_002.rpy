@@ -43,16 +43,29 @@ label room_002:
 
     elif Key_01 == True:
 
-        e ",,"
+        if Room_02 == False:
+
+            
+            $ Room_02 = True
+
+            e "...."
+
+            e "Она оказалась в типичной прихожей. "
 
 
-        #
         
-        $ Key = True
-        $ Room_02 = True
+        
+           
 
-        jump hallway_02
-        pass
+            jump prihojay_001_02
+            pass
+
+        else:
+            #block of code to run
+
+            e "Она снова оказалась в прихожей. "
+
+            jump prihojay_001_02
 
 
     return
