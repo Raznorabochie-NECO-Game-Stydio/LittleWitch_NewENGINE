@@ -148,6 +148,14 @@ define Key_04 = False
 define Key_05 = False
 define Key_06 = False
 
+#дополнительные переменные в квартирах
+
+# квартира 002 вариант 02 этаж 02
+
+define Box_002_02_01 = False
+define F_Room_002_01 = 0
+define shess_Key = False
+
 # Переменная необхадимая чтобы определит пошла ли МВ по следам, или рещила сночала осмотрет осталные этожи.
 define traces_01 = False
 
