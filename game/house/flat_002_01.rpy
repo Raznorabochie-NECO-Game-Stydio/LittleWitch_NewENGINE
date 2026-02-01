@@ -5,8 +5,22 @@ label hallway_prihojay_001:
         #"Say Statement"
         "Второй Коридор":
             #block of code to run
+
+            if Room_02 == False:
+                #block of code to run
+
+                e "Коридор упирался в стену с окнами, но, похоже, не заканчивался, а, по всей видимости, продолжался, заворачивая за угол. "
+                e "Девочка прошла в конец коридора и посмотрела на право. "
+                e "Так и было… там, то же виднелись двери "
                 
-            jump hallway_prihojay_002
+                jump hallway_prihojay_002
+
+            else:
+                #block of code to run
+
+                e "Девочка прошла в другую часть коридора."
+
+                jump hallway_prihojay_002
 
 
         "Комната 01":
@@ -92,6 +106,21 @@ label hallway_prihojay_002:
 
         "Вернутся обратно в коридор-прихожую":
             #block of code to run
+
+            $ replica = renpy.random.choice([1, 2])
+
+            if replica == 1:
+
+                e "Девочка вернулась обратно."
+
+                pass
+
+            if replica == 2:
+                #block of code to run
+
+                e "Девочка развернулась и пошла обратно."
+
+                pass
 
             jump hallway_prihojay_001
 
