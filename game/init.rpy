@@ -150,11 +150,33 @@ define Key_06 = False
 
 #дополнительные переменные в квартирах
 
+#фомка
+
+define fomka = False
+define fomka_endurance = 0
+
+#Квартира 002 вариант 01 этаж 02
+
+define hallway_prihojay_002_01 = 0
+define hallway_prihojay_002_02 = False
+define F_room_002_01_01 = 0
+define F_room_002_02_01 = 0
+define F_room_002_03_01 = 0
+define F_room_002_04_01 = 0
+define F_room_002_kitchen_01 = 0
+define F_room_002_Windows_01 = 0
+define F_room_002_WC_01 = 0
+define F_room_002_bathroom_01 = 0
+
 # квартира 002 вариант 02 этаж 02
 
 define Box_002_02_01 = False
 define F_Room_002_01 = 0
 define shess_Key = False
+
+#Квартира 003 этаж 02
+
+define Key_flat_01 = False
 
 # Переменная необхадимая чтобы определит пошла ли МВ по следам, или рещила сночала осмотрет осталные этожи.
 define traces_01 = False
