@@ -8,7 +8,7 @@ label room_040:
         #"Say Statement"
         "Нет. вернуться в коридор":
             #block of code to run
-            $ ppoints += 1
+            $ ppoints = ppoints + 1
 
             jump hallway_06_5
 
