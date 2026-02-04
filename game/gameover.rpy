@@ -1420,7 +1420,7 @@ label game_over:
         
         e "скрытий... Истинный Эпилог"
 
-        return
+      
+
     return
-return
         
