@@ -42,10 +42,14 @@ label hallway_flat_002_01:
 
         "гостиная":
 
+            e "."
+
             jump living_room_002_01
 
 
         "Кухня":
+
+            e "."
 
             jump kitchen_flat_002_01
 
@@ -97,7 +101,7 @@ label flat_room_002_01:
 
     if F_Room_002_01 == 0:
         #block of code to run
-        $ F_Room_002_01 =+ 1
+        $ F_Room_002_01 = F_Room_002_01 + 1
 
         e "....."
 
@@ -105,14 +109,14 @@ label flat_room_002_01:
 
     elif F_Room_002_01 == 1:
         #block of code to run:
-        $ F_Room_002_01 =+ 1
+        $ F_Room_002_01 = F_Room_002_01 + 1
 
         e ".."
         pass
 
     elif F_Room_002_01 >= 2:
         #block of code to run:
-        $ F_Room_002_01 =+ 1
+        $ F_Room_002_01 = F_Room_002_01 + 1
 
         e ".."
         pass
@@ -121,24 +125,24 @@ label flat_room_002_01:
     
     menu:
         
-        "осмотрет комнату":
+        "осмотреть комнату":
 
             e "....."
 
             menu:
                 #"Say Statement"
                 
-                "осмотрет стол":
+                "осмотреть стол":
                     #block of code to run
+
+                    e "На столе были шахматы."
 
                     jump chess_game_01
 
+                    #$ shess_Key = True
+                    #jump flat_room_002_01
 
-                    
-
-                    jump flat_room_002_01
-
-                "осмотрет ящик стола":
+                "осмотреть ящик стола":
                     #block of code to run
 
                     if Box_002_02_01 == False:
@@ -179,7 +183,7 @@ label flat_room_002_01:
                             #block of code to run
                             
 
-                            e "в ящике не было больше ничего"
+                            e "в ящике не было больше ничего."
 
                             pass
 
