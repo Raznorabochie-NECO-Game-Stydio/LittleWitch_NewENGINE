@@ -66,6 +66,7 @@ label chess_game_01:
             if _return == player_color:
                 e "Поздравляю, игрок!"
                 $ shess_Key = True
+                e "ключ в ящике"
 
             else:
                 e "В следующий раз тебе повезет больше, игрок."
