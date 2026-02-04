@@ -6,12 +6,14 @@ label hallway_prihojay_001:
         "Второй Коридор":
             #block of code to run
 
-            if Room_02 == False:
+            if hallway_prihojay_002_02 == False:
                 #block of code to run
+                $ hallway_prihojay_002_02 = True
 
-                e "Коридор упирался в стену с окнами, но, похоже, не заканчивался, а, по всей видимости, продолжался, заворачивая за угол. "
-                e "Девочка прошла в конец коридора и посмотрела на право. "
-                e "Так и было… там, то же виднелись двери "
+                e "Девочка, неспешно пошла в противоположную его часть. "
+                e "Изучая его.  "
+                e "Коридор, упирался в стену так же с окнами, но, похоже, не заканчивался, "
+                e "а, по всей видимости, продолжался, заворачивая за угол."
                 
                 jump hallway_prihojay_002
 
@@ -52,21 +54,6 @@ label hallway_prihojay_001:
             pass
 
         "Посмотреть в окна":
-
-            e "Пейзаж действительно быль странным… "
-            e "Не то чтобы пугающим, но определённо не из этого мира. "
-            e "За мутноватыми стёклами простирались ландшафты,"
-            e " словно вырванные из сновидений: деревья с серебристой листвой, небо, "
-            e "переливающееся всеми оттенками фиолетового, и далёкие силуэты, "
-            e "напоминающие то ли горы, то ли гигантские статуи. "
-
-            e "Всё это выглядело настолько чуждо и в то же время завораживающе, "
-            e "что ведьма на мгновение забыла о своём первоначальном намерении двигаться дальше. "
-            e "Она стояла, заворожённая этим зрелищем, и в голове её роились вопросы:"
-
-            LW "Что это? "
-            LW "Как оно связано с тем, куда я направляюсь? "
-            LW "И что ждёт меня за следующей дверью?"
 
             jump room_002_Windows
 
@@ -133,12 +120,47 @@ label hallway_prihojay_002:
 
 label room_002_01:
 
+    if F_room_002_01_01 == 0:
+        #block of code to run
+
+        e "..."
+
+
+        pass
+
+    elif F_room_002_01_01 >= 1:
+        #block of code to run
+
+        e "..."
+
+        pass
+
+    $ F_room_002_01_01 = F_room_002_01_01 + 1
+
 
     jump hallway_prihojay_001
 
     return
 
 label room_002_02:
+
+    if F_room_002_02_01 == 0:
+        #block of code to run
+
+        e "..."
+
+
+        pass
+
+    elif F_room_002_02_01 >= 1:
+        #block of code to run
+
+        e "..."
+
+        pass
+
+    $ F_room_002_02_01 = F_room_002_02_01 + 1
+
 
 
     jump hallway_prihojay_001
@@ -150,12 +172,47 @@ label room_002_03:
     #три варианта использоват написаный генератор СЧ 
     #в варианте 3 самым менее вероятном МВ видит тень. возможен скример 
 
+    if F_room_002_03_01 == 0:
+        #block of code to run
+
+        e "..."
+
+
+        pass
+
+    elif F_room_002_03_01 >= 1:
+        #block of code to run
+
+        e "..."
+
+        pass
+
+    $ F_room_002_03_01 = F_room_002_03_01 + 1
 
     jump hallway_prihojay_001
 
     return
 
 label room_002_04:
+
+    # На столе стоял компьютер на экране, которого был BSOD
+
+    if F_room_002_04_01 == 0:
+        #block of code to run
+
+        e "..."
+
+
+        pass
+
+    elif F_room_002_04_01 >= 1:
+        #block of code to run
+
+        e "..."
+
+        pass
+
+    $ F_room_002_04_01 = F_room_002_04_01 + 1
 
 
     jump hallway_prihojay_002
@@ -164,6 +221,20 @@ label room_002_04:
 
 label room_002_kitchen:
 
+    if F_room_002_kitchen_01 == 0:
+
+        e ".."
+
+        pass
+
+    elif F_room_002_kitchen_01 >= 1:
+
+        e "..."
+
+        pass
+
+    $ F_room_002_kitchen_01 = F_room_002_kitchen_01 + 1
+
 
     jump hallway_prihojay_001
 
@@ -171,6 +242,21 @@ label room_002_kitchen:
 
 label room_002_bathroom:
 
+    if F_room_002_bathroom_01 == 0:
+        #block of code to run
+
+        e ".."
+
+        pass
+
+    elif F_room_002_bathroom_01 >= 1:
+        #block of code to run
+
+        e "..."
+
+        pass
+
+    $ F_room_002_bathroom_01 = F_room_002_bathroom_01 + 1
 
     jump hallway_prihojay_002
     
@@ -178,12 +264,58 @@ label room_002_bathroom:
 
 label room_002_WC:
 
+    if F_room_002_WC_01 == 0:
+        #block of code to run
+
+        e ".."
+
+        pass
+
+    elif F_room_002_WC_01 >= 1:
+        #block of code to run
+
+        e "..."
+
+        pass
+
+    $ F_room_002_WC_01 = F_room_002_WC_01 + 1
 
     jump hallway_prihojay_002
     
     return
 
 label room_002_Windows:
+
+    if F_room_002_Windows_01 == 0:
+        #block of code to run
+
+        e "..."
+
+        e "Пейзаж действительно быль странным… "
+        e "Не то чтобы пугающим, но определённо не из этого мира. "
+        e "За мутноватыми стёклами простирались ландшафты,"
+        e " словно вырванные из сновидений: деревья с серебристой листвой, небо, "
+        e "переливающееся всеми оттенками фиолетового, и далёкие силуэты, "
+        e "напоминающие то ли горы, то ли гигантские статуи. "
+
+        e "Всё это выглядело настолько чуждо и в то же время завораживающе, "
+        e "что ведьма на мгновение забыла о своём первоначальном намерении двигаться дальше. "
+        e "Она стояла, заворожённая этим зрелищем, и в голове её роились вопросы:"
+
+        LW "Что это? "
+        LW "Как оно связано с тем, куда я направляюсь? "
+        LW "И что ждёт меня за следующей дверью?"
+
+        pass
+
+    elif F_room_002_Windows_01 >= 1:
+        #block of code to run
+
+        e ".."
+
+        pass
+
+    $ F_room_002_Windows_01 = F_room_002_Windows_01 + 1
 
     jump hallway_prihojay_001
     
