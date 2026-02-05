@@ -50,7 +50,7 @@ label room_002:
 
                 pass
 
-            if replica == 2:
+            elif replica == 2:
 
                 e "....."
                 e "Когда она снова оказалась в этом коридоре, "
@@ -58,7 +58,7 @@ label room_002:
 
                 pass
 
-            if replica == 3:
+            elif replica == 3:
 
                 e "......."
 
