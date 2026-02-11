@@ -17,7 +17,7 @@ label room_013:
         e ",,"
 
 
-        #шахматы
+       
         
         $ Key = True
         $ Room_13 = True
