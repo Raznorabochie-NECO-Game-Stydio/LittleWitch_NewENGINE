@@ -8,6 +8,7 @@ label room_035:
     e "....."
 
     $ Room_35 = True
+    $ Batter_01 = True
 
     jump hallway_08
 
