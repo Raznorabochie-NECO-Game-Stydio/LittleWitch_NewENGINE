@@ -165,8 +165,8 @@ define F_room_002_03_01 = 0
 define F_room_002_04_01 = 0
 define F_room_002_kitchen_01 = 0
 define F_room_002_Windows_01 = 0
-define F_room_002_WC_01 = 0
-define F_room_002_bathroom_01 = 0
+define F_room_002_WC_01 = False
+define F_room_002_bathroom_01 = False
 
 # квартира 002 вариант 02 этаж 02
 
@@ -1018,9 +1018,9 @@ image pe = SnowBlossom("images/Ani/pepel.png",
 image fly = SnowBlossom(anim.SMAnimation(
     "rrr",
     anim.State("rrr", anim.Filmstrip("images/Ani/fly01.png", (20, 20), (2,1), .50)), 
-    anim.State("ggg", anim.Filmstrip("images/ani/fly02.png", (20, 20), (2,1), .60)),
-    anim.State("bbb", anim.Filmstrip("images/ani/fly03.png", (20, 20), (2,1), .70)),
-    anim.State("ccc", anim.Filmstrip("images/ani/fly04.png", (20, 20), (2,1), .80)),
+    anim.State("ggg", anim.Filmstrip("images/ani/fly02.png", (20, 20), (2,1), .50)),
+    anim.State("bbb", anim.Filmstrip("images/ani/fly03.png", (20, 20), (2,1), .50)),
+    anim.State("ccc", anim.Filmstrip("images/ani/fly04.png", (20, 20), (2,1), .50)),
     
     anim.Edge("rrr", 10.0, "ggg"),
     anim.Edge("rrr", 10.0, "bbb"),
@@ -1039,7 +1039,7 @@ image fly = SnowBlossom(anim.SMAnimation(
     anim.Edge("ccc", 10.0, "ggg")
     ), 
      
-    count=50, border=100, xspeed=(-20, -20), yspeed=(-20, -20), start=5,  fast=True
+    count=50, border=50, xspeed=(-20, -20), yspeed=(-30, -30), start=15,  fast=True
     )
     
 image starA = Animation(
