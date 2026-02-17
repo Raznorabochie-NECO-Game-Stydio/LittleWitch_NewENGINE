@@ -135,12 +135,15 @@ label flat_room_002_01:
                 "осмотреть стол":
                     #block of code to run
 
-                    e "На столе были шахматы."
+                    e "На столе была игра."
 
-                    jump chess_game_01
+                    #jump chess_game_01
+                    $ max_time = 75
+                    $ ww, hh = 6, 5
+                    call memoria_game
 
-                    #$ shess_Key = True
-                    #jump flat_room_002_01
+                    #$ cards_Key = True
+                    jump flat_room_002_01
 
                 "осмотреть ящик стола":
                     #block of code to run
@@ -150,7 +153,7 @@ label flat_room_002_01:
 
                         $ Box_002_02_01 = True
 
-                        if shess_Key == True:
+                        if cards_Key == True:
                             #block of code to run
 
                             e "///"
@@ -166,7 +169,7 @@ label flat_room_002_01:
 
                             menu:
                                 #"Say Statement"
-                                "взять ключ" if shess_Key == True:
+                                "взять ключ" if cards_Key == True:
                                     #block of code to run
                                     e ".."
                                     $ Key = True
@@ -194,7 +197,7 @@ label flat_room_002_01:
 
                             menu:
                                 #"Say Statement"
-                                "взять ключ" if shess_Key == True:
+                                "взять ключ" if cards_Key == True:
                                     #block of code to run
                                     e ".."
                                     $ Key = True
