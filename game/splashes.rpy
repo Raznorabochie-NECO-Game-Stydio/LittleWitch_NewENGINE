@@ -216,48 +216,17 @@ label chapt_01_splashscr:
 
 label chapt_01_1_splashscr:
 
-    show screen chapt_splashscr_01("Кругом-кругом всё кружит карусель,")
+    show screen chapt_splashscr_01("Кругом-кругом всё кружит карусель,\n Кругом-кругом всё быстрей\n Ты без забот приди на наш фестиваль,")
     with dissolve
-    pause 5.0
+    pause 8.0
     hide screen chapt_splashscr_01
     with dissolve
 
-    show screen chapt_splashscr_01("Кругом-кругом всё быстрей.")
+    show screen chapt_splashscr_01("Кругом-кругом с ними кружись\n Давай-давай, ведь уже все собрались\n Кругом-кругом кружатся все,\n В страну фантазий тут все собрались.")
     with dissolve
-    pause 5.0
+    pause 8.0
     hide screen chapt_splashscr_01
     with dissolve
-
-    show screen chapt_splashscr_01("Ты без забот приди на наш фестиваль,")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Кругом-кругом с ними кружись")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Давай-давай, ведь уже все собрались")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Кругом-кругом кружатся все,")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("В страну фантазий тут все собрались.")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
 
     return
 
@@ -265,42 +234,11 @@ label chapt_01_1_splashscr:
 
 label chapt_01_2_splashscr:
 
-    show screen chapt_splashscr_01("Когда вечности суть я познала сама,")
+    show screen chapt_splashscr_01("Когда вечности суть я познала сама,\n Я тебя здесь уже найти не смогла,\n В тумане снов своих плывёт\n Ярких звёзд водоворот.\n Сон единый я создам, о цветах в серебряной ночи,\n Как тени этого яркого мира засыпают вечным сном.")
     with dissolve
-    pause 5.0
+    pause 15.0
     hide screen chapt_splashscr_01
     with dissolve
-
-    show screen chapt_splashscr_01("Я тебя здесь уже найти не смогла,")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("В тумане снов своих плывёт")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Ярких звёзд водоворот.")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Сон единый я создам, о цветах в серебряной ночи,")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Как тени этого яркого мира засыпают вечным сном.")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
 
     return
 
