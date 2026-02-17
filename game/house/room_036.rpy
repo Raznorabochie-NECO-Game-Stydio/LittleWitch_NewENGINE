@@ -18,8 +18,26 @@ label room_036:
 
     e "....."
 
+    menu:
+        #"Say Statement"
+                
+        "осмотреть стол":
+            #block of code to run
+
+            e "На столе были шахматы."
+
+            jump chess_game_02
+
+            pass
+
+        "нет":
+
+            pass
+
+
+
     $ Room_36 = True
-    $ enigma_02 = True
+    #$ enigma_02 = True
 
     jump hallway_08
 
