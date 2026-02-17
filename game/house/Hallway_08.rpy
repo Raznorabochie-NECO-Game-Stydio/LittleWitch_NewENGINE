@@ -396,9 +396,9 @@ label door_037:
 
 label door_038:
 
-    if Room_038 == False:
+    if Room_38 == False:
 
-        $ Room_038 = True
+        $ Room_38 = True
 
         e "Маленькая ведьма прикоснулась к холодному металлу ручки."
 
