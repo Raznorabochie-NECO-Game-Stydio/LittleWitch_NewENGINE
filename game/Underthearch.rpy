@@ -203,11 +203,11 @@ label Underthearch:
         e "Её взгляд цепляется за разбитую витрину магазинчика или ремонтной мастерской. "
         e "А потом и за трубу буржуйки, торчавшую из разбитой витрины, из нее шел дым."
 
-        centered "{font=fonts/Arial.ttf}{size=+20}{i}«Ремонт Солнечных Кукол». {/i}{/size}{/font}\n
+        centered "{cps=0}{font=fonts/Arial.ttf}{size=+20}{i}«Ремонт Солнечных Кукол». {/i}{/size}{/font}\n
                     {font=fonts/TrixieCyr-Light.ttf}«iDolls и TDolls»{/fond}\n
-                    {font=fonts/DS-Moster.ttf} «быстро, качественно, {s}не{/s}дорого»{/font}"
+                    {font=fonts/DS-Moster.ttf} «быстро, качественно, {s}не{/s}дорого»{/font}{/cps}"
 
-        centered "{font=fonts/Arial.ttf}{size=+20}{i}«Улица Азазело» {/i}{/size}{/font}"
+        centered "{cps=0}{font=fonts/Arial.ttf}{size=+20}{i}«Улица Азазело» {/i}{/size}{/font}{/cps}"
 
         #menu:
             #"Say Statement"
