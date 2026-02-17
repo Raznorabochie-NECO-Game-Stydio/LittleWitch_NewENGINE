@@ -172,7 +172,7 @@ define F_room_002_bathroom_01 = False
 
 define Box_002_02_01 = False
 define F_Room_002_01 = 0
-define shess_Key = False
+define cards_Key = False
 
 #Квартира 003 этаж 02
 
@@ -192,7 +192,8 @@ define Batter_01 = False
 define TV_01 = False
 
 
-
+#квартира 036
+define Key_shees_enigma_01 = False
 
 $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
