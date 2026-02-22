@@ -368,8 +368,6 @@ label Underthearch:
 
         e "Маленькая ведьма зашла в подъезд."
 
-
-
         jump podezd
         pass
 
