@@ -2,6 +2,7 @@ game/saves/persistent
 *.rpy~
 *.rpyc
 *.py~
+*.pyc
 *.rpyb
 *.rpyb~
 *.rpymc
