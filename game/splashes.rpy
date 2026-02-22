@@ -5,6 +5,9 @@ label splashscreen:
     $ renpy.pause(3)
     hide text with dissolve 
     $ renpy.pause(0.56)
+    
+    jump chapt0_splashscr
+
     return
 
 # стиль строк к главам
@@ -17,7 +20,7 @@ screen chapter01_splashscr():
     vbox:
         align (0.5, 0.5)
         text "Глава 01. Сон Страны Грёз":
-            size 36
+            size 36 
             color "#ff0000"
             bold True
             align (0.5, 0.5)
@@ -99,33 +102,32 @@ screen chapt_splashscr_01(line):
 
 
 # эпиграф заставки игры
+# text_font = "GOST_A.ttf"
 
 label chapt0_splashscr:
-    show screen chapt_splashscr("Привет, путник! Ты забрёл в мои туманные сны, ")
+    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=65}Привет, путник!{/size}{/font}")
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt_splashscr("где звёзды шепчут древние тайны.")
+    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=60}Ты забрёл в мои туманные сны, где звёзды шепчут древние тайны.{/size}{/font}")
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt_splashscr(" Расскажи, что привело тебя к Ведьме измерений?")
+    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=65}Расскажи, что привело тебя к Ведьме измерений?{/size}{/font}")
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-
-    show screen chapt_splashscr(" Может, вместе мы разгадаем загадки, скрытые в алых снах.")
+    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=65}Может, вместе мы разгадаем загадки, скрытые в алых снах.{/size}{/font}")
     with dissolve
     pause 4.0 # Дольше на последней строке
     hide screen chapt_splashscr
     with dissolve
-
     
     return
 
@@ -183,7 +185,7 @@ label chapt_01_splashscr:
     hide screen chapt_splashscr_01
     with dissolve
 
-    show screen chapt_splashscr_01("Ведьма измерений. Гуляющая сама по себе по фракталу древа миров. Мечтающая когда-нибудь приблизиться к Грани и обрести своё собственное Имя. ")
+    show screen chapt_splashscr_01("Ведьма измерений. Гуляющая сама по себе по фракталу древа миров.\n Мечтающая когда-нибудь приблизиться к Грани и обрести своё собственное Имя. ")
     with dissolve
     pause 10.0
     hide screen chapt_splashscr_01
@@ -195,7 +197,7 @@ label chapt_01_splashscr:
     hide screen chapt_splashscr_01
     with dissolve
 
-    show screen chapt_splashscr_01("Обожающая в жару нагишом купаться в ледяных ручьях, спать под открытым звездным небом и любоваться им.")
+    show screen chapt_splashscr_01("Обожающая в жару нагишом купаться в ледяных ручьях,\n спать под открытым звездным небом и любоваться им.")
     with dissolve
     pause 6.0
     hide screen chapt_splashscr_01
@@ -251,6 +253,49 @@ label chapt_01_1_splashscr:
     with dissolve
 
     show screen chapt_splashscr_01("В страну фантазий тут все собрались.")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+
+    return
+
+#Эпиграф первой главы доп.
+
+label chapt_01_2_splashscr:
+
+    show screen chapt_splashscr_01("Когда вечности суть я познала сама,")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Я тебя здесь уже найти не смогла,")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("В тумане снов своих плывёт")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Ярких звёзд водоворот.")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Сон единый я создам, о цветах в серебряной ночи,")
+    with dissolve
+    pause 5.0
+    hide screen chapt_splashscr_01
+    with dissolve
+
+    show screen chapt_splashscr_01("Как тени этого яркого мира засыпают вечным сном.")
     with dissolve
     pause 5.0
     hide screen chapt_splashscr_01

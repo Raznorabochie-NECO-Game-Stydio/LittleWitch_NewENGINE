@@ -136,10 +136,10 @@ define LO = Character('Лохматый',
 
 define e = Character(None, 
                         what_size = 35, 
-                        what_font = "segoescript.ttf", 
+                        what_font = "gui/fonts/segoescript.ttf", 
                         what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
-                        window_background=None,what_xalign = 0.5, 
+                        window_background="#00000000",what_xalign = 0.5, 
                         what_text_align = 0.5, cps = 25, 
                         window_xfill = False, 
                         window_xalign = 0.5
@@ -1049,24 +1049,90 @@ image extra neutral:
     pause 0.1
     repeat
 #ПЕРЕМЕННЫЕ
-$ ppoints = 0
-$ PP = 0
+
+# Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
+# влияющая на то какая концовка послесловия будет продемонстрированная игроку по окончанию игры.
+define ppoints = 0
+define PP = 0
+
+# Переменная нужная для того чтобы определит, сказал ли персонаж свое имя или нет.
 define DollCam = False
-define Room_01 = False
-define Room_02 = False
-define Room_03 = False
-define KupeRoom01 = False
-define KupeRoom02 = False
+
+# Переменная определяет имеется у игрока доступ в данную комнату или нет.
 define WCRoom = False
 define WCC = False
+
+# Переменная, которая меняется при посещении комнате, и впоследствии определяет, какая сцена будет показана игроку.
 define Wite = False
-define Jurnal = False
-define Key = False
-define Key_N = False
+
+#Переменные для доступа на скрытый этаж, и скрытую историю.
+define enigma_01 = False
+define enigma_02 = False
 
 $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
 $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
+
+# Переменные от 00 до ХХ служащие для определения посещения комнат.
+define Room_01 = False
+define Room_02 = False
+define Room_03 = False
+define Room_04 = False
+define Room_05 = False
+define Room_06 = False
+define Room_07 = False
+define Room_08 = False
+define Room_09 = False
+define Room_10 = False
+define Room_11 = False
+define Room_12 = False
+define Room_13 = False
+define Room_14 = False
+define Room_15 = False
+define Room_16 = False
+define Room_17 = False
+define Room_18 = False
+define Room_19 = False
+define Room_20 = False
+define Room_21 = False
+define Room_22 = False
+define Room_23 = False
+define Room_24 = False
+define Room_25 = False
+define Room_26 = False
+define Room_27 = False
+define Room_28 = False
+define Room_29 = False
+define Room_30 = False
+
+# переменные необходимые как метки для определения посещения разных купе в вагона
+define KupeRoom01 = False
+define KupeRoom02 = False
+define KupeRoom03 = False
+define KupeRoom04 = False
+define KupeRoom05 = False
+
+# Переменная нужная для определения того был ли прочитан журнал лежащий в почтовом ящике.
+define Jurnal = False
+define Key = False
+define Key_01 = False
+define Key_02 = False
+define Key_03 = False
+define Key_04 = False
+define Key_05 = False
+define Key_06 = False
+
+# Переменная необхадимая чтобы определит пошла ли МВ по следам, или рещила сночала осмотрет осталные этожи.
+define traces_01 = False
+
+#переменная нужная для определения если ГГ побывала в дополнительном блоке четвертой главы
+define Under_01 = False
+
+# Переменная необходимая для определения того что МВ взяла пульт от телевизора
+define remote_controller = False
+
+#переменная необходимая для определения быль ли просмотрен определенный телевизор
+define TV_01 = False
 
 #генератор случайных чисел
 #$ ran_dig = renpy.random.choice([1,6])
@@ -1090,6 +1156,69 @@ python:
             return self.current
     
     mci = AutoMCI()
+    
+#Генерат позиции(Де)
+init python:
+    from random import uniform
+    import math
+    #Это даст нам корды и границы безопасной зоны
+    def get_coords():
+        nx, ny = uniform(0, 1920), uniform(0, 1080)
+        xf = uniform(min(nx, -ny), max(nx, -ny))
+        yf = uniform(min(-nx, ny), max(-nx, ny))
+        return int(xf), int(yf)
+        
+    #Это докидывает конфиг для движения
+    def create_mover():
+        x = 960
+        y = 540
+        target_x = 960
+        target_y = 540
+        start_x = 960
+        start_y = 540
+        progress = 1.0
+        duration = 1.0
+        start_time = 0
+        #ТРОГАТЬ ТУТА
+        speed = 400
+        #ЭТО СКОРОСТЬ
+        
+        #А это само двигло
+        def move_func(trans, st, at):
+            nonlocal x, y, target_x, target_y, start_x, start_y, progress, duration, start_time
+            
+            if progress >= 1.0:
+                start_x, start_y = x, y
+                target_x, target_y = get_coords()
+                
+                dx = target_x - start_x
+                dy = target_y - start_y
+                distance = math.sqrt(dx*dx + dy*dy)
+                duration = max(0.5, distance / speed)
+                progress = 0
+                start_time = st
+                
+            elapsed = st - start_time
+            progress = min(1.0, elapsed / duration)
+            
+            if progress < 1.0:
+                x = start_x + (target_x - start_x) * progress
+                y = start_y + (target_y - start_y) * progress
+            else:
+                x, y = target_x, target_y
+            
+            trans.pos = (int(x), int(y))
+            return 0
+        
+        return move_func
+        
+#это чтоб оно шароёбилось
+transform smooth_random_move:
+    function create_mover()
+#Это тестовое, пока оставлю
+#transform test_transform():
+#        pos (0, 0)
+
 #ШРИФТЫ(Задам стилем ибо могу)
 #СТИЛЬ - Чепятная машинка(typewriter)
 style typewr is text:

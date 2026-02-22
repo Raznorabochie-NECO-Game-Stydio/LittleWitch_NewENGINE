@@ -528,69 +528,69 @@ label game_over:
     
          scene bg040a with circleirisout
          show plate at right
-         show HM n at right onlayer xra
+         show HM n at right onlayer sloi01
          with teleport
          show LW n at left with moveinleft
          show LW r at razgavor, left with dissolve
-         show VP at loposL onlayer demo
+         show VP at loposL onlayer sloi02
          play music "Sound/ghost-town2.mp3" fadein 1.5
     
          LW "- Хранительнца! {w=1}Расскажи ещё одну историю! Расскажи!"
     
          show LW s08 at left with dissolve
-         hide VP onlayer demo
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         hide VP onlayer sloi02
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show OB at loposR onlayer dexm
     
          HM "- Нет,{w=1} ты ведь знаешь все истории известных миров."
     
-         show HM s05 at right onlayer xra with dissolve
+         show HM s05 at right onlayer sloi01 with dissolve
          hide OB onlayer dexm
          show LW s15 at razgavor, left with dissolve
-         show V at loposL onlayer demo
+         show V at loposL onlayer sloi02
     
          LW "- А неизвестных? "
     
          show LW rn at razgavor, left with dissolve
-         hide V onlayer demo
-         show S02 at loposL onlayer demo
+         hide V onlayer sloi02
+         show S02 at loposL onlayer sloi02
     
          LW "Не хочешь ли ты мне сказать, мудрая Наставница,{w=1} что миры Великого Древа — всё, что существует?"
     
          show LW s01 at left with dissolve
-         hide S02 onlayer demo
-         show HM r02 at razgavor, right onlayer xra with dissolve
+         hide S02 onlayer sloi02
+         show HM r02 at razgavor, right onlayer sloi01 with dissolve
          show GI at loposR onlayer dexm
     
          HM "- Хех!..{w=1} Разумеется нет же! "
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show LW n at left with dissolve
          hide GI onlayer dexm
          show C at loposR onlayer dexm
     
          HM "У каждого Древа — своя Хранительница!"
     
-         show HM s03 at right onlayer xra with dissolve
+         show HM s03 at right onlayer sloi01 with dissolve
          hide C onlayer dexm
          show LW ud at razgavor, left with dissolve
-         show B at loposL onlayer demo
+         show B at loposL onlayer sloi02
     
          LW "- Так значит, есть и другие?.. {w=1}Как интересно!.."
     
          show LW s15 at razgavor, left with dissolve
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
     
          LW " Расскажи про других Хранительниц! Расскажи! Ну расскажи!"
     
          show LW s03 at left with dissolve
-         hide B onlayer demo
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         hide B onlayer sloi02
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show S01 at loposR onlayer dexm
     
          HM "- Хехе!..{w=1} Хорошая ты девочка, "
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
          show LW n at left with dissolve
          show ST at loposR onlayer dexm
@@ -598,29 +598,29 @@ label game_over:
          HM "Тихоня — но уж больно любопытная! Порой меня, саму меня в неловкое положение ставишь... "
          HM "Ладно, расскажу. "
     
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
     
          HM "Не густо правда, так ведь они-то не каждый вечер погостить к нам приходят! "
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          hide ST onlayer dexm
          show LW s02 at left with dissolve
          show SF at loposR onlayer dexm
     
          HM "И не каждый тысячный!"
     
-         show HM s03 at right onlayer xra with dissolve
+         show HM s03 at right onlayer sloi01 with dissolve
          show LW s15 at razgavor, left with dissolve
-         show N at loposL onlayer demo
+         show N at loposL onlayer sloi02
     
          LW "- Мда"
     
          hide SF onlayer dexm
-         hide N onlayer demo
+         hide N onlayer sloi02
          show LW n at left with dissolve
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide LW n at left with moveoutleft
-         hide HM n at right onlayer xra 
+         hide HM n at right onlayer sloi01 
          show HM n at right
          with dissolve
          hide HM n at right
@@ -671,37 +671,37 @@ label game_over:
          with moveinright
          show LW n at left with moveinleft
          hide HM n at right
-         show HM r01 at razgavor, right onlayer xra
+         show HM r01 at razgavor, right onlayer sloi01
          with dissolve
          show SHT at loposR onlayer dexm
     
          HM "- А впрочем...{w=1} Вон гляди! "
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
     
          HM "Видишь?... "
     
-         show HM s02 at right onlayer xra with dissolve
+         show HM s02 at right onlayer sloi01 with dissolve
          hide SHT onlayer dexm
     
          e "Хранительница, повернувшись, указала рукой на небо, которое бороздила яркая белая черта."
     
          show LW r at razgavor, left with dissolve
-         show V at loposL onlayer demo
+         show V at loposL onlayer sloi02
     
          LW "- Комета?..{w=1} Хотя я чувствую... "
     
          show LW rn at razgavor, left with dissolve
-         hide V onlayer demo
-         show B at loposL onlayer demo
-         show HM n at right onlayer xra with dissolve
+         hide V onlayer sloi02
+         show B at loposL onlayer sloi02
+         show HM n at right onlayer sloi01 with dissolve
     
          LW "Что-то...{w=1} Я не знаю что это, ты ведь знаешь?"
     
          show LW s08 at left with dissolve
-         hide B onlayer demo
+         hide B onlayer sloi02
          hide LW s08
-         hide HM n onlayer xra
+         hide HM n onlayer sloi01
          scene bg000 
          with diss
          stop music fadeout 1.0
@@ -730,58 +730,58 @@ label game_over:
          with moveinright
          show LW n at left with moveinleft
          hide HM n at right
-         show HM r01 at razgavor, right onlayer xra
+         show HM r01 at razgavor, right onlayer sloi01
          with dissolve
          show S04 at loposR onlayer dexm
     
          HM "- Это? Хех!.. "
          HM "Это ответ на вопрос твой,{w=1} Тихоня."
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
     
          HM "Гостья к нам пожаловала."
     
-         show HM r02 at razgavor, right onlayer xra with dissolve
+         show HM r02 at razgavor, right onlayer sloi01 with dissolve
          hide S04 onlayer dexm
          show S01 at loposR onlayer dexm
     
          HM " Иная Хранительница."
     
-         show HM s05 at right onlayer xra with dissolve
+         show HM s05 at right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
          show LW s07 at razgavor, left with dissolve
-         show TC at loposL onlayer demo
+         show TC at loposL onlayer sloi02
     
          LW "- Не может такого быть... "
     
-         hide TC onlayer demo
-         show VP at loposL onlayer demo
+         hide TC onlayer sloi02
+         show VP at loposL onlayer sloi02
          show LW r at Motion(Trampolin, 5.0, repeat=True, bounce=True) with dissolve
-         show HM s04 at right onlayer xra with dissolve
+         show HM s04 at right onlayer sloi01 with dissolve
          $ renpy.pause(4.0)
          show LW v03 at razgavor, left with dissolve
-         hide VP onlayer demo
-         show TC at loposL onlayer demo
+         hide VP onlayer sloi02
+         show TC at loposL onlayer sloi02
     
          LW "Это ты подстроила, это твой фокус! "
     
          show LW v02 at razgavor, left with dissolve
-         hide TC onlayer demo
-         show S03 at loposL onlayer demo
+         hide TC onlayer sloi02
+         show S03 at loposL onlayer sloi02
     
          LW "Да, Наставница?"
     
          show LW s at left with dissolve
-         hide S03 onlayer demo
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         hide S03 onlayer sloi02
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show OB at loposR onlayer dexm
     
          HM "- Если честно {w=1}— это сюрприз и для меня самой, Тихоня."
     
-         show HM s05 at right onlayer xra with dissolve
+         show HM s05 at right onlayer sloi01 with dissolve
          hide OB onlayer dexm
          show LW v02 at razgavor, left with dissolve
-         show SNO at loposL onlayer demo
+         show SNO at loposL onlayer sloi02
     
          LW "- Но я... "
     
@@ -790,49 +790,49 @@ label game_over:
          LW "Только спросила... "
     
          show LW ud at razgavor, left with dissolve
-         hide SNO onlayer demo
-         show D at loposL onlayer demo
+         hide SNO onlayer sloi02
+         show D at loposL onlayer sloi02
     
          LW "И тут?... {w=1}Так не бывает!"
     
          show LW s14 at left with dissolve
-         hide D onlayer demo
-         show HM r02 at razgavor, right onlayer xra with dissolve
+         hide D onlayer sloi02
+         show HM r02 at razgavor, right onlayer sloi01 with dissolve
          show GI at loposR onlayer dexm
     
          HM "- Что бывает, а что не бывает —{w=1} не тебе решать,"
     
          show LW n at left with dissolve
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          hide GI onlayer dexm
          show ST at loposR onlayer dexm
     
          HM "Туфелька. "
          HM "Ничего не возникает абсолютно случайно, и твой вопрос в том числе."
     
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide ST onlayer dexm
          show LW s15 at left with dissolve
-         show GI at loposL onlayer demo
+         show GI at loposL onlayer sloi02
     
          LW "- Да, Наставница!.. "
     
          show LW s13 at left with dissolve
-         hide GI onlayer demo
-         show B at loposL onlayer demo
+         hide GI onlayer sloi02
+         show B at loposL onlayer sloi02
     
          LW "Наставница...{w=1} А она какая?.."
     
          show LW n at left with dissolve
-         hide B onlayer demo
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         hide B onlayer sloi02
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S01 at loposR onlayer dexm
     
          HM "- Это ты сама увидишь, какова она."
     
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
-         hide HM n at right onlayer xra
+         hide HM n at right onlayer sloi01
          hide LW n at left
          scene bg000
          with diss
@@ -857,30 +857,30 @@ label game_over:
     
          show LW n at left with moveinleft
          show LW s13 at left with dissolve
-         show VP at loposL onlayer demo
+         show VP at loposL onlayer sloi02
          show plate at right
          show HM n at right
          with moveinright
          hide HM n at right
-         show HM n at right onlayer xra
+         show HM n at right onlayer sloi01
          with dissolve
     
          LW "- Она спускается за лес, на лужайку! "
     
          show LW n at left with dissolve
-         hide VP onlayer demo
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         hide VP onlayer sloi02
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show V at loposR onlayer dexm
     
          HM "- Идём же, "
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
     
          HM "Мне самой не терпится увидеть...{w=1} Коллегу..."
     
-         show HM s02 at right onlayer xra with dissolve
+         show HM s02 at right onlayer sloi01 with dissolve
          hide V onlayer dexm
-         hide HM n at right onlayer xra 
+         hide HM n at right onlayer sloi01 
          show HM n at right
          with dissolve
          hide HM n at right
@@ -975,34 +975,34 @@ label game_over:
          show HM n at right
          with moveinright
          hide HM n at right
-         show HM s01 at right onlayer xra
+         show HM s01 at right onlayer sloi01
          with dissolve
          $ renpy.pause(1.5)
          show CC n at center with moveinleft
          $ renpy.pause(1.5)
          show LW n at left with moveinleft
          show LW s02 at razgavor, left with dissolve 
-         show ZB at loposL onlayer demo
+         show ZB at loposL onlayer sloi02
      
          LW "- Она... {w=1}Похожа на нас... "
     
          show LW s06 at left with dissolve
-         hide ZB onlayer demo
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         hide ZB onlayer sloi02
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S02 at loposR onlayer dexm
     
          HM "- Конечно, ведь их Древо{w=1}  — зеркальное отражение нашего. "
      
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          hide S02 onlayer dexm
          show SF at loposR onlayer dexm
     
          HM "Принцип СРТ симметрии и спонтанное его нарушения действует и на этом уровне."
     
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide SF onlayer dexm
          show CC r at Motion(Trampoline, 5.0, repeat=True, bounce=True) with dissolve
-         show VP at loposCA onlayer demo
+         show VP at loposCA onlayer sloi02
     
          CC "- Сестрица!! "
     
@@ -1011,7 +1011,7 @@ label game_over:
          CC "Как давно я тебя не вииидела!!! "
     
          show CC s03 at center with dissolve
-         hide VP onlayer demo
+         hide VP onlayer sloi02
          show LW n at left with dissolve
     
          e "Неожиданно завизжала рогатая гостья голосом абсолютно детского тембра."
@@ -1021,73 +1021,73 @@ label game_over:
          e "Перед ней она и правда казалась маленьким ребёнком."
     
          show LW ud at razgavor, left with dissolve
-         show ZB at loposL onlayer demo
+         show ZB at loposL onlayer sloi02
          show CC n at center with dissolve
     
          LW "- Она{w=1} — твоя сестра?... "
     
          show LW s02 at left with dissolve
-         hide ZB onlayer demo
+         hide ZB onlayer sloi02
     
          e "удивлённо спросила Тихоня."
     
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show D at loposR onlayer dexm
     
          HM "- Нет.{w=1} Мы все так называем друг-друга,"
     
-         show HM s04 at right onlayer xra with dissolve
+         show HM s04 at right onlayer sloi01 with dissolve
          hide D onlayer dexm
          show LW n at left with dissolve
          show CC r at razgavor, center with dissolve
-         show GI at loposCA onlayer demo
+         show GI at loposCA onlayer sloi02
     
          CC "- Сестрицааа!!! "
     
-         hide GI onlayer demo
-         show LO at loposCA onlayer demo
+         hide GI onlayer sloi02
+         show LO at loposCA onlayer sloi02
     
          CC "Я так рада тебя обнять!!!{w=1}Сколько же мы не виииделись!"
     
          show CC smail 02 at center with dissolve
-         hide LO onlayer demo
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         hide LO onlayer sloi02
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S01 at loposR onlayer dexm
     
          HM "- Пять миллиардов шестьсот сорок семь миллионов двести двадцать три тысячи тринадцать субъективных лет, "
          HM "если брать в расчёт мою точку зрения... и шестнадца миллиардов объективных лет возраста этой вселенной…"
     
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
          show CC r at razgavor, center with dissolve
-         show D at loposCA onlayer demo
+         show D at loposCA onlayer sloi02
          show LW v04 at left with dissolve
     
          CC "- Ты как всегда не можешь без цифр! "
     
          show CC s03 at center with dissolve
-         hide D onlayer demo
+         hide D onlayer sloi02
     
          e "С сердито-деловым видом выплюнула гостья, скорчив физиономию."
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show GI at loposR onlayer dexm
          show CC s04 at center with dissolve
     
          HM "- Из цифр состоит всё, и я, и ты "
     
-         show HM s05 at razgavor, right onlayer xra with dissolve
+         show HM s05 at razgavor, right onlayer sloi01 with dissolve
          hide GI onlayer dexm
     
          e "оправдываясь, сказала Наставница,"
     
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show SF at loposR onlayer dexm
     
          HM ", - А ты, смотрю, как была коротышкой, так и осталась. Хех, не подросла ни на микрон!"
     
          show CC s01 at center with dissolve
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide SF onlayer dexm
     
          e "Тихоня, как и положено Тихоне,"
@@ -1098,40 +1098,40 @@ label game_over:
          e "Неожиданно гостья повернула голову, указав на неё, Тихоню, пальцем."
     
          show CC rn at razgavor, center with dissolve
-         show B at loposCA onlayer demo
+         show B at loposCA onlayer sloi02
     
          CC "- А это кто?"
     
          show CC smail 01 at center with dissolve
-         hide B onlayer demo
+         hide B onlayer sloi02
          show LW v03 at left with dissolve
          show C at loposR onlayer dexm
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
     
          HM "- А это…{w=1} ученица моя! "
     
-         show HM r02 at razgavor, right onlayer xra with dissolve
+         show HM r02 at razgavor, right onlayer sloi01 with dissolve
          hide C onlayer dexm
          show N at loposR onlayer dexm
          show LW s14 at left with dissolve
     
          HM "Можешь звать ее Тихоней."
     
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide N onlayer dexm
          show CC s04 at razgavor, center with dissolve 
-         show B at loposC onlayer demo
+         show B at loposC onlayer sloi02
     
          CC "- Ученица?!.. "
     
          show CC r at razgavor, center with dissolve
-         hide B onlayer demo
-         show C at loposC onlayer demo
+         hide B onlayer sloi02
+         show C at loposC onlayer sloi02
     
          CC "Сестрица, поставь меня на землю!.. "
     
          show CC s01 at center with dissolve
-         hide C onlayer demo
+         hide C onlayer sloi02
     
          e "И Наставница быстро и нежно положила её на лужайку, и она подошла. "
          e "Такая маленькая, такая смешная и чудная — и такая древняя, если в последний раз она её видела так давно."
@@ -1141,56 +1141,56 @@ label game_over:
     
          e "Тихоня ведь здесь от силы тысячу!"
     
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show D at loposR onlayer dexm
     
          HM "- Только не слишком приставай к ней. Она и так в недоумении."
     
-         show HM s03 at right onlayer xra with dissolve
+         show HM s03 at right onlayer sloi01 with dissolve
          hide D onlayer dexm
          show LW s16 at left with dissolve
     
          e "Тихоня мягко улыбнулась, глядя в сверкающие розовой радужкой глаза карликовой Хранительницы иных миров."
     
          show CC rn at razgavor, center with dissolve
-         show S01 at loposC onlayer demo
+         show S01 at loposC onlayer sloi02
     
          CC "- Значит, тебя зовут Тихоня? "
     
          show LW s03 at left with dissolve
          show CC n at center with dissolve
-         hide S01 onlayer demo
+         hide S01 onlayer sloi02
     
          e "Спросил её тонкий детский голосок."
     
          show LW s15 at razgavor, left with dissolve
-         show GI at loposL onlayer demo
+         show GI at loposL onlayer sloi02
     
          LW "- Иногда наставница называет меня Тихоней,{w=1} иногда Туфелькой. "
     
          show LW ud at razgavor, left with dissolve
-         hide GI onlayer demo
-         show SNO at loposL onlayer demo
+         hide GI onlayer sloi02
+         show SNO at loposL onlayer sloi02
     
          LW "Я же предпочитаю думать о себе как о Снежинке."
     
          show LW n at left with dissolve
-         hide SNO onlayer demo
+         hide SNO onlayer sloi02
     
          show CC r at razgavor, center with dissolve
-         show VP at loposC onlayer demo
+         show VP at loposC onlayer sloi02
     
          CC "- Занятно.{w=1} Милая девочка..."
     
          show CC n at center with dissolve
-         hide VP onlayer demo
+         hide VP onlayer sloi02
          show LW s02 at razgavor, left with dissolve
-         show V at loposL onlayer demo
+         show V at loposL onlayer sloi02
     
          LW "- Вы тоже..."
     
          show LW s08 at left with dissolve
-         hide V onlayer demo
+         hide V onlayer sloi02
     
          e "Гостья рассмеялась. "
          e "Тонкий детский смех пробрал её всю, заставляя совершенно по-детски, изогнувшись, повалиться на траву, "
@@ -1203,35 +1203,35 @@ label game_over:
          e "Наконец, просмеявшись, она просто спросила."
     
          show LW v03 at razgavor, left with dissolve
-         show B at loposL onlayer demo
+         show B at loposL onlayer sloi02
     
          LW "- А как вас зовут?"
     
          show LW v02 at left with dissolve
-         hide B onlayer demo
+         hide B onlayer sloi02
     
          show CC r at razgavor, center with dissolve
-         show S02 at loposC onlayer demo
+         show S02 at loposC onlayer sloi02
     
          CC "- Меня?.. {w=1}Можешь называть меня Син-Син. "
     
          show CC smail 02 at center with dissolve
-         hide S02 onlayer demo
+         hide S02 onlayer sloi02
          show LW s15 at razgavor, left with dissolve
-         show D at loposL onlayer demo
+         show D at loposL onlayer sloi02
     
          LW "- Син-Син? А что это значит?"
     
          show LW s03 at left with dissolve
-         hide D onlayer demo
+         hide D onlayer sloi02
          show CC smail 01 at center with dissolve
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show SHT at loposR onlayer dexm
     
          HM "- Не доставай её, Туфелька."
     
          show LW v01 at left with dissolve
-         show HM s04 at right onlayer xra with dissolve
+         show HM s04 at right onlayer sloi01 with dissolve
          hide SHT onlayer dexm
     
          e "Внезапно одёрнула её Наставница."
@@ -1239,63 +1239,63 @@ label game_over:
          show CC n at center with dissolve
          show LW s08 at left with dissolve
          show LW s15 at razgavor, left with dissolve
-         show D at loposL onlayer demo
+         show D at loposL onlayer sloi02
     
          LW "- О! Простите!.."
     
          show LW s06 at left with dissolve
-         hide D onlayer demo
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         hide D onlayer sloi02
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show GI at loposR onlayer dexm
     
          HM "- Ну давайте собираться. "
     
-         show HM r02 at razgavor, right onlayer xra with dissolve
+         show HM r02 at razgavor, right onlayer sloi01 with dissolve
          hide GI onlayer dexm
          show TC at loposR onlayer dexm
     
          HM "Не здесь же чай пить нам всем! "
     
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
     
          HM "А может — чего поинтереснее? "
     
          hide TC onlayer dexm
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          $ renpy.pause(1.0)
-         show HM s06 at right onlayer xra with dissolve
+         show HM s06 at right onlayer sloi01 with dissolve
          $ renpy.pause(0.5)
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
     
          e "Подмигнула наставница Син-Син."
     
          show LW r at razgavor, left with dissolve
-         show VP at loposL onlayer demo
+         show VP at loposL onlayer sloi02
     
          LW "- Поинтереснее?{w=1} Это я люблю!"
     
          show LW s16 at left with dissolve
-         hide VP onlayer demo
-         show HM r03 at razgavor, right onlayer xra with dissolve
+         hide VP onlayer sloi02
+         show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S02 at loposR onlayer dexm
     
          HM "- Вот только не надо ТЕБЕ налегать на это «поинтереснее». "
     
          show LW n at left with dissolve
-         show HM r01 at razgavor, right onlayer xra with dissolve
+         show HM r01 at razgavor, right onlayer sloi01 with dissolve
          hide S02 onlayer dexm
          show GI at loposR onlayer dexm
     
          HM "Ведь ты же ещё только ученица!"
     
-         show HM s03 at right onlayer xra with dissolve
+         show HM s03 at right onlayer sloi01 with dissolve
     
          e "полушутя, а может — полусерьёзно ответила Наставница. "
     
-         show HM n at right onlayer xra with dissolve
+         show HM n at right onlayer sloi01 with dissolve
          hide GI onlayer dexm
     
-         hide HM n onlayer xra
+         hide HM n onlayer sloi01
          show HM n at right
          $ renpy.pause(0.5)
          hide HM n at right

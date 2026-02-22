@@ -11,4 +11,3 @@ game/saves/persistent
 game/tl/None/common.rpymc
 game/\#init.rpy\#
 *.keystore
-*.json
