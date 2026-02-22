@@ -29,7 +29,7 @@ define config.check_conflicting_properties = True
 define gui.accent_color = '#3ce6ec'
 
 ## Цвет, используемый в текстовой кнопке, когда она не выбрана и не наведена.
-define gui.idle_color = '#62ca26'
+define gui.idle_color = '#552233'
 
 ## Small_color используется в маленьком тексте, который должен быть ярче/темнее,
 ## для того, чтобы выделяться.
