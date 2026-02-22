@@ -1,5 +1,6 @@
 # THIS_PATH is defined in chess_displayable.rpy
 # define THIS_PATH = '00-chess-engine/'
+# MOKOt
 
 init python:
     # for importing libraries
@@ -11,7 +12,7 @@ init python:
 #define config.default_textshader = True
 #$ renpy.register_text_shader()
 
-
+# MOKOt
 #генератор случайных чисел
 
 
@@ -20,7 +21,73 @@ $ gtm = 0
 $ player_guess = 0
 #$ mci = 0
 
+   
+#Генерат позиции(Де)
+# MOKOt
+init python:
+    from random import uniform
+    import math
+    #Это даст нам корды и границы безопасной зоны
+    def get_coords():
+        nx, ny = uniform(0, 1920), uniform(0, 1080)
+        xf = uniform(min(nx, -ny), max(nx, -ny))
+        yf = uniform(min(-nx, ny), max(-nx, ny))
+        return int(xf), int(yf)
+        
+    #Это докидывает конфиг для движения
+    def create_mover():
+        x = 960
+        y = 540
+        target_x = 960
+        target_y = 540
+        start_x = 960
+        start_y = 540
+        progress = 1.0
+        duration = 1.0
+        start_time = 0
+        #ТРОГАТЬ ТУТА
+        speed = 400
+        #ЭТО СКОРОСТЬ
+        
+        #А это само двигло
+        def move_func(trans, st, at):
+            nonlocal x, y, target_x, target_y, start_x, start_y, progress, duration, start_time
+            
+            if progress >= 1.0:
+                start_x, start_y = x, y
+                target_x, target_y = get_coords()
+                
+                dx = target_x - start_x
+                dy = target_y - start_y
+                distance = math.sqrt(dx*dx + dy*dy)
+                duration = max(0.5, distance / speed)
+                progress = 0
+                start_time = st
+                
+            elapsed = st - start_time
+            progress = min(1.0, elapsed / duration)
+            
+            if progress < 1.0:
+                x = start_x + (target_x - start_x) * progress
+                y = start_y + (target_y - start_y) * progress
+            else:
+                x, y = target_x, target_y
+            
+            trans.pos = (int(x), int(y))
+            return 0
+        
+        return move_func
+        
+#это чтоб оно шароёбилось
+transform smooth_random_move:
+    function create_mover()
+#Это тестовое, пока оставлю
+#transform test_transform():
+#        pos (0, 0)
+
+
 # mci(MENU CHOICE ID)
+# MOKOt
 
 init python:
     import rgen
@@ -224,13 +291,12 @@ define LW = Character('Маленькая ведьма',
         what_size = 35,
         what_color = "#541f82", 
         what_outlines = [ (2, "#000000") ],
-        image = "gui/side_ramka.png",
-        ctc = anim.Filmstrip(im.FactorScale("images/Ani/CTC.png", 5.0), 
-                            (100, 100), 
+        ctc = anim.Filmstrip(im.FactorScale("images/Ani/LIFE_01.png", 0.15), 
+                            (127, 130), 
                             (4, 1), 
                             .50, 
-                            xpos=1800, 
-                            ypos=1000, 
+                            xpos=1700, 
+                            ypos=950, 
                             xanchor=0, 
                             yanchor=0
                             ),
@@ -242,7 +308,17 @@ define HM = Character('Хранительница Миров',
         outlines = [ (2, "#000000") ],
         what_size = 35,
         what_color = "#aaaa98",
-        what_outlines = [ (2, "#000000") ]
+        what_outlines = [ (2, "#000000") ],
+        ctc = anim.Filmstrip(im.FactorScale("images/Ani/LIFE_02.png", 0.3),
+                            (168, 110),
+                            (5, 1),
+                            .50,
+                            xpos=1700,
+                            ypos=950,
+                            xanchor=0,
+                            yanchor=0
+                            ),
+        ctc_position = "fixed"
         )
 
 define GO = Character('Голос Океана', 
@@ -1147,6 +1223,8 @@ image send_right = anim.Filmstrip("images/Strit/send_02.png", (91, 33), (3, 1), 
 #ЗВУКИ
 
 #ПЕРЕХОДЫ
+
+
 # Анимация на основе состояний-переходов.
    
 image smanim = anim.SMAnimation(
@@ -1327,6 +1405,7 @@ define color_01 = im.matrix(
                     0, 0, 0, 1, 0 ])
 
 #МЕНЮ ЭКСТРА
+# MOKOt
 
 image extra neutral:
     "images/sprites/xtra/001.png"
