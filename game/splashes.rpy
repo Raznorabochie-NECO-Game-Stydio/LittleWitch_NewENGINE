@@ -1,4 +1,5 @@
 label splashscreen:
+    # MOKOt
     scene start_splash 
     $ renpy.pause(1.5)
     show text "{=typewr}{color=#909090}{size=65}NECO Game Stydio{/size}{/color}{/}" with Dissolve(1.5)
@@ -236,7 +237,7 @@ label chapt_01_2_splashscr:
 
     show screen chapt_splashscr_01("Когда вечности суть я познала сама,\n Я тебя здесь уже найти не смогла,\n В тумане снов своих плывёт\n Ярких звёзд водоворот.\n Сон единый я создам, о цветах в серебряной ночи,\n Как тени этого яркого мира засыпают вечным сном.")
     with dissolve
-    pause 15.0
+    pause 10.0
     hide screen chapt_splashscr_01
     with dissolve
 
@@ -245,30 +246,11 @@ label chapt_01_2_splashscr:
 # Эпиграф второй главы
 
 label chapt_02_splashscr:
-    show screen chapt_splashscr("А на утро выпал снег.")
+    show screen chapt_splashscr("А на утро выпал снег.\n В моем саду уж не цветет сирен\n В иллюзиях и в мечтаний\n Девочка бродит одна по миру снегов и льда.")
     with dissolve
-    pause 4.0
+    pause 8.0
     hide screen chapt_splashscr
     with dissolve
-
-    show screen chapt_splashscr("В моем саду уж не цветет сирен")
-    with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-    
-    show screen chapt_splashscr("В иллюзиях и в мечтаний")
-    with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-    
-    show screen chapt_splashscr("Девочка бродит одна по миру снегов и льда. ")
-    with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-    
 
     return
 
@@ -276,56 +258,20 @@ label chapt_02_splashscr:
 
 label chapt_03_splashscr:
      
-    show screen chapt_splashscr("В одиночестве она всегда,")
+    show screen chapt_splashscr("В одиночестве она всегда,\n В тумане снов своих плывет.\n И девочки мечта уходит вдаль,\n В веках живя в симметрии грез.")
     with dissolve
-    pause 4.0
+    pause 8.0
     hide screen chapt_splashscr
     with dissolve
 
-    show screen chapt_splashscr("В тумане снов своих плывет.")
-    with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-
-    show screen chapt_splashscr("И девочки мечта уходит вдаль,")
-    with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-
-    show screen chapt_splashscr("В веках живя в симметрии грез.")
-    with dissolve
-    pause 4.0  # Дольше на последней строке
-    hide screen chapt_splashscr
-    with dissolve
-    
     return
 
 #Эпиграф четвертой главы
 
 label chapt_04_splashscr:
-    show screen chapt_splashscr("Круг единый создав, будут сотни в нём цветов.")
+    show screen chapt_splashscr("Круг единый создав, будут сотни в нём цветов.\n Кружится, кружится платья воздушный подол.\n В такт движениям танца он плавно парит над цветами.\n Цветочный фестиваль иллюзорного мира.")
     with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-
-    show screen chapt_splashscr("Кружится, кружится платья воздушный подол.")
-    with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-
-    show screen chapt_splashscr("В такт движениям танца он плавно парит над цветами.")
-    with dissolve
-    pause 4.0
-    hide screen chapt_splashscr
-    with dissolve
-
-    show screen chapt_splashscr("Цветочный фестиваль иллюзорного мира.")
-    with dissolve
-    pause 4.0
+    pause 8.0
     hide screen chapt_splashscr
     with dissolve
 
