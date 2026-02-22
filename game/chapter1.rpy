@@ -1266,6 +1266,7 @@ label Cha_001:
         #show bafly_02 at splineBater_02
         #show bafly_03 at splineBater_03
         #show bafly_04 at splineBater_04
+        #show LW_NorBust_c_08 at smooth_random_move
 
     
     
