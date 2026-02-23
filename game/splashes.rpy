@@ -4,6 +4,14 @@ label splashscreen:
     $ renpy.pause(1.5)
     show text "{=typewr}{color=#909090}{size=65}NECO Game Stydio{/size}{/color}{/}" with Dissolve(1.5)
     $ renpy.pause(3)
+    hide text with dissolve
+    $ renpy.pause(1.5)
+    show text "{=typewr}{color=#f0f0f0}{size=65}Little Witch{/size}{/color}{/}" with Dissolve(1.5)
+    $ renpy.pause(3)
+    hide text with dissolve
+    $ renpy.pause(1.5)
+    show text "{=typewr}{color=#f0f0f0}{size=20}Все имена, названия городов, стран, даты и прочие критерии изменены в соответствии с чьей-то совестью. \n Все совпадения с реальным миром, случайные или намеренные, являются всего лишь одним из бесчисленного множества вариантов развития событий, существующих в многообразии миров Мультивселенной. \n Мы не призываем никого к совершению противозаконных или аморальных действий, предупреждаем об опасности необдуманных экспериментов со своим сознанием и осуждаем немедицинское употребление любых наркотических и психоактивных веществ.{/size}{/color}{/}" with Dissolve(1.5)
+    $ renpy.pause(25)
     hide text with dissolve 
     $ renpy.pause(0.56)
     
