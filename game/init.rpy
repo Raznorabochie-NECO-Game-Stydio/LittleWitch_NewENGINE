@@ -1,312 +1,23 @@
 # THIS_PATH is defined in chess_displayable.rpy
 # define THIS_PATH = '00-chess-engine/'
-<<<<<<< HEAD
-=======
-# MOKOt
->>>>>>> AngelRanga
 
 init python:
     # for importing libraries
     import_dir = os.path.join(renpy.config.gamedir, THIS_PATH, 'python-packages')
     # to prevent STOCKFISH_ENGINE from getting stored and pickled
     global_objects = {}
-<<<<<<< HEAD
     
-=======
-
-#шейдеры
-#define config.default_textshader = True
-#$ renpy.register_text_shader()
-
-# MOKOt
-#генератор случайных чисел
-
-
-#$ ran_dig = renpy.random.choice([1,6])
-$ gtm = 0
-$ player_guess = 0
-#$ mci = 0
-
-   
-#Генерат позиции(Де)
-# MOKOt
-init python:
-    from random import uniform
-    import math
-    #Это даст нам корды и границы безопасной зоны
-    def get_coords():
-        nx, ny = uniform(0, 1920), uniform(0, 1080)
-        xf = uniform(min(nx, -ny), max(nx, -ny))
-        yf = uniform(min(-nx, ny), max(-nx, ny))
-        return int(xf), int(yf)
-        
-    #Это докидывает конфиг для движения
-    def create_mover():
-        x = 960
-        y = 540
-        target_x = 960
-        target_y = 540
-        start_x = 960
-        start_y = 540
-        progress = 1.0
-        duration = 1.0
-        start_time = 0
-        #ТРОГАТЬ ТУТА
-        speed = 400
-        #ЭТО СКОРОСТЬ
-        
-        #А это само двигло
-        def move_func(trans, st, at):
-            nonlocal x, y, target_x, target_y, start_x, start_y, progress, duration, start_time
-            
-            if progress >= 1.0:
-                start_x, start_y = x, y
-                target_x, target_y = get_coords()
-                
-                dx = target_x - start_x
-                dy = target_y - start_y
-                distance = math.sqrt(dx*dx + dy*dy)
-                duration = max(0.5, distance / speed)
-                progress = 0
-                start_time = st
-                
-            elapsed = st - start_time
-            progress = min(1.0, elapsed / duration)
-            
-            if progress < 1.0:
-                x = start_x + (target_x - start_x) * progress
-                y = start_y + (target_y - start_y) * progress
-            else:
-                x, y = target_x, target_y
-            
-            trans.pos = (int(x), int(y))
-            return 0
-        
-        return move_func
-        
-#это чтоб оно шароёбилось
-transform smooth_random_move:
-    function create_mover()
-#Это тестовое, пока оставлю
-#transform test_transform():
-#        pos (0, 0)
-
-
-# mci(MENU CHOICE ID)
-# MOKOt
-
-init python:
-    import rgen
-    mci = rgen.rgen()
-
-python:
-    import rgen
-    
-    class AutoMCI:
-        def __init__(self):
-            self.current = None
-        
-        def __call__(self):
-            self.current = rgen.rgen()
-            return self.current
-    
-    mci = AutoMCI()
-
-#python:
-#    import rgen
-
-#define mci = rgen.rgen()
-#$ mci = rgen.rgen()
-#define Cha_01 = mci
-
-#ПЕРЕМЕННЫЕ
-
-# Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
-# влияющая на то какая концовка послесловия будет продемонстрированная игроку по окончанию игры.
-define ppoints = 0
-define PP = 0
-
-# Переменная нужная для того чтобы определит, сказал ли персонаж свое имя или нет.
-define DollCam = False
-
-# Переменная определяет имеется у игрока доступ в данную комнату или нет.
-define WCRoom = False
-define WCRoom_01 = False
-define WCC = False
-
-# Переменная, которая меняется при посещении комнате, и впоследствии определяет, какая сцена будет показана игроку.
-define Wite = False
-
-#Переменные для доступа на скрытый этаж, и скрытую историю.
-define enigma_01 = False
-define enigma_02 = False
-
-$ brightness_opacity = brightness * opacity
-$ fraktal_04_opacity = fraktal_04 * opacity
-$ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
-
-#переменная для определения лестничных клеток
-
-define hallway_001 = False
-define hallway_002 = False
-define hallway_003 = False
-define hallway_004 = False
-define hallway_005 = False
-define hallway_006 = False
-define hallway_007 = False
-define hallway_008 = False
-define hallway_009 = False
-define hallway_010 = False
-define hallway_011 = False
-
-# Переменные от 00 до ХХ служащие для определения посещения комнат.
-define Room_01 = False
-define Room_02 = False
-define Room_03 = False
-define Room_04 = False
-define Room_05 = False
-define Room_06 = False
-define Room_07 = False
-define Room_08 = False
-define Room_09 = False
-define Room_10 = False
-define Room_11 = False
-define Room_12 = False
-define Room_13 = False
-define Room_14 = False
-define Room_15 = False
-define Room_16 = False
-define Room_17 = False
-define Room_18 = False
-define Room_19 = False
-define Room_20 = False
-define Room_21 = False
-define Room_22 = False
-define Room_23 = False
-define Room_24 = False
-define Room_25 = False
-define Room_26 = False
-define Room_27 = False
-define Room_28 = False
-define Room_29 = False
-define Room_30 = False
-define Room_31 = False
-define Room_32 = False
-define Room_33 = False
-define Room_34 = False
-define Room_35 = False
-define Room_36 = False
-define Room_37 = False
-define Room_38 = False
-define Room_39 = False
-define Room_40 = False
-
-#Переменная необхадимая чтобы сделат бесконечную череду комнат
-define Room_infiniti = 0
-
-# переменные необходимые как метки для определения посещения разных купе в вагона
-define KupeRoom01 = False
-define KupeRoom02 = False
-define KupeRoom03 = False
-define KupeRoom04 = False
-define KupeRoom05 = False
-
-# Переменная нужная для определения того был ли прочитан журнал лежащий в почтовом ящике.
-define Jurnal = False
-define Key = False
-define Key_01 = False
-define Key_02 = False
-define Key_03 = False
-define Key_04 = False
-define Key_05 = False
-define Key_06 = False
-
-#дополнительные переменные в квартирах
-
-#фомка
-
-define fomka = False
-define fomka_endurance = 0
-
-#Квартира 002 вариант 01 этаж 02
-
-define hallway_prihojay_002_01 = 0
-define hallway_prihojay_002_02 = False
-define F_room_002_01_01 = 0
-define F_room_002_02_01 = 0
-define F_room_002_03_01 = 0
-define F_room_002_04_01 = 0
-define F_room_002_kitchen_01 = 0
-define F_room_002_Windows_01 = 0
-define F_room_002_WC_01 = False
-define F_room_002_bathroom_01 = False
-
-# квартира 002 вариант 02 этаж 02
-
-define Box_002_02_01 = False
-define F_Room_002_01 = 0
-define cards_Key = False
-
-#Квартира 003 этаж 02
-
-define Key_flat_01 = False
-
-# Переменная необхадимая чтобы определит пошла ли МВ по следам, или рещила сночала осмотрет осталные этожи.
-define traces_01 = False
-
-#переменная нужная для определения если ГГ побывала в дополнительном блоке четвертой главы
-define Under_01 = False
-
-# Переменная необходимая для определения того что МВ взяла пульт от телевизора
-define remote_controller = False
-define Batter_01 = False
-
-#переменная необходимая для определения быль ли просмотрен определенный телевизор
-define TV_01 = False
-
-
-#квартира 036
-define Key_shees_enigma_01 = False
-
-$ brightness_opacity = brightness * opacity
-$ fraktal_04_opacity = fraktal_04 * opacity
-$ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
-
-
-#задаем дополнителные звуковые каналы
-#renpy.music.register_channel ("nature", "sound", loop=True)
-#renpy.music.register_channel ("natu", "sound", loop=True)
-#renpy.music.register_channel ("natu_fon", "sound", loop=True)
-
-
->>>>>>> AngelRanga
 #ПЕРСОНАЖИ
 #NVL
-
-define nn = Character(None, 
-                    what_size = 45, 
-                    what_font ="fonts/GOST_A.ttf", 
-                    color="#c8ffc8", 
-                    kind=nvl
-                    )
-
+define n = Character(None, what_font ="GOST_A.ttf", color="#c8ffc8", kind=nvl)
 #СЮЖЕТНЫЕ 
-
 define LW = Character('Маленькая ведьма', 
         color="#6f0ead",
         outlines = [ (2, "#000000") ],
         what_size = 35,
         what_color = "#541f82", 
         what_outlines = [ (2, "#000000") ],
-        ctc = anim.Filmstrip(im.FactorScale("images/Ani/LIFE_01.png", 0.15), 
-                            (127, 130), 
-                            (4, 1), 
-                            .50, 
-                            xpos=1700, 
-                            ypos=950, 
-                            xanchor=0, 
-                            yanchor=0
-                            ),
+        ctc = anim.Filmstrip(im.FactorScale("images/Ani/CTC.png", 5.0), (100, 100), (4, 1), .50, xpos=1800, ypos=1000, xanchor=0, yanchor=0),
         ctc_position = "fixed"
         )
 
@@ -315,23 +26,13 @@ define HM = Character('Хранительница Миров',
         outlines = [ (2, "#000000") ],
         what_size = 35,
         what_color = "#aaaa98",
-        what_outlines = [ (2, "#000000") ],
-        ctc = anim.Filmstrip(im.FactorScale("images/Ani/LIFE_02.png", 0.3),
-                            (168, 110),
-                            (5, 1),
-                            .50,
-                            xpos=1700,
-                            ypos=950,
-                            xanchor=0,
-                            yanchor=0
-                            ),
-        ctc_position = "fixed"
+        what_outlines = [ (2, "#000000") ]
         )
 
 define GO = Character('Голос Океана', 
         color="#063271", 
         outlines = [ (2, "#000000") ],
-        what_size = 35,
+        what_size = 25,
         what_color = "#009fe6",
         what_outlines = [ (2, "#000000") ]
         )
@@ -339,7 +40,7 @@ define GO = Character('Голос Океана',
 define FN = Character('Неизвестные', 
         color="#440047", 
         outlines = [ (2, "#000000") ],
-        what_size = 35,
+        what_size = 25,
         what_color = "#6A0026",
         what_outlines = [ (2, "#000000") ]
         )
@@ -347,7 +48,7 @@ define FN = Character('Неизвестные',
 define Doll = Character('Кукла', 
         color="#9A5D9D",
         outlines = [ (2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#7D0F80",
         what_outlines = [ (2, "#000000")]
         )
@@ -355,7 +56,7 @@ define Doll = Character('Кукла',
 define Cam = Character('Кампанелла', 
         color="#9A5D9D",
         outlines = [ (2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#7D0F80",
         what_outlines = [ (2, "#000000")]
         )
@@ -363,7 +64,7 @@ define Cam = Character('Кампанелла',
 define Ananim = Character('???', 
         color="#009fe6",
         outlines = [(2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#440047",
         what_outlines = [(2, "#000000")]
         )
@@ -371,14 +72,14 @@ define Ananim = Character('???',
 define Shu = Character('Мара', 
         color="#7A0026",
         outlines = [(2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#EC008C",
         what_outlines = [(2, "#000000")]
         )
 
 define men = Character('Байкер', 
         color="#363636",
-        what_size = 35,
+        what_size = 25,
         what_color = "#A1A1A1",
         what_outlines = [(2, "#000000")]
         )
@@ -386,7 +87,7 @@ define men = Character('Байкер',
 define monster = Character('Монстр', 
         color="#063271", 
         outlines = [ (2, "#000000") ],
-        what_size = 35,
+        what_size = 25,
         what_color = "#009fe6",
         what_outlines = [ (2, "#000000") ]
         )
@@ -394,7 +95,7 @@ define monster = Character('Монстр',
 define FC = Character('Фосфорная Кошка', 
         color="#8560a8", 
         outlines = [ (2, "#000000") ],
-        what_size = 35,
+        what_size = 25,
         what_color = "#5674b9",
         what_outlines = [ (2, "#000000") ]
         )
@@ -402,7 +103,7 @@ define FC = Character('Фосфорная Кошка',
 define CO = Character('Корабль-оболочка', 
         color="#51e9e4",
         outlines = [(2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#e4e951",
         what_outlines = [ (2, "#000000") ]
         )
@@ -410,7 +111,7 @@ define CO = Character('Корабль-оболочка',
 define CC = Character('Син-Син', 
         color="#6836A1",
         outlines = [(2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#A1368E",
         what_outlines =[(2, "#000000")]
         )
@@ -418,7 +119,7 @@ define CC = Character('Син-Син',
 define ZBE = Character('Звездочет', 
         color="#E5CC2A",
         outlines = [(2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#B9FAA5",
         what_outlines =[(2, "#000000")]
         )
@@ -426,7 +127,7 @@ define ZBE = Character('Звездочет',
 define LO = Character('Лохматый', 
         color="#2ACDE5",
         outlines = [(2, "#000000")],
-        what_size = 35,
+        what_size = 25,
         what_color = "#37646B",
         what_outlines =[(2, "#000000")]
         )
@@ -435,11 +136,7 @@ define LO = Character('Лохматый',
 
 define e = Character(None, 
                         what_size = 35, 
-<<<<<<< HEAD
                         what_font = "gui/fonts/segoescript.ttf", 
-=======
-                        what_font = "fonts/segoescript.ttf", 
->>>>>>> AngelRanga
                         what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
                         window_background="#00000000",what_xalign = 0.5, 
@@ -448,39 +145,15 @@ define e = Character(None,
                         window_xalign = 0.5
                         )
 
-#define en = Character(None, kind=nvl)
-
-#ШРИФТЫ(Задам стилем ибо могу)
-#СТИЛЬ - Чепятная машинка(typewriter)
-style typewr is text:
-    size 30
-    color "#ffffff"
-    font "fonts/DS-Moster.ttf"
-
-
 #ФОНЫ
-
 #ПОНГ
-
 image bg pong field = "images/pong/pong_field.png"
-
 ################################################################################
-
-#СТАРТОВЫЙ СПЛЭШ
-image start_splash = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Alpha("gui/start_splash/splash_wallp.jpg", 0.347)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
-
 #СЮЖЕТНЫЕ
-image bg0000 = "images/texture/Blek.jpg"
+image bg0000 = "images/BG/Blek.jpg"
 image bg0000a = "images/BG/0000a.jpg"
 image bg0000b = "images/BG/0000b.jpg"
-image bg0000c = "images/texture/Withe.jpg"
+image bg0000c = "images/BG/Withe.jpg"
 image bg0001 = "images/BG/0001.jpg"
 image bg0002 = "images/BG/0002.jpg"
 image bg0003 = "images/BG/0003.jpg"
@@ -690,58 +363,12 @@ image bg0107 = "images/BG/0096.jpg"
 image bg0108 = "images/BG/0097.jpg"
 image bg0109 = "images/BG/0098.jpg"
 #image F_masked = im.AlphaMask("Mask.png", "pod.png")
-
-
-#region бумага
-image peper_01 = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Sepia(im.Alpha("images/texture/peper_02.jpg", 0.347)),
-        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
-
-image peper_02 = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Sepia(im.Alpha("images/texture/peper_05.jpg", 0.347)),
-        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
-
-image peper_03 = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Sepia(im.Alpha("images/texture/peper_06.jpg", 0.347)),
-        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
-
-#endregion Region name
     
 #концовки
-
-image DEnd = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), im.Sepia("images/END/END_00.jpg"),
-        (0, 0), im.Alpha("images/END/END_02.jpg", 0.7),
-        (0, 0), im.Alpha("images/END/END_01.jpg", 0.347)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)   
-)
-
+image DEnd = "images/BG/Deathend.jpg"
 
 #СПРАЙТЫ
-
 #МАЛЕНЬКАЯ ВЕДЬМА
-
 # в полный рост
 image LW_NormFull_01 = anim. SMAnimation("ax",
     anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma01.png", 0.1, 0.1)),
@@ -1068,30 +695,22 @@ image Alaya_05 = im.Alpha("images/Logo/Alaya_IU_04.png", 0.5)
 
     
 # анимации природных явлений и прочих эффектов
-
-# Нота
 image NA = Animation(
     "images/Ani/N01.png", 0.5,
     "images/Ani/N03.png", 0.5, 
     "images/Ani/N02.png", 0.5
     ) 
-
-# дождь
-
+    
 image rain = SnowBlossom(anim.Filmstrip(
     "images/Ani/H2O.png", (20, 20), (2, 1), .25), 
     count=30, border=50, xspeed=(50, 50), yspeed=(400, 400), start=0,  fast=True
     )
     
-# Бризги
-
 image sn = SnowBlossom(anim.Filmstrip(
     "images/Ani/BZ.png", (20, 20), (2, 1), .25), 
-    count=80, border=10, xspeed=(100, 400), yspeed=(100, 400), start=1,  fast=False
+    count=50, border=10, xspeed=(100, 400), yspeed=(100, 400), start=0,  fast=False
     )
     
-# Снег
-
 image snow = SnowBlossom(anim.Filmstrip(
     "images/Ani/snow.png", (20, 20), (4, 1), .25), 
     count=60, border=1, xspeed=(10, 10), yspeed=(10, 100), start=0,  fast=True
@@ -1101,14 +720,12 @@ image pe = SnowBlossom("images/Ani/pepel.png",
     count=60, border=1, xspeed=(10, 10), yspeed=(10, 100), start=0,  fast=True
     )
     
-# светлячки 
-
 image fly = SnowBlossom(anim.SMAnimation(
     "rrr",
     anim.State("rrr", anim.Filmstrip("images/Ani/fly01.png", (20, 20), (2,1), .50)), 
     anim.State("ggg", anim.Filmstrip("images/ani/fly02.png", (20, 20), (2,1), .50)),
     anim.State("bbb", anim.Filmstrip("images/ani/fly03.png", (20, 20), (2,1), .50)),
-    anim.State("ccc", anim.Filmstrip("images/ani/fly04.png", (20, 20), (2,1), .50)),
+    anim.State("ccc", anim.Filmstrip("images/ani/fly04.png", (20, 20), (2, 1), .50)),
     
     anim.Edge("rrr", 10.0, "ggg"),
     anim.Edge("rrr", 10.0, "bbb"),
@@ -1127,7 +744,7 @@ image fly = SnowBlossom(anim.SMAnimation(
     anim.Edge("ccc", 10.0, "ggg")
     ), 
      
-    count=50, border=50, xspeed=(-20, -20), yspeed=(-30, -30), start=15,  fast=True
+    count=10, border=1, xspeed=(-10, -10), yspeed=(-10, -10), start=0,  fast=True
     )
     
 image starA = Animation(
@@ -1244,8 +861,6 @@ image start_splash = Transform(
 #ЗВУКИ
 
 #ПЕРЕХОДЫ
-
-
 # Анимация на основе состояний-переходов.
    
 image smanim = anim.SMAnimation(
@@ -1285,8 +900,6 @@ define tele = MultipleTransition([
     False, dissolve, "#fff", dissolve,
     True, dissolve, "#fff", dissolve, True]
     )
-
-
     
 # Эффекты перехода с использованием маски (ImageDissolve).
 define circleirisout = ImageDissolve("data/id_circleiris.png", 1.0, 8)
@@ -1360,10 +973,10 @@ init:
 
 #МАТРИЦЫ
 define brightness = im.matrix(
-                    [ 1, 0, 0, 0, .1,
-                    0, 1, 0, 0, .1,
-                    0, 0, 1, 0, .1,
-                    0, 0, 0, 1, 0 ])
+                       [ 1, 0, 0, 0, .1,
+                       0, 1, 0, 0, .1,
+                       0, 0, 1, 0, .1,
+                       0, 0, 0, 1, 0 ])
     
 define opacity = im.matrix(
                     [ 1, 0, 0, 0, 0,
@@ -1372,10 +985,10 @@ define opacity = im.matrix(
                     0, 0, 0, .5, 0 ])
     
 define inverted = im.matrix(
-                    [ -1,  0,  0, 0, 1,
-                    0, -1,  0, 0, 1,
-                    0,  0, -1, 0, 1,
-                    0,  0,  0, 1, 0 ])
+                     [ -1,  0,  0, 0, 1,
+                     0, -1,  0, 0, 1,
+                     0,  0, -1, 0, 1,
+                     0,  0,  0, 1, 0 ])
     
 define fraktal_01 = im.matrix(
                     [0.5, 0, 0, 0, 1,
@@ -1424,10 +1037,7 @@ define color_01 = im.matrix(
                     0, 1, 0, 0, .1,
                     0, 0, .9, 0, .1,
                     0, 0, 0, 1, 0 ])
-
 #МЕНЮ ЭКСТРА
-# MOKOt
-
 image extra neutral:
     "images/sprites/xtra/001.png"
     pause 0.1
@@ -1438,7 +1048,6 @@ image extra neutral:
     "images/sprites/xtra/004.png"
     pause 0.1
     repeat
-<<<<<<< HEAD
 #ПЕРЕМЕННЫЕ
 
 # Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
@@ -1621,8 +1230,3 @@ style typewr is text:
 #renpy.music.register_channel ("nature", "sound", loop=True)
 #renpy.music.register_channel ("natu", "sound", loop=True)
 #renpy.music.register_channel ("natu_fon", "sound", loop=True)
-=======
-
-
-#КОНЦОВКИ
->>>>>>> AngelRanga

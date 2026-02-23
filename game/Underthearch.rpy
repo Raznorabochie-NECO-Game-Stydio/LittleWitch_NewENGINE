@@ -203,17 +203,9 @@ label Underthearch:
         e "Её взгляд цепляется за разбитую витрину магазинчика или ремонтной мастерской. "
         e "А потом и за трубу буржуйки, торчавшую из разбитой витрины, из нее шел дым."
 
-<<<<<<< HEAD
         centered "{font=font/Arial.ttf}{size=+20}{i}«Ремонт Солнечных Кукол». {/i}{/size}{/font}\n
                     {font=font/TrixieCyr-Light.ttf}«iDolls и TDolls»{/font}\n
                     {font=font/DS-Moster.ttf} «быстро, качественно, {s}не{/s}дорого»{/font}"
-=======
-        centered "{cps=0}{font=fonts/Arial.ttf}{size=+20}{i}«Ремонт Солнечных Кукол». {/i}{/size}{/font}\n
-                    {font=fonts/TrixieCyr-Light.ttf}«iDolls и TDolls»{/fond}\n
-                    {font=fonts/DS-Moster.ttf} «быстро, качественно, {s}не{/s}дорого»{/font}{/cps}"
-
-        centered "{cps=0}{font=fonts/Arial.ttf}{size=+20}{i}«Улица Азазело» {/i}{/size}{/font}{/cps}"
->>>>>>> AngelRanga
 
         #menu:
             #"Say Statement"
@@ -374,11 +366,8 @@ label Underthearch:
 
         e "Маленькая ведьма зашла в подъезд."
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> AngelRanga
         jump podezd
         pass
 

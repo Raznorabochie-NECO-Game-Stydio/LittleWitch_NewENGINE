@@ -34,12 +34,7 @@ define gui.about = _p("""
 Бета ридер, соавтор - Saitar1337\n
 Кодер поменьше - M0K0t\n
 Используемые материалы принадлежат их правообладателям.\n
-<<<<<<< HEAD
 Шахматный движок принадлежит его автору - {a=https://lynnzheng.netlify.app/}Линн Женг{/a} по {a=https://github.com/RuolinZheng08/renpy-chess/?tab=MIT-1-ov-file#}лицензии MIT{/a}.
-=======
-Шахматный движок принадлежит его автору - {a=https://lynnzheng.netlify.app/}Линн Женг{/a} по \n
-{a=https://github.com/RuolinZheng08/renpy-chess/?tab=MIT-1-ov-file#}лицензии MIT{/a}.
->>>>>>> AngelRanga
 """)
 
 
@@ -94,12 +89,12 @@ define config.intra_transition = pixellate
 
 ## Переход, используемый после загрузки слота сохранения.
 
-define config.after_load_transition = pixellate
+define config.after_load_transition = None
 
 
 ## Используется при входе в главное меню после того, как игра закончится.
 
-define config.end_game_transition = pixellate
+define config.end_game_transition = None
 
 
 ## Переменная, устанавливающая переход, когда старт игры не существует. Вместо

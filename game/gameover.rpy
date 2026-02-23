@@ -3,37 +3,37 @@ label game_over:
     
     if ppoints == 0:
         
-        #scene bg000b with dissolve
-        #show STRA
-        #play music  "Sound/BGM_008.mp3" fadein 1.5
+        scene bg000b with dissolve
+        show STRA
+        play music  "Sound/BGM_008.mp3" fadein 1.5
         centered "{color=#7fbdbf}{i}И вместе смотреть будем сны{/i}{/color}"
         centered "{color=#7fbdbf}{i}В просторах космоса безбрежном{/i}{/color}"
         centered "{color=#7fbdbf}{i}И убаюкивать в ночи{/i}{/color}"
         centered "{color=#7fbdbf}{i}Пузырь сред звезд мыльный{/i}{/color}"
-        #hide STRA
-        #scene bg000 with diss
+        hide STRA
+        scene bg000 with diss
         e "..."
-        #stop music fadeout 1.0
-        #scene a311 with fade
-        #play music  "Sound/bgm6.mp3" fadein 1.5
+        stop music fadeout 1.0
+        scene a311 with fade
+        play music  "Sound/bgm6.mp3" fadein 1.5
         
         e " Корабль-оболочка, Варп-двигатель, Сфера Алькубьерре межзвездная бездна, "
         e "усыпанная серебреной пылью звезд и яркими красками туманностей."
         e "Маленькая ведьма парит в середине мыльного пузыря несущегося через звездную бездну. "
         
-        #scene bg312 with dissolve
+        scene bg312 with dissolve
         
         e "Корабль живой он убаюкивает маленькую ведьму, рассказывая истории."
         
-        #scene bg314 with dissolve
+        scene bg314 with dissolve
         
         LW " - Этот очередной мир, что ты мне показал? "
         
-        #scene bg312 with dissolve
+        scene bg312 with dissolve
         
         e "Обратилась маленькая ведьма к кораблю-оболочке."
         
-        #scene a311 with dissolve
+        scene a311 with dissolve
         
         CO " - Один из многих вариантов. "
         
@@ -41,20 +41,20 @@ label game_over:
         
         CO "Рассказ неотличимый от жизни."
         
-        #scene bg312 with dissolve
-        #scene bg314 with dissolve
+        scene bg312 with dissolve
+        scene bg314 with dissolve
         
         LW " - Реальность и рассказ не одно и тоже. "
         LW "У рассказа есть определенное начала и конец, у реальности…"
         LW " у жизни их нет."
         
-        #scene bg312 with dissolve
-        #scene a311 with dissolve
+        scene bg312 with dissolve
+        scene a311 with dissolve
         
         CO " - Но как же рождения и смерть это и есть начала и конец рассказа."
         
-        #scene bg312 with dissolve
-        #scene bg314 with dissolve
+        scene bg312 with dissolve
+        scene bg314 with dissolve
         
         LW " - Не совсем у рассказа есть смысл и сюжет,"
         LW "у жизни нет не того не другого. "
@@ -62,56 +62,56 @@ label game_over:
         LW "герой рассказа лишь подчиняется желанию писателя,"
         LW " не способен выбирать сам, как ему поступать в тот или иной момент."
         
-        #scene bg312 with dissolve
-        #scene a311 with dissolve
+        scene bg312 with dissolve
+        scene a311 with dissolve
         
         CO " - А ты не задумывалась,"
         CO " что герой рассказа сам не подозревает об существовании автора который и вкладывает в него мысли, "
         CO "чувства, желания, тем самым создавая сюжет."
         
-        #scene bg312 with dissolve
-        #scene bg314 with dissolve
+        scene bg312 with dissolve
+        scene bg314 with dissolve
         
         LW " - Тогда кто придумывает автора? "
         LW "Читатели…"
         
-        #scene bg312 with dissolve
-        #scene a311 with dissolve
+        scene bg312 with dissolve
+        scene a311 with dissolve
         
         CO " - Писатели читатели. "
         CO "Крылья лапы… {w=1}главное хвост…"
         
-        #scene bg313 with dissA
+        scene bg313 with dissA
         
         e " А если нету ничего,"
         
         if Jurnal == False:
             
-            #scene bg464 with dissA
+             scene bg464 with dissA
              
-            e " и никогда не была не ее, ни мира. "
-            e "Все это является продуктом воспаленным разумом укушенного пауком снов."
-            e "Маленькая ведьма возможно, "
+             e " и никогда не была не ее, ни мира. "
+             e "Все это является продуктом воспаленным разумом укушенного пауком снов."
+             e "Маленькая ведьма возможно, "
      
         else:
             
-            #scene bg316 with dissA
+            scene bg316 with dissA
         
             e " и никогда не была не ее, ни мира. "
         
-            #scene bg315 with dissA
+            scene bg315 with dissA
         
         e "Все это является продуктом воспаленным разумом укушенного пауком снов."
         e "Маленькая ведьма возможно, "
         
-        #scene bg317 with dissA
-        #scene bg317 at Zoom((800, 600), (0, 0, 800, 600), (230, 100, 370, 250), 5.0) 
+        scene bg317 with dissA
+        scene bg317 at Zoom((800, 600), (0, 0, 800, 600), (230, 100, 370, 250), 5.0) 
         
         e "как и индейский бог Брахма создала наш мир в своем воображении, "
         e "и он существует, пока маленькая ведьма его мыслит."
         
-        #scene bg000b
-        #stop music fadeout 1.0
+        scene bg000b
+        stop music fadeout 1.0
         centered "{color=#ff0000}{b}{size=+6}Эпилог №1{/size}{/b}{/color}"
         centered "{size=+3}{i}Иллюзия Выдуманного Мира, Вечный Сон Путешествия в Стране Грез.{/i}{/size}"
         centered "{color=#d16f6a}{i}Худшие из оков - те, которые ты не видишь.{/i}{/color}"
@@ -122,15 +122,13 @@ label game_over:
         centered "{color=#d16f6a}{i}Пока не готов...{/i}{/color}"
         centered "{color=#d16f6a}{i}Колесо крутится...{/i}{/color}"
         "****************************************"
-
-        return
         
     elif ppoints == 1:
         
-        #scene bg000 with dissolve
+        scene bg000 with dissolve
         
-        #show STRA
-        #play music  "Sound/BGM_008.mp3" fadein 1.5
+        show STRA
+        play music  "Sound/BGM_008.mp3" fadein 1.5
         centered "{color=#ff0000}{b}{size=+6}Черный Город: Грез, Теней, и Снов {/size}{/b}{/color}"
         centered "{color=#7fbdbf}{i}Полынь трава,{/i}{/color}"
         centered "{color=#7fbdbf}{i}Полынь звезда,{/i}{/color}"
@@ -142,8 +140,8 @@ label game_over:
         centered "{color=#7fbdbf}{i}От звезды к звезде.{/i}{/color}"
         centered "{color=#7fbdbf}{i}Остывшие чувства холодной зимы.{/i}{/color}"
         
-        #hide STRA
-        #scene bg000 with diss
+        hide STRA
+        scene bg000 with diss
         
         e "Древний каменный град, "
         e "раскинутый на старой планете вращающейся вокруг шестикратной звезды Кастор. "
@@ -493,44 +491,41 @@ label game_over:
        
         centered "{color=#ff0000}{b}{size=+6}эпилог №2{/size}{/b}{/color}"
         centered "{size=+3}{i}Бесконечная иллюзорная дорога в звездных мирах{/i}{/size}"
-
-        return
         
     elif ppoints >= 2 and ppoints <= 3:
         
-        #scene bg000 with dissolve
-        centered "{color=#ff0000}{b}{size=+6}Романс НЛО в ночном небе.{/size}{/b}{/color}"
+         scene bg000 with dissolve
+         centered "{color=#ff0000}{b}{size=+6}Романс НЛО в ночном небе.{/size}{/b}{/color}"
     
-        #scene bg000 with diss
-        #show STRA
-        #play music  "Sound/BGM_008.mp3" fadein 1.5
+         scene bg000 with diss
+         show STRA
+         play music  "Sound/BGM_008.mp3" fadein 1.5
     
-        centered "{color=#7fbdbf}{i}Для бесконечности нет невозможного. Боги - лишь её отблески.{/i}{/color}"
-        centered "{color=#7fbdbf}{i}Не зря я пью вино на склоне дня,{/i}{/color}"
-        centered "{color=#7fbdbf}{i}Заслужена его глухая власть.{/i}{/color}"
-        centered "{color=#7fbdbf}{i}Вино меня уводит в глубь меня,{/i}{/color}"
-        centered "{color=#7fbdbf}{i}Туда, куда мне трезвым не попасть.{/i}{/color}"
+         centered "{color=#7fbdbf}{i}Для бесконечности нет невозможного. Боги - лишь её отблески.{/i}{/color}"
+         centered "{color=#7fbdbf}{i}Не зря я пью вино на склоне дня,{/i}{/color}"
+         centered "{color=#7fbdbf}{i}Заслужена его глухая власть.{/i}{/color}"
+         centered "{color=#7fbdbf}{i}Вино меня уводит в глубь меня,{/i}{/color}"
+         centered "{color=#7fbdbf}{i}Туда, куда мне трезвым не попасть.{/i}{/color}"
   
-        window hide
-        nvl clear
-        nvl show dissolve
+         window hide
+         nvl clear
+         nvl show dissolve
     
-        "{color=#7fbdbf}{i}Со временем истлеет всё — даже то, что не может истлеть. {/i}{/color}"
-        "{color=#7fbdbf}{i}Думаете, мы — дрова? Мы — остывающие угли. {/i}{/color}"
-        "{color=#7fbdbf}{i}Отдавая жар холодной зимней ночи, мы создаём себе иллюзию триумфа над холодом и смертью. Но снег и ветер делают своё дело...{/i}{/color}"
+         "{color=#7fbdbf}{i}Со временем истлеет всё — даже то, что не может истлеть. {/i}{/color}"
+         "{color=#7fbdbf}{i}Думаете, мы — дрова? Мы — остывающие угли. {/i}{/color}"
+         "{color=#7fbdbf}{i}Отдавая жар холодной зимней ночи, мы создаём себе иллюзию триумфа над холодом и смертью. Но снег и ветер делают своё дело...{/i}{/color}"
     
-        nvl clear
-        #window show
-        hide STRA
-        #scene bg000b with fade
+         nvl clear
+         #window show
+         hide STRA
+         scene bg000b with fade
     
-        centered "{color=#23a7e0}{i}Хранительница миров, хозяйка магазинчика золотых звёзд.  {/i}{/color}"
-        centered "{color=#23a7e0}{i}Помнит, например, как создавался мир, а ведь она тогда уже была далеко не девочка.  {/i}{/color}"
-        centered "{color=#23a7e0}{i}Себя, однако, старушкой не считает.  {/i}{/color}"
-        centered "{color=#23a7e0}{i}Вот её бабушку действительно можно считать пожилой женщиной. {/i}{/color}"
-        #stop music fadeout 1.5
+         centered "{color=#23a7e0}{i}Хранительница миров, хозяйка магазинчика золотых звёзд.  {/i}{/color}"
+         centered "{color=#23a7e0}{i}Помнит, например, как создавался мир, а ведь она тогда уже была далеко не девочка.  {/i}{/color}"
+         centered "{color=#23a7e0}{i}Себя, однако, старушкой не считает.  {/i}{/color}"
+         centered "{color=#23a7e0}{i}Вот её бабушку действительно можно считать пожилой женщиной. {/i}{/color}"
+         stop music fadeout 1.5
     
-<<<<<<< HEAD
          scene bg040a with circleirisout
          show plate at right
          show HM n at right onlayer sloi01
@@ -539,74 +534,36 @@ label game_over:
          show LW r at razgavor, left with dissolve
          show VP at loposL onlayer sloi02
          play music "Sound/ghost-town2.mp3" fadein 1.5
-=======
-        #scene bg040a with circleirisout
-        #show plate at right
-        #show HM n at right onlayer xra
-        #with teleport
-        #show LW n at left with moveinleft
-        #show LW r at razgavor, left with dissolve
-        #show VP at loposL onlayer demo
-        #play music "Sound/ghost-town2.mp3" fadein 1.5
->>>>>>> AngelRanga
     
-        LW "- Хранительнца! {w=1}Расскажи ещё одну историю! Расскажи!"
+         LW "- Хранительнца! {w=1}Расскажи ещё одну историю! Расскажи!"
     
-<<<<<<< HEAD
          show LW s08 at left with dissolve
          hide VP onlayer sloi02
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show OB at loposR onlayer dexm
-=======
-        #show LW s08 at left with dissolve
-        #hide VP onlayer demo
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show OB at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Нет,{w=1} ты ведь знаешь все истории известных миров."
+         HM "- Нет,{w=1} ты ведь знаешь все истории известных миров."
     
-<<<<<<< HEAD
          show HM s05 at right onlayer sloi01 with dissolve
          hide OB onlayer dexm
          show LW s15 at razgavor, left with dissolve
          show V at loposL onlayer sloi02
-=======
-        #show HM s05 at right onlayer xra with dissolve
-        #hide OB onlayer dexm
-        #show LW s15 at razgavor, left with dissolve
-        #show V at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- А неизвестных? "
+         LW "- А неизвестных? "
     
-<<<<<<< HEAD
          show LW rn at razgavor, left with dissolve
          hide V onlayer sloi02
          show S02 at loposL onlayer sloi02
-=======
-        #show LW rn at razgavor, left with dissolve
-        #hide V onlayer demo
-        #show S02 at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "Не хочешь ли ты мне сказать, мудрая Наставница,{w=1} что миры Великого Древа — всё, что существует?"
+         LW "Не хочешь ли ты мне сказать, мудрая Наставница,{w=1} что миры Великого Древа — всё, что существует?"
     
-<<<<<<< HEAD
          show LW s01 at left with dissolve
          hide S02 onlayer sloi02
          show HM r02 at razgavor, right onlayer sloi01 with dissolve
          show GI at loposR onlayer dexm
-=======
-        #show LW s01 at left with dissolve
-        #hide S02 onlayer demo
-        #show HM r02 at razgavor, right onlayer xra with dissolve
-        #show GI at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Хех!..{w=1} Разумеется нет же! "
+         HM "- Хех!..{w=1} Разумеется нет же! "
     
-<<<<<<< HEAD
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show LW n at left with dissolve
          hide GI onlayer dexm
@@ -623,91 +580,41 @@ label game_over:
     
          show LW s15 at razgavor, left with dissolve
          show HM n at right onlayer sloi01 with dissolve
-=======
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show LW n at left with dissolve
-        #hide GI onlayer dexm
-        #show C at loposR onlayer dexm
     
-        HM "У каждого Древа — своя Хранительница!"
+         LW " Расскажи про других Хранительниц! Расскажи! Ну расскажи!"
     
-        #show HM s03 at right onlayer xra with dissolve
-        #hide C onlayer dexm
-        #show LW ud at razgavor, left with dissolve
-        #show B at loposL onlayer demo
-    
-        LW "- Так значит, есть и другие?.. {w=1}Как интересно!.."
-    
-        #show LW s15 at razgavor, left with dissolve
-        #show HM n at right onlayer xra with dissolve
->>>>>>> AngelRanga
-    
-        LW " Расскажи про других Хранительниц! Расскажи! Ну расскажи!"
-    
-<<<<<<< HEAD
          show LW s03 at left with dissolve
          hide B onlayer sloi02
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show S01 at loposR onlayer dexm
-=======
-        #show LW s03 at left with dissolve
-        #hide B onlayer demo
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #show S01 at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Хехе!..{w=1} Хорошая ты девочка, "
+         HM "- Хехе!..{w=1} Хорошая ты девочка, "
     
-<<<<<<< HEAD
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
          show LW n at left with dissolve
          show ST at loposR onlayer dexm
-=======
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #hide S01 onlayer dexm
-        #show LW n at left with dissolve
-        #show ST at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "Тихоня — но уж больно любопытная! Порой меня, саму меня в неловкое положение ставишь... "
-        HM "Ладно, расскажу. "
+         HM "Тихоня — но уж больно любопытная! Порой меня, саму меня в неловкое положение ставишь... "
+         HM "Ладно, расскажу. "
     
-<<<<<<< HEAD
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
-=======
-        #show HM r01 at razgavor, right onlayer xra with dissolve
->>>>>>> AngelRanga
     
-        HM "Не густо правда, так ведь они-то не каждый вечер погостить к нам приходят! "
+         HM "Не густо правда, так ведь они-то не каждый вечер погостить к нам приходят! "
     
-<<<<<<< HEAD
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          hide ST onlayer dexm
          show LW s02 at left with dissolve
          show SF at loposR onlayer dexm
-=======
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #hide ST onlayer dexm
-        #show LW s02 at left with dissolve
-        #show SF at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "И не каждый тысячный!"
+         HM "И не каждый тысячный!"
     
-<<<<<<< HEAD
          show HM s03 at right onlayer sloi01 with dissolve
          show LW s15 at razgavor, left with dissolve
          show N at loposL onlayer sloi02
-=======
-        #show HM s03 at right onlayer xra with dissolve
-        #show LW s15 at razgavor, left with dissolve
-        #show N at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Мда"
+         LW "- Мда"
     
-<<<<<<< HEAD
          hide SF onlayer dexm
          hide N onlayer sloi02
          show LW n at left with dissolve
@@ -726,50 +633,29 @@ label game_over:
     
          scene bg400 at Pan((0,0), (0, 400), 30.0)
          with leftiss
-=======
-        #hide SF onlayer dexm
-        #hide N onlayer demo
-        #show LW n at left with dissolve
-        #show HM n at right onlayer xra with dissolve
-        #hide LW n at left with moveoutleft
-        #hide HM n at right onlayer xra 
-        #show HM n at right
-        #with dissolve
-        #hide HM n at right
-        #hide plate at right
-        #with moveoutright
-        #scene bg000 with leftiss
-        #scene bg000b with diss
     
-        e "..........."
+         e "Тихоня слегка изменилась за прошедшее лето. "
+         e "Девочка слегка наклонила головку, вглядываясь своими нечеловечески пронзительными глазами температуры абсолютного нуля в светлый лик Хранительницы Миров — женщины, "
+         e "чьё платье восточного фасона отражало на себе бесконечность космоса, переливы галактик и туманностей, далёкие огни звёзд. "
     
-        #scene bg400 at Pan((0,0), (0, 400), 30.0)
-        #with leftiss
->>>>>>> AngelRanga
+         scene bg000
+         with light3iss
+         scene bg402 
+         with circlewipe
     
-        e "Тихоня слегка изменилась за прошедшее лето. "
-        e "Девочка слегка наклонила головку, вглядываясь своими нечеловечески пронзительными глазами температуры абсолютного нуля в светлый лик Хранительницы Миров — женщины, "
-        e "чьё платье восточного фасона отражало на себе бесконечность космоса, переливы галактик и туманностей, далёкие огни звёзд. "
+         e "Она сама, скромная девочка в нелепой, по мнению некоторых шляпе, со свисающей по-детски косичкой и в рыжем шарфике, чьё платьице, опять же по мнению некоторых, "
+         e "плохо сочеталось с её массивными крепкими ботинками на шнуровке, и кокетливо выглядывающими из-под оборочки подола платьица панталончиками,"
+         e " она жаждала ответа — ибо уже приучилась знать, что Наставница должна знать всё. "
     
-        #scene bg000
-        #with light3iss
-        #scene bg402 
-        #with circlewipe
+         scene bg000
+         with circlewipe
+         scene bg403 
+         with circlewipe
     
-        e "Она сама, скромная девочка в нелепой, по мнению некоторых шляпе, со свисающей по-детски косичкой и в рыжем шарфике, чьё платьице, опять же по мнению некоторых, "
-        e "плохо сочеталось с её массивными крепкими ботинками на шнуровке, и кокетливо выглядывающими из-под оборочки подола платьица панталончиками,"
-        e " она жаждала ответа — ибо уже приучилась знать, что Наставница должна знать всё. "
+         e "Нет, ВСЁ. "
+         e "И даже если она не знает — это значит лишь то,"
+         e "что Тихоня ещё не готова узнать этого. "
     
-        #scene bg000
-        #with circlewipe
-        #scene bg403 
-        #with circlewipe
-    
-        e "Нет, ВСЁ. "
-        e "И даже если она не знает — это значит лишь то,"
-        e "что Тихоня ещё не готова узнать этого. "
-    
-<<<<<<< HEAD
          scene bg000
          with circlewipe
          scene bg410 
@@ -809,51 +695,9 @@ label game_over:
          hide V onlayer sloi02
          show B at loposL onlayer sloi02
          show HM n at right onlayer sloi01 with dissolve
-=======
-        #scene bg000
-        #with circlewipe
-        #scene bg410 
-        #with circlewipe
     
-        e "Она знала, что это только ради неё, всё только для её пользы, и в её взгляде было столько истинной,"
-        e " материнской теплоты, что в этом невозможно было усомниться."
+         LW "Что-то...{w=1} Я не знаю что это, ты ведь знаешь?"
     
-        #scene bg000 with rightiss
-        #scene bg040a with rightiss
-        #show plate at right
-        #show HM n at right
-        #with moveinright
-        #show LW n at left with moveinleft
-        #hide HM n at right
-        #show HM r01 at razgavor, right onlayer xra
-        #with dissolve
-        #show SHT at loposR onlayer dexm
-    
-        HM "- А впрочем...{w=1} Вон гляди! "
-    
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-    
-        HM "Видишь?... "
-    
-        #show HM s02 at right onlayer xra with dissolve
-        #hide SHT onlayer dexm
-    
-        e "Хранительница, повернувшись, указала рукой на небо, которое бороздила яркая белая черта."
-    
-        #show LW r at razgavor, left with dissolve
-        #show V at loposL onlayer demo
-    
-        LW "- Комета?..{w=1} Хотя я чувствую... "
-    
-        #show LW rn at razgavor, left with dissolve
-        #hide V onlayer demo
-        #show B at loposL onlayer demo
-        #show HM n at right onlayer xra with dissolve
->>>>>>> AngelRanga
-    
-        LW "Что-то...{w=1} Я не знаю что это, ты ведь знаешь?"
-    
-<<<<<<< HEAD
          show LW s08 at left with dissolve
          hide B onlayer sloi02
          hide LW s08
@@ -889,82 +733,27 @@ label game_over:
          show HM r01 at razgavor, right onlayer sloi01
          with dissolve
          show S04 at loposR onlayer dexm
-=======
-        #show LW s08 at left with dissolve
-        #hide B onlayer demo
-        #hide LW s08
-        #hide HM n onlayer xra
-        #scene bg000 
-        #with diss
-        #stop music fadeout 1.0
-        #$ renpy.pause(1.0)
-        #scene bg401 with light2iss
-        #play music "Zvuki/atmosfera_pustoty.mp3" fadein 2.0
-        #$ renpy.music.set_volume (0.5, .5, channel = "music")
-        #play nature "Zvuki/kometa.mp3" fadein 0.5
     
-        e "Черта и впрямь сильно выделалась на фоне местного неба. "
-        e "Как будто этот след оставляла метла ведьмы в полете."
-        e "Если какая-нибудь ведьмочка очень любила магические спецэффекты. "
-        e "То обязательным пантом было приблизительно такое явление."
-        e "Маленькая ведьма правда не часто пользовалась метлой как средством передвижения,"
-        e " предпочитая корабль-оболочку как более комфортабельное средство передвижения от звезды к звезде."
+         HM "- Это? Хех!.. "
+         HM "Это ответ на вопрос твой,{w=1} Тихоня."
     
-        #stop music fadeout 1.5
-        #stop nature fadeout 1.5
-        #$ renpy.music.set_volume (0.5, 1.0, channel = "music")
-        #scene bg000 with dissA
-    
-        #scene bg040a with rightiss
-        #play music "Sound/ghost-town2.mp3" fadein 1.5
-        #show plate at right
-        #show HM n at right
-        #with moveinright
-        #show LW n at left with moveinleft
-        #hide HM n at right
-        #show HM r01 at razgavor, right onlayer xra
-        #with dissolve
-        #show S04 at loposR onlayer dexm
->>>>>>> AngelRanga
-    
-        HM "- Это? Хех!.. "
-        HM "Это ответ на вопрос твой,{w=1} Тихоня."
-    
-<<<<<<< HEAD
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
-=======
-        #show HM r03 at razgavor, right onlayer xra with dissolve
->>>>>>> AngelRanga
     
-        HM "Гостья к нам пожаловала."
+         HM "Гостья к нам пожаловала."
     
-<<<<<<< HEAD
          show HM r02 at razgavor, right onlayer sloi01 with dissolve
          hide S04 onlayer dexm
          show S01 at loposR onlayer dexm
-=======
-        #show HM r02 at razgavor, right onlayer xra with dissolve
-        #hide S04 onlayer dexm
-        #show S01 at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM " Иная Хранительница."
+         HM " Иная Хранительница."
     
-<<<<<<< HEAD
          show HM s05 at right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
          show LW s07 at razgavor, left with dissolve
          show TC at loposL onlayer sloi02
-=======
-        #show HM s05 at right onlayer xra with dissolve
-        #hide S01 onlayer dexm
-        #show LW s07 at razgavor, left with dissolve
-        #show TC at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Не может такого быть... "
+         LW "- Не может такого быть... "
     
-<<<<<<< HEAD
          hide TC onlayer sloi02
          show VP at loposL onlayer sloi02
          show LW r at Motion(Trampolin, 5.0, repeat=True, bounce=True) with dissolve
@@ -973,64 +762,33 @@ label game_over:
          show LW v03 at razgavor, left with dissolve
          hide VP onlayer sloi02
          show TC at loposL onlayer sloi02
-=======
-        #hide TC onlayer demo
-        #show VP at loposL onlayer demo
-        #show LW r at Motion(Trampolin, 5.0, repeat=True, bounce=True) with dissolve
-        #show HM s04 at right onlayer xra with dissolve
-        #$ renpy.pause(4.0)
-        #show LW v03 at razgavor, left with dissolve
-        #hide VP onlayer demo
-        #show TC at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "Это ты подстроила, это твой фокус! "
+         LW "Это ты подстроила, это твой фокус! "
     
-<<<<<<< HEAD
          show LW v02 at razgavor, left with dissolve
          hide TC onlayer sloi02
          show S03 at loposL onlayer sloi02
-=======
-        #show LW v02 at razgavor, left with dissolve
-        #hide TC onlayer demo
-        #show S03 at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "Да, Наставница?"
+         LW "Да, Наставница?"
     
-<<<<<<< HEAD
          show LW s at left with dissolve
          hide S03 onlayer sloi02
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show OB at loposR onlayer dexm
-=======
-        #show LW s at left with dissolve
-        #hide S03 onlayer demo
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show OB at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Если честно {w=1}— это сюрприз и для меня самой, Тихоня."
+         HM "- Если честно {w=1}— это сюрприз и для меня самой, Тихоня."
     
-<<<<<<< HEAD
          show HM s05 at right onlayer sloi01 with dissolve
          hide OB onlayer dexm
          show LW v02 at razgavor, left with dissolve
          show SNO at loposL onlayer sloi02
-=======
-        #show HM s05 at right onlayer xra with dissolve
-        #hide OB onlayer dexm
-        #show LW v02 at razgavor, left with dissolve
-        #show SNO at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Но я... "
+         LW "- Но я... "
     
-        #show LW v03 at razgavor, left with dissolve
+         show LW v03 at razgavor, left with dissolve
     
-        LW "Только спросила... "
+         LW "Только спросила... "
     
-<<<<<<< HEAD
          show LW ud at razgavor, left with dissolve
          hide SNO onlayer sloi02
          show D at loposL onlayer sloi02
@@ -1048,104 +806,55 @@ label game_over:
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          hide GI onlayer dexm
          show ST at loposR onlayer dexm
-=======
-        #show LW ud at razgavor, left with dissolve
-        #hide SNO onlayer demo
-        #show D at loposL onlayer demo
     
-        LW "И тут?... {w=1}Так не бывает!"
+         HM "Туфелька. "
+         HM "Ничего не возникает абсолютно случайно, и твой вопрос в том числе."
     
-        #show LW s14 at left with dissolve
-        #hide D onlayer demo
-        #show HM r02 at razgavor, right onlayer xra with dissolve
-        #show GI at loposR onlayer dexm
-    
-        #HM "- Что бывает, а что не бывает —{w=1} не тебе решать,"
-    
-        #show LW n at left with dissolve
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #hide GI onlayer dexm
-        #show ST at loposR onlayer dexm
->>>>>>> AngelRanga
-    
-        HM "Туфелька. "
-        HM "Ничего не возникает абсолютно случайно, и твой вопрос в том числе."
-    
-<<<<<<< HEAD
          show HM n at right onlayer sloi01 with dissolve
          hide ST onlayer dexm
          show LW s15 at left with dissolve
          show GI at loposL onlayer sloi02
-=======
-        #show HM n at right onlayer xra with dissolve
-        #hide ST onlayer dexm
-        #show LW s15 at left with dissolve
-        #show GI at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Да, Наставница!.. "
+         LW "- Да, Наставница!.. "
     
-<<<<<<< HEAD
          show LW s13 at left with dissolve
          hide GI onlayer sloi02
          show B at loposL onlayer sloi02
-=======
-        #show LW s13 at left with dissolve
-        #hide GI onlayer demo
-        #show B at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "Наставница...{w=1} А она какая?.."
+         LW "Наставница...{w=1} А она какая?.."
     
-<<<<<<< HEAD
          show LW n at left with dissolve
          hide B onlayer sloi02
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S01 at loposR onlayer dexm
-=======
-        #show LW n at left with dissolve
-        #hide B onlayer demo
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show S01 at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Это ты сама увидишь, какова она."
+         HM "- Это ты сама увидишь, какова она."
     
-<<<<<<< HEAD
          show HM n at right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
          hide HM n at right onlayer sloi01
          hide LW n at left
          scene bg000
          with diss
-=======
-        #show HM n at right onlayer xra with dissolve
-        #hide S01 onlayer dexm
-        #hide HM n at right onlayer xra
-        #hide LW n at left
-        #scene bg000
-        #with diss
->>>>>>> AngelRanga
     
-        e "Сказала женщина мягким добрым голосом."
+         e "Сказала женщина мягким добрым голосом."
     
-        #scene bg401 with diss
-        #$ renpy.music.set_volume (0.5, .5, channel = "music")
-        #play nature "Zvuki/kometa.mp3" fadein 0.5
+         scene bg401 with diss
+         $ renpy.music.set_volume (0.5, .5, channel = "music")
+         play nature "Zvuki/kometa.mp3" fadein 0.5
     
-        e "Взгляд Тихони пристально следил за чертой, которая проходила сквозь плотные слои атмосферы планеты Хранительницы, "
-        e "оставляя яркий белый хвост. "
+         e "Взгляд Тихони пристально следил за чертой, которая проходила сквозь плотные слои атмосферы планеты Хранительницы, "
+         e "оставляя яркий белый хвост. "
     
-        #scene bg404 with fade
+         scene bg404 with fade
     
-        e "Наконец, она опустилась, став просто небольшой яркой точкой, спускающейся вниз."
+         e "Наконец, она опустилась, став просто небольшой яркой точкой, спускающейся вниз."
     
-        #stop nature fadeout 1.5
-        #$ renpy.music.set_volume (0.5, 1.0, channel = "music")
-        #scene bg000 with light3iss
-        #scene bg040a with circleirisout
+         stop nature fadeout 1.5
+         $ renpy.music.set_volume (0.5, 1.0, channel = "music")
+         scene bg000 with light3iss
+         scene bg040a with circleirisout
     
-<<<<<<< HEAD
          show LW n at left with moveinleft
          show LW s13 at left with dissolve
          show VP at loposL onlayer sloi02
@@ -1155,43 +864,20 @@ label game_over:
          hide HM n at right
          show HM n at right onlayer sloi01
          with dissolve
-=======
-        #show LW n at left with moveinleft
-        #show LW s13 at left with dissolve
-        #show VP at loposL onlayer demo
-        #show plate at right
-        #show HM n at right
-        #with moveinright
-        #hide HM n at right
-        #show HM n at right onlayer xra
-        #with dissolve
->>>>>>> AngelRanga
     
-        LW "- Она спускается за лес, на лужайку! "
+         LW "- Она спускается за лес, на лужайку! "
     
-<<<<<<< HEAD
          show LW n at left with dissolve
          hide VP onlayer sloi02
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show V at loposR onlayer dexm
-=======
-        #show LW n at left with dissolve
-        #hide VP onlayer demo
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #show V at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Идём же, "
+         HM "- Идём же, "
     
-<<<<<<< HEAD
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
-=======
-        #show HM r03 at razgavor, right onlayer xra with dissolve
->>>>>>> AngelRanga
     
-        #HM "Мне самой не терпится увидеть...{w=1} Коллегу..."
+         HM "Мне самой не терпится увидеть...{w=1} Коллегу..."
     
-<<<<<<< HEAD
          show HM s02 at right onlayer sloi01 with dissolve
          hide V onlayer dexm
          hide HM n at right onlayer sloi01 
@@ -1206,103 +892,85 @@ label game_over:
          scene bg000 with diss
          scene bg000b with diss
          stop music fadeout 1.0
-=======
-        #show HM s02 at right onlayer xra with dissolve
-        #hide V onlayer dexm
-        #hide HM n at right onlayer xra 
-        #show HM n at right
-        #with dissolve
-        #hide HM n at right
-        #hide plate at right
-        #with moveoutright
-        #show LW n at Transform(function=m_r_z), left
-        #$ renpy.pause(4.0)
-        #hide LW n
-        #scene bg000 with diss
-        #scene bg000b with diss
-        #stop music fadeout 1.0
->>>>>>> AngelRanga
     
-        e "............"
+         e "............"
      
-        #scene bg406 with leftiss 
-        #play sound "Zvuki/kabluki.mp3"
-        #play music "Sound/BGM_021.mp3"
-
-        e "Путь занял немного времени — очевидно было, "
-        e "что аппарат садился, ориентируясь на дом на сваях, в котором Хранительница жила. "
+         scene bg406 with leftiss 
+         play sound "Zvuki/kabluki.mp3"
+         play music "Sound/BGM_021.mp3"
+         e "Путь занял немного времени — очевидно было, "
+         e "что аппарат садился, ориентируясь на дом на сваях, в котором Хранительница жила. "
     
-        #scene bg405 with leftiss
+         scene bg405 with leftiss
     
-        e "Магический лес, или даже это был не лес вовсе — а нечто где фигурировали странно сплетенные между собой живые на свой  манер существа, "
-        e "более напоминающие огромные корни-лианы или ветви дерева каучуково-черного цвета, живущие в среде, "
-        e "напоминающей белесо-серую воду или все же студень с вздымающимися красивыми язычками напоминающие пламя газовой печки, "
-        e "и фантомными полупрозрачными грибами, иногда имеющую холодные, неестественно синие и синюшные оттенки. "
-        e "Существ облоков. "
+         e "Магический лес, или даже это был не лес вовсе — а нечто где фигурировали странно сплетенные между собой живые на свой  манер существа, "
+         e "более напоминающие огромные корни-лианы или ветви дерева каучуково-черного цвета, живущие в среде, "
+         e "напоминающей белесо-серую воду или все же студень с вздымающимися красивыми язычками напоминающие пламя газовой печки, "
+         e "и фантомными полупрозрачными грибами, иногда имеющую холодные, неестественно синие и синюшные оттенки. "
+         e "Существ облоков. "
     
-        #scene f411 with leftiss
+         scene f411 with leftiss
     
-        e "Это была причудливая форма коллективного разума существа с непостижимой логикой и знаниями."
-        e "Объединенным общем телом и идеей того что наивысшая точка разума – это коллективизм и безличие каждого индивидуума в нем. "
-        e "Чей коллективный разум, при помощи проецирования из свого подсознания на всех окружающих, некоторых знаний и идей,"
-        e "в том или ином виде входящих в состав человеческих форм развития."
-        e "Из года в год из века в век старалась постичь себя как единицу разума, но из-за того что у всех субсуществ этого метасущества была одинаковая логика и все мыслили одинаково. "
-        e "Оно не могло различить границы своего мышления и своего сознания, отделить свое «я» от сотен и тысяч чужих и так к итогу ни к чему не приходили. "
-        e "К  такого рода идеям, в первую очередь, следует отнести идею коллективного бытия людей как бытия клеток одного организма, "
-        e "при которых игнорируется индивидуальность. "
-        e "К счастью, этот способ бытия, все же является сущностно человеческим: "
-        e "действительно человеческий способ совместного бытия скорее похож на птиц, образующих стаю, или звезды, соединяющиеся  в созвездия. "
-        e "Поэтому ни Маленькая ведьма, ни Хранительница особо не впечетьлялись этим."
+         e "Это была причудливая форма коллективного разума существа с непостижимой логикой и знаниями."
+         e "Объединенным общем телом и идеей того что наивысшая точка разума – это коллективизм и безличие каждого индивидуума в нем. "
+         e "Чей коллективный разум, при помощи проецирования из свого подсознания на всех окружающих, некоторых знаний и идей,"
+         e "в том или ином виде входящих в состав человеческих форм развития."
+         e "Из года в год из века в век старалась постичь себя как единицу разума, но из-за того что у всех субсуществ этого метасущества была одинаковая логика и все мыслили одинаково. "
+         e "Оно не могло различить границы своего мышления и своего сознания, отделить свое «я» от сотен и тысяч чужих и так к итогу ни к чему не приходили. "
+         e "К  такого рода идеям, в первую очередь, следует отнести идею коллективного бытия людей как бытия клеток одного организма, "
+         e "при которых игнорируется индивидуальность. "
+         e "К счастью, этот способ бытия, все же является сущностно человеческим: "
+         e "действительно человеческий способ совместного бытия скорее похож на птиц, образующих стаю, или звезды, соединяющиеся  в созвездия. "
+         e "Поэтому ни Маленькая ведьма, ни Хранительница особо не впечетьлялись этим."
     
-        #scene bg000b with dissA
+         scene bg000b with dissA
     
-        e ".........."
+         e ".........."
      
-        #$ renpy.music.set_volume (0.5, .5, channel = "music")
-        #play nature "Zvuki/kometa.mp3" fadein 0.5
+         $ renpy.music.set_volume (0.5, .5, channel = "music")
+         play nature "Zvuki/kometa.mp3" fadein 0.5
     
-        e "И уже вскоре сквозь них был различим сверкающий дискообразный аппарат. "
-        e " с переливающимися разноцветными огнями по контуру, "
+         e "И уже вскоре сквозь них был различим сверкающий дискообразный аппарат. "
+         e " с переливающимися разноцветными огнями по контуру, "
     
-        #scene bg407 with dissA
-        #scene bg408 with dissA
+         scene bg407 with dissA
+         scene bg408 with dissA
     
-        e "из открытого в нижней части отверстия, которого сходил диагональный трап из чистого жёлтого света, "
-        e "ощущавшийся ментальным взором как медовое тепло. "
-        e "И вот, они вышли на мягкий травяной ковёр. "
-        e "Тихоня не спешила, учтиво пропуская Наставницу вперёд. "
+         e "из открытого в нижней части отверстия, которого сходил диагональный трап из чистого жёлтого света, "
+         e "ощущавшийся ментальным взором как медовое тепло. "
+         e "И вот, они вышли на мягкий травяной ковёр. "
+         e "Тихоня не спешила, учтиво пропуская Наставницу вперёд. "
     
-        #scene bg409 with dissA
+         scene bg409 with dissA
     
-        e "Её распирало изнутри от предвкушения — но уважение к Наставнице выше всего. "
-        e "Тем более, от осознания того, что эта гостья из абсолютно чужой МУЛЬТИВСЕЛЕННОЙ немного холодило под ложечкой, "
-        e "отдавая по телу невольной дрожью и опаской неизведанного. "
+         e "Её распирало изнутри от предвкушения — но уважение к Наставнице выше всего. "
+         e "Тем более, от осознания того, что эта гостья из абсолютно чужой МУЛЬТИВСЕЛЕННОЙ немного холодило под ложечкой, "
+         e "отдавая по телу невольной дрожью и опаской неизведанного. "
     
-        #stop nature fadeout 1.5
-        #$ renpy.music.set_volume (0.5, 1.0, channel = "music")
-        #scene bg411 
-        #show Rose onlayer de
-        #with diss
+         stop nature fadeout 1.5
+         $ renpy.music.set_volume (0.5, 1.0, channel = "music")
+         scene bg411 
+         show Rose onlayer de
+         with diss
     
-        e "Первый раз поймав взглядом, она удивилась {w=1}— И ЭТО ХРАНИТЕЛЬНИЦА?.. "
-        e "Это была девочка, ростом от силы метр с небольшим. "
-        e "С фиолетовыми волосами и белыми рожками, одетая в темное кукольное платье с белым передником и перевернутыми крестами. "
-        e "Она держала в руке тонкий длинный мундштук, покуривая ядреную злющую самокрутку-самосад. "
-        e "Так же как и у маленькой ведьмы из под оборочки ее платьице кокетливо выгладывали панталончики. "
+         e "Первый раз поймав взглядом, она удивилась {w=1}— И ЭТО ХРАНИТЕЛЬНИЦА?.. "
+         e "Это была девочка, ростом от силы метр с небольшим. "
+         e "С фиолетовыми волосами и белыми рожками, одетая в темное кукольное платье с белым передником и перевернутыми крестами. "
+         e "Она держала в руке тонкий длинный мундштук, покуривая ядреную злющую самокрутку-самосад. "
+         e "Так же как и у маленькой ведьмы из под оборочки ее платьице кокетливо выгладывали панталончики. "
     
-        #hide Rose onlayer de with dissA
+         hide Rose onlayer de with dissA
    
-        e "Её голову покрывал ободок с причудливым золотым символом — он выглядел как Валькнут, но был перевёрнут всеми треугольниками вниз. "
-        e "Странная девочка, более чем. "
-        e "И вместе с тем {w=1} — какая-то слишком ОБЫЧНАЯ. "
-        e "Путешествуя по снам, она видела существ гораздо более причудливых и чужеродных, нежели эти обитатели абсолютно иного древа."
+         e "Её голову покрывал ободок с причудливым золотым символом — он выглядел как Валькнут, но был перевёрнут всеми треугольниками вниз. "
+         e "Странная девочка, более чем. "
+         e "И вместе с тем {w=1} — какая-то слишком ОБЫЧНАЯ. "
+         e "Путешествуя по снам, она видела существ гораздо более причудливых и чужеродных, нежели эти обитатели абсолютно иного древа."
     
-        #scene bg000 with dissA
-        #scene bg000b with dissolve
-        e".................."
-        #scene bg339 with circleirisout
+         scene bg000 with dissA
+         scene bg000b with dissolve
+         e".................."
+         scene bg339 with circleirisout
     
-<<<<<<< HEAD
          show plate at right
          show HM n at right
          with moveinright
@@ -1315,608 +983,315 @@ label game_over:
          show LW n at left with moveinleft
          show LW s02 at razgavor, left with dissolve 
          show ZB at loposL onlayer sloi02
-=======
-        #show plate at right
-        #show HM n at right
-        #with moveinright
-        #hide HM n at right
-        #show HM s01 at right onlayer xra
-        #with dissolve
-        #$ renpy.pause(1.5)
-        #show CC n at center with moveinleft
-        #$ renpy.pause(1.5)
-        #show LW n at left with moveinleft
-        #show LW s02 at razgavor, left with dissolve 
-        #show ZB at loposL onlayer demo
->>>>>>> AngelRanga
      
-        LW "- Она... {w=1}Похожа на нас... "
+         LW "- Она... {w=1}Похожа на нас... "
     
-<<<<<<< HEAD
          show LW s06 at left with dissolve
          hide ZB onlayer sloi02
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S02 at loposR onlayer dexm
-=======
-        #show LW s06 at left with dissolve
-        #hide ZB onlayer demo
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show S02 at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Конечно, ведь их Древо{w=1}  — зеркальное отражение нашего. "
+         HM "- Конечно, ведь их Древо{w=1}  — зеркальное отражение нашего. "
      
-<<<<<<< HEAD
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          hide S02 onlayer dexm
          show SF at loposR onlayer dexm
-=======
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #hide S02 onlayer dexm
-        #show SF at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "Принцип СРТ симметрии и спонтанное его нарушения действует и на этом уровне."
+         HM "Принцип СРТ симметрии и спонтанное его нарушения действует и на этом уровне."
     
-<<<<<<< HEAD
          show HM n at right onlayer sloi01 with dissolve
          hide SF onlayer dexm
          show CC r at Motion(Trampoline, 5.0, repeat=True, bounce=True) with dissolve
          show VP at loposCA onlayer sloi02
-=======
-        #show HM n at right onlayer xra with dissolve
-        #hide SF onlayer dexm
-        #show CC r at Motion(Trampoline, 5.0, repeat=True, bounce=True) with dissolve
-        #show VP at loposCA onlayer demo
->>>>>>> AngelRanga
     
-        CC "- Сестрица!! "
+         CC "- Сестрица!! "
     
-        #show CC rn at razgavor, center with dissolve
+         show CC rn at razgavor, center with dissolve
     
-        CC "Как давно я тебя не вииидела!!! "
+         CC "Как давно я тебя не вииидела!!! "
     
-<<<<<<< HEAD
          show CC s03 at center with dissolve
          hide VP onlayer sloi02
          show LW n at left with dissolve
-=======
-        #show CC s03 at center with dissolve
-        #hide VP onlayer demo
-        #show LW n at left with dissolve
->>>>>>> AngelRanga
     
-        e "Неожиданно завизжала рогатая гостья голосом абсолютно детского тембра."
-        e "И, визжа, бросив недокуренный мундштук в траву, рванула навстречу,"
-        e " буквально прыгая в объятия столь высокой и статной наставнице, "
-        e "одетой в столь огромную и широкую юбку, что весь её облик просто затмевал гостью. "
-        e "Перед ней она и правда казалась маленьким ребёнком."
+         e "Неожиданно завизжала рогатая гостья голосом абсолютно детского тембра."
+         e "И, визжа, бросив недокуренный мундштук в траву, рванула навстречу,"
+         e " буквально прыгая в объятия столь высокой и статной наставнице, "
+         e "одетой в столь огромную и широкую юбку, что весь её облик просто затмевал гостью. "
+         e "Перед ней она и правда казалась маленьким ребёнком."
     
-<<<<<<< HEAD
          show LW ud at razgavor, left with dissolve
          show ZB at loposL onlayer sloi02
          show CC n at center with dissolve
-=======
-        #show LW ud at razgavor, left with dissolve
-        #show ZB at loposL onlayer demo
-        #show CC n at center with dissolve
->>>>>>> AngelRanga
     
-        LW "- Она{w=1} — твоя сестра?... "
+         LW "- Она{w=1} — твоя сестра?... "
     
-<<<<<<< HEAD
          show LW s02 at left with dissolve
          hide ZB onlayer sloi02
-=======
-        #show LW s02 at left with dissolve
-        #hide ZB onlayer demo
->>>>>>> AngelRanga
     
-        e "удивлённо спросила Тихоня."
+         e "удивлённо спросила Тихоня."
     
-<<<<<<< HEAD
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show D at loposR onlayer dexm
-=======
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #show D at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Нет.{w=1} Мы все так называем друг-друга,"
+         HM "- Нет.{w=1} Мы все так называем друг-друга,"
     
-<<<<<<< HEAD
          show HM s04 at right onlayer sloi01 with dissolve
          hide D onlayer dexm
          show LW n at left with dissolve
          show CC r at razgavor, center with dissolve
          show GI at loposCA onlayer sloi02
-=======
-        #show HM s04 at right onlayer xra with dissolve
-        #hide D onlayer dexm
-        #show LW n at left with dissolve
-        #show CC r at razgavor, center with dissolve
-        #show GI at loposCA onlayer demo
->>>>>>> AngelRanga
     
-        CC "- Сестрицааа!!! "
+         CC "- Сестрицааа!!! "
     
-<<<<<<< HEAD
          hide GI onlayer sloi02
          show LO at loposCA onlayer sloi02
-=======
-        #hide GI onlayer demo
-        #show LO at loposCA onlayer demo
->>>>>>> AngelRanga
     
-        CC "Я так рада тебя обнять!!!{w=1}Сколько же мы не виииделись!"
+         CC "Я так рада тебя обнять!!!{w=1}Сколько же мы не виииделись!"
     
-<<<<<<< HEAD
          show CC smail 02 at center with dissolve
          hide LO onlayer sloi02
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S01 at loposR onlayer dexm
-=======
-        #show CC smail 02 at center with dissolve
-        #hide LO onlayer demo
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show S01 at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Пять миллиардов шестьсот сорок семь миллионов двести двадцать три тысячи тринадцать субъективных лет, "
-        HM "если брать в расчёт мою точку зрения... и шестнадца миллиардов объективных лет возраста этой вселенной…"
+         HM "- Пять миллиардов шестьсот сорок семь миллионов двести двадцать три тысячи тринадцать субъективных лет, "
+         HM "если брать в расчёт мою точку зрения... и шестнадца миллиардов объективных лет возраста этой вселенной…"
     
-<<<<<<< HEAD
          show HM n at right onlayer sloi01 with dissolve
          hide S01 onlayer dexm
          show CC r at razgavor, center with dissolve
          show D at loposCA onlayer sloi02
          show LW v04 at left with dissolve
-=======
-        #show HM n at right onlayer xra with dissolve
-        #hide S01 onlayer dexm
-        #show CC r at razgavor, center with dissolve
-        #show D at loposCA onlayer demo
-        #show LW v04 at left with dissolve
->>>>>>> AngelRanga
     
-        CC "- Ты как всегда не можешь без цифр! "
+         CC "- Ты как всегда не можешь без цифр! "
     
-<<<<<<< HEAD
          show CC s03 at center with dissolve
          hide D onlayer sloi02
-=======
-        #show CC s03 at center with dissolve
-        #hide D onlayer demo
->>>>>>> AngelRanga
     
-        #e "С сердито-деловым видом выплюнула гостья, скорчив физиономию."
+         e "С сердито-деловым видом выплюнула гостья, скорчив физиономию."
     
-<<<<<<< HEAD
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show GI at loposR onlayer dexm
          show CC s04 at center with dissolve
-=======
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show GI at loposR onlayer dexm
-        #show CC s04 at center with dissolve
->>>>>>> AngelRanga
     
-        HM "- Из цифр состоит всё, и я, и ты "
+         HM "- Из цифр состоит всё, и я, и ты "
     
-<<<<<<< HEAD
          show HM s05 at razgavor, right onlayer sloi01 with dissolve
          hide GI onlayer dexm
-=======
-        #show HM s05 at razgavor, right onlayer xra with dissolve
-        #hide GI onlayer dexm
->>>>>>> AngelRanga
     
-        e "оправдываясь, сказала Наставница,"
+         e "оправдываясь, сказала Наставница,"
     
-<<<<<<< HEAD
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show SF at loposR onlayer dexm
-=======
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #show SF at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM ", - А ты, смотрю, как была коротышкой, так и осталась. Хех, не подросла ни на микрон!"
+         HM ", - А ты, смотрю, как была коротышкой, так и осталась. Хех, не подросла ни на микрон!"
     
-<<<<<<< HEAD
          show CC s01 at center with dissolve
          show HM n at right onlayer sloi01 with dissolve
          hide SF onlayer dexm
-=======
-        #show CC s01 at center with dissolve
-        #show HM n at right onlayer xra with dissolve
-        #hide SF onlayer dexm
->>>>>>> AngelRanga
     
-        e "Тихоня, как и положено Тихоне,"
-        e "стояла в сторонке, наблюдая за тем, как её Наставница разговаривала с сидящей на её руках гостьей, "
-        e "о чём-то оживлённо разговаривала. "
-        e "Тихону гложила неведомое прежде для нее чувства ревности. "
-        e "Подслушивать нехорошо, знала она, и воспитанные девочки так не делают. "
-        e "Неожиданно гостья повернула голову, указав на неё, Тихоню, пальцем."
+         e "Тихоня, как и положено Тихоне,"
+         e "стояла в сторонке, наблюдая за тем, как её Наставница разговаривала с сидящей на её руках гостьей, "
+         e "о чём-то оживлённо разговаривала. "
+         e "Тихону гложила неведомое прежде для нее чувства ревности. "
+         e "Подслушивать нехорошо, знала она, и воспитанные девочки так не делают. "
+         e "Неожиданно гостья повернула голову, указав на неё, Тихоню, пальцем."
     
-<<<<<<< HEAD
          show CC rn at razgavor, center with dissolve
          show B at loposCA onlayer sloi02
-=======
-        #show CC rn at razgavor, center with dissolve
-        #show B at loposCA onlayer demo
->>>>>>> AngelRanga
     
-        CC "- А это кто?"
+         CC "- А это кто?"
     
-<<<<<<< HEAD
          show CC smail 01 at center with dissolve
          hide B onlayer sloi02
          show LW v03 at left with dissolve
          show C at loposR onlayer dexm
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
-=======
-        #show CC smail 01 at center with dissolve
-        #hide B onlayer demo
-        #show LW v03 at left with dissolve
-        #show C at loposR onlayer dexm
-        #show HM r03 at razgavor, right onlayer xra with dissolve
->>>>>>> AngelRanga
     
-        HM "- А это…{w=1} ученица моя! "
+         HM "- А это…{w=1} ученица моя! "
     
-<<<<<<< HEAD
          show HM r02 at razgavor, right onlayer sloi01 with dissolve
          hide C onlayer dexm
          show N at loposR onlayer dexm
          show LW s14 at left with dissolve
-=======
-        #show HM r02 at razgavor, right onlayer xra with dissolve
-        #hide C onlayer dexm
-        #show N at loposR onlayer dexm
-        #show LW s14 at left with dissolve
->>>>>>> AngelRanga
     
-        HM "Можешь звать ее Тихоней."
+         HM "Можешь звать ее Тихоней."
     
-<<<<<<< HEAD
          show HM n at right onlayer sloi01 with dissolve
          hide N onlayer dexm
          show CC s04 at razgavor, center with dissolve 
          show B at loposC onlayer sloi02
-=======
-        #show HM n at right onlayer xra with dissolve
-        #hide N onlayer dexm
-        #show CC s04 at razgavor, center with dissolve 
-        #show B at loposC onlayer demo
->>>>>>> AngelRanga
     
-        CC "- Ученица?!.. "
+         CC "- Ученица?!.. "
     
-<<<<<<< HEAD
          show CC r at razgavor, center with dissolve
          hide B onlayer sloi02
          show C at loposC onlayer sloi02
-=======
-        #show CC r at razgavor, center with dissolve
-        #hide B onlayer demo
-        #show C at loposC onlayer demo
->>>>>>> AngelRanga
     
-        CC "Сестрица, поставь меня на землю!.. "
+         CC "Сестрица, поставь меня на землю!.. "
     
-<<<<<<< HEAD
          show CC s01 at center with dissolve
          hide C onlayer sloi02
-=======
-        #show CC s01 at center with dissolve
-        #hide C onlayer demo
->>>>>>> AngelRanga
     
-        e "И Наставница быстро и нежно положила её на лужайку, и она подошла. "
-        e "Такая маленькая, такая смешная и чудная — и такая древняя, если в последний раз она её видела так давно."
+         e "И Наставница быстро и нежно положила её на лужайку, и она подошла. "
+         e "Такая маленькая, такая смешная и чудная — и такая древняя, если в последний раз она её видела так давно."
     
-        #show LW s08 at left with dissolve
-        #show CC n at center with dissolve
+         show LW s08 at left with dissolve
+         show CC n at center with dissolve
     
-        e "Тихоня ведь здесь от силы тысячу!"
+         e "Тихоня ведь здесь от силы тысячу!"
     
-<<<<<<< HEAD
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show D at loposR onlayer dexm
-=======
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #show D at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Только не слишком приставай к ней. Она и так в недоумении."
+         HM "- Только не слишком приставай к ней. Она и так в недоумении."
     
-<<<<<<< HEAD
          show HM s03 at right onlayer sloi01 with dissolve
          hide D onlayer dexm
          show LW s16 at left with dissolve
-=======
-        #show HM s03 at right onlayer xra with dissolve
-        #hide D onlayer dexm
-        #show LW s16 at left with dissolve
->>>>>>> AngelRanga
     
-        e "Тихоня мягко улыбнулась, глядя в сверкающие розовой радужкой глаза карликовой Хранительницы иных миров."
+         e "Тихоня мягко улыбнулась, глядя в сверкающие розовой радужкой глаза карликовой Хранительницы иных миров."
     
-<<<<<<< HEAD
          show CC rn at razgavor, center with dissolve
          show S01 at loposC onlayer sloi02
-=======
-        #show CC rn at razgavor, center with dissolve
-        #show S01 at loposC onlayer demo
->>>>>>> AngelRanga
     
-        CC "- Значит, тебя зовут Тихоня? "
+         CC "- Значит, тебя зовут Тихоня? "
     
-<<<<<<< HEAD
          show LW s03 at left with dissolve
          show CC n at center with dissolve
          hide S01 onlayer sloi02
-=======
-        #show LW s03 at left with dissolve
-        #show CC n at center with dissolve
-        #hide S01 onlayer demo
->>>>>>> AngelRanga
     
-        e "Спросил её тонкий детский голосок."
+         e "Спросил её тонкий детский голосок."
     
-<<<<<<< HEAD
          show LW s15 at razgavor, left with dissolve
          show GI at loposL onlayer sloi02
-=======
-        #show LW s15 at razgavor, left with dissolve
-        #show GI at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Иногда наставница называет меня Тихоней,{w=1} иногда Туфелькой. "
+         LW "- Иногда наставница называет меня Тихоней,{w=1} иногда Туфелькой. "
     
-<<<<<<< HEAD
          show LW ud at razgavor, left with dissolve
          hide GI onlayer sloi02
          show SNO at loposL onlayer sloi02
-=======
-        #show LW ud at razgavor, left with dissolve
-        #hide GI onlayer demo
-        #show SNO at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "Я же предпочитаю думать о себе как о Снежинке."
+         LW "Я же предпочитаю думать о себе как о Снежинке."
     
-<<<<<<< HEAD
          show LW n at left with dissolve
          hide SNO onlayer sloi02
     
          show CC r at razgavor, center with dissolve
          show VP at loposC onlayer sloi02
-=======
-        #show LW n at left with dissolve
-        #hide SNO onlayer demo
     
-        #show CC r at razgavor, center with dissolve
-        #show VP at loposC onlayer demo
->>>>>>> AngelRanga
+         CC "- Занятно.{w=1} Милая девочка..."
     
-        CC "- Занятно.{w=1} Милая девочка..."
-    
-<<<<<<< HEAD
          show CC n at center with dissolve
          hide VP onlayer sloi02
          show LW s02 at razgavor, left with dissolve
          show V at loposL onlayer sloi02
-=======
-        #show CC n at center with dissolve
-        #hide VP onlayer demo
-        #show LW s02 at razgavor, left with dissolve
-        #show V at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Вы тоже..."
+         LW "- Вы тоже..."
     
-<<<<<<< HEAD
          show LW s08 at left with dissolve
          hide V onlayer sloi02
-=======
-        #show LW s08 at left with dissolve
-        #hide V onlayer demo
->>>>>>> AngelRanga
     
-        e "Гостья рассмеялась. "
-        e "Тонкий детский смех пробрал её всю, заставляя совершенно по-детски, изогнувшись, повалиться на траву, "
-        e "барахтаясь от хохота руками и ногами. "
+         e "Гостья рассмеялась. "
+         e "Тонкий детский смех пробрал её всю, заставляя совершенно по-детски, изогнувшись, повалиться на траву, "
+         e "барахтаясь от хохота руками и ногами. "
     
-        #show LW s06 at left with dissolve
+         show LW s06 at left with dissolve
     
-        e "Да, странное поведение для той, кто старше звёзд — думала Тихоня. "
-        e "Но комментировать было бы грубо."
-        e "Наконец, просмеявшись, она просто спросила."
+         e "Да, странное поведение для той, кто старше звёзд — думала Тихоня. "
+         e "Но комментировать было бы грубо."
+         e "Наконец, просмеявшись, она просто спросила."
     
-<<<<<<< HEAD
          show LW v03 at razgavor, left with dissolve
          show B at loposL onlayer sloi02
-=======
-        #show LW v03 at razgavor, left with dissolve
-        #show B at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- А как вас зовут?"
+         LW "- А как вас зовут?"
     
-<<<<<<< HEAD
          show LW v02 at left with dissolve
          hide B onlayer sloi02
     
          show CC r at razgavor, center with dissolve
          show S02 at loposC onlayer sloi02
-=======
-        #show LW v02 at left with dissolve
-        #hide B onlayer demo
     
-        #show CC r at razgavor, center with dissolve
-        #show S02 at loposC onlayer demo
->>>>>>> AngelRanga
+         CC "- Меня?.. {w=1}Можешь называть меня Син-Син. "
     
-        CC "- Меня?.. {w=1}Можешь называть меня Син-Син. "
-    
-<<<<<<< HEAD
          show CC smail 02 at center with dissolve
          hide S02 onlayer sloi02
          show LW s15 at razgavor, left with dissolve
          show D at loposL onlayer sloi02
-=======
-        #show CC smail 02 at center with dissolve
-        #hide S02 onlayer demo
-        #show LW s15 at razgavor, left with dissolve
-        #show D at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Син-Син? А что это значит?"
+         LW "- Син-Син? А что это значит?"
     
-<<<<<<< HEAD
          show LW s03 at left with dissolve
          hide D onlayer sloi02
          show CC smail 01 at center with dissolve
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          show SHT at loposR onlayer dexm
-=======
-        #show LW s03 at left with dissolve
-        #hide D onlayer demo
-        #show CC smail 01 at center with dissolve
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #show SHT at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Не доставай её, Туфелька."
+         HM "- Не доставай её, Туфелька."
     
-<<<<<<< HEAD
          show LW v01 at left with dissolve
          show HM s04 at right onlayer sloi01 with dissolve
          hide SHT onlayer dexm
-=======
-        #show LW v01 at left with dissolve
-        #show HM s04 at right onlayer xra with dissolve
-        #hide SHT onlayer dexm
->>>>>>> AngelRanga
     
-        e "Внезапно одёрнула её Наставница."
+         e "Внезапно одёрнула её Наставница."
     
-<<<<<<< HEAD
          show CC n at center with dissolve
          show LW s08 at left with dissolve
          show LW s15 at razgavor, left with dissolve
          show D at loposL onlayer sloi02
-=======
-        #show CC n at center with dissolve
-        #show LW s08 at left with dissolve
-        #show LW s15 at razgavor, left with dissolve
-        #show D at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- О! Простите!.."
+         LW "- О! Простите!.."
     
-<<<<<<< HEAD
          show LW s06 at left with dissolve
          hide D onlayer sloi02
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show GI at loposR onlayer dexm
-=======
-        #show LW s06 at left with dissolve
-        #hide D onlayer demo
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show GI at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Ну давайте собираться. "
+         HM "- Ну давайте собираться. "
     
-<<<<<<< HEAD
          show HM r02 at razgavor, right onlayer sloi01 with dissolve
          hide GI onlayer dexm
          show TC at loposR onlayer dexm
-=======
-        #show HM r02 at razgavor, right onlayer xra with dissolve
-        #hide GI onlayer dexm
-        #show TC at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "Не здесь же чай пить нам всем! "
+         HM "Не здесь же чай пить нам всем! "
     
-<<<<<<< HEAD
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
-=======
-        #show HM r03 at razgavor, right onlayer xra with dissolve
->>>>>>> AngelRanga
     
-        HM "А может — чего поинтереснее? "
+         HM "А может — чего поинтереснее? "
     
-<<<<<<< HEAD
          hide TC onlayer dexm
          show HM n at right onlayer sloi01 with dissolve
          $ renpy.pause(1.0)
          show HM s06 at right onlayer sloi01 with dissolve
          $ renpy.pause(0.5)
          show HM n at right onlayer sloi01 with dissolve
-=======
-        #hide TC onlayer dexm
-        #show HM n at right onlayer xra with dissolve
-        #$ renpy.pause(1.0)
-        #show HM s06 at right onlayer xra with dissolve
-        #$ renpy.pause(0.5)
-        #show HM n at right onlayer xra with dissolve
->>>>>>> AngelRanga
     
-        e "Подмигнула наставница Син-Син."
+         e "Подмигнула наставница Син-Син."
     
-<<<<<<< HEAD
          show LW r at razgavor, left with dissolve
          show VP at loposL onlayer sloi02
-=======
-        #show LW r at razgavor, left with dissolve
-        #show VP at loposL onlayer demo
->>>>>>> AngelRanga
     
-        LW "- Поинтереснее?{w=1} Это я люблю!"
+         LW "- Поинтереснее?{w=1} Это я люблю!"
     
-<<<<<<< HEAD
          show LW s16 at left with dissolve
          hide VP onlayer sloi02
          show HM r03 at razgavor, right onlayer sloi01 with dissolve
          show S02 at loposR onlayer dexm
-=======
-        #show LW s16 at left with dissolve
-        #hide VP onlayer demo
-        #show HM r03 at razgavor, right onlayer xra with dissolve
-        #show S02 at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "- Вот только не надо ТЕБЕ налегать на это «поинтереснее». "
+         HM "- Вот только не надо ТЕБЕ налегать на это «поинтереснее». "
     
-<<<<<<< HEAD
          show LW n at left with dissolve
          show HM r01 at razgavor, right onlayer sloi01 with dissolve
          hide S02 onlayer dexm
          show GI at loposR onlayer dexm
-=======
-        #show LW n at left with dissolve
-        #show HM r01 at razgavor, right onlayer xra with dissolve
-        #hide S02 onlayer dexm
-        #show GI at loposR onlayer dexm
->>>>>>> AngelRanga
     
-        HM "Ведь ты же ещё только ученица!"
+         HM "Ведь ты же ещё только ученица!"
     
-<<<<<<< HEAD
          show HM s03 at right onlayer sloi01 with dissolve
-=======
-        #show HM s03 at right onlayer xra with dissolve
->>>>>>> AngelRanga
     
-        e "полушутя, а может — полусерьёзно ответила Наставница. "
+         e "полушутя, а может — полусерьёзно ответила Наставница. "
     
-<<<<<<< HEAD
          show HM n at right onlayer sloi01 with dissolve
          hide GI onlayer dexm
     
@@ -1930,48 +1305,31 @@ label game_over:
          hide CC n with moveoutright
          $ renpy.pause(0.8)
          hide LW n with moveoutright
-=======
-        #show HM n at right onlayer xra with dissolve
-        #hide GI onlayer dexm
     
-        #hide HM n onlayer xra
-        #show HM n at right
-        #$ renpy.pause(0.5)
-        #hide HM n at right
-        #hide plate at right
-        #with moveoutright
-        #$ renpy.pause(0.8)
-        #hide CC n with moveoutright
-        #$ renpy.pause(0.8)
-        #hide LW n with moveoutright
->>>>>>> AngelRanga
+         e "Они пошли..."
     
-        e "Они пошли..."
+         scene bg000b with leftiss
     
-        #scene bg000b with leftiss
+         e "...."
     
-        e "...."
+         scene bg000 with leftiss
+         scene bg128 with leftiss
     
-        #scene bg000 with leftiss
-        #scene bg128 with leftiss
+         e "Есть мир один, который лишь ягода на грозди миров огромного Великого Древа. "
+         e "Мир, в чём-то подобный своим соседям, в чём-то отличный. "
+         e "Но нам интересен не весь мир во всём его пёстром многообразии сотканный из галактических нитей - галактических кластеров, "
+         e "ибо одной мелкой песчинки, всего одной планеты было бы достаточно, чтобы достойно познакомить с ним. "
+         e "На планете той растет древа, а на древе том плод. "
+         e "И только тот, кто достоин его сможет… сорвет его с древа и вкусит. "
+         e "И тогда вкусивший познает суть вещей…"
+         e "Но будь осторожней Ночные ветры скоро прийдут и тогда…"
     
-        e "Есть мир один, который лишь ягода на грозди миров огромного Великого Древа. "
-        e "Мир, в чём-то подобный своим соседям, в чём-то отличный. "
-        e "Но нам интересен не весь мир во всём его пёстром многообразии сотканный из галактических нитей - галактических кластеров, "
-        e "ибо одной мелкой песчинки, всего одной планеты было бы достаточно, чтобы достойно познакомить с ним. "
-        e "На планете той растет древа, а на древе том плод. "
-        e "И только тот, кто достоин его сможет… сорвет его с древа и вкусит. "
-        e "И тогда вкусивший познает суть вещей…"
-        e "Но будь осторожней Ночные ветры скоро прийдут и тогда…"
+         stop music fadeout 1.5
+         scene bg000b with fade
     
-        #stop music fadeout 1.5
-        #scene bg000b with fade
-    
-        e "************************************"
-        e"Новое путеществие"
-        e "эпилог 3"
-
-        return
+         e "************************************"
+         e"Новое путеществие"
+         e "эпилог 3"
          
     elif ppoints  >= 4 and ppoints <= 5:
         
@@ -1979,8 +1337,6 @@ label game_over:
         #планета юготт
         
         e "Эпилог 4"
-
-        return
         
     elif ppoints >= 6 and ppoints <= 8:
         
@@ -1989,8 +1345,6 @@ label game_over:
         
         
         e "Эпилог 5"
-
-        return
         
     elif ppoints >= 9:
         
@@ -2022,11 +1376,7 @@ label game_over:
             
             pass
             
-<<<<<<< HEAD
         if PP == 1:
-=======
-        elif PP == 1:
->>>>>>> AngelRanga
             
             centered "{color=#7fbdbf}{i}«Красная магия»{/i}{/color}"
             centered "{color=#7fbdbf}{i}По ниточке, по ниточке{/i}{/color}"
@@ -2058,8 +1408,4 @@ label game_over:
             pass
         
         e "скрытий... Истинный Эпилог"
-
-      
-
-    return
         
