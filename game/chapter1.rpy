@@ -35,27 +35,8 @@ label chapter1:
 
         #$ renpy.pause(2.0)    
         #centered "{rotat}The Little Witch{/rotat}"
-        centered "{font=fonts/CeltesSP2.otf}{k=10}{color=#ff0000}{outlinecolor=#0000ff}{size=185}The Little Witch{/size}{/outlinecolor}{/color}{/k}{/font}"
+        #centered "{font=fonts/CeltesSP2.otf}{k=10}{color=#ff0000}{outlinecolor=#0000ff}{size=185}The Little Witch{/size}{/outlinecolor}{/color}{/k}{/font}"
         #centered "{shader=jitter:u__jitter=1.0, 3.0}The Little Witch{/shader}"
-
-
-        #$ renpy.pause(10.0)
-        centered "{cps=0}{color=#d16f6a}{i}Все имена, названия городов, стран, даты и прочие критерии изменены в соответствии с чьей-то совестью.\n 
-                Все совпадения с реальным миром, случайные или намеренные,\n 
-                являются всего лишь одним из бесчисленного множества вариантов развития событий,\n
-                существующих в многообразии миров Мультивселенной.\n
-                Мы не призываем никого к совершению противозаконных или аморальных действий,\n
-                предупреждаем об опасности необдуманных экспериментов со своим сознанием \n
-                и осуждаем немедицинское употребление любых наркотических и психоактивных веществ.\n
-                Аминь.{/i}{/color}{/cps}"
-
-## строки менаються на названия ВН. шрифт более крупный.
-## Допольнительные шейдерные эффекты примененные к тексту.
-##
-
-        #centered "{color=#ff0000}{b}{size=+8}Иллюзорные Записки Маленькой Ведьмы{/size}{/b}{/color}"
-    
-        #$ renpy.pause(2.0)
 
         call chapter_01_splashscr
 
