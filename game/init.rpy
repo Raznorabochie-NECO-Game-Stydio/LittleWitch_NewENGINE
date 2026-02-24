@@ -1226,7 +1226,6 @@ style typewr is text:
     color "#ffffff"
     font "gui/fonts/DS-Moster.ttf"
 
-
 #задаем дополнителные звуковые каналы
 #renpy.music.register_channel ("nature", "sound", loop=True)
 #renpy.music.register_channel ("natu", "sound", loop=True)
