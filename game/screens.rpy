@@ -113,7 +113,7 @@ screen say(who, what):
     ## По стандарту не показывается на варианте для мобильных устройств — мало
     ## места.
     if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
+        add SideImage() xalign 0.0 yalign 1.0 yoffset 50
 
 
 ## Делает namebox доступным для стилизации через объект Character.
@@ -144,7 +144,7 @@ style namebox:
     ypos gui.name_ypos
     ysize gui.namebox_height
 
-    background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    background Frame("gui/ramka.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
     padding gui.namebox_borders.padding
 
 style say_label:
@@ -261,6 +261,10 @@ screen quick_menu():
 ## Данный код гарантирует, что экран быстрого меню будет показан в игре в любое
 ## время, если только игрок не скроет интерфейс.
 init python:
+<<<<<<< HEAD
+=======
+    #config.overlay_screens.append("quick_menu")
+>>>>>>> AngelRanga
     if persistent.QMenu == True:
         config.overlay_screens.append("quick_menu")
     else:
@@ -717,6 +721,10 @@ style slot_button_text:
 ## Экран настроек позволяет игроку настраивать игру под себя.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
+<<<<<<< HEAD
+=======
+
+>>>>>>> AngelRanga
 init python:
     class OneTimeReload(Action):
         def __init__(self):
@@ -730,7 +738,12 @@ init python:
         
         def get_sensitive(self):
             return not self.used
+<<<<<<< HEAD
             
+=======
+
+
+>>>>>>> AngelRanga
 screen preferences():
 
     tag menu
@@ -763,6 +776,12 @@ screen preferences():
                     textbutton _("Есть") action [SetVariable("persistent.QMenu", True), OneTimeReload()]
                     textbutton _("Нету") action [SetVariable("persistent.QMenu", False), OneTimeReload()]
 
+
+                vbox:
+                    style_prefix "radio"
+                    label _("Быстрое меню")
+                    textbutton _("Есть") action [SetVariable("persistent.QMenu", True), OneTimeReload()]
+                    textbutton _("Нету") action [SetVariable("persistent.QMenu", False), OneTimeReload()]
 
                 ## Дополнительные vbox'ы типа "radio_pref" или "check_pref"
                 ## могут быть добавлены сюда для добавления новых настроек.
