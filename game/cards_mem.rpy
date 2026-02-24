@@ -50,7 +50,7 @@ init python:
             values_list.append('empty')
 
 # экран игры
-screen memo_scr:
+screen memo_scr():
     # таймер    
     timer 1.0 action If (memo_timer > 1, SetVariable("memo_timer", memo_timer - 1), Jump("memo_game_lose") ) repeat True
     # поле

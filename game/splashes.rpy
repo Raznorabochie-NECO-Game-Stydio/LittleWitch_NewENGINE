@@ -1,22 +1,7 @@
 label splashscreen:
-<<<<<<< HEAD
-    scene start_splash 
-    $ renpy.pause(1.5)
-    show text "{=typewr}{color=#f0f0f0}{size=65}NECO Game Stydio{/size}{/color}{/}" with Dissolve(1.5)
-    $ renpy.pause(3)
-    hide text with dissolve
-    $ renpy.pause(1.5)
-    show text "{=typewr}{color=#f0f0f0}{size=65}Little Witch{/size}{/color}{/}" with Dissolve(1.5)
-    $ renpy.pause(3)
-    hide text with dissolve
-    $ renpy.pause(1.5)
-    show text "{=typewr}{color=#f0f0f0}{size=20}Все имена, названия городов, стран, даты и прочие критерии изменены в соответствии с чьей-то совестью. \n Все совпадения с реальным миром, случайные или намеренные, являются всего лишь одним из бесчисленного множества вариантов развития событий, существующих в многообразии миров Мультивселенной. \n Мы не призываем никого к совершению противозаконных или аморальных действий, предупреждаем об опасности необдуманных экспериментов со своим сознанием и осуждаем немедицинское употребление любых наркотических и психоактивных веществ.{/size}{/color}{/}" with Dissolve(1.5)
-=======
-    # MOKOt
     scene start_splash 
     $ renpy.pause(1.5)
     show text "{=typewr}{color=#909090}{size=65}NECO Game Stydio{/size}{/color}{/}" with Dissolve(1.5)
->>>>>>> AngelRanga
     $ renpy.pause(3)
     hide text with dissolve
     $ renpy.pause(1.5)
@@ -128,41 +113,26 @@ screen chapt_splashscr_01(line):
 # text_font = "GOST_A.ttf"
 
 label chapt0_splashscr:
-<<<<<<< HEAD
-    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=65}Привет, путник!{/size}{/font}")
-=======
+
     show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=65}Привет, путник!{/size}{/font}")
->>>>>>> AngelRanga
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-<<<<<<< HEAD
-    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=60}Ты забрёл в мои туманные сны, где звёзды шепчут древние тайны.{/size}{/font}")
-=======
     show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=60}Ты забрёл в мои туманные сны, где звёзды шепчут древние тайны.{/size}{/font}")
->>>>>>> AngelRanga
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-<<<<<<< HEAD
-    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=65}Расскажи, что привело тебя к Ведьме измерений?{/size}{/font}")
-=======
     show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=65}Расскажи, что привело тебя к Ведьме измерений?{/size}{/font}")
->>>>>>> AngelRanga
     with dissolve
     pause 4.0
     hide screen chapt_splashscr
     with dissolve
 
-<<<<<<< HEAD
-    show screen chapt_splashscr("{font=/gui/fonts/CeltesSP2.otf}{size=65}Может, вместе мы разгадаем загадки, скрытые в алых снах.{/size}{/font}")
-=======
     show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=65}Может, вместе мы разгадаем загадки, скрытые в алых снах.{/size}{/font}")
->>>>>>> AngelRanga
     with dissolve
     pause 4.0 # Дольше на последней строке
     hide screen chapt_splashscr
@@ -264,18 +234,6 @@ label chapt_01_1_splashscr:
     show screen chapt_splashscr_01("Кругом-кругом с ними кружись\n Давай-давай, ведь уже все собрались\n Кругом-кругом кружатся все,\n В страну фантазий тут все собрались.")
     with dissolve
     pause 8.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    return
-
-#Эпиграф первой главы доп.
-
-label chapt_01_2_splashscr:
-
-    show screen chapt_splashscr_01("Когда вечности суть я познала сама,\n Я тебя здесь уже найти не смогла,\n В тумане снов своих плывёт\n Ярких звёзд водоворот.\n Сон единый я создам, о цветах в серебряной ночи,\n Как тени этого яркого мира засыпают вечным сном.")
-    with dissolve
-    pause 10.0
     hide screen chapt_splashscr_01
     with dissolve
 

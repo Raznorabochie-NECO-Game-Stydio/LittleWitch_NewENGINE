@@ -261,10 +261,7 @@ screen quick_menu():
 ## Данный код гарантирует, что экран быстрого меню будет показан в игре в любое
 ## время, если только игрок не скроет интерфейс.
 init python:
-<<<<<<< HEAD
-=======
-    #config.overlay_screens.append("quick_menu")
->>>>>>> AngelRanga
+
     if persistent.QMenu == True:
         config.overlay_screens.append("quick_menu")
     else:
@@ -721,10 +718,7 @@ style slot_button_text:
 ## Экран настроек позволяет игроку настраивать игру под себя.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
-<<<<<<< HEAD
-=======
 
->>>>>>> AngelRanga
 init python:
     class OneTimeReload(Action):
         def __init__(self):
@@ -738,12 +732,7 @@ init python:
         
         def get_sensitive(self):
             return not self.used
-<<<<<<< HEAD
-            
-=======
 
-
->>>>>>> AngelRanga
 screen preferences():
 
     tag menu

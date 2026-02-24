@@ -1,24 +1,15 @@
 # THIS_PATH is defined in chess_displayable.rpy
 # define THIS_PATH = '00-chess-engine/'
-<<<<<<< HEAD
-=======
-# MOKOt
->>>>>>> AngelRanga
-
 init python:
     # for importing libraries
     import_dir = os.path.join(renpy.config.gamedir, THIS_PATH, 'python-packages')
     # to prevent STOCKFISH_ENGINE from getting stored and pickled
     global_objects = {}
-<<<<<<< HEAD
-    
-=======
 
 #шейдеры
 #define config.default_textshader = True
 #$ renpy.register_text_shader()
 
-# MOKOt
 #генератор случайных чисел
 
 
@@ -27,7 +18,6 @@ $ gtm = 0
 $ player_guess = 0
 #$ mci = 0
 
-   
 #Генерат позиции(Де)
 # MOKOt
 init python:
@@ -278,8 +268,6 @@ $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 #renpy.music.register_channel ("natu", "sound", loop=True)
 #renpy.music.register_channel ("natu_fon", "sound", loop=True)
 
-
->>>>>>> AngelRanga
 #ПЕРСОНАЖИ
 #NVL
 
@@ -435,11 +423,7 @@ define LO = Character('Лохматый',
 
 define e = Character(None, 
                         what_size = 35, 
-<<<<<<< HEAD
-                        what_font = "gui/fonts/segoescript.ttf", 
-=======
                         what_font = "fonts/segoescript.ttf", 
->>>>>>> AngelRanga
                         what_outlines = [(3, "#0008", 2, 2), (3, "#0068b3", 0, 0)], 
                         what_layout = "subtitle", 
                         window_background="#00000000",what_xalign = 0.5, 
@@ -1056,7 +1040,7 @@ image Cainic = im.FactorScale("images/logo/Cainic.png", 1.7, 1.7)
 image Mil_01 = im.FactorScale(im.Alpha("images/logo/Milnii_01.png", 0.9), 1.6, 1.6)
     
 # Объявляем изображение магического круга.
-image magic_circle = "images/BG/magic.png"
+image magic_circle = "images/texture/magic.png"
     
     # эффекты тумана и освящения
 image Alaya_01 = im.Alpha("images/Logo/Alaya_IU.png", 0.5)
@@ -1242,7 +1226,7 @@ image start_splash = Transform(
 #МУЗЫКА
 
 #ЗВУКИ
-
+define audio.BGM_008 = "/audio/sound/BGM_008.mp3"
 #ПЕРЕХОДЫ
 
 
@@ -1426,7 +1410,6 @@ define color_01 = im.matrix(
                     0, 0, 0, 1, 0 ])
 
 #МЕНЮ ЭКСТРА
-# MOKOt
 
 image extra neutral:
     "images/sprites/xtra/001.png"
@@ -1438,191 +1421,5 @@ image extra neutral:
     "images/sprites/xtra/004.png"
     pause 0.1
     repeat
-<<<<<<< HEAD
-#ПЕРЕМЕННЫЕ
-
-# Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
-# влияющая на то какая концовка послесловия будет продемонстрированная игроку по окончанию игры.
-define ppoints = 0
-define PP = 0
-
-# Переменная нужная для того чтобы определит, сказал ли персонаж свое имя или нет.
-define DollCam = False
-
-# Переменная определяет имеется у игрока доступ в данную комнату или нет.
-define WCRoom = False
-define WCC = False
-
-# Переменная, которая меняется при посещении комнате, и впоследствии определяет, какая сцена будет показана игроку.
-define Wite = False
-
-#Переменные для доступа на скрытый этаж, и скрытую историю.
-define enigma_01 = False
-define enigma_02 = False
-
-$ brightness_opacity = brightness * opacity
-$ fraktal_04_opacity = fraktal_04 * opacity
-$ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
-
-# Переменные от 00 до ХХ служащие для определения посещения комнат.
-define Room_01 = False
-define Room_02 = False
-define Room_03 = False
-define Room_04 = False
-define Room_05 = False
-define Room_06 = False
-define Room_07 = False
-define Room_08 = False
-define Room_09 = False
-define Room_10 = False
-define Room_11 = False
-define Room_12 = False
-define Room_13 = False
-define Room_14 = False
-define Room_15 = False
-define Room_16 = False
-define Room_17 = False
-define Room_18 = False
-define Room_19 = False
-define Room_20 = False
-define Room_21 = False
-define Room_22 = False
-define Room_23 = False
-define Room_24 = False
-define Room_25 = False
-define Room_26 = False
-define Room_27 = False
-define Room_28 = False
-define Room_29 = False
-define Room_30 = False
-
-# переменные необходимые как метки для определения посещения разных купе в вагона
-define KupeRoom01 = False
-define KupeRoom02 = False
-define KupeRoom03 = False
-define KupeRoom04 = False
-define KupeRoom05 = False
-
-# Переменная нужная для определения того был ли прочитан журнал лежащий в почтовом ящике.
-define Jurnal = False
-define Key = False
-define Key_01 = False
-define Key_02 = False
-define Key_03 = False
-define Key_04 = False
-define Key_05 = False
-define Key_06 = False
-
-# Переменная необхадимая чтобы определит пошла ли МВ по следам, или рещила сночала осмотрет осталные этожи.
-define traces_01 = False
-
-#переменная нужная для определения если ГГ побывала в дополнительном блоке четвертой главы
-define Under_01 = False
-
-# Переменная необходимая для определения того что МВ взяла пульт от телевизора
-define remote_controller = False
-
-#переменная необходимая для определения быль ли просмотрен определенный телевизор
-define TV_01 = False
-
-#генератор случайных чисел
-#$ ran_dig = renpy.random.choice([1,6])
-#$ gtm = 0
-#$ player_guess = 0
-
-# mci(MENU CHOICE ID)
-init python:
-    import rgen
-    mci = rgen.rgen()
-
-python:
-    import rgen
-    
-    class AutoMCI:
-        def __init__(self):
-            self.current = None
-        
-        def __call__(self):
-            self.current = rgen.rgen()
-            return self.current
-    
-    mci = AutoMCI()
-    
-#Генерат позиции(Де)
-init python:
-    from random import uniform
-    import math
-    #Это даст нам корды и границы безопасной зоны
-    def get_coords():
-        nx, ny = uniform(0, 1920), uniform(0, 1080)
-        xf = uniform(min(nx, -ny), max(nx, -ny))
-        yf = uniform(min(-nx, ny), max(-nx, ny))
-        return int(xf), int(yf)
-        
-    #Это докидывает конфиг для движения
-    def create_mover():
-        x = 960
-        y = 540
-        target_x = 960
-        target_y = 540
-        start_x = 960
-        start_y = 540
-        progress = 1.0
-        duration = 1.0
-        start_time = 0
-        #ТРОГАТЬ ТУТА
-        speed = 400
-        #ЭТО СКОРОСТЬ
-        
-        #А это само двигло
-        def move_func(trans, st, at):
-            nonlocal x, y, target_x, target_y, start_x, start_y, progress, duration, start_time
-            
-            if progress >= 1.0:
-                start_x, start_y = x, y
-                target_x, target_y = get_coords()
-                
-                dx = target_x - start_x
-                dy = target_y - start_y
-                distance = math.sqrt(dx*dx + dy*dy)
-                duration = max(0.5, distance / speed)
-                progress = 0
-                start_time = st
-                
-            elapsed = st - start_time
-            progress = min(1.0, elapsed / duration)
-            
-            if progress < 1.0:
-                x = start_x + (target_x - start_x) * progress
-                y = start_y + (target_y - start_y) * progress
-            else:
-                x, y = target_x, target_y
-            
-            trans.pos = (int(x), int(y))
-            return 0
-        
-        return move_func
-        
-#это чтоб оно шароёбилось
-transform smooth_random_move:
-    function create_mover()
-#Это тестовое, пока оставлю
-#transform test_transform():
-#        pos (0, 0)
-
-#ШРИФТЫ(Задам стилем ибо могу)
-#СТИЛЬ - Чепятная машинка(typewriter)
-style typewr is text:
-    size 30
-    color "#ffffff"
-    font "gui/fonts/DS-Moster.ttf"
-
-#задаем дополнителные звуковые каналы
-#renpy.music.register_channel ("nature", "sound", loop=True)
-#renpy.music.register_channel ("natu", "sound", loop=True)
-#renpy.music.register_channel ("natu_fon", "sound", loop=True)
-=======
-
 
 #КОНЦОВКИ
->>>>>>> AngelRanga
