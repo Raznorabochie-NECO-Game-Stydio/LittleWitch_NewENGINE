@@ -204,7 +204,7 @@ label Underthearch:
         e "А потом и за трубу буржуйки, торчавшую из разбитой витрины, из нее шел дым."
 
         centered "{cps=0}{font=fonts/Arial.ttf}{size=+20}{i}«Ремонт Солнечных Кукол». {/i}{/size}{/font}\n
-                    {font=fonts/TrixieCyr-Light.ttf}«iDolls и TDolls»{/fond}\n
+                    {font=fonts/TrixieCyr-Light.ttf}«iDolls и TDolls»{/font}\n
                     {font=fonts/DS-Moster.ttf} «быстро, качественно, {s}не{/s}дорого»{/font}{/cps}"
 
         centered "{cps=0}{font=fonts/Arial.ttf}{size=+20}{i}«Улица Азазело» {/i}{/size}{/font}{/cps}"
