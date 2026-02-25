@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## Версия игры.
 
-define config.version = "0.0.4.2"
+define config.version = "0.0.4.5"
 
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
@@ -32,7 +32,7 @@ define config.version = "0.0.4.2"
 define gui.about = _p("""
 Автор, Главный кодер, Художник - AngelRanga\n
 Бета ридер, соавтор - Saitar1337\n
-Кодер поменьше - M0K0t\n
+Запертый в подвале кодер - M0K0t\n
 Используемые материалы принадлежат их правообладателям.\n
 Шахматный движок принадлежит его автору - {a=https://lynnzheng.netlify.app/}Линн Женг{/a} по \n
 {a=https://github.com/RuolinZheng08/renpy-chess/?tab=MIT-1-ov-file#}лицензии MIT{/a}.
