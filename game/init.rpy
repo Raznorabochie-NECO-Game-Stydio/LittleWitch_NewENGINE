@@ -113,6 +113,97 @@ python:
 #$ mci = rgen.rgen()
 #define Cha_01 = mci
 
+#карты таро
+# MOKOt
+
+screen my_text_screen(line):
+    frame:
+        #Вот это твоё положение и размер рамки
+        xalign 0.6
+        yalign 0.1
+        xsize 1200
+        
+        # Укажи путь к фону
+        background im.FactorScale("images/my_frame_bg.png", 1.7) 
+        
+        # Добавь отступы, чтобы текст не прилипал к краям картинки
+        padding (20, 20) 
+        
+        text line:
+            size 35 
+            italic False
+            #bold True
+            #text_align 0.5
+
+#старшие арканы
+
+image SAT_01 = "images/cardgame/card_A.png"
+image SAT_02 = "images/cardgame/card_B.png"
+image SAT_03 = "images/cardgame/card_C.png"
+image SAT_04 = "images/cardgame/card_D.png"
+image SAT_05 = "images/cardgame/card_E.png"
+image SAT_06 = "images/cardgame/card_F.png"
+image SAT_07 = "images/cardgame/card_G.png"
+image SAT_08 = "images/cardgame/card_H.png"
+image SAT_09 = "images/cardgame/card_I.png"
+image SAT_10 = "images/cardgame/card_J.png"
+image SAT_11 = "images/cardgame/card_K.png"
+image SAT_12 = "images/cardgame/card_L.png"
+image SAT_13 = "images/cardgame/card_M.png"
+image SAT_14 = "images/cardgame/card_N.png"
+image SAT_15 = "images/cardgame/card_O.png"
+image SAT_16 = "images/cardgame/card_P.png"
+image SAT_17 = "images/cardgame/card_R.png"
+image SAT_18 = "images/cardgame/card_S.png"
+image SAT_19 = "images/cardgame/card_T.png"
+image SAT_20 = "images/cardgame/card_U.png"
+image SAT_21 = "images/cardgame/card_V.png"
+image SAT_22 = "images/cardgame/card_Y.png"
+
+
+#младщие арканы
+
+image MAT_01 = im.FactorScale("images/minor_arcana/01.png", 2.9)
+image MAT_02 = im.FactorScale("images/minor_arcana/02.png", 2.9)
+image MAT_03 = im.FactorScale("images/minor_arcana/03.png", 2.9)
+image MAT_04 = im.FactorScale("images/minor_arcana/04.png", 2.9)
+image MAT_05 = im.FactorScale("images/minor_arcana/05.png", 2.9)
+image MAT_06 = im.FactorScale("images/minor_arcana/06.png", 2.9)
+image MAT_07 = im.FactorScale("images/minor_arcana/07.png", 2.9)
+image MAT_08 = im.FactorScale("images/minor_arcana/08.png", 2.9)
+image MAT_09 = im.FactorScale("images/minor_arcana/09.png", 2.9)
+image MAT_10 = im.FactorScale("images/minor_arcana/10.png", 2.9)
+image MAT_11 = im.FactorScale("images/minor_arcana/11.png", 2.9)
+image MAT_12 = im.FactorScale("images/minor_arcana/12.png", 2.9)
+image MAT_13 = im.FactorScale("images/minor_arcana/13.png", 2.9)
+image MAT_14 = im.FactorScale("images/minor_arcana/14.png", 2.9)
+image MAT_15 = im.FactorScale("images/minor_arcana/15.png", 2.9)
+image MAT_16 = im.FactorScale("images/minor_arcana/16.png", 2.9)
+image MAT_17 = im.FactorScale("images/minor_arcana/17.png", 2.9)
+image MAT_18 = im.FactorScale("images/minor_arcana/18.png", 2.9)
+image MAT_19 = im.FactorScale("images/minor_arcana/19.png", 2.9)
+image MAT_20 = im.FactorScale("images/minor_arcana/20.png", 2.9)
+image MAT_21 = im.FactorScale("images/minor_arcana/21.png", 2.9)
+image MAT_22 = im.FactorScale("images/minor_arcana/22.png", 2.9)
+image MAT_23 = im.FactorScale("images/minor_arcana/23.png", 2.9)
+image MAT_24 = im.FactorScale("images/minor_arcana/24.png", 2.9)
+image MAT_25 = im.FactorScale("images/minor_arcana/25.png", 2.9)
+image MAT_26 = im.FactorScale("images/minor_arcana/26.png", 2.9)
+image MAT_27 = im.FactorScale("images/minor_arcana/27.png", 2.9)
+image MAT_28 = im.FactorScale("images/minor_arcana/28.png", 2.9)
+image MAT_29 = im.FactorScale("images/minor_arcana/29.png", 2.9)
+image MAT_30 = im.FactorScale("images/minor_arcana/30.png", 2.9)
+image MAT_31 = im.FactorScale("images/minor_arcana/31.png", 2.9)
+image MAT_32 = im.FactorScale("images/minor_arcana/32.png", 2.9)
+image MAT_33 = im.FactorScale("images/minor_arcana/33.png", 2.9)
+image MAT_34 = im.FactorScale("images/minor_arcana/34.png", 2.9)
+image MAT_35 = im.FactorScale("images/minor_arcana/35.png", 2.9)
+image MAT_36 = im.FactorScale("images/minor_arcana/36.png", 2.9)
+image MAT_37 = im.FactorScale("images/minor_arcana/37.png", 2.9)
+image MAT_38 = im.FactorScale("images/minor_arcana/38.png", 2.9)
+image MAT_39 = im.FactorScale("images/minor_arcana/39.png", 2.9)
+image MAT_40 = im.FactorScale("images/minor_arcana/40.png", 2.9)
+
 #ПЕРЕМЕННЫЕ
 
 # Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
@@ -680,7 +771,7 @@ image bg0108 = "images/BG/0097.jpg"
 image bg0109 = "images/BG/0098.jpg"
 #image F_masked = im.AlphaMask("Mask.png", "pod.png")
 
-
+# текстуры
 #region бумага
 image peper_01 = Transform(
     Composite(
@@ -713,6 +804,16 @@ image peper_03 = Transform(
 )
 
 #endregion Region name
+
+#цветочные
+
+image floralt_01 = Composite(
+        (1920, 1080),
+        (0, 0), Solid("#000000"),
+        (0, 0), im.Alpha("images/texture/floral_texture_01.jpg", 0.9),
+        (0, 0), im.Sepia(im.Alpha("images/texture/muar_01.png", 0.3))
+    )
+    
     
 #концовки
 
