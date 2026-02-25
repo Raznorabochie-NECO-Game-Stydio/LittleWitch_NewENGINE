@@ -187,7 +187,7 @@ label chapter1:
 ##
 
 
-        hide  LW_NormBust_01 onlayer sloi02
+        hide LW_NormBust_01 onlayer sloi02
         show LW_NakBust_a_04 at screen_center_01 onlayer sloi02 
         with dissolve
         #show C at loposC onlayer sloi03
