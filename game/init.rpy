@@ -500,17 +500,28 @@ image bg0005 = Animation(
 image bg0006 = "images/BG/0006.jpg"
 image bg0007 = "images/BG/0007.jpg"
 image bg0008 = "images/BG/0008.jpg"
-image a0008 = im.MatrixColor("images/BG/0008.jpg", im.matrix.invert())
+image a0008:
+    "images/BG/0008.jpg"
+    matrixcolor InvertMatrix(1.0)
 image bg0009 = "images/BG/0009.jpg"
 image bg0010 = "images/BG/0010.jpg"
 image bg0011 = "images/BG/0011.jpg"
 image bg0012 = "images/BG/0012.jpg"
 image bg0013 = "images/BG/0013.jpg"
-image bg0014 = anim.TransitionAnimation(
-    "images/BG/0014.jpg", 3, dissA,
-    "images/BG/0015.jpg", 3, dissA,
-    "images/BG/0016.jpg", 3, dissA
-    )
+image bg0014:
+    "images/BG/0014.jpg"
+    pause 3.0
+    
+    "images/BG/0015.jpg" with dissA
+    pause 3.0
+    
+    "images/BG/0016.jpg" with dissA
+    pause 3.0
+    
+    "images/BG/0014.jpg" with dissA
+    
+    repeat
+
 image bg0015 = "images/BG/0014.jpg"
 image bg0016 = "images/BG/0015.jpg"
 image bg0017 = "images/BG/0016.jpg"
@@ -530,14 +541,22 @@ image bg0030 = "images/BG/0029.jpg"
 image bg0031 = "images/BG/0030.jpg"
 image bg0032 = "images/BG/0031.jpg"
 image bg0033 = "images/BG/0032.jpg"
-#image bg0034 = "images/BG/0033.jpg"
-image bg0034 = Composite(
-    (1920, 1080),
-    (0, 0), "images/BG/0033.jpg",
-    (0, 0), im.Alpha("images/BG/0033b.png", 0.4),
-    (0, 0), im.Alpha("images/BG/0033a.png", 0.6),
-    (0, 0), im.MatrixColor("images/BG/0033c.png", color_01)
-    )
+image bg0034:
+    contains:
+        "images/BG/0033.jpg"
+        
+    contains:
+        "images/BG/0033b.png"
+        alpha 0.4
+
+    contains:
+        "images/BG/0033a.png"
+        alpha 0.6
+
+    contains:
+        "images/BG/0033c.png"
+        matrixcolor color_01
+
 image bg0036 = "images/BG/0035.jpg"
 image bg0037 = "images/BG/0036.jpg"
 image bg0038 = "images/BG/0037.jpg"
@@ -548,23 +567,30 @@ image a0041 = Composite(
     (0, 0), "images/BG/0038a.jpg",
     (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
     )
-image bg0041 = anim.TransitionAnimation(
-    im.MatrixColor(im.Composite(
-        (1920, 1080),
-        (0, 0), "images/BG/0038a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-        ), im.matrix.brightness (-.80)), 0.5, dissolve,
-    im.MatrixColor(im.Composite(
-        (1920, 1080),
-        (0, 0), "images/BG/0038a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-        ), im.matrix.brightness (-.50)), 0.5, dissolve,
-    im.MatrixColor(im.Composite(
-        (1920, 1080),
-        (0, 0), "images/BG/0038a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-        ), im.matrix.brightness (0)), 0.5, dissolve,
-    )
+
+image bg0041:
+    contains:
+        "images/BG/0038a.jpg"
+        parallel:
+            matrixcolor BrightnessMatrix(-0.5)
+            easein 1.5 matrixcolor BrightnessMatrix(-0.35)
+            pause 0.7
+            easeout 1.5 matrixcolor BrightnessMatrix(-0.5)
+            repeat
+    contains:
+        "Logo/Alaya_IU.png"
+        parallel:
+            alpha 0.2
+            ease 1.5 alpha 0.4
+            pause 0.7
+            ease 1.5 alpha 0.2
+            repeat
+        parallel:
+            matrixcolor BrightnessMatrix(-0.65)
+            easein 1.5 matrixcolor BrightnessMatrix(-0.45)
+            pause 0.7
+            easeout 1.5 matrixcolor BrightnessMatrix(-0.65)
+            repeat
     
 image bg0042 = "images/BG/0038a.jpg"
 image bg0043 = "images/BG/0039a.jpg"
@@ -658,7 +684,7 @@ image bg0097 = im.Composite((1280, 720),
     (0, 0), "images/BG/0071.jpg",
     (- 60, 150), "images/sprites/SLW/LW_slip_01.png"
     )
-image bg0098 = im.Composite((1280, 720),
+image bg0098 = im.Composite((1920, 720),
     (0, 0), "images/BG/0072.jpg",
     (- 60, 150), "images/sprites/SLW/LW_slip_01.png"
     )
@@ -1042,14 +1068,26 @@ image Mil_01 = im.FactorScale(im.Alpha("images/logo/Milnii_01.png", 0.9), 1.6, 1
 # Объявляем изображение магического круга.
 image magic_circle = "images/texture/magic.png"
     
-    # эффекты тумана и освящения
-image Alaya_01 = im.Alpha("images/Logo/Alaya_IU.png", 0.5)
-image Alaya_02 = im.Alpha("images/Logo/Alaya_IU_01.png", 0.5)
-image Alaya_03 = im.Alpha("images/Logo/Alaya_IU_02.png", 0.5)
-image Alaya_04 = im.Alpha("images/Logo/Alaya_IU_03.png", 0.5)
-image Alaya_05 = im.Alpha("images/Logo/Alaya_IU_04.png", 0.5)
-        
-
+# эффекты тумана и освящения
+image Alaya_01:
+    "images/Logo/Alaya_IU.png"
+    alpha 0.5
+    
+image Alaya_02:
+    "images/Logo/Alaya_IU_01.png"
+    alpha 0.5
+    
+image Alaya_03:
+    "images/Logo/Alaya_IU_02.png"
+    alpha 0.5
+    
+image Alaya_04:
+    "images/Logo/Alaya_IU_03.png"
+    alpha 0.5
+    
+image Alaya_05:
+    "images/Logo/Alaya_IU_04.png"
+    alpha 0.5
     
 # анимации природных явлений и прочих эффектов
 
@@ -1151,68 +1189,198 @@ image per = SnowBlossom(anim.Filmstrip(
     count=40, border=1, xspeed=(-10, -150), yspeed=(-100, -10), start=0,  fast=True
     )
     
-image bafly_01 = Animation(
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly01.png", inverted), (50, 50), (4, 1), 0.28),  1.0, 
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly01.png", fraktal_02), (50, 50), (4, 1), 0.28), 1.0, 
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly01.png", fraktal_01), (50, 50), (4, 1), 0.28), 1.0, 
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly01.png", fraktal_03), (50, 50), (4, 1), 0.28), 1.0
-    )
+image bafly_01:
+    parallel:
+        "images/Ani/baterfly01.png" crop (0, 0, 50, 50)
+        pause 0.28
+        "images/Ani/baterfly01.png" crop (50, 0, 50, 50)
+        pause 0.28
+        "images/Ani/baterfly01.png" crop (100, 0, 50, 50)
+        pause 0.28
+        "images/Ani/baterfly01.png" crop (150, 0, 50, 50)
+        pause 0.28
+        repeat
+
+    parallel:
+        matrixcolor inverted
+        pause 1.0
+        matrixcolor fraktal_02
+        pause 1.0
+        matrixcolor fraktal_01
+        pause 1.0
+        matrixcolor fraktal_03
+        pause 1.0
+        repeat
     
-image bafly_02 = Animation(
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly02.png", fraktal_01), (66, 50), (4, 1), 0.35), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly02.png", fraktal_03), (66, 50), (4, 1), 0.35), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly02.png", fraktal_02), (66, 50), (4, 1), 0.35), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly02.png", fraktal_04), (66, 50), (4, 1), 0.35), 1.0
-    )
+image bafly_02:
+    parallel:
+        "images/Ani/baterfly02.png" crop (0, 0, 66, 55)
+        pause 0.35
+        "images/Ani/baterfly02.png" crop (0, 0, 66, 55)
+        pause 0.35
+        "images/Ani/baterfly02.png" crop (0, 0, 66, 55)
+        pause 0.35
+        "images/Ani/baterfly02.png" crop (0, 0, 66, 55)
+        pause 0.35 
+        repeat
+        
+    parallel:
+        matrixcolor fraktal_01
+        pause 1.0
+        matrixcolor fraktal_03
+        pause 1.0
+        matrixcolor fraktal_02
+        pause 1.0
+        matrixcolor fraktal_04
+        pause 1.0
+        repeat
+        
+image bafly_03:
+    parallel:
+        "images/Ani/baterfly03.png" crop (0, 0, 66, 55)
+        pause 0.30
+        "images/Ani/baterfly03.png" crop (0, 0, 66, 55)
+        pause 0.30
+        "images/Ani/baterfly03.png" crop (0, 0, 66, 55)
+        pause 0.30
+        "images/Ani/baterfly03.png" crop (0, 0, 66, 55)
+        pause 0.30
+        repeat
+        
+    parallel:
+        matrixcolor fraktal_04
+        pause 1.0
+        matrixcolor fraktal_01
+        pause 1.0
+        matrixcolor fraktal_03
+        pause 1.0
+        matrixcolor inverted
+        pause 1.0
+        repeat
+        
+image bafly_04:
+    parallel:
+        "images/Ani/baterfly03.png" crop (0, 0, 50, 50)
+        pause 0.33
+        "images/Ani/baterfly03.png" crop (0, 0, 50, 50)
+        pause 0.33
+        "images/Ani/baterfly03.png" crop (0, 0, 50, 50)
+        pause 0.33
+        "images/Ani/baterfly03.png" crop (0, 0, 50, 50)
+        pause 0.33
+        repeat
+        
+    parallel:
+        matrixcolor brightness
+        pause 1.0
+        matrixcolor fraktal_04
+        pause 1.0
+        matrixcolor fraktal_01
+        pause 1.0
+        matrixcolor opacity
+        pause 1.0
+        repeat
     
-image bafly_03 = Animation(
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly03.png", fraktal_04), (66, 50), (4, 1), 0.30), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly03.png", fraktal_01), (66, 50), (4, 1), 0.30), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly03.png", fraktal_03), (66, 50), (4, 1), 0.30), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly03.png", inverted), (66, 50), (4, 1), 0.30), 1.0
-    )
-   
-image bafly_04 = Animation(
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly04.png", brightness), (50, 50), (4, 1), 0.33), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly04.png", fraktal_04), (50, 50), (4, 1), 0.33), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly04.png", fraktal_01), (50, 50), (4, 1), 0.33), 1.0,
-    anim.Filmstrip(im.MatrixColor("images/Ani/baterfly04.png", opacity), (50, 50), (4, 1), 0.33), 1.0
-    )
+image sb:
+    "images/Ani/s01.png"
+    pause 1.5
+    "images/Ani/s02.png"
+    pause 1.5
+    "images/Ani/s03.png"
+    pause 1.5
+    "images/Ani/s04.png"
+    pause 1.5
+    "images/Ani/s05.png"
+    pause 1.5
+    "images/Ani/s06.png"
+    pause 1.5
+    repeat
     
-image sb = Animation(
-    "images/Ani/s01.png", 1.5,
-    "images/Ani/s02.png", 1.5,
-    "images/Ani/s03.png", 1.5,
-    "images/Ani/s04.png", 1.5,
-    "images/Ani/s05.png", 1.5,
-    "images/Ani/s06.png", 1.5
-    )
+image star_01:
+    alpha 0.35
+    parallel:
+        "images/Ani/star.png" crop (0, 0, 480, 300)
+        pause 0.5
+        "images/Ani/star.png" crop (480, 0, 480, 300)
+        pause 0.5
+        "images/Ani/star.png" crop (960, 0, 480, 300)
+        pause 0.5
+        "images/Ani/star.png" crop (1440, 0, 480, 300)
+        pause 0.5
+        "images/Ani/star.png" crop (1920, 0, 480, 300)
+        pause 0.5
+        repeat
+
+    parallel:
+        matrixcolor inverted
+        pause 1.0
+        matrixcolor fra
+        pause 1.0
+        matrixcolor frac
+        pause 1.0
+        matrixcolor fra
+        pause 1.0
+        repeat
     
-image star_01 = Animation(
-    anim.Filmstrip(im.Alpha("Ani/star.png", 0.35), (480,300), (5, 1), .50), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/star.png", 0.35), inverted), (480,300), (5, 1), .50), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/star.png", 0.35), fra), (480,300), (5, 1), .50), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/star.png", 0.35), frac), (480,300), (5, 1), .50), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/star.png", 0.35), fra), (480,300), (5, 1), .50), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/star.png", 0.35), inverted), (480,300), (5, 1), .50), 1.0
-    )
+image dim_animated:
+    # Кадр 1
+    "images/Ani/dim.png" crop (0, 0, 500, 500)
+    pause 0.2
+    # Кадр 2
+    "images/Ani/dim.png" crop (500, 0, 500, 500)
+    pause 0.2
+    # Кадр 3
+    "images/Ani/dim.png" crop (1000, 0, 500, 500)
+    pause 0.2
+    # Кадр 4
+    "images/Ani/dim.png" crop (1500, 0, 500, 500)
+    pause 0.2
     
-image dim = anim.Filmstrip("Ani/dim.png", (500, 500), (4, 1), .20)
+    repeat
+
     
-image dimCat = Animation(
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/dim.png", 0.75), inverted), (500,500), (4, 1), .20), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/dim.png", 0.75), fra), (500,500), (4, 1), .20), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/dim.png", 0.75), frac), (500,500), (4, 1), .20), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/dim.png", 0.75), fra), (500,500), (4, 1), .20), 1.0,
-    anim.Filmstrip(im.MatrixColor(im.Alpha("images/Ani/dim.png", 0.75), inverted), (500,500), (4, 1), .20), 1.0
-    )
+image dimCat:
+    # Общая прозрачность для всего образа (75%)
+    alpha 0.75
+
+    # ПАРАЛЛЕЛЬ 1: Анимация кадров (нарезка 4x1)
+    parallel:
+        "images/Ani/dim.png" crop (0, 0, 500, 500)
+        pause 0.20
+        "images/Ani/dim.png" crop (500, 0, 500, 500)
+        pause 0.20
+        "images/Ani/dim.png" crop (1000, 0, 500, 500)
+        pause 0.20
+        "images/Ani/dim.png" crop (1500, 0, 500, 500)
+        pause 0.20
+        repeat
+
+    # ПАРАЛЛЕЛЬ 2: Цикл смены цветов (матрицы)
+    parallel:
+        matrixcolor inverted
+        pause 1.0
+        matrixcolor fra
+        pause 1.0
+        matrixcolor frac
+        pause 1.0
+        matrixcolor fra
+        pause 1.0
+        matrixcolor inverted
+        pause 1.0
+        repeat
+
     
 image STU = anim.Filmstrip("images/styl/STU.png", (236, 600), (18, 1), .20)
     
 #анимация стрелок
-image send_left = anim.Filmstrip("images/Strit/send_01.png", (91, 33), (3, 1), .50)
-image send_right = anim.Filmstrip("images/Strit/send_02.png", (91, 33), (3, 1), .50)
-
+image send_left:
+    "images/Strit/send_01.png" crop (0, 0, 91, 33)
+    pause 0.50
+    
+image send_right:
+    "images/Strit/send_02.png" crop (0, 0, 91, 33)
+    pause 0.50
+    
 #СТАРТОВЫЙ СПЛЭШ
 image start_splash = Transform(
     Composite(
@@ -1343,71 +1511,82 @@ init:
     $ config.layers.insert(6, 'sloi06')
 
 #МАТРИЦЫ
-define brightness = im.matrix(
-                    [ 1, 0, 0, 0, .1,
-                    0, 1, 0, 0, .1,
-                    0, 0, 1, 0, .1,
-                    0, 0, 0, 1, 0 ])
+define brightness = Matrix([
+    1.0, 0.0, 0.0, 0.1,
+    0.0, 1.0, 0.0, 0.1,
+    0.0, 0.0, 1.0, 0.1,
+    0.0, 0.0, 0.0, 1.0
+    ])
     
-define opacity = im.matrix(
-                    [ 1, 0, 0, 0, 0,
-                    0, 1, 0, 0, 0,
-                    0, 0, 1, 0, 0,
-                    0, 0, 0, .5, 0 ])
+define opacity = Matrix([
+    1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0,
+    0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.5
+    ])
     
-define inverted = im.matrix(
-                    [ -1,  0,  0, 0, 1,
-                    0, -1,  0, 0, 1,
-                    0,  0, -1, 0, 1,
-                    0,  0,  0, 1, 0 ])
+define inverted = Matrix([
+    -1.0, 0.0, 0.0, 1.0,
+    0.0, -1.0, 0.0, 1.0,
+    0.0, 0.0, -1.0, 1.0,
+    0.0, 0.0, 0.0, 1.0
+    ])
     
-define fraktal_01 = im.matrix(
-                    [0.5, 0, 0, 0, 1,
-                    0, 0.5, 0, 0, 1,
-                    0,  0, -1, 0, 1,
-                    0,  0,  0, 1, 0])
+define fraktal_01 = Matrix([
+    0.5, 0.0, 0.0, 1.0,
+    0.0, 0.5, 0.0, 1.0,
+    0.0, 0.0, -1.0, 1.0,
+    0.0, 0.0, 0.0, 1.0
+    ])
     
-define fraktal_02 = im.matrix(
-                    [0.5, 0, 0, 0, 0.5,
-                    0, 0.5, 0, 0, 0.5,
-                    0,  0, 0.5, 0, 1,
-                    0,  0,  0, 0.5, 0])
+define fraktal_02 = Matrix([
+    0.5, 0.0, 0.0, 0.5,
+    0.0, 0.5, 0.0, 0.5,
+    0.0, 0.0, 0.5, 1.0,
+    0.0, 0.0, 0.0, 0.5
+    ])
     
-define fraktal_03 = im.matrix(
-                    [0.5, 0, 0, 0, 0.5,
-                    0, -0.5, 0, 0, 0.5,
-                    0,  0, -0.5, 0, 1,
-                    0,  0,  0, 0.5, 0])
+define fraktal_03 = Matrix([
+    0.5, 0.0, 0.0, 0.5,
+    0.0, -0.5, 0.0, 0.5,
+    0.0, 0.0, -0.5, 1,
+    0.0, 0.0, 0.0, 0.5
+    ])
     
-define fraktal_04 = im.matrix(
-                    [1, 0, 0, 0, 0.5,
-                    0, 1, 0, 0, 0.5,
-                    0,  0, 1, 0, 0.5,
-                    0,  0,  0, 1, 0])
+define fraktal_04 = Matrix([
+    1.0, 0.0, 0.0, 0.5,
+    0.0, 1.0, 0.0, 0.5,
+    0.0, 0.0, 1.0, 0.5,
+    0.0, 0.0, 0.0, 1.0
+    ])
     
-define fraktal_05 = im.matrix(
-                    [-1, 0, 1, 0, 0.5,
-                    0, 1, 0, 0, 1,
-                    -1,  0, 1, 0, 1,
-                    0,  0,  0, -1, 0])
+define fraktal_05 = Matrix([
+    -1.0, 0.0, 1.0, 0.5,
+    0.0, 1.0, 0.0, 1.0,
+    -1.0, 0.0, 1.0, 1.0,
+    0.0, 0.0, 0.0, -1.0
+    ])
     
-define fra = im.matrix(
-                    [-0.3, 0, 0.8, 0, 0,
-                    0, 0.3, 0, 0, 1,
-                    1,  0, -0.3, 0, 0,
-                    0,  0,  0, 1, 0])
+define fra = Matrix([
+    -0.3, 0.0, 0.8, 0.0,
+    0.0, 0.3, 0.0, 1.0,
+    1.0, 0.0, -0.3, 0.0,
+    0.0, 0.0, 0.0, 1.0
+    ])
     
-define frac = im.matrix(
-                    [0.7, 0, 0.8, 0, 0.2,
-                    0, -0.6, 0, 0, 1,
-                    1,  0, -0.4, 0, -0.6,
-                    0,  0,  0, 1, 0])
+define frac = Matrix([
+    0.7, 0.0, 0.8, 0.2,
+    0.0, -0.6, 0.0, 1.0,
+    1.0, 0.0, -0.4, -0.6,
+    0.0, 0.0, 0.0, 1.0
+    ])
     
-define color_01 = im.matrix(
-                    [1, 0, 0, 0, .1,
-                    0, 1, 0, 0, .1,
-                    0, 0, .9, 0, .1,
-                    0, 0, 0, 1, 0 ])
+define color_01 = Matrix([
+   1.0, 0.0, 0.0, 0.1,
+   0.0, 1.0, 0.0, 0.1,
+   0.0, 0.0, 0.9, 0.1,
+   0.0, 0.0, 0.0, 1.0
+   ])
 
 #МЕНЮ ЭКСТРА
 
