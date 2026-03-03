@@ -12,3 +12,8 @@ game/saves/persistent
 game/tl/None/common.rpymc
 game/\#init.rpy\#
 *.keystore
+game/00-chess-engine/python-packages/chess/__pycache__/__init__.cpython-312.pyc
+game/ap_house.rpyc
+game/article.rpyc
+game/end.rpyc
+game/00-chess-engine/python-packages/chess/__pycache__/engine.cpython-312.pyc
