@@ -11,8 +11,6 @@ init python:
 #$ renpy.register_text_shader()
 
 #генератор случайных чисел
-
-
 #$ ran_dig = renpy.random.choice([1,6])
 $ gtm = 0
 $ player_guess = 0
@@ -468,41 +466,68 @@ image bg0000c = "images/texture/Withe.jpg"
 image bg0001 = "images/BG/0001.jpg"
 image bg0002 = "images/BG/0002.jpg"
 image bg0003 = "images/BG/0003.jpg"
-image bg0004 = Animation(
-    "images/BG/0004a01.jpg", 0.5,
-    "images/BG/0004a02.jpg", 0.5,
-    "images/BG/0004a03.jpg", 0.5,
-    "images/BG/0004a04.jpg", 0.5,
-    "images/BG/0004a05.jpg", 0.5,
-    "images/BG/0004a06.jpg", 0.5,
-    "images/BG/0004a07.jpg", 0.5,
-    "images/BG/0004a08.jpg", 0.5,
-    "images/BG/0004a09.jpg", 0.5,
-    "images/BG/0004a10.jpg", 0.5,
-    "images/BG/0004a11.jpg", 0.5,
-    "images/BG/0004a12.jpg", 0.5,
-    "images/BG/0004a13.jpg", 0.5,
-    "images/BG/0004a14.jpg", 0.5,
-    "images/BG/0004a15.jpg", 0.5,
-    "images/BG/0004a16.jpg", 0.5,
-    "images/BG/0004a17.jpg", 0.5,
-    "images/BG/0004a18.jpg", 0.5,
-    "images/BG/0004a19.jpg", 0.5,
-    "images/BG/0004a20.jpg", 0.5,
-    "images/BG/0004a21.jpg", 0.5,
-    "images/BG/0004a22.jpg", 0.5,
-    "images/BG/0004a23.jpg", 0.5
-    )
-image bg0005 = Animation(
-    "images/BG/0005a.jpg", 0.5,
-    "images/BG/0005b.jpg", 1.5
-    )
+image bg0004:
+    "images/BG/0004a01.jpg"
+    pause 0.5
+    "images/BG/0004a02.jpg"
+    pause 0.5
+    "images/BG/0004a03.jpg"
+    pause 0.5
+    "images/BG/0004a04.jpg"
+    pause 0.5
+    "images/BG/0004a05.jpg"
+    pause 0.5
+    "images/BG/0004a06.jpg"
+    pause 0.5
+    "images/BG/0004a07.jpg"
+    pause 0.5
+    "images/BG/0004a08.jpg"
+    pause 0.5
+    "images/BG/0004a09.jpg"
+    pause 0.5
+    "images/BG/0004a10.jpg"
+    pause 0.5
+    "images/BG/0004a11.jpg"
+    pause 0.5
+    "images/BG/0004a12.jpg"
+    pause 0.5
+    "images/BG/0004a13.jpg"
+    pause 0.5
+    "images/BG/0004a14.jpg"
+    pause 0.5
+    "images/BG/0004a15.jpg"
+    pause 0.5
+    "images/BG/0004a16.jpg"
+    pause 0.5
+    "images/BG/0004a17.jpg"
+    pause 0.5
+    "images/BG/0004a18.jpg"
+    pause 0.5
+    "images/BG/0004a19.jpg"
+    pause 0.5
+    "images/BG/0004a20.jpg"
+    pause 0.5
+    "images/BG/0004a21.jpg"
+    pause 0.5
+    "images/BG/0004a22.jpg"
+    pause 0.5
+    "images/BG/0004a23.jpg"
+    pause 0.5
+    
+image bg0005:
+    "images/BG/0005a.jpg" with dissolve
+    pause 0.5
+    "images/BG/0005b.jpg" with dissolve
+    pause 1.5
+    repeat
+    
 image bg0006 = "images/BG/0006.jpg"
 image bg0007 = "images/BG/0007.jpg"
 image bg0008 = "images/BG/0008.jpg"
 image a0008:
     "images/BG/0008.jpg"
     matrixcolor InvertMatrix(1.0)
+    
 image bg0009 = "images/BG/0009.jpg"
 image bg0010 = "images/BG/0010.jpg"
 image bg0011 = "images/BG/0011.jpg"
@@ -562,11 +587,11 @@ image bg0037 = "images/BG/0036.jpg"
 image bg0038 = "images/BG/0037.jpg"
 image bg0039 = "images/BG/0038.jpg"
 image bg0040 = "images/BG/0039.jpg"
-image a0041 = Composite(
-    (1920, 1080),
-    (0, 0), "images/BG/0038a.jpg",
-    (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-    )
+image a0041:
+    "images/BG/0038a.jpg"
+    contains:
+        "Logo/Alaya_IU.png"
+        alpha 0.5
 
 image bg0041:
     contains:
@@ -594,43 +619,41 @@ image bg0041:
     
 image bg0042 = "images/BG/0038a.jpg"
 image bg0043 = "images/BG/0039a.jpg"
-image bg0044 = anim.TransitionAnimation(
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0040c.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU_01.png", 0.5)),
-    im.matrix.brightness (-.80)), 0.5, dissolve,
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0040b.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU_01.png", 0.5)),
-    im.matrix.brightness (-.50)), 0.5, dissolve,
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0040a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU_01.png", 0.5)),
-    im.matrix.brightness (0)), 0.5, dissolve,
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0040b.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU_01.png", 0.5)),
-    im.matrix.brightness (-.50)), 0.5, dissolve
-    )    
+
+image bg0044:
+    contains:
+        "images/BG/0040c.jpg" with dissolve
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.60)
+        "images/BG/0040b.jpg" with dissolve
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.44)
+        "images/BG/0040a.jpg" with dissolve
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.22)
+        "images/BG/0040b.jpg" with dissolve
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.44)
+        repeat
+
+    contains:
+        "Logo/Alaya_IU_01.png" with dissolve
+        alpha 0.5
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.40)
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.30)
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.20)
+        easeout 1.5 matrixcolor BrightnessMatrix(-0.30)
+        repeat
+            
 image bg0045 =  "images/BG/0040c.jpg"
-image bg0046 = anim.TransitionAnimation(
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0039a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-    ), im.matrix.brightness (-.80)), 0.5, dissolve,
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0039a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-    ), im.matrix.brightness (-.50)), 0.5, dissolve,
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0039a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-    ), im.matrix.brightness (0)), 0.5, dissolve,
-    im.MatrixColor(im.Composite((1920, 1080),
-        (0, 0), "images/BG/0039a.jpg",
-        (0, 0), im.Alpha("Logo/Alaya_IU.png", 0.5)
-    ), im.matrix.brightness (-.50)), 0.5, dissolve
-    )
+image bg0046:
+    contains:
+        "images/BG/0039a.jpg" with dissolve
+    contains:
+        "Logo/Alaya_IU.png"
+        alpha 0.35
+    matrixcolor BrightnessMatrix(-0.80)
+    easeout 1.85 matrixcolor BrightnessMatrix(-0.45)
+    easeout 1.65 matrixcolor BrightnessMatrix(-0.70)
+    easeout 1.85 matrixcolor BrightnessMatrix(-0.80)
+    repeat
+    
 image bg0047 = "images/BG/0041.jpg"
 image bg0048 = "images/BG/0042.jpg"
 image bg0049 = "images/BG/0043.jpg"
@@ -647,11 +670,26 @@ image bg0059 = "images/BG/0053.jpg"
 image bg0060 = "images/BG/0054.jpg"
 image bg0061 = "images/BG/0055.jpg"
 image bg0062 = "images/BG/0056.jpg"
-image bg0063 = im.FactorScale("images/BG/0057.jpg", 1.27, 1.27)
-image bg0064 = im.FactorScale(im.Alpha("images/BG/0058b.png", 0.6), 1.5, 1.0)
-image bg0065 = im.FactorScale("images/BG/0058a.jpg", 1.8, 2.0)
+image bg0063:
+    "images/BG/0057.jpg"
+    zoom 1.27
+    
+image bg0064:
+    "images/BG/0058b.png"
+    alpha 0.6
+    xzoom 1.5
+    yzoom 1.0
+    
+image bg0065:
+    "images/BG/0058a.jpg"
+    xzoom 1.8
+    yzoom 2.0
+    
 image bg0066 = "images/BG/0059.jpg"
-image bg0067 = im.FactorScale("images/BG/0057.jpg", 1.1, 1.1)
+image bg0067:
+    "images/BG/0057.jpg"
+    zoom 1.1
+    
 image bg0068 = "images/BG/0060.jpg"
 image bg0069 = "images/BG/0061.jpg"
 image bg0070 = "images/BG/0062.jpg"
@@ -680,14 +718,18 @@ image bg0093 = "images/BG/0084.jpg"
 image bg0094 = "images/BG/0085.jpg"
 image bg0095 = "images/BG/0086.jpg"
 image bg0096 = "images/BG/0087.jpg"
-image bg0097 = im.Composite((1280, 720),
-    (0, 0), "images/BG/0071.jpg",
-    (- 60, 150), "images/sprites/SLW/LW_slip_01.png"
-    )
-image bg0098 = im.Composite((1920, 720),
-    (0, 0), "images/BG/0072.jpg",
-    (- 60, 150), "images/sprites/SLW/LW_slip_01.png"
-    )
+image bg0097:
+    "images/BG/0071.jpg"
+    contains:
+        "images/sprites/SLW/LW_slip_01.png"
+        pos (-60, 150)
+        
+image bg0098:
+    "images/BG/0072.jpg",
+    contains:
+        "images/sprites/SLW/LW_slip_01.png"
+        pos (- 60, 150)
+        
 image bg0099 = "images/BG/0088.jpg"
 image bg0100 = "images/BG/0089.jpg"
 image bg0101 = "images/BG/0090.jpg"
@@ -703,57 +745,68 @@ image bg0109 = "images/BG/0098.jpg"
 
 
 #region бумага
-image peper_01 = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Sepia(im.Alpha("images/texture/peper_02.jpg", 0.347)),
-        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
+image peper_01:
+    Solid("#000000")
+    contains:
+        "images/texture/peper_02.jpg"
+        alpha 0.347
+        matrixcolor SepiaMatrix()
+        
+    contains:
+        "images/texture/the_letters_03.jpg"
+        alpha 0.3
+        
+    matrixcolor BrightnessMatrix(-0.09)
 
-image peper_02 = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Sepia(im.Alpha("images/texture/peper_05.jpg", 0.347)),
-        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
+image peper_02:
+    Solid("#000000")
+    contains:
+        "images/texture/peper_05.jpg"
+        alpha 0.347
+        matrixcolor SepiaMatrix()
+        
+    contains:
+        "images/texture/the_letters_03.jpg"
+        alpha 0.3
+        
+    matrixcolor BrightnessMatrix(-0.09)
 
-image peper_03 = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Sepia(im.Alpha("images/texture/peper_06.jpg", 0.347)),
-        (0, 0), im.Alpha("images/texture/the_letters_03.jpg", 0.3)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
+image peper_03:
+    Solid("#000000"),
+    contains:
+        "images/texture/peper_06.jpg"
+        alpha 0.347
+        matrixcolor SepiaMatrix()
+        
+    contains:
+        "images/texture/the_letters_03.jpg"
+        alpha 0.3
+        
+    matrixcolor BrightnessMatrix(-0.09)
 
 #endregion Region name
     
 #концовки
 
-image DEnd = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), im.Sepia("images/END/END_00.jpg"),
-        (0, 0), im.Alpha("images/END/END_02.jpg", 0.7),
-        (0, 0), im.Alpha("images/END/END_01.jpg", 0.347)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)   
-)
-
+image DEnd:
+    contains:
+        "images/END/END_00.jpg"
+        matrixcolor SepiaMatrix()
+    contains:
+        "images/END/END_02.jpg"
+        alpha 0.7
+    contains:
+        "images/END/END_01.jpg"
+        alpha 0.347
+        
+    matrixcolor BrightnessMatrix(-0.09)
 
 #СПРАЙТЫ
 
 #МАЛЕНЬКАЯ ВЕДЬМА
 
 # в полный рост
-image LW_NormFull_01 = anim. SMAnimation("ax",
+image LW_NormFull_01 = anim.SMAnimation("ax",
     anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma01.png", 0.1, 0.1)),
     anim.Edge ("ax", 1.0, "ax", prob=7),
     anim.Edge ("ax", 0.25, "bx"),
@@ -888,7 +941,7 @@ image LW_NorFull_c_21 = im.FactorScale("images/sprites/SLW/LW_Norma_c_20.png", 0
     
     
 # спрайт ближный план
-image LW_NormBust_01 = anim. SMAnimation("ax",
+image LW_NormBust_01 = anim.SMAnimation("ax",
     anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma01.png", 0.15, 0.15)),
     anim.Edge ("ax", 1.0, "ax", prob=7),
     anim.Edge ("ax", 0.25, "bx"),
@@ -1092,12 +1145,15 @@ image Alaya_05:
 # анимации природных явлений и прочих эффектов
 
 # Нота
-image NA = Animation(
-    "images/Ani/N01.png", 0.5,
-    "images/Ani/N03.png", 0.5, 
-    "images/Ani/N02.png", 0.5
-    ) 
-
+image NA:
+    "images/Ani/N01.png"
+    ease 0.5
+    "images/Ani/N03.png"
+    ease 0.5
+    "images/Ani/N02.png"
+    ease 0.5
+    repeat
+    
 # дождь
 
 image rain = SnowBlossom(anim.Filmstrip(
@@ -1381,15 +1437,6 @@ image send_right:
     "images/Strit/send_02.png" crop (0, 0, 91, 33)
     pause 0.50
     
-#СТАРТОВЫЙ СПЛЭШ
-image start_splash = Transform(
-    Composite(
-        (1920, 1080),
-        (0, 0), Solid("#000000"),
-        (0, 0), im.Alpha("gui/start_splash/splash_wallp.jpg", 0.347)
-    ),
-    matrixcolor=BrightnessMatrix(-0.09)
-)
 
 #МУЗЫКА
 
