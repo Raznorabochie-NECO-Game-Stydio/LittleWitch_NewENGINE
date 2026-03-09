@@ -157,8 +157,12 @@ label chapter1:
 ## 
     
         scene bg0005
-        show LW_NormBust_01 at screen_center_01 onlayer sloi02 
-        show NA at loposC onlayer sloi03
+        
+        
+
+        #show LW_NormBust_01 at screen_center_01 onlayer sloi02 
+        show Little_witch hair_wind_01 kassa_wind_01 at LW_short_range, screen_center_03 onlayer sloi02
+        #show NA at loposC onlayer sloi03
         show sn onlayer sloi04
         with diss
         #play nature "Zvuki/turbine_loop_1.wav" fadein 1.0
@@ -187,7 +191,10 @@ label chapter1:
 ##
 
 
-        hide LW_NormBust_01 onlayer sloi02
+        hide Little_witch onlayer sloi02
+        # LW open ""
+        # show LW -open
+        #hide LW_NormBust_01 onlayer sloi02
         show LW_NakBust_a_04 at screen_center_01 onlayer sloi02 
         with dissolve
         #show C at loposC onlayer sloi03
@@ -834,7 +841,7 @@ label chapter1:
         scene bg0050
         show Alaya_04 onlayer sloi02
         show Alaya_05 onlayer sloi03
-        show fly #onlayer sloi04
+        #show fly #onlayer sloi04
         with pixellate
 
 
@@ -843,7 +850,7 @@ label chapter1:
     
         hide Alaya_04 onlayer sloi02
         hide Alaya_05 onlayer sloi03
-        hide fly #onlayer sloi04
+        #hide fly #onlayer sloi04
         scene bg0051 
         show LW_NFM_01 at pos_cen onlayer sloi03
         show Mil_01 at pos_cen onlayer sloi04
@@ -897,7 +904,7 @@ label chapter1:
         e "......"
         #play music "Sound/3554.mp3" fadein 2.5
         scene bg0050 
-        show fly onlayer sloi02
+        #show fly onlayer sloi02
         with teleport
 
         e "Когда-то Маленькая ведьма жила в причудливом пурпурном мире."
@@ -915,7 +922,7 @@ label chapter1:
         e "Она любовалась причудливыми созвездиями, объятыми в царственные облака межзвёздного газа, "
         e "сидя на крытом крылечке своего дома и неспешно потягивая сладкое вино из глиняной кружки. " 
   
-        hide fly onlayer sloi02
+        #hide fly onlayer sloi02
         scene bg0000 with dream
 
         e "..."
