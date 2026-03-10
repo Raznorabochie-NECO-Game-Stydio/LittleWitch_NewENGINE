@@ -112,6 +112,11 @@ label hallway_prihojay_001:
 
         "кухня":
 
+            e ".."
+            e "Это был младший аркан таро."
+            $ Minor_Arcane_Taro = 2
+            call Minor_Arcane
+
             jump room_002_kitchen
 
             pass

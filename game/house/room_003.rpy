@@ -48,6 +48,23 @@ label hallway_flat_003_01:
 
         "Комната 01":
 
+            menu:
+                #"Say Statement"
+                "карта таро":
+                    #block of code to run
+
+                    e "Это был младший аркан таро."
+
+                    $ Minor_Arcane_Taro = 3
+                    call Minor_Arcane
+
+                    pass
+                "комната":
+                    #block of code to run
+
+                    pass
+                
+
             jump room_003_01
 
         "Гостиная":

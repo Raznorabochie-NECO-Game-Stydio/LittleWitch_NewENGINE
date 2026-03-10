@@ -156,7 +156,7 @@ label chapter1:
 ## звуковое сопровождения: - шум работающей турбины. выводимый через fadein 1.0
 ## основной звуковой канал - "тема Главной героини"
 ## 
-    
+
     scene bg0005
     show LW_NormBust_01 at screen_center_01 onlayer sloi02 
     show NA at loposC onlayer sloi03
@@ -189,6 +189,14 @@ label chapter1:
 
 
     hide  LW_NormBust_01 onlayer sloi02
+    show LW_NakBust_a_04 at screen_center_01 onlayer sloi02 
+    with dissolve
+    #show C at loposC onlayer sloi03
+    #show LW_NakBust_a_04 at screen_right_01 onlayer sloi02 with move
+    hide Little_witch onlayer sloi02
+    # LW open ""
+    # show LW -open
+    #hide LW_NormBust_01 onlayer sloi02
     show LW_NakBust_a_04 at screen_center_01 onlayer sloi02 
     with dissolve
     #show C at loposC onlayer sloi03
@@ -836,11 +844,9 @@ label chapter1:
     show Alaya_05 onlayer sloi03
     show fly #onlayer sloi04
     with pixellate
-
-
     
     e "Воспоминания о цветущих садах Азатота, где росли медовые деревья с пурпурными листьями и чудесными сладостными плодами... "
-    
+
     hide Alaya_04 onlayer sloi02
     hide Alaya_05 onlayer sloi03
     hide fly #onlayer sloi04
@@ -850,8 +856,6 @@ label chapter1:
     with diss
     $ renpy.pause(2.0)
     scene bg0052 with dissA
-    
-
     
     e "Девочка была одна, она была всегда одна с того момента, когда она нашла этот мир, "
     
@@ -888,7 +892,7 @@ label chapter1:
     scene bg0059 with diss
 
     e "Она была одна и когда покидала чёрные звёзды."
-   
+
     #stop music fadeout 1.0
     scene bg0000 
     hide LW_NFM_01 onlayer sloi03
@@ -899,6 +903,7 @@ label chapter1:
     scene bg0050 
     show fly onlayer sloi02
     with teleport
+
 
     e "Когда-то Маленькая ведьма жила в причудливом пурпурном мире."
    
