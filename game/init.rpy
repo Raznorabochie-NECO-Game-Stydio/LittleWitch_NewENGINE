@@ -1143,7 +1143,7 @@ image SLW_kassa_wind_03:
             Transform(
                 "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
                 zoom=0.75,
-                anchor=(0.4, 0.0),
+                anchor=(0.0, 0.0),
                 transform_anchor=True
             )
         )
@@ -1310,6 +1310,69 @@ layeredimage Little_witch:
 
         attribute eyes_norm_blink_01 default:
             "SLW_eyes_blink_01"
+
+        attribute eyes_norm_02:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
+
+            )
+
+        attribute eyes_norm_03:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_01_03.png"
+
+            )
+
+        attribute eyes_norm_blindfold_01:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_02_01.png"
+
+            )
+
+        attribute eyes_norm_blindfold_02:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_02_02.png"
+
+            )
+
+        attribute eyes_left_norm_01:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_03_01.png"
+
+            )
+
+        attribute eyes_left_norm_he_winks_01:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_04_01.png"
+
+            )
+        
+        attribute eyes_right_norm_he_winks_01:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_05_01.png"
+
+            )
+
+        attribute eyes_norm_cray_01:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_cray_01_01.png"
+
+            )
+
+        attribute eyes_norm_horror_01:
+            Composite(
+                (2500, 6200),
+                (655, 620), "images/sprites/SLW/SWN/ese_base_horror_01_01.png"
+
+            )
 
     group freckles:
 
