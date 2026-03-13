@@ -12,18 +12,35 @@ init python:
 #define config.default_textshader = True
 #$ renpy.register_text_shader()
 
-# MOKOt
-#генератор случайных чисел
+#=================================================
+#задаем дополнителные звуковые каналы
+#=================================================
+#renpy.music.register_channel ("nature", "sound", loop=True)
+#renpy.music.register_channel ("natu", "sound", loop=True)
+#renpy.music.register_channel ("natu_fon", "sound", loop=True)
 
+
+init python:
+    renpy.music.register_channel("nature", "sound", loop=True)
+    renpy.music.register_channel("natu", "sound", loop=True)
+    renpy.music.register_channel("natu_fon", "sound", loop=True)
+
+
+# MOKOt
+#==============================================
+#генератор случайных чисел
+#==============================================
 
 #$ ran_dig = renpy.random.choice([1,6])
 $ gtm = 0
 $ player_guess = 0
 #$ mci = 0
 
-   
+#===============================================   
 #Генерат позиции(Де)
+#===============================================
 # MOKOt
+
 init python:
     from random import uniform
     import math
@@ -86,7 +103,9 @@ transform smooth_random_move:
 #        pos (0, 0)
 
 
+#===================================================
 # mci(MENU CHOICE ID)
+#===================================================
 # MOKOt
 
 init python:
@@ -113,7 +132,9 @@ python:
 #$ mci = rgen.rgen()
 #define Cha_01 = mci
 
+#=============================================================
 #карты таро
+#=============================================================
 # MOKOt
 
 screen my_text_screen(line):
@@ -135,7 +156,10 @@ screen my_text_screen(line):
             #bold True
             #text_align 0.5
 
+#======================================================================
 #святлечки
+#======================================================================
+
 init python:
     import random
 
@@ -192,7 +216,11 @@ init python:
         def visit(self):
             return self.variants
 
+###########################################################################
+
+#===========================================================
 #старшие арканы
+#===========================================================
 
 image SAT_01 = "images/cardgame/card_A.png"
 image SAT_02 = "images/cardgame/card_B.png"
@@ -217,8 +245,9 @@ image SAT_20 = "images/cardgame/card_U.png"
 image SAT_21 = "images/cardgame/card_V.png"
 image SAT_22 = "images/cardgame/card_Y.png"
 
-
+#==============================================================
 #младщие арканы
+#==============================================================
 
 image MAT_01 = im.FactorScale("images/minor_arcana/01.png", 2.9)
 image MAT_02 = im.FactorScale("images/minor_arcana/02.png", 2.9)
@@ -261,7 +290,9 @@ image MAT_38 = im.FactorScale("images/minor_arcana/38.png", 2.9)
 image MAT_39 = im.FactorScale("images/minor_arcana/39.png", 2.9)
 image MAT_40 = im.FactorScale("images/minor_arcana/40.png", 2.9)
 
+########################################################################################
 #ПЕРЕМЕННЫЕ
+
 
 # Основная переменная, суть которой подсчет очков выбора игрока между действиями выбора, 
 # влияющая на то какая концовка послесловия будет продемонстрированная игроку по окончанию игры.
@@ -283,6 +314,7 @@ define Wite = False
 define enigma_01 = False
 define enigma_02 = False
 
+#перемноживания матриц
 $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
 $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
@@ -415,13 +447,7 @@ $ brightness_opacity = brightness * opacity
 $ fraktal_04_opacity = fraktal_04 * opacity
 $ fraktal_01_fraktal_03 = fraktal_01 * fraktal_03
 
-
-#задаем дополнителные звуковые каналы
-#renpy.music.register_channel ("nature", "sound", loop=True)
-#renpy.music.register_channel ("natu", "sound", loop=True)
-#renpy.music.register_channel ("natu_fon", "sound", loop=True)
-
-
+#############################################################################
 #ПЕРСОНАЖИ
 #NVL
 
@@ -432,7 +458,9 @@ define nn = Character(None,
                     kind=nvl
                     )
 
-#СЮЖЕТНЫЕ 
+#=================================================================
+#СЮЖЕТНЫЕ
+#=================================================================
 
 #image='Little_witch'
 define LW = Character('Маленькая ведьма', 
@@ -574,7 +602,9 @@ define LO = Character('Лохматый',
         what_outlines =[(2, "#000000")]
         )
 
+#=========================================================================
 # основной стиль текста
+#=========================================================================
 
 define e = Character(None, 
                         what_size = 35, 
@@ -589,23 +619,32 @@ define e = Character(None,
 
 #define en = Character(None, kind=nvl)
 
+#===========================================================================
 #ШРИФТЫ(Задам стилем ибо могу)
+#===========================================================================
 #СТИЛЬ - Чепятная машинка(typewriter)
+
 style typewr is text:
     size 30
     color "#ffffff"
     font "fonts/DS-Moster.ttf"
 
-
+#===============================================================================
 #ФОНЫ
+#===============================================================================
 
+#===============================================================================
 #ПОНГ
+#===============================================================================
 
 image bg pong field = "images/pong/pong_field.png"
 
 ################################################################################
 
+#===============================================================================
 #СТАРТОВЫЙ СПЛЭШ
+#===============================================================================
+
 image start_splash = Transform(
     Composite(
         (1920, 1080),
@@ -615,7 +654,10 @@ image start_splash = Transform(
     matrixcolor=BrightnessMatrix(-0.09)
 )
 
+#================================================================================
 #СЮЖЕТНЫЕ
+#================================================================================
+
 image bg0000 = "images/texture/Blek.jpg"
 image bg0000a = "images/BG/0000a.jpg"
 image bg0000b = "images/BG/0000b.jpg"
@@ -895,7 +937,10 @@ image bg0108 = "images/BG/0097.jpg"
 image bg0109 = "images/BG/0098.jpg"
 #image F_masked = im.AlphaMask("Mask.png", "pod.png")
 
+#=================================================================
 # текстуры
+#=================================================================
+
 #region бумага
 image peper_01:
     contains:
@@ -944,7 +989,9 @@ image peper_03:
     matrixcolor BrightnessMatrix(-0.09)
 #endregion Region name
 
+#================================================================================
 #цветочные
+#================================================================================
 
 image floralt_01 = Composite(
         (1920, 1080),
@@ -953,8 +1000,9 @@ image floralt_01 = Composite(
         (0, 0), im.Sepia(im.Alpha("images/texture/muar_01.png", 0.3))
     )
     
-    
+#==================================================================================   
 #концовки
+#==================================================================================
 
 image DEnd:
     contains:
@@ -970,19 +1018,16 @@ image DEnd:
     matrixcolor BrightnessMatrix(-0.09)
 
 
-
+####################################################################################
 #СПРАЙТЫ
-
 #МАЛЕНЬКАЯ ВЕДЬМА
-
 #составные спрайты
 
-#default angry = False
+# ===================================================
+# АНИМИРОВАННАЯ КОСА
+# ===================================================
 
-# Анимация ветра (зацикленная)
-
-# Анимированная коса (ветер)
-# Вариант 1 слабый ветер
+# Вариант 1 — слабый ветер
 image SLW_kassa_wind_01:
     Composite(
         (3500, 6000),
@@ -1016,73 +1061,74 @@ image SLW_kassa_wind_01:
     pause 0.5
     repeat
 
-# Вариант 2 средний ветер
+# Вариант 2 — средний ветер
 image SLW_kassa_wind_02:
     Composite(
         (3500, 6000),
         (0, 630),
         Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_01.png", 
-                zoom=0.75,
-                rotate=0,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-                )
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_01.png",
+            zoom=0.75,
+            rotate=0,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
+        )
     )
     pause 0.5
     Composite(
         (3500, 6000),
         (150, 600),
         Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png", 
-                zoom=0.75,
-                rotate=5,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-                )
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
+            zoom=0.75,
+            rotate=5,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
+        )
     )
     pause 0.5
     Composite(
         (3500, 6000),
         (300, 580),
         Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_03.png", 
-                zoom=0.75,
-                rotate=10,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-                )
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_03.png",
+            zoom=0.75,
+            rotate=10,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
+        )
     )
     pause 0.5
     Composite(
         (3500, 6000),
         (500, 670),
         Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_04.png", 
-                zoom=0.75,
-                rotate=15,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-                )
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_04.png",
+            zoom=0.75,
+            rotate=15,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
+        )
     )
     pause 0.5
     Composite(
         (3500, 6000),
         (150, 600),
         Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png", 
-                zoom=0.75,
-                rotate=10,
-                anchor=(0.5, 1.0),
-                transform_anchor=True
-                )
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
+            zoom=0.75,
+            rotate=10,
+            anchor=(0.5, 1.0),
+            transform_anchor=True
+        )
     )
     pause 0.5
     repeat
 
-# Вариант 3 средний ветер
+# Вариант 3 — сильный ветер
+# ИСПРАВЛЕНО: убран некорректный parallel внутри image ATL
+# Используем простое чередование кадров с разными позициями
 image SLW_kassa_wind_03:
-
     Composite(
         (3500, 6000),
         (0, 600),
@@ -1093,63 +1139,56 @@ image SLW_kassa_wind_03:
             transform_anchor=True
         )
     )
-
-    parallel:
-        ease 0.5 rotate 7
-        easeout 1.5 rotate -3
-        repeat
-
-    parallel:
-
-        Composite(
-            (3500, 6000),
-            (150, 600),
-            Transform(
-                "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
-                zoom=0.75,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-            )
+    pause 0.4
+    Composite(
+        (3500, 6000),
+        (150, 590),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
+            zoom=0.75,
+            rotate=5,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
         )
-        pause 0.8
-
-        Composite(
-            (3500, 6000),
-            (300, 580),
-            Transform(
-                "images/sprites/SLW/SWN/SLW_01_01_kassa_03.png",
-                zoom=0.75,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-            )
+    )
+    pause 0.4
+    Composite(
+        (3500, 6000),
+        (300, 570),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_03.png",
+            zoom=0.75,
+            rotate=12,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
         )
-        pause 0.8
-
-        Composite(
-            (3500, 6000),
-            (500, 670),
-            Transform(
-                "images/sprites/SLW/SWN/SLW_01_01_kassa_04.png",
-                zoom=0.75,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-            )
+    )
+    pause 0.4
+    Composite(
+        (3500, 6000),
+        (500, 650),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_04.png",
+            zoom=0.75,
+            rotate=18,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
         )
-        pause 0.8
-
-        Composite(
-            (3500, 6000),
-            (150, 600),
-            Transform(
-                "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
-                zoom=0.75,
-                anchor=(0.0, 0.0),
-                transform_anchor=True
-            )
+    )
+    pause 0.4
+    Composite(
+        (3500, 6000),
+        (150, 590),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
+            zoom=0.75,
+            rotate=8,
+            anchor=(0.0, 0.0),
+            transform_anchor=True
         )
-        pause 0.8
-
-        repeat
+    )
+    pause 0.4
+    repeat
 
 # Статичная коса (без ветра)
 image SLW_kassa_still:
@@ -1159,257 +1198,427 @@ image SLW_kassa_still:
         Transform("images/sprites/SLW/SWN/SLW_01_01_kassa_01.png", zoom=0.75)
     )
 
-# Волосы анимированные
-image SLW_hair_wind_01:
+# Выбор анимации косы с учётом ветра
+image SLW_kassa_01 = ConditionSwitch(
+    "wind_01 == 1", "SLW_kassa_wind_01",
+    "wind_01 == 2", "SLW_kassa_wind_02",
+    "wind_01 == 3", "SLW_kassa_wind_03",
+    "True",         "SLW_kassa_still"
+)
+
+# ===================================================
+# ГОЛОВА
+# ===================================================
+
+image LWS_head = ConditionSwitch(
+
+    "head_LW_01 == 1",
+    Composite(
+        (2500, 6200),
+        (800, 940), "images/sprites/SLW/SWN/neck_01.png",
+        (530, 140),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+            zoom=0.93
+        )
+    ),
+
+    "head_LW_01 == 2",
+    Composite(
+        (2500, 6200),
+        (330, 40),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_01_feis_01.png",
+            rotate=-10,
+            anchor=(0.5, 1.0),
+            transform_anchor=True
+        )
+    ),
+
+    "head_LW_01 == 3",
+    Composite(
+        (2500, 6200),
+        (800, 940), "images/sprites/SLW/SWN/neck_01.png",
+        (160, 80),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+            zoom=0.93,
+            rotate=-15,
+            anchor=(0.5, 1.0),
+            transform_anchor=True
+        )
+    ),
+
+    "True",
+    Composite(
+        (2500, 6200),
+        (590, 160),
+        "images/sprites/SLW/SWN/SLW_01_01_feis_01.png"
+    )
+)
+
+# ===================================================
+# ВОЛОСЫ
+# ===================================================
+
+# Медленный ветер
+image SLW_hair_wind_slow:
     Composite(
         (2500, 6000),
-        (325,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
+        (327, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
     )
     pause 0.5
     Composite(
         (2500, 6000),
-        (325,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+        (332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
     )
     pause 0.5
     Composite(
         (2500, 6000),
-        (320,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_03.png"
+        (318, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_03.png"
     )
     pause 0.5
     Composite(
         (2500, 6000),
-        (325,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+        (332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
     )
     pause 0.5
     repeat
 
-# Волосы анимированные 2
-image SLW_hair_wind_02:
+# Быстрый ветер
+image SLW_hair_wind_fast:
     Composite(
         (2500, 6000),
-        (325,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
+        (327, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
     )
     pause 0.2
     Composite(
         (2500, 6000),
-        (325,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+        (332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
     )
     pause 0.2
     Composite(
         (2500, 6000),
-        (325,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_03.png"
+        (318, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_03.png"
     )
     pause 0.2
     Composite(
         (2500, 6000),
-        (325,58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+        (332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
     )
     pause 0.2
     repeat
 
-# Волосы статисчные
-image SLW_hair_still:
+# Статичные волосы
+image SLW_hair_static:
     Composite(
         (2500, 6000),
-        (325, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
+        (327, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
     )
 
-#глаза анимированные
+# Выбор волос через ConditionSwitch
+image SLW_hair_01 = ConditionSwitch(
+    "wind_01 == 1",              "SLW_hair_wind_slow",
+    "wind_01 == 2 or wind_01 == 3", "SLW_hair_wind_fast",
+    "True",                      "SLW_hair_static"
+)
+
+# ===================================================
+# ГЛАЗА
+# ===================================================
+
+# Анимация моргания (базовая)
 image SLW_eyes_blink_01:
-
     Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
-
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
     )
     pause 1.0
     choice:
         Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
-
-            )
+            (2500, 6200),
+            (655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
+        )
         pause 1.0
     choice:
         Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
-
-            )
+            (2500, 6200),
+            (655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
+        )
         pause 0.25
         Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_01_03.png"
-
-            )
+            (2500, 6200),
+            (655, 620), "images/sprites/SLW/SWN/ese_base_01_03.png"
+        )
         pause 0.25
         Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
-
-            )
+            (2500, 6200),
+            (655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
+        )
         pause 0.5
-
     repeat
 
-layeredimage Little_witch:
-    always:
+# Выбор варианта глаз
+# ИСПРАВЛЕНО: "Trye" -> "True"
+image SLW_eyes_01 = ConditionSwitch(
 
-        Null()
+    "eyes_LW_01 == 'eyes_norm_02'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
+    ),
 
-    # Коса — переключается через condition (wind_01)
-    group kassa:
-        attribute kassa_wind_01:
-            "SLW_kassa_wind_01"     # ссылка на ATL image
+    "eyes_LW_01 == 'eyes_norm_03'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_01_03.png"
+    ),
 
-        attribute kassa_wind_02:
-            "SLW_kassa_wind_02"     # ссылка на ATL image
+    "eyes_LW_01 == 'eyes_norm_blindfold_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_02_01.png"
+    ),
 
-        attribute kassa_wind_03:
-            "SLW_kassa_wind_03"     # ссылка на ATL image
+    "eyes_LW_01 == 'eyes_norm_blindfold_02'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_02_02.png"
+    ),
 
-        attribute kassa_still default:
-            "SLW_kassa_still"
+    "eyes_LW_01 == 'eyes_norm_blindfold_03'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_02_03.png"
+    ),
 
-    attribute SH default:
+    "eyes_LW_01 == 'eyes_norm_blindfold_04'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_02_04.png"
+    ),
 
-        Composite(
+    "eyes_LW_01 == 'eyes_left_norm_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_03_01.png"
+    ),
+
+    "eyes_LW_01 == 'eyes_right_norm_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_06_01.png"
+    ),
+
+    "eyes_LW_01 == 'eyes_left_norm_he_winks_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_04_01.png"
+    ),
+
+    "eyes_LW_01 == 'eyes_right_norm_he_winks_01'",
+    Composite(
+        (2500, 6200),
+        (655, 600), "images/sprites/SLW/SWN/ese_base_05_01.png"
+    ),
+
+    "eyes_LW_01 == 'eyes_norm_cray_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_cray_01_01.png"
+    ),
+
+    "eyes_LW_01 == 'eyes_norm_horror_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_horror_01_01.png"
+    ),
+
+    "eyes_LW_01 == 'eyes_norm_horror_02'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_horror_01_02.png"
+    ),
+
+    "eyes_LW_01 == 'eyes_norm_prizes_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_prizes_01_01.png"
+    ),
+
+    "True", "SLW_eyes_blink_01"   # ИСПРАВЛЕНО: было "Trye"
+)
+
+# ===================================================
+# ВЕСНУШКИ
+# ===================================================
+
+# ИСПРАВЛЕНО: "Trye" -> "True"
+image SLW_freckles_01 = ConditionSwitch(
+
+    "freckles_LW_01 == 'no'", Null(),
+
+    "freckles_LW_01 == 'norm_01'",
+    Composite(
+        (2500, 6200),
+        (750, 810), "images/sprites/SLW/SWN/freckles_base_01_02.png"
+    ),
+
+    "freckles_LW_01 == 'norm_02'",
+    Composite(
+        (2500, 6200),
+        (750, 810), "images/sprites/SLW/SWN/freckles_base_01_03.png"
+    ),
+
+    "freckles_LW_01 == 'norm_03'",
+    Composite(
+        (2500, 6200),
+        (750, 810), "images/sprites/SLW/SWN/freckles_base_01_04.png"
+    ),
+
+    "freckles_LW_01 == 'norm_04'",
+    Composite(
+        (2500, 6200),
+        (750, 810), "images/sprites/SLW/SWN/freckles_base_01_05.png"
+    ),
+
+    "freckles_LW_01 == 'norm_05'",
+    Composite(
+        (2500, 6200),
+        (750, 810), "images/sprites/SLW/SWN/freckles_base_01_06.png"
+    ),
+
+    "True",                         # ИСПРАВЛЕНО: было "Trye"
+    Composite(
+        (2500, 6200),
+        (750, 810), "images/sprites/SLW/SWN/freckles_base_01_01.png"
+    )
+)
+
+# ===================================================
+# РОТ
+# ===================================================
+
+image SLW_mouth_01 = ConditionSwitch(
+
+    "mouth_LW_01 == 'norm_smail_01'",
+    Composite(
+        (2500, 6200),
+        (950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_01.png"
+    ),
+
+    "True",
+    Composite(
+        (2500, 6200),
+        (970, 980), "images/sprites/SLW/SWN/mouth_base_01_01.png"
+    )
+)
+
+#====================================================
+#БРОВИ
+#====================================================
+
+image SLW_brov_01 = ConditionSwitch(
+
+    "brov_LW_01 == 'brov_surprised_01'", Composite(
                 (2500, 6200),
-                (556,130), "images/sprites/SLW/SWN/SLW_H.png"
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_02.png"
+            ),
 
-            )
-
-    group bodu_01:
-
-        attribute bodu_norm_01_nude default:
-
-            Composite(
+    "brov_LW_01 == 'brov_gloomy_01'", Composite(
                 (2500, 6200),
-                (0, 1000), "images/sprites/SLW/SWN/SLW_01_02_bodu_base.png"
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_03.png"
+            ),
 
-            )
-
-    group head:
-
-        attribute head_morm_01 default:
-
-            Composite(
+    "brov_LW_01 == 'brov_irritations_01'", Composite(
                 (2500, 6200),
-                (590,160), "images/sprites/SLW/SWN/SLW_01_01_feis_01.png"
-            )
-    
-    group brov:
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_04.png"
+            ),
 
-        attribute brov_norm_01 default:
-            Composite(
+    "brov_LW_01 == 'brov_sad_01'", Composite(
+                (2500, 6200),
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_05.png"
+            ),
+
+    "True", Composite(
                 (2500, 6200),
                 (665, 550), "images/sprites/SLW/SWN/brov_base_01_01.png"
             )
+)
 
-    group eyes:
 
-        attribute eyes_norm_blink_01 default:
-            "SLW_eyes_blink_01"
+# ===================================================
+# LAYEREDIMAGE — Маленькая Ведьма
+# ===================================================
+# ИСПРАВЛЕНО:
+#   - убрано дублирование group brov
+#   - brov_norm_01 оставлен в одной группе (непрозрачный вариант)
+#   - атрибут SH помечен default
 
-        attribute eyes_norm_02:
+layeredimage Little_witch:
+
+    always:
+        Null()
+
+    # Коса
+    attribute kassa_01 default:
+        "SLW_kassa_01"
+
+    # заглушка
+    attribute SH default:
+        Composite(
+            (2500, 6200),
+            (556, 130), "images/sprites/SLW/SWN/SLW_H.png"
+        )
+
+    # Тело
+    group bodu_01:
+        attribute bodu_norm_01_nude default:
             Composite(
                 (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
-
+                (0, 1000), "images/sprites/SLW/SWN/SLW_01_02_bodu_base.png"
             )
 
-        attribute eyes_norm_03:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_01_03.png"
+    # Голова
+    attribute head default:
+        "LWS_head"
 
-            )
-
-        attribute eyes_norm_blindfold_01:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_02_01.png"
-
-            )
-
-        attribute eyes_norm_blindfold_02:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_02_02.png"
-
-            )
-
-        attribute eyes_left_norm_01:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_03_01.png"
-
-            )
-
-        attribute eyes_left_norm_he_winks_01:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_04_01.png"
-
-            )
-        
-        attribute eyes_right_norm_he_winks_01:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_05_01.png"
-
-            )
-
-        attribute eyes_norm_cray_01:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_cray_01_01.png"
-
-            )
-
-        attribute eyes_norm_horror_01:
-            Composite(
-                (2500, 6200),
-                (655, 620), "images/sprites/SLW/SWN/ese_base_horror_01_01.png"
-
-            )
-
-    group freckles:
-
-        attribute freckles_norm_01 default:
-            Composite(
-                (2500, 6200),
-                (750, 810), "images/sprites/SLW/SWN/freckles_base_01_01.png"
-            )
-
-    group mouth:
-
-        attribute mouth_norm_01 default:
-            Composite(
-                (2500, 6200),
-                (970, 980), "images/sprites/SLW/SWN/mouth_base_01_01.png"
-            )
-
-    group hair:
-
-        attribute hair_wind_01:
-            "SLW_hair_wind_01"
-
-        attribute hair_wind_02:
-            "SLW_hair_wind_02"
-
-        attribute hair_still default:
-            "SLW_hair_still"
-
+    # Брови (одна группа, один вариант по умолчанию)
+    # ИСПРАВЛЕНО: была дублирующая group brov с im.Alpha
     group brov:
+        attribute brov_01 default:
+            "SLW_brov_01"
 
-        attribute brov_norm_01 default:
-            Composite(
-                (2500, 6200),
-                (665, 550), im.Alpha("images/sprites/SLW/SWN/brov_base_01_01.png", 0.7)
-            )
+    # Глаза
+    group eyes:
+        attribute eyes_01 default:
+            "SLW_eyes_01"
 
-   
+    # Веснушки
+    group freckles:
+        attribute freckles_01 default:
+            "SLW_freckles_01"
+
+    # Рот
+    group mouth:
+        attribute mouth_01 default:
+            "SLW_mouth_01"
+
+    # Волосы
+    attribute hair_01 default:
+        "SLW_hair_01"
+
+    #брови альфа канал.
+    group brov_alpha:
+        attribute brov_alpha_01 default:
+            Transform("SLW_brov_01", alpha=0.7)
+
+    # Цензура (не default — показывается только явным вызовом)
+    attribute censorship:
+        Composite(
+            (2500, 6000),
+            (-390, 80), "images/sprites/SLW/SWN/censorship_01_01_base.png"
+        )
 
 
 #    always:
@@ -1757,8 +1966,11 @@ image LW_slip_01 = "images/sprites/SLW/LW_slip_01.png"
 image DRC = im.FactorScale(im.Alpha("images/CG/Drakon.png", 0.85), 1.3, 1.3)
 
 #Хранительница Миров
-    
+
+
+#########################################################################################
 # добавочные изображения
+
 image ZB = "images/SD/ZB.png"
 image B = "images/SD/B.png"
 image V = "images/SD/V.png"
@@ -1785,7 +1997,8 @@ image LO = "images/SD/LO.png"
 image STAR_S = "images/SD/STAR_IU.png"
 image Cainic = im.FactorScale("images/logo/Cainic.png", 1.7, 1.7)
 image Mil_01 = im.FactorScale(im.Alpha("images/logo/Milnii_01.png", 0.9), 1.6, 1.6)
-    
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
 # Объявляем изображение магического круга.
 image magic_circle = "images/BG/magic.png"
     
@@ -1811,7 +2024,7 @@ image Alaya_05:
     alpha 0.5
         
 
-    
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
 # анимации природных явлений и прочих эффектов
 
 # Нота
@@ -2149,8 +2362,11 @@ image send_right:
 
 #ПЕРЕХОДЫ
 
+##################################################################################################
 
+#=======================================================================
 # Анимация на основе состояний-переходов.
+#========================================================================
    
 image smanim = anim.SMAnimation(
         
@@ -2179,7 +2395,10 @@ image smanim = anim.SMAnimation(
     anim.Edge("b", .5, "g", dissolve),         
     )
 
+#============================================================================
 # Определяем несколько новых эффектов перехода.
+#============================================================================
+
 define flashbulb = Fade(0.2, 0.0, 0.8, color='#fff')
 define diss = Dissolve (1.5)
 define dissA = Dissolve (3.0)
@@ -2191,8 +2410,10 @@ define tele = MultipleTransition([
     )
 
 
-    
+#======================================================================================   
 # Эффекты перехода с использованием маски (ImageDissolve).
+#======================================================================================
+
 define circleirisout = ImageDissolve("data/id_circleiris.png", 1.0, 8)
 define circleirisin = ImageDissolve("data/id_circleiris.png", 1.0, 8, reverse=True)
 define circlewipe = ImageDissolve("data/id_circlewipe.png", 1.0, 8)
@@ -2210,12 +2431,17 @@ define light6iss = ImageDissolve("data/light6.png", 1.0, 8)
 define tcenteriss = ImageDissolve("data/tcenter.png", 1.0, 8)
 define tlcenteriss = ImageDissolve("data/tlcenter.png", 1.0, 8)
 define upiss = ImageDissolve("data/up.png", 1.0, 8)
-    
+
+#==========================================================================================  
 # Эффекты перехода от одного режима к другому
+#==========================================================================================
 $ config.adv_nvl_transition = dissolve
 $ config.nvl_adv_transition = dissolve
-    
+
+#===========================================================================================    
 #дополнительные позиции спрайтов
+#============================================================================================
+
 #Для маленькой ведьмы
 define screen_left_01 = Position(xpos=200, ypos=1050)
 define screen_left_02 = Position(xpos=200, ypos=900)
@@ -2230,8 +2456,11 @@ define screen_right_02 = Position(xpos=1100, ypos=900)
 default LW_short_range = FactorZoom(0.53, 0.53, 0.0, opaque = False)
 default LW_medium_range = FactorZoom(0.30, 0.30, 0.0, opaque = False)
 default LW_long_range = FactorZoom(0.15, 0.15, 0.0, opaque = False)
-    
+
+#==============================================================================================    
 # параметрыческие функции
+#==============================================================================================
+
 define loposL = Position(xpos = 170, ypos = 50, xanchor = 0, yanchor = 0)
 define loposLD = Position(xpos = 170, ypos = -50, xanchor = 0, yanchor = 0)
 define loposLZ = Position(xpos = 190, ypos = 30, xanchor = 0, yanchor = 0)
@@ -2259,7 +2488,10 @@ define pos_cen = Position(xpos = 750, ypos = 360, xanchor = 0.5, yanchor = 0.5)
 
 
 define move = MoveTransition(1.5)
+
+#####################################################################################
 #Слои
+#====================================================================================
 init: 
     $ config.layers.insert(1, 'sloi01')
     $ config.layers.insert(2, 'sloi02')
@@ -2268,7 +2500,10 @@ init:
     $ config.layers.insert(5, 'sloi05')
     $ config.layers.insert(6, 'sloi06')
 
+#=====================================================================================
 #МАТРИЦЫ
+#=====================================================================================
+
 define brightness = Matrix([
     1.0, 0.0, 0.0, 0.1,
     0.0, 1.0, 0.0, 0.1,
@@ -2347,6 +2582,7 @@ define color_01 = Matrix([
     ])
 
 
+####################################################################################
 #МЕНЮ ЭКСТРА
 # MOKOt
 
