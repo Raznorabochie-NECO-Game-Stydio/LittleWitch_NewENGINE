@@ -158,10 +158,15 @@ label chapter1:
     
         scene bg0005
         
-        
+        $ head_LW_01 = 0
+        $ wind_01 = 1
+        default eyes_LW_01 = True
+        default freckles_LW_01 = 'norm_01'
+        default mouth_LW_01 = True
+        default brov_LW_01 = True
 
         #show LW_NormBust_01 at screen_center_01 onlayer sloi02 
-        show Little_witch hair_wind_01 kassa_wind_01 eyes_norm_horror_01 at LW_short_range, screen_center_03 onlayer sloi02
+        show Little_witch at LW_short_range, screen_center_03 onlayer sloi02
         #show NA at loposC onlayer sloi03
         show sn onlayer sloi04
         with diss
