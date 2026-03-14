@@ -222,28 +222,16 @@ init python:
 #старшие арканы
 #===========================================================
 
-image SAT_01 = "images/cardgame/card_A.png"
-image SAT_02 = "images/cardgame/card_B.png"
-image SAT_03 = "images/cardgame/card_C.png"
-image SAT_04 = "images/cardgame/card_D.png"
-image SAT_05 = "images/cardgame/card_E.png"
-image SAT_06 = "images/cardgame/card_F.png"
-image SAT_07 = "images/cardgame/card_G.png"
-image SAT_08 = "images/cardgame/card_H.png"
-image SAT_09 = "images/cardgame/card_I.png"
-image SAT_10 = "images/cardgame/card_J.png"
-image SAT_11 = "images/cardgame/card_K.png"
-image SAT_12 = "images/cardgame/card_L.png"
-image SAT_13 = "images/cardgame/card_M.png"
-image SAT_14 = "images/cardgame/card_N.png"
-image SAT_15 = "images/cardgame/card_O.png"
-image SAT_16 = "images/cardgame/card_P.png"
-image SAT_17 = "images/cardgame/card_R.png"
-image SAT_18 = "images/cardgame/card_S.png"
-image SAT_19 = "images/cardgame/card_T.png"
-image SAT_20 = "images/cardgame/card_U.png"
-image SAT_21 = "images/cardgame/card_V.png"
-image SAT_22 = "images/cardgame/card_Y.png"
+init python:
+    letters = [
+        "A","B","C","D","E","F","G","H","I","J","K",
+        "L","M","N","O","P","R","S","T","U","V","Y"
+    ]
+
+    SAT_cards = {
+        f"SAT_{i+1:02}": f"images/major_arcana/card_{letters[i]}.png"
+        for i in range(len(letters))
+    }
 
 #==============================================================
 #младщие арканы
@@ -1065,60 +1053,60 @@ image SLW_kassa_wind_01:
 image SLW_kassa_wind_02:
     Composite(
         (3500, 6000),
-        (0, 630),
+        (-300, 630),
         Transform(
             "images/sprites/SLW/SWN/SLW_01_01_kassa_01.png",
             zoom=0.75,
             rotate=0,
-            anchor=(0.0, 0.0),
+            anchor=(0.3, 0.0),
             transform_anchor=True
         )
     )
     pause 0.5
     Composite(
         (3500, 6000),
-        (150, 600),
+        (-300, 600),
         Transform(
             "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
             zoom=0.75,
             rotate=5,
-            anchor=(0.0, 0.0),
+            anchor=(0.3, 0.0),
             transform_anchor=True
         )
     )
     pause 0.5
     Composite(
         (3500, 6000),
-        (300, 580),
+        (-300, 580),
         Transform(
             "images/sprites/SLW/SWN/SLW_01_01_kassa_03.png",
             zoom=0.75,
             rotate=10,
-            anchor=(0.0, 0.0),
+            anchor=(0.3, 0.0),
             transform_anchor=True
         )
     )
     pause 0.5
     Composite(
         (3500, 6000),
-        (500, 670),
+        (-300, 670),
         Transform(
             "images/sprites/SLW/SWN/SLW_01_01_kassa_04.png",
             zoom=0.75,
             rotate=15,
-            anchor=(0.0, 0.0),
+            anchor=(0.3, 0.0),
             transform_anchor=True
         )
     )
     pause 0.5
     Composite(
         (3500, 6000),
-        (150, 600),
+        (-300, 600),
         Transform(
             "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
             zoom=0.75,
             rotate=10,
-            anchor=(0.5, 1.0),
+            anchor=(0.3, 0.0),
             transform_anchor=True
         )
     )
@@ -1128,67 +1116,71 @@ image SLW_kassa_wind_02:
 # Вариант 3 — сильный ветер
 # ИСПРАВЛЕНО: убран некорректный parallel внутри image ATL
 # Используем простое чередование кадров с разными позициями
+
+# Отдельные кадры кассы
+
+
+# Финальная сборка с rotate отдельно
 image SLW_kassa_wind_03:
-    Composite(
-        (3500, 6000),
-        (0, 600),
-        Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_01.png",
-            zoom=0.75,
-            anchor=(0.0, 0.0),
-            transform_anchor=True
+    contains:
+        # Покадровая анимация кадров
+        Composite(
+            (3500, 6000),
+            (0, 630),
+            Transform(
+                "images/sprites/SLW/SWN/SLW_01_01_kassa_01.png",
+                zoom=0.75
+            )
         )
-    )
-    pause 0.4
-    Composite(
-        (3500, 6000),
-        (150, 590),
-        Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
-            zoom=0.75,
-            rotate=5,
-            anchor=(0.0, 0.0),
-            transform_anchor=True
+        pause 0.5
+        Composite(
+            (3500, 6000),
+            (150, 600),
+            Transform(
+                "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
+                zoom=0.75
+            )
         )
-    )
-    pause 0.4
-    Composite(
-        (3500, 6000),
-        (300, 570),
-        Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_03.png",
-            zoom=0.75,
-            rotate=12,
-            anchor=(0.0, 0.0),
-            transform_anchor=True
+        pause 0.5
+        Composite(
+            (3500, 6000),
+            (300, 580),
+            Transform(
+                "images/sprites/SLW/SWN/SLW_01_01_kassa_03.png",
+                zoom=0.75
+            )
         )
-    )
-    pause 0.4
-    Composite(
-        (3500, 6000),
-        (500, 650),
-        Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_04.png",
-            zoom=0.75,
-            rotate=18,
-            anchor=(0.0, 0.0),
-            transform_anchor=True
+        pause 0.5
+        Composite(
+            (3500, 6000),
+            (500, 670),
+            Transform(
+                "images/sprites/SLW/SWN/SLW_01_01_kassa_04.png",
+                zoom=0.75
+            )
         )
-    )
-    pause 0.4
-    Composite(
-        (3500, 6000),
-        (150, 590),
-        Transform(
-            "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
-            zoom=0.75,
-            rotate=8,
-            anchor=(0.0, 0.0),
-            transform_anchor=True
+        pause 0.5
+        Composite(
+            (3500, 6000),
+            (150, 600),
+            Transform(
+                "images/sprites/SLW/SWN/SLW_01_01_kassa_02.png",
+                zoom=0.75
+            )
         )
-    )
-    pause 0.4
-    repeat
+        pause 0.5
+        repeat
+
+    # Качание всей анимации
+    rotate_pad False
+    xanchor 0.5
+    yanchor 0.0
+    block:
+        ease 0.2 rotate 10
+        easeout 0.8 rotate 3
+        ease 0.4 rotate 8
+        easeout 1.5 rotate -4
+        repeat
 
 # Статичная коса (без ветра)
 image SLW_kassa_still:
@@ -1212,7 +1204,7 @@ image SLW_kassa_01 = ConditionSwitch(
 
 image LWS_head = ConditionSwitch(
 
-    "head_LW_01 == 1",
+    "head_LW_01 == 'left'",
     Composite(
         (2500, 6200),
         (800, 940), "images/sprites/SLW/SWN/neck_01.png",
@@ -1223,7 +1215,7 @@ image LWS_head = ConditionSwitch(
         )
     ),
 
-    "head_LW_01 == 2",
+    "head_LW_01 == 'left_slant'",
     Composite(
         (2500, 6200),
         (330, 40),
@@ -1235,7 +1227,7 @@ image LWS_head = ConditionSwitch(
         )
     ),
 
-    "head_LW_01 == 3",
+    "head_LW_01 == 'left_down'",
     Composite(
         (2500, 6200),
         (800, 940), "images/sprites/SLW/SWN/neck_01.png",
@@ -1244,6 +1236,78 @@ image LWS_head = ConditionSwitch(
             "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
             zoom=0.93,
             rotate=-15,
+            anchor=(0.5, 1.0),
+            transform_anchor=True
+        )
+    ),
+
+    "head_LW_01 == 'left_top'",
+    Composite(
+        (2500, 6200),
+        (800, 940), "images/sprites/SLW/SWN/neck_01.png",
+        (325, 80),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+            zoom=0.93,
+            rotate=10,
+            anchor=(0.5, 1.0),
+            transform_anchor=True
+        )
+    ),
+
+    "head_LW_01 == 'right'",
+    Composite(
+        (2500, 6200),
+        (760, 940), 
+        Transform(
+            "images/sprites/SLW/SWN/neck_02.png",
+            xzoom=-1,
+            anchor=(0.5, 0.5)
+        ),
+        (560, 140),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+            zoom=0.93,
+            xzoom=-1,
+            anchor=(0.5, 0.5)
+        )
+    ),
+
+    "head_LW_01 == 'right_down'",
+    Composite(
+        (2500, 6200),
+        (800, 940), 
+        Transform(
+            "images/sprites/SLW/SWN/neck_02.png",
+            xzoom=-1,
+            anchor=(0.5, 0.5)
+        ),
+        (370, 80),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+            zoom=0.93,
+            rotate=15,
+            xzoom=-1,
+            anchor=(0.5, 1.0),
+            transform_anchor=True
+        )
+    ),
+
+    "head_LW_01 == 'right_top'",
+    Composite(
+        (2500, 6200),
+        (800, 940), 
+        Transform(
+            "images/sprites/SLW/SWN/neck_02.png",
+            xzoom=-1,
+            anchor=(0.5, 0.5)
+        ),
+        (240, 80),
+        Transform(
+            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+            zoom=0.93,
+            rotate=-10,
+            xzoom=-1,
             anchor=(0.5, 1.0),
             transform_anchor=True
         )
@@ -1362,6 +1426,12 @@ image SLW_eyes_blink_01:
 # ИСПРАВЛЕНО: "Trye" -> "True"
 image SLW_eyes_01 = ConditionSwitch(
 
+    "eyes_LW_01 == 'eyes_norm_01'",
+    Composite(
+        (2500, 6200),
+        (655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
+    ),
+
     "eyes_LW_01 == 'eyes_norm_02'",
     Composite(
         (2500, 6200),
@@ -1447,6 +1517,45 @@ image SLW_eyes_01 = ConditionSwitch(
     ),
 
     "True", "SLW_eyes_blink_01"   # ИСПРАВЛЕНО: было "Trye"
+)
+
+# ===================================================
+# ПЛАЧ
+# ===================================================
+
+image SLW_cry_01 = ConditionSwitch(
+
+    "cry_LW_01 == 'no'", Null(),
+
+    "cry_LW_01 == 'cry_01'", 
+    Composite(
+        (2500, 6200),
+        (680, 750), "images/sprites/SLW/SWN/cry_base_01_02.png"
+    ),
+
+    "cry_LW_01 == 'cry_02'", 
+    Composite(
+        (2500, 6200),
+        (730, 750), "images/sprites/SLW/SWN/cry_base_01_03.png"
+    ),
+
+    "cry_LW_01 == 'cry_03'", 
+    Composite(
+        (2500, 6200),
+        (730, 750), "images/sprites/SLW/SWN/cry_base_01_04.png"
+    ),
+
+    "cry_LW_01 == 'cry_04'", 
+    Composite(
+        (2500, 6200),
+        (730, 750), "images/sprites/SLW/SWN/cry_base_01_05.png"
+    ),
+
+    "True", 
+    Composite(
+        (2500, 6200),
+        (730, 750), "images/sprites/SLW/SWN/cry_base_01_01.png"
+    )
 )
 
 # ===================================================
@@ -1540,6 +1649,36 @@ image SLW_brov_01 = ConditionSwitch(
                 (650, 530), "images/sprites/SLW/SWN/brov_base_01_05.png"
             ),
 
+    "brov_LW_01 == 'brov_angry_01'", Composite(
+                (2500, 6200),
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_06.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_02'", Composite(
+                (2500, 6200),
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_07.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_03'", Composite(
+                (2500, 6200),
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_08.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_04'", Composite(
+                (2500, 6200),
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_09.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_05'", Composite(
+                (2500, 6200),
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_10.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_06'", Composite(
+                (2500, 6200),
+                (650, 530), "images/sprites/SLW/SWN/brov_base_01_11.png"
+            ),
+
     "True", Composite(
                 (2500, 6200),
                 (665, 550), "images/sprites/SLW/SWN/brov_base_01_01.png"
@@ -1565,7 +1704,7 @@ layeredimage Little_witch:
         "SLW_kassa_01"
 
     # заглушка
-    attribute SH default:
+    attribute SH:# default:
         Composite(
             (2500, 6200),
             (556, 130), "images/sprites/SLW/SWN/SLW_H.png"
@@ -1583,34 +1722,37 @@ layeredimage Little_witch:
     attribute head default:
         "LWS_head"
 
-    # Брови (одна группа, один вариант по умолчанию)
-    # ИСПРАВЛЕНО: была дублирующая group brov с im.Alpha
-    group brov:
-        attribute brov_01 default:
+    
+    group face:
+   
+        attribute brov_01:# default:
+        # Брови (одна группа, один вариант по умолчанию)
+        # ИСПРАВЛЕНО: была дублирующая group brov с im.Alpha
             "SLW_brov_01"
 
-    # Глаза
-    group eyes:
-        attribute eyes_01 default:
+        attribute eyes_01:# default:
+            # Глаза
             "SLW_eyes_01"
 
-    # Веснушки
-    group freckles:
-        attribute freckles_01 default:
+        attribute cry_01:# default:
+            #плач
+            "SLW_cry_01"
+ 
+        attribute freckles_01:# default:
+        # Веснушки
             "SLW_freckles_01"
 
-    # Рот
-    group mouth:
-        attribute mouth_01 default:
+        attribute mouth_01:# default:
+        # Рот
             "SLW_mouth_01"
 
-    # Волосы
-    attribute hair_01 default:
-        "SLW_hair_01"
+    
+        attribute hair_01:# default:
+        # Волосы
+            "SLW_hair_01"
 
-    #брови альфа канал.
-    group brov_alpha:
-        attribute brov_alpha_01 default:
+        attribute brov_alpha_01:# default:
+        #брови альфа канал.
             Transform("SLW_brov_01", alpha=0.7)
 
     # Цензура (не default — показывается только явным вызовом)
