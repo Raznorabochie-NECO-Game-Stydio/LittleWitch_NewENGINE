@@ -158,16 +158,17 @@ label chapter1:
     
         scene bg0005
         
-        default head_LW_01 = True
-        $ wind_01 = 3
-        default eyes_LW_01 = 'eyes_norm_02'
-        default cry_LW_01 = 'cry_01'
+        #default head_LW_01 = "left_down"
+        default head_LW_01 = 'default'
+        $ wind_01 = 0
+        default eyes_LW_01 = True
+        default cry_LW_01 = 'no'
         default freckles_LW_01 = 'norm_01'
         default mouth_LW_01 = True
-        default brov_LW_01 = 'brov_sad_01'
+        default brov_LW_01 = True
 
         #show LW_NormBust_01 at screen_center_01 onlayer sloi02 
-        show Little_witch at LW_long_range, screen_center_03 onlayer sloi02
+        show Little_witch at LW_short_range, screen_center_03 onlayer sloi02
         #show NA at loposC onlayer sloi03
         show sn onlayer sloi04
         with diss
@@ -177,11 +178,11 @@ label chapter1:
 
         e "На берегу замерзающего океана живёт Маленькая ведьма, когда-то нашедшая этот мир. "
         
-        #$ head_LW_01 = 1
+        $ head_LW_01 = 'left_slant'
         
         e "В прочем, она только учится у наставницы - хранительницы бездны миров... "
         
-        #$ head_LW_01 = 2
+        #$ head_LW_01 = 'default'
 
 ## задный фон менаеться через эффект diss, исчезает эффект бризг, и анимированная нота возле головы МВ. 
 ##так же исчезает шум турбины через затухания fadeout 1.5
