@@ -13,6 +13,9 @@
 
 label Taro_Arcane:
 
+    #$ card = SAT_cards["SAT_05"]
+    #show expression card
+
 
 
 
