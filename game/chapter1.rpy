@@ -73,7 +73,9 @@ label chapter1:
         #$ renpy.pause(2.0)
         #centered "{color=#d16f6a}{i}В страну фантазий тут все собрались.{/i}{/color}"
    
-## кадр менается по переходу dissA, картинка средний план. Кроват возле окна, шторы, окно закрыто, на окне измороз, и ледяные узоры, за окном сияют звезды. одна из которых яркая и крупная, в середине плана. 
+## кадр менается по переходу dissA, картинка средний план. Кроват возле окна, шторы, окно закрыто, 
+##на окне измороз, и ледяные узоры, за окном сияют звезды. одна из которых яркая и крупная,
+## в середине плана. стиль рисунка цветные карандаши 
 ##
 ##
     
@@ -86,8 +88,7 @@ label chapter1:
 ##
 ##
     
-        scene bg0002 with dissolve
-        scene bg0002 at Zoom((1920, 1080), (0, 0, 1920, 1080), (540, 130, 370, 250), 5.0)
+        scene bg0001 at Zoom((1920, 1080), (0, 0, 1920, 1080), (540, 130, 370, 250), 10.0)
     
         e "{i} Тёмным был путь, но сверкала звезда.{/i}{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
         e "{i}Горела в ночи и манила в пути безграничных дорог, причудливых снов и невозможных приключений.{/i}{space=30}{image=images/SD/GO.png}{alt}GO{/alt} "
@@ -136,7 +137,7 @@ label chapter1:
         scene black
         with dream
         scene bg0004
-        $ renpy.pause(7.0) 
+        $ renpy.pause(4.0) 
 
 ## Сцена 004
 ## кадр менаеться через переход diss. Смотровая плащадка ядерного маяка, кадр выстроен таким образом чтобы в левой его части была 
@@ -158,31 +159,18 @@ label chapter1:
     
         scene bg0005
         
-        #default head_LW_01 = "left_down"
-        default head_LW_01 = 'default'
-        $ wind_01 = 0
-        default eyes_LW_01 = True
-        default cry_LW_01 = 'no'
-        default freckles_LW_01 = 'norm_01'
-        default mouth_LW_01 = True
-        default brov_LW_01 = True
-
-        #show LW_NormBust_01 at screen_center_01 onlayer sloi02 
-        show Little_witch at LW_short_range, screen_center_03 onlayer sloi02
-        #show NA at loposC onlayer sloi03
-        show sn onlayer sloi04
+        
+        show LW_NormBust_01 at screen_center_01 onlayer sloi02 
+        
+        show NA at loposC onlayer sloi03
+        #show sn onlayer sloi04
         with diss
         #play nature "Zvuki/turbine_loop_1.wav" fadein 1.0
         #$ renpy.music.set_volume (0.6, .5, channel = "nature")
         #$ renpy.pause(0.5)
 
         e "На берегу замерзающего океана живёт Маленькая ведьма, когда-то нашедшая этот мир. "
-        
-        $ head_LW_01 = 'left_slant'
-        
         e "В прочем, она только учится у наставницы - хранительницы бездны миров... "
-        
-        #$ head_LW_01 = 'default'
 
 ## задный фон менаеться через эффект diss, исчезает эффект бризг, и анимированная нота возле головы МВ. 
 ##так же исчезает шум турбины через затухания fadeout 1.5
@@ -192,7 +180,7 @@ label chapter1:
     
         #stop nature fadeout 1.5
         hide NA onlayer sloi03
-        hide sn onlayer sloi04
+        #hide sn onlayer sloi04
         scene bg0006 
         with diss
  
@@ -203,10 +191,8 @@ label chapter1:
 ##
 
 
-        hide Little_witch onlayer sloi02
-        # LW open ""
-        # show LW -open
-        #hide LW_NormBust_01 onlayer sloi02
+        
+        hide LW_NormBust_01 onlayer sloi02
         show LW_NakBust_a_04 at screen_center_01 onlayer sloi02 
         with dissolve
         #show C at loposC onlayer sloi03
@@ -1295,18 +1281,30 @@ label Cha_001:
         e "Наконец, посреди этой тьмы она увидела даже не комнату – просто очерченный куб удивительно нормального бытового пространства,"
  
     
-    
+        #default head_LW_01 = "left_down"
+        #default head_LW_01 = 'default'
+        #$ wind_01 = 0
+        #default eyes_LW_01 = True
+        #default cry_LW_01 = 'no'
+        #default freckles_LW_01 = 'norm_01'
+        #default mouth_LW_01 = True
+        #default brov_LW_01 = True
+
+        #show Little_witch at LW_long_range, screen_center_03 onlayer sloi02
         #show LW n at left with moveinleft
         #show TR at Position(xpos = 400, ypos = 0, xanchor = 0, yanchor = 0)
         #show plate at right
         #show HM n at right onlayer xra 
         #with teleport
-
+        #$ head_LW_01 = 'left_slant'
     
         e " посреди которого, в похожем на трон высоком кресле восседала женщина со сверкающей диадемой на голове, "
     
-    
+        #$ head_LW_01 = 'default'
         #show HM s01 at right onlayer xra with dissolve
+        #hide Little_witch onlayer sloi02
+        # LW open ""
+        # show LW -open
 
         e "по причудливому длинному одеянию которой плыли звёзды и галактики."
 
