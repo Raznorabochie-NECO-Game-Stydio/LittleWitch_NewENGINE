@@ -1154,9 +1154,7 @@ layeredimage Little_witch:
         "SLW_kassa_01"
 
 
-# анимированные цветные спрайты
-
-
+# цветные спрайты
 
 # в полный рост
 # Основной спрайт с анимацией моргания
@@ -1173,6 +1171,13 @@ image LW_Norma_Color_01 = anim. SMAnimation("ax",
     anim.Edge ("dx", 0.5, "ax")
     ) 
 
+image LW_Color_Nor_a_01 = "images/sprites/SLW/LW_Norma_a_01.png"
+image LW_Color_Nor_a_02 = "images/sprites/SLW/LW_Norma_a_07.png"
+
+image LW_Color_NormaBust_a_01 = "images/sprites/SLW/LW_Norma_a_26.png"
+image LW_Color_NormaBust_a_02 = "images/sprites/SLW/LW_Norma_a_27.png"
+    
+
 #наклон стеснительно-заигрующе
 image LW_Color_Nak_a_04 = "images/sprites/SLW/LW_Nak_a_04.png" 
 
@@ -1182,7 +1187,7 @@ image LW_Color_Nak_a_02 = "images/sprites/SLW/LW_Nak_a_02.png"
 image LW_NakBust_a_03 = im.FactorScale("images/sprites/SLW/LW_Nak_a_03.png", 0.15, 0.15)
 
 #2/3 наклон
-image LW_NakBust_a_05 = im.FactorScale("images/sprites/SLW/LW_Nak_a_05.png", 0.15, 0.15)
+image LW_Color_Nak_a_05 = "images/sprites/SLW/LW_Nak_a_05.png"
 image LW_Color_Nak_a_06 = "images/sprites/SLW/LW_Nak_a_06.png"  
 
 #2/3
@@ -1281,7 +1286,9 @@ image LW_NormFull_c_01 = anim.SMAnimation("ax",
     anim.State ("dx", im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.1, 0.1)),
     anim.Edge ("dx", 0.5, "ax")
     ) 
-    
+
+
+
 image LW_NorFull_c_02 = im.FactorScale("images/sprites/SLW/LW_Norma_c_01.png", 0.1, 0.1)
 image LW_NorFull_c_03 = im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.1, 0.1)
 image LW_NorFull_c_04 = im.FactorScale("images/sprites/SLW/LW_Norma_c_03.png", 0.1, 0.1)
@@ -1347,8 +1354,8 @@ image LW_nb_02 = im.FactorScale("images/sprites/SLW/LW_Norma03.png", 0.15, 0.15)
 
     
 
-image LW_NorBust_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_01.png", 0.15, 0.15)
-image LW_NorBust_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_07.png", 0.15, 0.15)
+
+
 image LW_NorBust_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_10.png", 0.15, 0.15)
 image LW_NorBust_a_04 = im.FactorScale("images/sprites/SLW/LW_Norma_a_13.png", 0.15, 0.15)
     
@@ -1445,9 +1452,7 @@ image LW_Spin_c_01 = im.FactorScale("images/sprites/SLW/LW_Spin_c_01.png", 0.1, 
 image LW_Spin_a_01 = "images/sprites/SLW/LW_Spin_a_01.png"
 image LW_Spin_c_02 = im.FactorScale("images/sprites/SLW/LW_Spin_c_02.png", 0.21, 0.21)
     
-image LW_NormaBust_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_26.png", 0.27, 0.27)
-image LW_NormaBust_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_27.png", 0.2, 0.2)
-    
+
 #наклон стеснительно-заигрующе
 image LW_NorBust_c_20 = im.FactorScale("images/sprites/SLW/LW_Norma_c_19.png", 0.15, 0.15)
 image LW_NorBust_c_21 = im.FactorScale("images/sprites/SLW/LW_Norma_c_20.png", 0.15, 0.15)
@@ -2001,6 +2006,7 @@ define pos_cen = Position(xpos = 750, ypos = 360, xanchor = 0.5, yanchor = 0.5)
 
 
 define move = MoveTransition(1.5)
+define slow_move = MoveTransition(3.0)
 
 #####################################################################################
 #Слои
