@@ -254,7 +254,10 @@ label chapter1:
         show LW_Color_Nak_a_08 at LW_medium_range, screen_center_02_medium
         hide SNO onlayer sloi03
         show SNO at emo_LW_medium, loposC_LM_medium
-        scene bg0009 
+        #hide LW sloi02
+        #hide LW
+        
+        scene bg0009
         with diss
 
         e "И оно даже не одно: {w=1} их три. "
@@ -394,17 +397,31 @@ label chapter1:
         #play sound "Zvuki/Sound_05993.mp3" 
 
 
-        $ renpy.pause(4.0)
+        pause 4.0
         centered "{i}Бип… Бип… Бип…{/i} "
-        $ renpy.pause(4.0)
+        pause 4.0
         centered "{i}Бип… Бип… Бип…{/i} "
-        $ renpy.pause(4.0)
+        pause 4.0
         centered "{i}Бип… Бип… Бип…{/i} {space=30}{image=images/SD/GO.png}{alt}GO{/alt}"
-        $ renpy.pause(4.0)
+        pause 4.0
+
+##Сцена 0012
+##region 
+## Слайды обработанных сзвездных фотографий 
+##сделанных из журналов.
+##
+
         scene bg0014 with dissA
 
         e "Безмолвный крик, обращённый в бездну миров…"
-    
+
+##Сцена 0013
+##region
+## Быстроя смена кадра через эффект  tlcenteriss
+## За тем сцена на верхней площадки маяка. Маленкая Ведма распоожена в правой стороне экрана, 
+## сначала она смотрит в камеру потом менает наклон головы. Голова наклонена и смотрит в лево.
+##
+
         scene bg0018 with tlcenteriss
         #play music "Zvuki/Missile 45.wav" fadein 1.5
         #play sound "Zvuki/se-gale.wav" fadein 0.5
@@ -413,7 +430,9 @@ label chapter1:
         show sn onlayer sloi03
         show LW_Color_Nak_a_02 at LW_medium_range, screen_right_02_medium onlayer sloi02 
         with tlcenteriss
-        $ renpy.pause(4.0)
+
+        pause 4.0
+
         hide LW_Color_Nak_a_02 onlayer sloi02
         show LW_Color_Nak_a_06 at LW_medium_range, screen_right_02_medium onlayer sloi02
         with diss
@@ -425,12 +444,20 @@ label chapter1:
         hide LW_Color_Nak_a_06 onlayer sloi02
         show LW_Color_Nak_a_06 at LW_medium_range, screen_right_02_medium
         #stop music fadeout 1.0
+
+##Сцена 0014
+##region
+## Затенения смена кадра через эффект diss 
+## Общий план сцены со скалистыми островами в бущующим океане. 
+## Над ними виден газовый гигант. 
+##
+
         scene bg0000
         with diss
         e "..."
         scene bg0019 with diss
         #play music "Zvuki/OCEAN.WAV" fadein 1.5
-        $ renpy.pause(3.0)
+        pause 3.0
 
     
         e " Мир есть океан. "
@@ -441,6 +468,13 @@ label chapter1:
     
         #play sound "Zvuki/veter_02.mp3" fadein 0.5
         #play music "Sound/BGM_020.mp3" fadein 2.0
+
+##Сцена 0015
+##region
+## Смена кадра.
+##
+##
+
         scene bg0020 with dissA
         #scene bg0000 with diss
         #show LW_Spin_c_01 at left
@@ -449,14 +483,27 @@ label chapter1:
         e "И кажется, что вся планета засыпает, погружаясь в ледяной сон разума. "
     
         e "......"
+
+##Сцена 0016
+##region
+## Смена кадра.
+## Маленькая Ведьма находиться на верхней площадке. В правой часте кадра. 
+## За тем через 3 секунды с помощью эффекта slow_move перемещаеться в центр экрана.
+##
+
         scene bg0005 
         show sn onlayer sloi03
-        show LW_Color_Nak_a_02 at LW_medium_range, screen_right_02_medium
+
+        show LW_Color_Nak_a_02 as LW at LW_medium_range, screen_right_02_medium
         with leftiss
-        $ renpy.pause(3.0)
-        show LW_Color_Nak_a_02 at LW_medium_range, screen_right_02_medium with move
-        hide LW_Color_Nak_a_02
-        show LW_Color_Nak_a_06 at LW_medium_range, screen_center_02_medium
+
+        pause 3.0
+
+        #show LW_Color_Nak_a_02 as LW at LW_medium_range, screen_right_02_medium 
+        #with slow_move
+
+        #hide LW_Color_Nak_a_02
+        show LW_Color_Nak_a_06 as LW at LW_medium_range, screen_center_02_medium with slow_move
         with dissolve
         #play music "Zvuki/OCEAN.WAV" fadein 1.5
         #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
@@ -465,7 +512,8 @@ label chapter1:
         e "Маленькой ведьме всегда казалось, что и жизнь - и есть океан:"
    
         #play sound "Zvuki/veter_02.mp3"
-        hide LW_Color_Nak_a_06
+        hide LW
+        #hide LW_Color_Nak_a_06
         show LW_Color_Nak_a_07 at LW_medium_range, screen_center_02_medium
         with dissolve
         show GI at emo_LW_medium, loposC_LM_medium onlayer sloi03
@@ -483,39 +531,45 @@ label chapter1:
         hide GI onlayer sloi03
         #show TC at loposC onlayer demo
         hide LW_Color_Nak_a_08
-        show LW_NakBust_a_05 at screen_center_01
+        show LW_Color_Nak_a_05 at LW_medium_range, screen_center_02_medium
         with dissolve
 
         e "Кинув очередной взгляд в мрачный туманный горизонт, она застыла. "
         e "Казалось, будто она кого-то ждала {w=1}- надеялась, что вот-вот на горизонте появится корабль. "
 
-        hide LW_NakBust_a_05
-        show LW_NakBust_a_07 at screen_center_01
+        hide LW_Color_Nak_a_05
+        show LW_Color_Nak_a_07 at LW_medium_range, screen_center_02_medium
         with dissolve
     
         e "Иногда на неё накатывала волна необъяснимой тоски, надежды и предчувствий... "
     
         #play sound "Zvuki/OCEAN.WAV" fadein 0.5
-        hide LW_NakBust_a_07
-        show LW_NorBust_a_01 at screen_center_01
+        hide LW_Color_Nak_a_07
+        show LW_Color_Nor_a_01 at LW_medium_range, screen_center_02_medium
         with dissolve
 
         e "Вдохнув морозный соленый воздух, "
         e "Маленькая Ведьма закутавшись потеплее в плотную накидку и поправила свой широкий, расшитый белыми звёздами шарф."
     
         #play sound "Zvuki/veter_02.mp3" fadein 0.5
-        hide LW_NorBust_a_01
-        show LW_NormBust_01 at screen_center_01 
+        hide LW_Color_Nor_a_01
+        show LW_Norma_Color_01 at LW_medium_range, screen_center_02_medium 
         with dissolve
         #hide TC onlayer demo
 
         e "Она резко развернулась на каблуках своих шнурованных сапог."
 
         hide sn onlayer sloi03
-        hide LW_NormBust_01 with moveoutleft
+        hide LW_Norma_Color_01 with moveoutleft
         $ renpy.pause(2.0)
+
+##Сцена 0017
+##region
+## Смена кадра.
+
+
         scene bg0022 
-        show LW_NormaBust_a_02 at right
+        show LW_Color_NormaBust_a_02 at right
         with diss
     
 
@@ -523,13 +577,18 @@ label chapter1:
         e "Ветер так и норовил растрепать её тяжёлую, закрепленную заколкой в виде бабочки косу,"
         e " в которую были заплетены её длинные, белые словно снег волосы…"
     
-        hide LW_NormaBust_a_02
-        show LW_NormaBust_a_01 at right 
+        hide LW_Color_NormaBust_a_02
+        show LW_Color_NormaBust_a_01 at right 
         with dissA
     
         e "... "
 
-        hide LW_NormaBust_a_01 with moveoutleft
+        hide LW_Color_NormaBust_a_01 with moveoutleft
+        
+##Сцена 0018
+##region
+## Смена кадра.   
+        
         scene bg0023 with light4iss
         $ renpy.pause(1.0)
         #play sound "Zvuki/close2.wav"
