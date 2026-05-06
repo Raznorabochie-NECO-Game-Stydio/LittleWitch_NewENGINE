@@ -160,10 +160,10 @@ label chapter1:
         scene bg0005
         
         
-        show LW_NormBust_01 at screen_center_01 onlayer sloi02 
+        show LW_Norma_Color_01 at LW_medium_range, screen_center_02_medium onlayer sloi02 
         
-        show NA at loposC onlayer sloi03
-        #show sn onlayer sloi04
+        show NA at emo_LW_medium, loposC_LM_medium onlayer sloi03
+        show sn onlayer sloi04
         with diss
         #play nature "Zvuki/turbine_loop_1.wav" fadein 1.0
         #$ renpy.music.set_volume (0.6, .5, channel = "nature")
@@ -180,7 +180,7 @@ label chapter1:
     
         #stop nature fadeout 1.5
         hide NA onlayer sloi03
-        #hide sn onlayer sloi04
+        hide sn onlayer sloi04
         scene bg0006 
         with diss
  
@@ -192,8 +192,8 @@ label chapter1:
 
 
         
-        hide LW_NormBust_01 onlayer sloi02
-        show LW_NakBust_a_04 at screen_center_01 onlayer sloi02 
+        hide LW_Norma_Color_01 onlayer sloi02
+        show LW_Color_Nak_a_04 at LW_medium_range, screen_center_02_medium onlayer sloi02 
         with dissolve
         #show C at loposC onlayer sloi03
         #show LW_NakBust_a_04 at screen_right_01 onlayer sloi02 with move
@@ -203,8 +203,8 @@ label chapter1:
 
 ## спрайт Маленькой Ведьмы менаеться на с закрытими глазами.  
 
-        hide LW_NakBust_a_04 onlayer sloi02 
-        show LW_NakBust_a_01 at screen_center_01 onlayer sloi02 
+        hide LW_Color_Nak_a_04 onlayer sloi02 
+        show LW_Color_Nak_a_01 at LW_medium_range, screen_center_02_medium onlayer sloi02 
         with dissolve
     
         e "кто на что горазд: {w=1} кто называл её Тихоней, {w=1} кто-то Шалуньей, {w=1} а некоторые и вовсе Туфелькой. "
@@ -217,8 +217,8 @@ label chapter1:
 
 
         #hide D onlayer dexm
-        hide LW_NakBust_a_01 onlayer sloi02
-        show LW_NakBust_a_07 at screen_center_01 onlayer sloi02 
+        hide LW_Color_Nak_a_01 onlayer sloi02
+        show LW_Color_Nak_a_07 at LW_medium_range, screen_center_02_medium onlayer sloi02 
         with dissolve
         #show SHT at loposC onlayer dexm with dissolve
         scene bg0008 with diss
@@ -234,9 +234,9 @@ label chapter1:
     
     
         #hide SHT onlayer dexm
-        hide LW_NakBust_a_07 onlayer sloi02
-        show LW_NakBust_a_08 at screen_center_01 onlayer sloi02 
-        show SNO at loposC onlayer sloi03 with dissolve
+        hide LW_Color_Nak_a_07 onlayer sloi02
+        show LW_Color_Nak_a_08 at LW_medium_range, screen_center_02_medium onlayer sloi02 
+        show SNO at emo_LW_medium, loposC_LM_medium onlayer sloi03 with dissolve
         scene a0008 
         with diss
 
@@ -250,9 +250,11 @@ label chapter1:
 
 
 
-        hide LW_NakBust_a_08 onlayer sloi02
+        hide LW_Color_Nak_a_08 onlayer sloi02
+        show LW_Color_Nak_a_08 at LW_medium_range, screen_center_02_medium
         hide SNO onlayer sloi03
-        scene bg0009
+        show SNO at emo_LW_medium, loposC_LM_medium
+        scene bg0009 
         with diss
 
         e "И оно даже не одно: {w=1} их три. "
@@ -328,7 +330,7 @@ label chapter1:
 ## звук ветра 
 
     
-        scene bg0012 with dissA
+        scene bg0012a with dissA
 
         e "И хочется Ведьме согреть мир в ладошках, а временами – между бёдер."
 
@@ -349,7 +351,7 @@ label chapter1:
         with dream
         scene bg0005 
         show sn onlayer sloi03
-        show LW_NormBust_01 at screen_right_01 onlayer sloi02 
+        show LW_Norma_Color_01 at LW_medium_range, screen_right_02_medium onlayer sloi02 
         with circleirisout
         #play music "Zvuki/Missile 45.wav" fadein 1.5
     
@@ -383,7 +385,8 @@ label chapter1:
         e "Пронзая бездну мёртвого космоса, старый маяк непрерывно посылает короткие радиосигналы в космос: "
     
         hide sn onlayer sloi03
-        hide LW_NormBust_01 onlayer sloi02
+        hide LW_Norma_Color_01 onlayer sloi02
+        show LW_Norma_Color_01 at LW_medium_range, screen_right_02_medium
         scene bg0013 at Pan((0, 2480), (0, 0), 35.0) 
         with fade
         #stop music fadeout 1.0
@@ -406,23 +409,21 @@ label chapter1:
         #play music "Zvuki/Missile 45.wav" fadein 1.5
         #play sound "Zvuki/se-gale.wav" fadein 0.5
 
-
-
-   
         scene bg0005 
         show sn onlayer sloi03
-        show LW_NakBust_a_02 at screen_right_01 onlayer sloi02 
+        show LW_Color_Nak_a_02 at LW_medium_range, screen_right_02_medium onlayer sloi02 
         with tlcenteriss
         $ renpy.pause(4.0)
-        hide LW_NakBust_a_02 onlayer sloi02
-        show LW_NakBust_a_06 at screen_right_01 onlayer sloi02
+        hide LW_Color_Nak_a_02 onlayer sloi02
+        show LW_Color_Nak_a_06 at LW_medium_range, screen_right_02_medium onlayer sloi02
         with diss
         #$ renpy.pause(4.0)
     
         e "......"
 
         hide sn onlayer sloi03
-        hide LW_NakBust_a_06 onlayer sloi02
+        hide LW_Color_Nak_a_06 onlayer sloi02
+        show LW_Color_Nak_a_06 at LW_medium_range, screen_right_02_medium
         #stop music fadeout 1.0
         scene bg0000
         with diss
@@ -450,12 +451,12 @@ label chapter1:
         e "......"
         scene bg0005 
         show sn onlayer sloi03
-        show LW_NakBust_a_02 at screen_right_01
+        show LW_Color_Nak_a_02 at LW_medium_range, screen_right_02_medium
         with leftiss
         $ renpy.pause(3.0)
-        show LW_NakBust_a_02 at screen_center_01 with move
-        hide LW_NakBust_a_02
-        show LW_NakBust_a_06 at screen_center_01
+        show LW_Color_Nak_a_02 at LW_medium_range, screen_right_02_medium with move
+        hide LW_Color_Nak_a_02
+        show LW_Color_Nak_a_06 at LW_medium_range, screen_center_02_medium
         with dissolve
         #play music "Zvuki/OCEAN.WAV" fadein 1.5
         #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
@@ -464,15 +465,15 @@ label chapter1:
         e "Маленькой ведьме всегда казалось, что и жизнь - и есть океан:"
    
         #play sound "Zvuki/veter_02.mp3"
-        hide LW_NakBust_a_06
-        show LW_NakBust_a_07 at screen_center_01
+        hide LW_Color_Nak_a_06
+        show LW_Color_Nak_a_07 at LW_medium_range, screen_center_02_medium
         with dissolve
-        show GI at loposC onlayer sloi03
+        show GI at emo_LW_medium, loposC_LM_medium onlayer sloi03
     
         e " такой же бушующий,  "
     
-        hide LW_NakBust_a_07
-        show LW_NakBust_a_08 at screen_center_01
+        hide LW_Color_Nak_a_07
+        show LW_Color_Nak_a_08 at LW_medium_range, screen_center_02_medium
         with dissolve
 
 
@@ -481,7 +482,7 @@ label chapter1:
 
         hide GI onlayer sloi03
         #show TC at loposC onlayer demo
-        hide LW_NakBust_a_08
+        hide LW_Color_Nak_a_08
         show LW_NakBust_a_05 at screen_center_01
         with dissolve
 
