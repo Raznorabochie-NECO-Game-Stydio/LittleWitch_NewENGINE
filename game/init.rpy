@@ -677,6 +677,7 @@ image bg0009 = "images/BG/0009.jpg"
 image bg0010 = "images/BG/0010.jpg"
 image bg0011 = "images/BG/0011.jpg"
 image bg0012 = "images/BG/0012.jpg"
+image bg0012a = "images/BG/0012a.jpg"
 image bg0013 = "images/BG/0013.jpg"
 image bg0014:
     "images/BG/0014.jpg"
@@ -1158,6 +1159,7 @@ layeredimage Little_witch:
 
 
 # в полный рост
+# Основной спрайт с анимацией моргания
 
 image LW_Norma_Color_01 = anim. SMAnimation("ax",
     anim.State ("ax", "images/sprites/SLW/LW_Norma01.png"),
@@ -1171,6 +1173,24 @@ image LW_Norma_Color_01 = anim. SMAnimation("ax",
     anim.Edge ("dx", 0.5, "ax")
     ) 
 
+#наклон стеснительно-заигрующе
+image LW_Color_Nak_a_04 = "images/sprites/SLW/LW_Nak_a_04.png" 
+
+#наклон гловы
+image LW_Color_Nak_a_01 = "images/sprites/SLW/LW_Nak_a_01.png"
+image LW_Color_Nak_a_02 = "images/sprites/SLW/LW_Nak_a_02.png"
+image LW_NakBust_a_03 = im.FactorScale("images/sprites/SLW/LW_Nak_a_03.png", 0.15, 0.15)
+
+#2/3 наклон
+image LW_NakBust_a_05 = im.FactorScale("images/sprites/SLW/LW_Nak_a_05.png", 0.15, 0.15)
+image LW_Color_Nak_a_06 = "images/sprites/SLW/LW_Nak_a_06.png"  
+
+#2/3
+image LW_Color_Nak_a_07 = "images/sprites/SLW/LW_Nak_a_07.png"
+  
+#доволная
+image LW_Color_Nak_a_08 = "images/sprites/SLW/LW_Nak_a_08.png"
+    
 
 image LW_NormFull_01 = anim. SMAnimation("ax",
     anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma01.png", 0.1, 0.1)),
@@ -1322,24 +1342,11 @@ image LW_NormBust_01 = anim. SMAnimation("ax",
 image LW_nb_01 = im.FactorScale("images/sprites/SLW/LW_Norma02.png", 0.15, 0.15)
 image LW_nb_02 = im.FactorScale("images/sprites/SLW/LW_Norma03.png", 0.15, 0.15)
     
-#наклон гловы
-image LW_NakBust_a_01 = im.FactorScale("images/sprites/SLW/LW_Nak_a_01.png", 0.15, 0.15)
-image LW_NakBust_a_02 = im.FactorScale("images/sprites/SLW/LW_Nak_a_02.png", 0.15, 0.15)
-image LW_NakBust_a_03 = im.FactorScale("images/sprites/SLW/LW_Nak_a_03.png", 0.15, 0.15)
+
+  
+
     
-#2/3
-image LW_NakBust_a_07 = im.FactorScale("images/sprites/SLW/LW_Nak_a_07.png", 0.15, 0.15)
-    
-#2/3 наклон
-image LW_NakBust_a_05 = im.FactorScale("images/sprites/SLW/LW_Nak_a_05.png", 0.15, 0.15)
-image LW_NakBust_a_06 = im.FactorScale("images/sprites/SLW/LW_Nak_a_06.png", 0.15, 0.15)
-    
-#наклон стеснительно-заигрующе
-image LW_NakBust_a_04 = im.FactorScale("images/sprites/SLW/LW_Nak_a_04.png", 0.15, 0.15) 
-    
-#доволная
-image LW_NakBust_a_08 = im.FactorScale("images/sprites/SLW/LW_Nak_a_08.png", 0.15, 0.15)
-    
+
 image LW_NorBust_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_01.png", 0.15, 0.15)
 image LW_NorBust_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_07.png", 0.15, 0.15)
 image LW_NorBust_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_10.png", 0.15, 0.15)
@@ -1958,6 +1965,10 @@ define LW_short_range = FactorZoom(1.5, 1.5, 0.0, opaque = False)
 define LW_medium_range = FactorZoom(1.0, 1.0, 0.0, opaque = False)
 define LW_long_range = FactorZoom(0.5, 0.5, 0.0, opaque = False)
 
+# переменные для Маленькой Ведьмы для эмодзи
+
+define emo_LW_medium = FactorZoom(1.8, 1.8, 0.0, opaque = False)
+
 #==============================================================================================    
 # параметрыческие функции
 #==============================================================================================
@@ -1970,6 +1981,7 @@ define loposR = Position(xpos = 720, ypos = 10, xanchor = 0, yanchor = 0)
 define loposRC = Position(xpos = 700, ypos =120, xanchor = 0, yanchor = 0)
 define loposRG = Position(xpos = 660, ypos = 10, xanchor = 0, yanchor = 0)
 define loposC_LM_long = Position(xpos = 1000, ypos = 145, xanchor = 0.5, yanchor = 0.5)
+define loposC_LM_medium = Position(xpos = 1100, ypos = 145, xanchor = 0.5, yanchor = 0.5)
 define loposCFull = Position(xpos = 700, ypos = 100, xanchor = 0.5, yanchor = 0.5)
 define loposCA = Position(xpos = 465, ypos = 25, xanchor = 0, yanchor = 0)
 define lopoA = Position(xpos = 115, ypos = 370, xanchor = 0, yanchor = 0)
