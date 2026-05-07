@@ -103,6 +103,10 @@ transform smooth_random_move:
 #        pos (0, 0)
 
 
+#задается дополнительные вектора перемещения
+transform moveout_left_bottom:
+    ease 5.0  xpos -500 ypos 1200
+
 #===================================================
 # mci(MENU CHOICE ID)
 #===================================================
@@ -680,7 +684,7 @@ image bg0012 = "images/BG/0012.jpg"
 image bg0012a = "images/BG/0012a.jpg"
 image bg0013 = "images/BG/0013.jpg"
 image bg0014:
-    "images/BG/0014.jpg"
+    "images/BG/0014.jpg" with dissA
     pause 3.0
     
     "images/BG/0015.jpg" with dissA
@@ -689,7 +693,17 @@ image bg0014:
     "images/BG/0016.jpg" with dissA
     pause 3.0
     
-    "images/BG/0014.jpg" with dissA
+    "images/BG/0014a.jpg" with dissA
+    pause 3.0
+
+    "images/BG/0014c.jpg" with dissA
+    pause 3.0
+
+    "images/BG/0014b.jpg" with dissA
+    pause 3.0
+
+    "images/BG/0014d.jpg" with dissA
+    pause 3.0
     
     repeat
 image bg0015 = "images/BG/0014.jpg"
@@ -1171,12 +1185,18 @@ image LW_Norma_Color_01 = anim. SMAnimation("ax",
     anim.Edge ("dx", 0.5, "ax")
     ) 
 
+# норм
+
 image LW_Color_Nor_a_01 = "images/sprites/SLW/LW_Norma_a_01.png"
 image LW_Color_Nor_a_02 = "images/sprites/SLW/LW_Norma_a_07.png"
+image LW_Color_Nor_a_03 = "images/sprites/SLW/LW_Norma_a_10.png"
+image LW_Color_Nor_a_04 = "images/sprites/SLW/LW_Norma_a_13.png"
 
 image LW_Color_NormaBust_a_01 = "images/sprites/SLW/LW_Norma_a_26.png"
 image LW_Color_NormaBust_a_02 = "images/sprites/SLW/LW_Norma_a_27.png"
     
+image LW_Color_nf_01 = "images/sprites/SLW/LW_Norma02.png"
+image LW_Color_nf_02 = "images/sprites/SLW/LW_Norma03.png"
 
 #наклон стеснительно-заигрующе
 image LW_Color_Nak_a_04 = "images/sprites/SLW/LW_Nak_a_04.png" 
@@ -1184,279 +1204,121 @@ image LW_Color_Nak_a_04 = "images/sprites/SLW/LW_Nak_a_04.png"
 #наклон гловы
 image LW_Color_Nak_a_01 = "images/sprites/SLW/LW_Nak_a_01.png"
 image LW_Color_Nak_a_02 = "images/sprites/SLW/LW_Nak_a_02.png"
-image LW_NakBust_a_03 = im.FactorScale("images/sprites/SLW/LW_Nak_a_03.png", 0.15, 0.15)
+image LW_Color_Nak_a_03 = "images/sprites/SLW/LW_Nak_a_03.png"
 
 #2/3 наклон
 image LW_Color_Nak_a_05 = "images/sprites/SLW/LW_Nak_a_05.png"
 image LW_Color_Nak_a_06 = "images/sprites/SLW/LW_Nak_a_06.png"  
-
-#2/3
 image LW_Color_Nak_a_07 = "images/sprites/SLW/LW_Nak_a_07.png"
-  
+
+#наклон стеснительно-заигрующе
+image WL_Color_Nak_a_04 = "images/sprites/SLW/LW_Nak_a_04.png"
+ 
 #доволная
 image LW_Color_Nak_a_08 = "images/sprites/SLW/LW_Nak_a_08.png"
     
-
-image LW_NormFull_01 = anim. SMAnimation("ax",
-    anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma01.png", 0.1, 0.1)),
-    anim.Edge ("ax", 1.0, "ax", prob=7),
-    anim.Edge ("ax", 0.25, "bx"),
-    anim.State ("bx", im.FactorScale("images/sprites/SLW/LW_Norma02.png", 0.1, 0.1)),
-    anim.Edge ("bx", 0.25, "cx"),
-    anim.State ("cx", im.FactorScale("images/sprites/SLW/LW_Norma03.png", 0.1, 0.1)),
-    anim.Edge ("cx", 0.25, "dx"),
-    anim.State ("dx", im.FactorScale("images/sprites/SLW/LW_Norma02.png", 0.1, 0.1)),
-    anim.Edge ("dx", 0.5, "ax")
-    ) 
-    
-image LW_nf_01 = im.FactorScale("images/sprites/SLW/LW_Norma02.png", 0.1, 0.1)
-image LW_nf_02 = im.FactorScale("images/sprites/SLW/LW_Norma03.png", 0.1, 0.1)
-    
-#наклон гловы
-image LW_NakFull_a_01 = im.FactorScale("images/sprites/SLW/LW_Nak_a_01.png", 0.1, 0.1)
-image LW_NakFull_a_02 = im.FactorScale("images/sprites/SLW/LW_Nak_a_02.png", 0.1, 0.1)
-image LW_NakFull_a_03 = im.FactorScale("images/sprites/SLW/LW_Nak_a_03.png", 0.1, 0.1)
-    
-#2/3
-image WL_NakFull_a_07 = im.FactorScale("images/sprites/SLW/LW_Nak_a_07.png", 0.1, 0.1)
-    
-#2/3 наклон
-image WL_NakFull_a_05 = im.FactorScale("images/sprites/SLW/LW_Nak_a_05.png", 0.1, 0.1)
-image WL_NakFull_a_06 = im.FactorScale("images/sprites/SLW/LW_Nak_a_06.png", 0.1, 0.1)
-    
-#наклон стеснительно-заигрующе
-image WL_NakFull_a_04 = im.FactorScale("images/sprites/SLW/LW_Nak_a_04.png", 0.1, 0.1) 
-    
-#доволная
-image WL_NakFull_a_08 = im.FactorScale("images/sprites/SLW/LW_Nak_a_08.png", 0.1, 0.1)
-    
-image LW_NorFull_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_01.png", 0.1, 0.1)
-image LW_NorFull_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_07.png", 0.1, 0.1)
-image LW_NorFull_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_10.png", 0.1, 0.1)
-image LW_NorFull_a_04 = im.FactorScale("images/sprites/SLW/LW_Norma_a_13.png", 0.1, 0.1)
-    
 #глаза закрыты
-image LW_NorFullEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_02.png", 0.1, 0.1)
-image LW_NorFullEyesOff_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_05.png", 0.1, 0.1)
-    
+image LW_Color_NorEyesOff_a_01 = "images/sprites/SLW/LW_Norma_a_02.png"
+image LW_Color_NorEyesOff_a_02 = "images/sprites/SLW/LW_Norma_a_05.png"
+  
 #Разговор глаза закрыты
-image LW_NorFullRazEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_03.png", 0.1, 0.1)
-image LW_NorFullRazEyesOff_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_04.png", 0.1, 0.1)
+image LW_Color_NorRazEyesOff_a_01 = "images/sprites/SLW/LW_Norma_a_03.png"
+image LW_Color_NorRazEyesOff_a_02 = "images/sprites/SLW/LW_Norma_a_04.png"
     
 #удивленно напугана
-image LW_NorFullHorror_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_06.png", 0.1, 0.1)
-image LW_NorFullHorror_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_25.png", 0.1, 0.1)
+image LW_Color_NorHorror_a_01 = "images/sprites/SLW/LW_Norma_a_06.png"
+image LW_Color_NorHorror_a_02 = "images/sprites/SLW/LW_Norma_a_25.png"
     
 #разговор
-image LW_NorFullRaz_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_08.png", 0.1, 0.1)
-image LW_NorFullRaz_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_21.png", 0.1, 0.1)
-image LW_NorFullRaz_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_23.png", 0.1, 0.1)
+image LW_Color_NorRaz_a_01 = "images/sprites/SLW/LW_Norma_a_08.png"
+image LW_Color_NorRaz_a_02 = "images/sprites/SLW/LW_Norma_a_21.png"
+image LW_Color_NorRaz_a_03 = "images/sprites/SLW/LW_Norma_a_23.png"
     
 #Язык
-image LW_NorFullLeng_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_09.png", 0.1, 0.1)
+image LW_Color_NorLeng_a_01 = "images/sprites/SLW/LW_Norma_a_09.png"
     
 #Удивлена
-image LW_NorFullUdivlena_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_11.png", 0.1, 0.1)
+image LW_Color_NorUdivlena_a_01 = "images/sprites/SLW/LW_Norma_a_11.png"
     
 #стеснается
-image LW_NorFullShyUdivlena_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_12.png", 0.1, 0.1)
-image LW_NorFullShy_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_14.png", 0.1, 0.1)
-image LW_NorFullShy_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_19.png", 0.1, 0.1)
-image LW_NorFullShy_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_20.png", 0.1, 0.1)
-image LW_NorFullShyEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_17.png", 0.1, 0.1)
-image LW_NorFullShyRaz_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_15.png", 0.1, 0.1)
-image LW_NorFullShyRaz_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_22.png", 0.1, 0.1)
-image LW_NorFullShyRaz_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_24.png", 0.1, 0.1)
-image LW_NorFullShyRazEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_18.png", 0.1, 0.1)
-image LW_NorFullShyHorror_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_16.png", 0.1, 0.1)
+image LW_Color_NorShyUdivlena_a_01 = "images/sprites/SLW/LW_Norma_a_12.png"
+image LW_Color_NorShy_a_01 = "images/sprites/SLW/LW_Norma_a_14.png"
+image LW_Color_NorShy_a_02 = "images/sprites/SLW/LW_Norma_a_19.png"
+image LW_Color_NorShy_a_03 = "images/sprites/SLW/LW_Norma_a_20.png"
+image LW_Color_NorShyEyesOff_a_01 = "images/sprites/SLW/LW_Norma_a_17.png"
+image LW_Color_NorShyRaz_a_01 = "images/sprites/SLW/LW_Norma_a_15.png"
+image LW_Color_NorShyRaz_a_02 = "images/sprites/SLW/LW_Norma_a_22.png"
+image LW_Color_NorShyRaz_a_03 = "images/sprites/SLW/LW_Norma_a_24.png"
+image LW_Color_NorShyRazEyesOff_a_01 = "images/sprites/SLW/LW_Norma_a_18.png"
+image LW_Color_NorShyHorror_a_01 = "images/sprites/SLW/LW_Norma_a_16.png"
     
 # спит
 image LW_sl_01 = "images/sprites/SLW/LW_slip_01.png"
     
 # C
     
-image LW_NormFull_c_01 = anim.SMAnimation("ax",
-    anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma_c_01.png", 0.1, 0.1)),
+image LW_Color_Norm_c_01 = anim.SMAnimation("ax",
+    anim.State ("ax", "images/sprites/SLW/LW_Norma_c_01.png"),
     anim.Edge ("ax", 1.0, "ax", prob=7),
     anim.Edge ("ax", 0.25, "bx"),
-    anim.State ("bx", im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.1, 0.1)),
+    anim.State ("bx", "images/sprites/SLW/LW_Norma_c_02.png"),
     anim.Edge ("bx", 0.25, "cx"),
-    anim.State ("cx", im.FactorScale("images/sprites/SLW/LW_Norma_c_03.png", 0.1, 0.1)),
+    anim.State ("cx", "images/sprites/SLW/LW_Norma_c_03.png"),
     anim.Edge ("cx", 0.25, "dx"),
-    anim.State ("dx", im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.1, 0.1)),
+    anim.State ("dx", "images/sprites/SLW/LW_Norma_c_02.png"),
     anim.Edge ("dx", 0.5, "ax")
     ) 
 
 
 
-image LW_NorFull_c_02 = im.FactorScale("images/sprites/SLW/LW_Norma_c_01.png", 0.1, 0.1)
-image LW_NorFull_c_03 = im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.1, 0.1)
-image LW_NorFull_c_04 = im.FactorScale("images/sprites/SLW/LW_Norma_c_03.png", 0.1, 0.1)
-image LW_NorFull_c_06 = im.FactorScale("images/sprites/SLW/LW_Norma_c_04.png", 0.1, 0.1)
+image LW_Color_Nor_c_02 = "images/sprites/SLW/LW_Norma_c_01.png"
+image LW_Color_Nor_c_03 = "images/sprites/SLW/LW_Norma_c_02.png"
+image LW_Color_Nor_c_04 = "images/sprites/SLW/LW_Norma_c_03.png"
+image LW_Color_Nor_c_06 = "images/sprites/SLW/LW_Norma_c_04.png"
     
 #наклон головы
-image LW_NorFull_c_17 = im.FactorScale("images/sprites/SLW/LW_Norma_c_16.png", 0.1, 0.1)
-image LW_NorFull_c_18 = im.FactorScale("images/sprites/SLW/LW_Norma_c_17.png", 0.1, 0.1)
-image LW_NorFull_c_19 = im.FactorScale("images/sprites/SLW/LW_Norma_c_18.png", 0.1, 0.1)
+image LW_Color_Nor_c_17 = "images/sprites/SLW/LW_Norma_c_16.png"
+image LW_Color_Nor_c_18 = "images/sprites/SLW/LW_Norma_c_17.png"
+image LW_Color_Nor_c_19 = "images/sprites/SLW/LW_Norma_c_18.png"
     
 # показывает Язык
-image LW_NorFull_c_07 = im.FactorScale("images/sprites/SLW/LW_Norma_c_06.png", 0.1, 0.1)
+image LW_Color_Nor_c_07 = "images/sprites/SLW/LW_Norma_c_06.png"
     
 #подозрительная
-image LW_NorFull_c_08 = im.FactorScale("images/sprites/SLW/LW_Norma_c_07.png", 0.1, 0.1)
+image LW_Color_Nor_c_08 = "images/sprites/SLW/LW_Norma_c_07.png"
     
 # Разговор 
-image LW_NorFull_c_09 = im.FactorScale("images/sprites/SLW/LW_Norma_c_08.png", 0.1, 0.1)
+image LW_Color_Nor_c_09 = "images/sprites/SLW/LW_Norma_c_08.png"
     
 #закрытие глаза разговор, 
-image LW_NorFull_c_10 = im.FactorScale("images/sprites/SLW/LW_Norma_c_09.png", 0.1, 0.1)
-image LW_NorFull_c_14 = im.FactorScale("images/sprites/SLW/LW_Norma_c_13.png", 0.1, 0.1)
-image LW_NorFull_c_15 = im.FactorScale("images/sprites/SLW/LW_Norma_c_14.png", 0.1, 0.1)
+image LW_Color_Nor_c_10 = "images/sprites/SLW/LW_Norma_c_09.png"
+image LW_Color_Nor_c_14 = "images/sprites/SLW/LW_Norma_c_13.png"
+image LW_Color_Nor_c_15 = "images/sprites/SLW/LW_Norma_c_14.png"
     
 #удивленная подозрительная
-image LW_NorFull_c_11 = im.FactorScale("images/sprites/SLW/LW_Norma_c_10.png", 0.1, 0.1)
-    
+image LW_Color_Nor_c_11 = "images/sprites/SLW/LW_Norma_c_10.png"
+
 #Хорор удивленная
-image LW_NorFull_c_12 = im.FactorScale("images/sprites/SLW/LW_Norma_c_11.png", 0.1, 0.1)
+image LW_Color_Nor_c_12 = "images/sprites/SLW/LW_Norma_c_11.png"
     
 # кислая
-image LW_NorFull_c_13 = im.FactorScale("images/sprites/SLW/LW_Norma_c_12.png", 0.1, 0.1)
+image LW_Color_Nor_c_13 = "images/sprites/SLW/LW_Norma_c_12.png"
     
 # кислая, глаза закрыти
-image LW_NorFull_c_16 = im.FactorScale("images/sprites/SLW/LW_Norma_c_15.png", 0.1, 0.1)
+image LW_Color_Nor_c_16 = "images/sprites/SLW/LW_Norma_c_15.png"
     
 # поза 02
-image LW_NorFull_c_05 = im.FactorScale("images/sprites/SLW/LW_Norma_c_05.png", 0.1, 0.1)
+image LW_Color_Nor_c_05 = "images/sprites/SLW/LW_Norma_c_05.png"
     
 #наклон стеснительно-заигрующе
-image LW_NorFull_c_20 = im.FactorScale("images/sprites/SLW/LW_Norma_c_19.png", 0.1, 0.1)
-image LW_NorFull_c_21 = im.FactorScale("images/sprites/SLW/LW_Norma_c_20.png", 0.1, 0.1)
-    
-    
-# спрайт ближный план
-image LW_NormBust_01 = anim. SMAnimation("ax",
-    anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma01.png", 0.15, 0.15)),
-    anim.Edge ("ax", 1.0, "ax", prob=7),
-    anim.Edge ("ax", 0.25, "bx"),
-    anim.State ("bx", im.FactorScale("images/sprites/SLW/LW_Norma02.png", 0.15, 0.15)),
-    anim.Edge ("bx", 0.25, "cx"),
-    anim.State ("cx", im.FactorScale("images/sprites/SLW/LW_Norma03.png", 0.15, 0.15)),
-    anim.Edge ("cx", 0.25, "dx"),
-    anim.State ("dx", im.FactorScale("images/sprites/SLW/LW_Norma02.png", 0.15, 0.15)),
-    anim.Edge ("dx", 0.5, "ax")
-    ) 
-    
-image LW_nb_01 = im.FactorScale("images/sprites/SLW/LW_Norma02.png", 0.15, 0.15)
-image LW_nb_02 = im.FactorScale("images/sprites/SLW/LW_Norma03.png", 0.15, 0.15)
-    
-
-  
-
-    
-
-
-
-image LW_NorBust_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_10.png", 0.15, 0.15)
-image LW_NorBust_a_04 = im.FactorScale("images/sprites/SLW/LW_Norma_a_13.png", 0.15, 0.15)
-    
-#глаза закрыти
-image LW_NorBustEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_02.png", 0.15, 0.15)
-image LW_NorBustEyesOff_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_05.png", 0.15, 0.15)
-    
-#Разговор глаза закрыти
-image LW_NorBustRazEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_03.png", 0.15, 0.15)
-image LW_NorBustRazEyesOff_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_04.png", 0.15, 0.15)
-    
-#удивленно напугана
-image LW_NorBustHorror_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_06.png", 0.15, 0.15)
-image LW_NorBustHorror_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_25.png", 0.15, 0.15)
-    
-#разговор
-image LW_NorBustRaz_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_08.png", 0.15, 0.15)
-image LW_NorBustRaz_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_21.png", 0.15, 0.15)
-image LW_NorBustRaz_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_23.png", 0.15, 0.15)
-    
-#Язык
-image LW_NorBustLeng_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_09.png", 0.15, 0.15)
-    
-#Удивлена
-image LW_NorBustUdivlena_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_11.png", 0.15, 0.15)
-    
-#стеснается
-image LW_NorBustShyUdivlena_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_12.png", 0.15, 0.15)
-image LW_NorBustShy_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_14.png", 0.15, 0.15)
-image LW_NorBustShy_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_19.png", 0.15, 0.15)
-image LW_NorBustShy_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_20.png", 0.15, 0.15)
-image LW_NorBustShyEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_17.png", 0.15, 0.15)
-image LW_NorBustShyRaz_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_15.png", 0.15, 0.15)
-image LW_NorBustShyRaz_a_02 = im.FactorScale("images/sprites/SLW/LW_Norma_a_22.png", 0.15, 0.15)
-image LW_NorBustShyRaz_a_03 = im.FactorScale("images/sprites/SLW/LW_Norma_a_24.png", 0.15, 0.15)
-image LW_NorBustShyRazEyesOff_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_18.png", 0.15, 0.15)
-image LW_NorBustShyHorror_a_01 = im.FactorScale("images/sprites/SLW/LW_Norma_a_16.png", 0.15, 0.15)
-    
-# C
-image LW_NormBust_c_01 = anim.SMAnimation("ax",
-    anim.State ("ax", im.FactorScale("images/sprites/SLW/LW_Norma_c_01.png", 0.15, 0.15)),
-    anim.Edge ("ax", 1.0, "ax", prob=7),
-    anim.Edge ("ax", 0.25, "bx"),
-    anim.State ("bx", im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.15, 0.15)),
-    anim.Edge ("bx", 0.25, "cx"),
-    anim.State ("cx", im.FactorScale("images/sprites/SLW/LW_Norma_c_03.png", 0.15, 0.15)),
-    anim.Edge ("cx", 0.25, "dx"),
-    anim.State ("dx", im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.15, 0.15)),
-    anim.Edge ("dx", 0.5, "ax")
-    ) 
-    
-image LW_NorBust_c_02 = im.FactorScale("images/sprites/SLW/LW_Norma_c_01.png", 0.15, 0.15)
-image LW_NorBust_c_03 = im.FactorScale("images/sprites/SLW/LW_Norma_c_02.png", 0.15, 0.15)
-image LW_NorBust_c_04 = im.FactorScale("images/sprites/SLW/LW_Norma_c_03.png", 0.15, 0.15)
-image LW_NorBust_c_06 = im.FactorScale("images/sprites/SLW/LW_Norma_c_04.png", 0.15, 0.15)
-    
-#наклон головы
-image LW_NorBust_c_17 = im.FactorScale("images/sprites/SLW/LW_Norma_c_16.png", 0.15, 0.15)
-image LW_NorBust_c_18 = im.FactorScale("images/sprites/SLW/LW_Norma_c_17.png", 0.15, 0.15)
-image LW_NorBust_c_19 = im.FactorScale("images/sprites/SLW/LW_Norma_c_18.png", 0.15, 0.15)
-image LW_NorBust_c_22 = im.FactorScale("images/sprites/SLW/LW_Norma_c_21.png", 0.15, 0.15)
-    
-# показывает Язык
-image LW_NorBust_c_07 = im.FactorScale("images/sprites/SLW/LW_Norma_c_06.png", 0.15, 0.15)
-    
-#подозрительная
-image LW_NorBust_c_08 = im.FactorScale("images/sprites/SLW/LW_Norma_c_07.png", 0.15, 0.15)
-    
-# Разговор 
-image LW_NorBust_c_09 = im.FactorScale("images/sprites/SLW/LW_Norma_c_08.png", 0.15, 0.15)
-    
-#закрытие глаза разговор, 
-image LW_NorBust_c_10 = im.FactorScale("images/sprites/SLW/LW_Norma_c_09.png", 0.15, 0.15)
-image LW_NorBust_c_14 = im.FactorScale("images/sprites/SLW/LW_Norma_c_13.png", 0.15, 0.15)
-image LW_NorBust_c_15 = im.FactorScale("images/sprites/SLW/LW_Norma_c_14.png", 0.15, 0.15)
-    
-#удивленная подозрительная
-image LW_NorBust_c_11 = im.FactorScale("images/sprites/SLW/LW_Norma_c_10.png", 0.15, 0.15)
-    
-#Хорор удивленная
-image LW_NorBust_c_12 = im.FactorScale("images/sprites/SLW/LW_Norma_c_11.png", 0.15, 0.15)
-    
-# кислая
-image LW_NorBust_c_13 = im.FactorScale("images/sprites/SLW/LW_Norma_c_12.png", 0.15, 0.15)
-    
-# кислая, глаза закрыти
-image LW_NorBust_c_16 = im.FactorScale("images/sprites/SLW/LW_Norma_c_15.png", 0.15, 0.15)
-    
-# поза 02
-image LW_NorBust_c_05 = im.FactorScale("images/sprites/SLW/LW_Norma_c_05.png", 0.15, 0.15)
+image LW_Color_Nor_c_20 = "images/sprites/SLW/LW_Norma_c_19.png"
+image LW_Color_Nor_c_21 = "images/sprites/SLW/LW_Norma_c_20.png"
     
 # спина спрайты
-image LW_Spin_c_01 = im.FactorScale("images/sprites/SLW/LW_Spin_c_01.png", 0.1, 0.1)
+image LW_Spin_c_01 = "images/sprites/SLW/LW_Spin_c_01.png"
 image LW_Spin_a_01 = "images/sprites/SLW/LW_Spin_a_01.png"
-image LW_Spin_c_02 = im.FactorScale("images/sprites/SLW/LW_Spin_c_02.png", 0.21, 0.21)
-    
-
-#наклон стеснительно-заигрующе
-image LW_NorBust_c_20 = im.FactorScale("images/sprites/SLW/LW_Norma_c_19.png", 0.15, 0.15)
-image LW_NorBust_c_21 = im.FactorScale("images/sprites/SLW/LW_Norma_c_20.png", 0.15, 0.15)
-    
+image LW_Spin_c_02 = "images/sprites/SLW/LW_Spin_c_02.png"
+      
 #image LW_NorBust_c_01 = im.FactorScale("images/sprites/SLW/LW_Norma_c_05.png", 0.15, 0.15)
     
 #N обнаженная
@@ -1964,6 +1826,8 @@ define screen_center_02_medium  = Position(xpos=400, ypos=0)
 define screen_center_03_long  = Position(xpos=650, ypos=50)
 define screen_right_01_short = Position(xpos=900, ypos=0)
 define screen_right_02_medium = Position(xpos=1100, ypos=0)
+define screen_right_03_long = Position(xpos=1500, ypos=50)
+define screen_right_03_long_may = Position(xpos=1500, ypos=90)
 
 # переменные для Маленькой Ведьмы на ближный средний и дальный план
 define LW_short_range = FactorZoom(1.5, 1.5, 0.0, opaque = False)
