@@ -277,27 +277,38 @@ label chapter1:
 
 
 
-        scene bg0007 at Pan((0, 2380), (0, 0), 45.0) with fade
+        scene bg0007 at Pan((0, 3570), (0, 0), 45.0) with fade
         #play nature "Zvuki/se-ocean.wav" fadein 0.5
         #$ renpy.music.set_volume (0.5, .5, channel = "nature")
         #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
         #$ renpy.music.set_volume (0.5, .5, channel = "natu")
-        $ renpy.pause(5.0)
 
+        pause 3.0
 
         e "С башни старого маяка глазами температуры сна мира она смотрит вверх на парящую луну в зените небосвода,{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"    
+        
+        pause 2.0
+
         e " а ещё несколько лун серпиками виднеются в сумрачной дали. {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
     
-        $ renpy.pause(2.0)
+        pause 2.0
+
         #play sound "Zvuki/wind-05.mp3" fadein 0.5
         #$ renpy.music.set_volume (0.3, .5, channel = "nature")
 
         e "И маленькое белое солнышко, едва освещающее этот мир. {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
+        
+        pause 2.0
+        
         e "Мир из планет и спутников водит бесконечный хоровод вокруг маленькой умирающей звезды,{space=30}{image=images/SD/SG.png}{alt}SG{/alt} "
+        
+        pause 2.0
+        
         e "а сама звёздочка - вокруг двух других вращающихся солнц,{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
     
         #stop nature fadeout 1.5
-        $ renpy.pause(2.0)
+
+        pause 2.0
  
         e " и эти другие солнца согревают её по очереди. {space=30}{image=images/SD/GO.png}{alt}GO{/alt}"
     
@@ -307,7 +318,8 @@ label chapter1:
 
 
 
-        $ renpy.pause(2.0)
+        pause 2.0
+
         #stop natu fadeout 1.5
         scene bg0010 with teleport
         #play sound "Zvuki/wind-05.mp3"
@@ -333,7 +345,7 @@ label chapter1:
 ## звук ветра 
 
     
-        scene bg0012a with dissA
+        scene bg0012 with dissA
 
         e "И хочется Ведьме согреть мир в ладошках, а временами – между бёдер."
 
@@ -352,10 +364,12 @@ label chapter1:
 
         scene bg0000 
         with dream
-        scene bg0005 
-        show sn onlayer sloi03
-        show LW_Norma_Color_01 at LW_medium_range, screen_right_02_medium onlayer sloi02 
-        with circleirisout
+        scene bg0012a with dissA
+
+        #scene bg0005 
+        #show sn onlayer sloi03
+        #show LW_Norma_Color_01 at LW_medium_range, screen_right_02_medium onlayer sloi02 
+        #with circleirisout
         #play music "Zvuki/Missile 45.wav" fadein 1.5
     
         e "Зима уже недалеко... "
@@ -367,6 +381,16 @@ label chapter1:
         e "Но пока его волны ещё бушуют. "
         e "Гигантские громады мрачной воды разбиваются об острые скалы, "
         e "оставляя после себя облака мелкой ледяной взвеси. "
+        
+        
+        scene bg0000 
+        with dream
+        scene bg0005 
+        show sn onlayer sloi03
+        show LW_Norma_Color_01 at LW_medium_range, screen_right_02_medium onlayer sloi02 
+        with circleirisout
+        
+        
         e "Маленькая Ведьма наблюдает за их игрой с верхней смотровой площадки ядерного маяка при яростном свете факела-инжектора,"
         e  " что освещает мир ночью," 
 
@@ -524,8 +548,6 @@ label chapter1:
         show LW_Color_Nak_a_08 at LW_medium_range, screen_center_02_medium
         with dissolve
 
-
-   
         e " такой же переменчивый и непредсказуемый. "
 
         hide GI onlayer sloi03
@@ -560,7 +582,7 @@ label chapter1:
         e "Она резко развернулась на каблуках своих шнурованных сапог."
 
         hide sn onlayer sloi03
-        hide LW_Norma_Color_01 with moveoutleft
+        hide LW_Norma_Color_01 with easeoutleft
         $ renpy.pause(2.0)
 
 ##Сцена 0017
@@ -587,7 +609,20 @@ label chapter1:
         
 ##Сцена 0018
 ##region
-## Смена кадра.   
+## Смена кадра. 
+## На картинке изображена мрачная сцена под сильным дождём в стилистике грубого цифрового скетча 
+## или комиксной иллюстрации. Фон почти чёрный, с зелёно-синими оттенками, по всему кадру идут косые линии дождя, создавая атмосферу холода, тревоги и изоляции.
+## Справа находится массивное серое здание или укреплённый вход в секретный объект. Оно выглядит как бетонный или металлический бункер с большими прямоугольными панелями.
+## На центральной части стены размещена белая табличка с надписью “SCP” и символом, напоминающим логотип SCP Foundation. 
+## Архитектура строгая, индустриальная, тяжёлая, с тёмными тенями и синим контурным освещением по краям.
+## Рядом заметен маленький красно-оранжевый светящийся элемент, похожий на глаз, индикатор или фонарь.
+## Слева находится отдельная деревянная или металлическая платформа. 
+## На ней расположен яркий фантастический механизм — что-то вроде самодельного устройства, генератора или странной машины. 
+## Конструкция наполнена трубами, кабелями, цилиндрами, яркими синими, жёлтыми и оранжевыми деталями. 
+## Верх устройства охвачен огнём или светящейся плазмой: яркое оранжево-жёлтое пламя резко контрастирует с холодной дождливой сценой. Машина выглядит нестабильной, экспериментальной, возможно, аномальной.
+##
+##
+##
         
         scene bg0023 with light4iss
         $ renpy.pause(1.0)
@@ -597,17 +632,23 @@ label chapter1:
         scene bg0000 
         with circleirisin
         $ renpy.pause(1.0)
-        scene bg0031 at Pan((0, 0), (0, 1550), 10.0) with dissA
-        $ renpy.pause(10.0)
+        #scene bg0031 at Pan((0, 0), (0, 1550), 10.0) with dissA
+        scene bg0031 with dissA
+
+        pause 5.0
+
         #play music "Sound/BGM_005.mp3" fadein 1.5
         #play sound "Zvuki/metal_mechanical_noise.mp3" fadein 3.0
         #play nature "Zvuki/PDron.mp3" fadein 4.0
-        scene bg0025 
+        scene bg0025
+        show LW_Norma_Color_01 as LW at LW_long_range, screen_right_03_long_may 
         with downiss 
-        $ renpy.pause(3.0)
-        scene bg0026
-        show LW_NormFull_01 at center
-        with downiss 
+
+        pause 3.0
+
+        #scene bg0026
+         
+        #with downiss 
         #with circlewipe
         #play natu "Zvuki/kabluki_po_metal.MP3" fadein 0.5
     
@@ -623,12 +664,16 @@ label chapter1:
         #scene bg0000
         #with circleirisin
         #scene bg0028 with dissA
-        $ renpy.pause(3.0)
-        hide LW_NormFull_01
+        pause 1.0
+        show LW_Norma_Color_01 as LW at LW_long_range, screen_right_03_long_may, moveout_left_bottom
+        pause 5.0
+        hide LW
+
         scene bg0000
         with circleirisin
         scene bg0030 with dissA
-        $ renpy.pause(3.0)
+        
+        pause 3.0
         scene bg0000
         with circleirisin
         scene bg0029 with dissA
@@ -658,19 +703,21 @@ label chapter1:
         #stop music fadeout 1.0
         #hide LW s01 with moveoutright
         scene bg0000 with fade
-        scene bg0032 at Pan((0, 0), (0, 1550), 10.0) with dissolve
-        $ renpy.pause(3.5)
-        scene bg0000
-        with circleirisin
         scene bg0027 with dissA
         with circleirisin
-        $ renpy.pause(3.0)
+        
+        pause 3.0
         scene bg0000
         with circleirisin
         scene bg0028 with dissA
-        $ renpy.pause(3.0)
-        scene bg0033 with dissA
 
+        pause 3.0
+        with circleirisin
+        scene bg0032 with dissA
+        
+        pause 3.0
+        with circleirisin
+        scene bg0033 with dissA
     
         e "Повернув ручку тяжёлой и скрипучей двери, она вышла на каменный утёс"
     
@@ -678,7 +725,12 @@ label chapter1:
         scene bg0000 with dissA
 
         e "..."
-   
+
+## Сцена 0019
+## дальный плань, камера движеться сверху вниз, показывая ядерный маяк.
+##
+##
+
         #play nature "Zvuki/Shagi_po_kamnyam_3.MP3" fadein 0.5
         #play natu "Zvuki/turbine_loop_1.wav" fadein 1.0
         #$ renpy.music.set_volume (0.7, .5, channel = "natu")
