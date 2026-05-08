@@ -100,8 +100,6 @@ label chapter1:
 ##музыкального трека - тихий спокойный эмбиент с каплами или журчанием воды, создающий атмосферу текущей воды. музыкальная тема "водного мира"
 ##
 ##
-
-
         scene bg0000
         with dream
         #stop music fadeout 1.0
@@ -387,12 +385,16 @@ label chapter1:
         with dream
         scene bg0005 
         show sn onlayer sloi03
-        show LW_Norma_Color_01 at LW_medium_range, screen_right_02_medium onlayer sloi02 
+        show LW_Color_Nor_a_03 at LW_medium_range, screen_right_02_medium onlayer sloi02 
         with circleirisout
         
         
         e "Маленькая Ведьма наблюдает за их игрой с верхней смотровой площадки ядерного маяка при яростном свете факела-инжектора,"
         e  " что освещает мир ночью," 
+
+        hide LW_Color_Nor_a_03 onlayer sloi02 
+        show LW_Color_Nak_a_08 at LW_medium_range, screen_right_02_medium onlayer sloi02 
+        with dissolve
 
         #play sound "Zvuki/se-gale.wav" fadein 0.5
 
@@ -412,8 +414,8 @@ label chapter1:
         e "Пронзая бездну мёртвого космоса, старый маяк непрерывно посылает короткие радиосигналы в космос: "
     
         hide sn onlayer sloi03
-        hide LW_Norma_Color_01 onlayer sloi02
-        show LW_Norma_Color_01 at LW_medium_range, screen_right_02_medium
+        hide LW_Color_Nak_a_08 onlayer sloi02
+        show LW_Color_Nak_a_08 at LW_medium_range, screen_right_02_medium
         scene bg0013 at Pan((0, 2480), (0, 0), 35.0) 
         with fade
         #stop music fadeout 1.0
@@ -740,31 +742,52 @@ label chapter1:
 
         e "..."
 
-        scene bg0036 with diss
-    
+     
+## Сцена 0020    
 #фон растительности на скалах
 #через две строчки сменит на фон хижины МВ.
 
+        
+        scene bg0000 with dissA
+        
+        e "......"
+
+        scene bg0036 with tlcenteriss 
+
         e "Растительность здесь была скудная, ибо ветер и волны практически не оставляли на камнях плодородной почвы, "
         e "но каким-то немыслимым чудом – жизнь просачивалась через щели и здесь. "
+        
+        scene bg0036a with diss
+        
         e "Вдали сквозь туман виднелась старая хижина с ветхой протекающей крышей, "
         e "промерзающая в лютые зимы и подпёртая брёвнами с покосившейся стороны. "
 
  
         scene bg0037
-        show WL_NakFull_a_08 at center
+        show LW_Color_Nak_a_02 at LW_long_range, screen_center_03_long 
         show NA at loposCFull onlayer sloi03
         with downiss
 
-#сменит фон анимация, возможно отдельная уменщающейся спрайт МВ, 
-#повернутый спиной к игроку, который идет в перспективу фона
+## Сцена 0021
+# МВ идет от основания мояка. План дальный. 
+#
 
         e "Единственное убежище посреди этого неприветливого мирка, обречённого уже скоро стать бесконечной ледяной пустыней…" 
+        
+        hide LW_Color_Nak_a_02
+        show LW_Color_NorEyesOff_a_02 at LW_long_range, screen_center_03_long 
+        with dissolve
+        
         e "Петляя среди огромных валунов, похожих на зубы древнего чудовища, Маленькая Ведьма направилась к своему скромному жилищу. "
+        
+        hide LW_Color_NorEyesOff_a_02
+        show LW_Color_Nak_a_01 at LW_long_range, screen_center_03_long 
+        with dissolve 
+        
         e "Шагами, мерившими тысячелетия, она шла вперёд…"
 
 
-        hide WL_NakFull_a_08
+        hide LW_Color_Nak_a_02
         hide NA onlayer sloi03
         #stop sound fadeout 1.0
         #stop nature fadeout 0.5
@@ -774,38 +797,48 @@ label chapter1:
         e "...."
         #play music "Sound/BGM_002.mp3" fadein 2.0
         scene bg0038 with diss
+
+## Сцена 0022
+#сменит фон анимация, возможно отдельная уменщающейся спрайт МВ, 
+#повернутый спиной к игроку, который идет в перспективу фона
     
 
         e "Этот дом был каменным."
         e "Сейчас вокруг него стыл сумрак ночи. "
         e "Странным казалось в нём всё. И в то же время - всё было обычным, почти родным. "
+        
+        show LW_Spin_a_01 at xijena, movein_left_bottom_01
+        
         e "Словно кто-то взял и ковырнул её воспоминания из детские мечтаний - после чего воплотил их в камне."
         e " Но не стал обтёсывать, а обложил каким-то таинственным заклятием "
         e "и перенёс назад во времени - так, чтобы когда маленькая ведьма его нашла, этот дом выглядел старым."
         e "Но становилось понятным – создан он для неё и поставлен здесь для неё, и дожидается именно её..."
-    
-        e "..."
+
+## Сцена 0023
+
+        scene bg0000
+        with diss
     
         #play natu "Zvuki/drova.MP3" fadein 0.5
         #$ renpy.music.set_volume (0.9, .5, channel = "natu")
+        e "..."
         scene bg0041 
         #show Alaya_01 onlayer sloi02 
         with tlcenteriss
 
-    
         e "Сняв с себя тяжелый промокший плащ, она вошла в комнату."
         e "В этом доме была старая невзрачная мебель: шкаф, стол, пара стульев, комод и кровать."
         e "И много, много пыли... "
 
-        show LW_NorBust_c_08 at xijena, screen_left_02 with moveinleft
+        show LW_Color_Nor_c_08 at xijena, screen_left_02 with moveinleft
         #show S02 at loposLX onlayer demo
 
     
         e "Она не знала, кто и когда построил этот маяк."
         e "Она не знала, кто и когда построил хижину."
     
-        hide LW_NorBust_c_08
-        show LW_NorBust_c_06 at xijena, screen_left_02 
+        hide LW_Color_Nor_c_08
+        show LW_Color_Nor_c_06 at xijena, screen_left_02 
         with dissolve
         #hide S02 onlayer demo
         #show S03 at loposLX onlayer demo
@@ -814,8 +847,8 @@ label chapter1:
         e "Она не знала, кто до неё жил. "
         e "Она лишь нашла то, что было, спустившись с неба три зимы назад."
     
-        hide LW_NorBust_c_06
-        show LW_NorBust_c_21 at xijena, screen_left_02 
+        hide LW_Color_Nor_c_06
+        show LW_Color_Nor_c_21 at xijena, screen_left_02 
         with dissolve
         #hide S03 onlayer demo
         #show GI at loposLX onlayer demo
@@ -824,15 +857,18 @@ label chapter1:
     
         e "И поселилась здесь, храня тепло очага. "
     
-        hide LW_NorBust_c_21
-        show LW_NorBust_c_05 at xijena, screen_left_02 
+        hide LW_Color_Nor_c_21
+        show LW_Color_Nor_c_05 at xijena, screen_left_02 
         with dissolve
 
         e "Она обжила этот дом, и он стал ей родным. "
         e "Она уже не представляла жизни вне этого холодного мира..."
     
-        hide LW_NorBust_c_05
+        hide LW_Color_Nor_c_05
         #hide GI onlayer demo
+
+## Сцена 0024
+
         scene bg0000
         with diss
         e "...."
