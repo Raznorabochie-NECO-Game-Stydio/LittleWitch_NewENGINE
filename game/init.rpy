@@ -1293,6 +1293,7 @@ image LW_Color_Nor_c_06 = "images/sprites/SLW/LW_Norma_c_04.png"
 image LW_Color_Nor_c_17 = "images/sprites/SLW/LW_Norma_c_16.png"
 image LW_Color_Nor_c_18 = "images/sprites/SLW/LW_Norma_c_17.png"
 image LW_Color_Nor_c_19 = "images/sprites/SLW/LW_Norma_c_18.png"
+image LW_Color_Nor_c_22 = "images/sprites/SLW/LW_Norma_c_21.png"
     
 # показывает Язык
 image LW_Color_Nor_c_07 = "images/sprites/SLW/LW_Norma_c_06.png"
@@ -1338,8 +1339,16 @@ image LW_Spin_c_02 = "images/sprites/SLW/LW_Spin_c_02.png"
 image LW_NFM_01 = im.FactorScale("images/sprites/SLW/LW_Nude_Full_01.png", 0.2, 0.2)
 image LW_slip_01 = "images/sprites/SLW/LW_slip_01.png"
 
+
+
+
+
 #Дракон
 image DRC = im.FactorScale(im.Alpha("images/CG/Drakon.png", 0.85), 1.3, 1.3)
+
+
+
+
 
 #Хранительница Миров
 
@@ -1862,7 +1871,8 @@ define emo_LW_medium = FactorZoom(1.8, 1.8, 0.0, opaque = False)
 define loposL = Position(xpos = 170, ypos = 50, xanchor = 0, yanchor = 0)
 define loposLD = Position(xpos = 170, ypos = -50, xanchor = 0, yanchor = 0)
 define loposLZ = Position(xpos = 190, ypos = 30, xanchor = 0, yanchor = 0)
-define loposLX = Position(xpos = 120, ypos = 180, xanchor = 0, yanchor = 0)
+define loposLX = Position(xpos = 450, ypos = 550, xanchor = 0.5, yanchor = 0.5)
+define loposLX_01 = Position(xpos = 350, ypos = 610, xanchor = 0.5, yanchor = 0.5)
 define loposR = Position(xpos = 720, ypos = 10, xanchor = 0, yanchor = 0)
 define loposRC = Position(xpos = 700, ypos =120, xanchor = 0, yanchor = 0)
 define loposRG = Position(xpos = 660, ypos = 10, xanchor = 0, yanchor = 0)
