@@ -103,9 +103,14 @@ transform smooth_random_move:
 #        pos (0, 0)
 
 
-#задается дополнительные вектора перемещения
+#дополнительные вектора перемещения
 transform moveout_left_bottom:
     ease 5.0  xpos -500 ypos 1200
+
+transform movein_left_bottom_01:
+    xalign -0.5
+    yalign 1.5
+    ease 5.0 xalign 0.5 yalign 0.7
 
 #===================================================
 # mci(MENU CHOICE ID)
@@ -742,6 +747,14 @@ image bg0034:
         matrixcolor color_01
 
 image bg0036 = "images/BG/0035.jpg"
+image bg0036a = "images/BG/0035a.jpg"
+image bg0036b = "images/BG/0035b.jpg"
+image bg0036c = "images/BG/0035c.jpg"
+image bg0036d = "images/BG/0035d.jpg"
+image bg0036e = "images/BG/0035e.jpg"
+image bg0036f = "images/BG/0035f.jpg"
+image bg0036g = "images/BG/0035g.jpg"
+image bg0036h = "images/BG/0035h.jpg"
 image bg0037 = "images/BG/0036.jpg"
 image bg0038 = "images/BG/0037.jpg"
 image bg0039 = "images/BG/0038.jpg"
@@ -1829,6 +1842,10 @@ define screen_right_02_medium = Position(xpos=1100, ypos=0)
 define screen_right_03_long = Position(xpos=1500, ypos=50)
 define screen_right_03_long_may = Position(xpos=1500, ypos=90)
 
+define screen_left_02 = Position(xpos=100, ypos=500)
+define screen_left_03 = Position(xpos=270, ypos=1150)
+define screen_Center_02 = Position(xpos=600, ypos=500)  
+
 # переменные для Маленькой Ведьмы на ближный средний и дальный план
 define LW_short_range = FactorZoom(1.5, 1.5, 0.0, opaque = False)
 define LW_medium_range = FactorZoom(1.0, 1.0, 0.0, opaque = False)
@@ -1851,13 +1868,13 @@ define loposRC = Position(xpos = 700, ypos =120, xanchor = 0, yanchor = 0)
 define loposRG = Position(xpos = 660, ypos = 10, xanchor = 0, yanchor = 0)
 define loposC_LM_long = Position(xpos = 1000, ypos = 145, xanchor = 0.5, yanchor = 0.5)
 define loposC_LM_medium = Position(xpos = 1100, ypos = 145, xanchor = 0.5, yanchor = 0.5)
-define loposCFull = Position(xpos = 700, ypos = 100, xanchor = 0.5, yanchor = 0.5)
+define loposCFull = Position(xpos = 1000, ypos = 100, xanchor = 0.5, yanchor = 0.5)
 define loposCA = Position(xpos = 465, ypos = 25, xanchor = 0, yanchor = 0)
 define lopoA = Position(xpos = 115, ypos = 370, xanchor = 0, yanchor = 0)
 define lopoB = Position(xpos = 145, ypos = 240, xanchor = 0, yanchor = 0)
 define lopoC = Position(xpos = 145, ypos = 120, xanchor = 0, yanchor = 0)
 define razgavor = FactorZoom(1.0, 1.01, 0.0, opaque = False)
-define xijena = FactorZoom(0.0, 0.7, 0.0, opaque = False)
+define xijena = FactorZoom(0.0, 0.5, 0.0, opaque = False)
 define levelUp = FactorZoom(0.2, 1.0, 1.0, opaque = False)
 define posA = Position(xpos = 0.45, ypos = 0.30, xanchor = 0, yanchor = 0)
 define lopoD = Position(xpos = 165, ypos = 0, xanchor = 0, yanchor = 0)
