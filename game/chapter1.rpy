@@ -135,7 +135,8 @@ label chapter1:
         scene black
         with dream
         scene bg0004
-        $ renpy.pause(4.0) 
+        with dissA
+        pause 1.0 
 
 ## Сцена 004
 ## кадр менаеться через переход diss. Смотровая плащадка ядерного маяка, кадр выстроен таким образом чтобы в левой его части была 
@@ -686,7 +687,7 @@ label chapter1:
     
         e "Размеренный стук шагов причудливым сюрреалистическим эхом разливался по внутренним помещениям маяка. "
     
-        scene bg0024 at Pan((0, 0), (0, 1550), 20.0) with dissA
+        scene bg0024 at Pan((0, 0), (0, 2320), 20.0) with dissA
 
         centered "{i}Топ, топ...{/i} "
   
@@ -864,11 +865,11 @@ label chapter1:
         e "Она обжила этот дом, и он стал ей родным. "
         e "Она уже не представляла жизни вне этого холодного мира..."
     
-        hide LW_Color_Nor_c_05
         #hide GI onlayer demo
 
 ## Сцена 0024
 
+        #hide LW_Color_Nor_c_05
         scene bg0000
         with diss
         e "...."
@@ -884,7 +885,7 @@ label chapter1:
         #play sound "Zvuki/zheleznaya_reshetka.mp3"
         scene bg0044 
         show Cainic at pos_Cainic onlayer sloi01
-        show LW_Spin_c_02 at screen_left_03 onlayer sloi03
+        show LW_Spin_c_02 at screen_left_02_medium, screen_left_03 onlayer sloi03
         show Alaya_02 onlayer sloi04
         with diss
 
@@ -905,6 +906,8 @@ label chapter1:
         #play nature "Zvuki/Zvuki.mp3" fadein 1.0
         #$ renpy.music.set_volume (1.5, .5, channel = "nature")
         #play sound "Zvuki/teaKettle.mp3"
+
+## Сцена 0025
 
         e "Поёжившись, она села вплотную к огню – дожидаясь, пока вода в чайнике не вскипит."
     
