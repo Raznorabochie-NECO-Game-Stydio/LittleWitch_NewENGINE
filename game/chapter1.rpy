@@ -898,35 +898,37 @@ label chapter1:
 
         e "В хижине было не теплее, чем на улице."
 
+## Сцена 0025
+
         scene bg0046
         hide Cainic onlayer sloi01
         hide Alaya_02 onlayer sloi04
-        show LW_NormBust_c_01 at xijena, screen_left_02 
+        show LW_Color_Norm_c_01 at xijena, screen_left_02 
         with diss
         #play nature "Zvuki/Zvuki.mp3" fadein 1.0
         #$ renpy.music.set_volume (1.5, .5, channel = "nature")
         #play sound "Zvuki/teaKettle.mp3"
 
-## Сцена 0025
-
         e "Поёжившись, она села вплотную к огню – дожидаясь, пока вода в чайнике не вскипит."
     
-        hide LW_NormBust_c_01
-        show LW_NorBust_c_09 at xijena, screen_left_02 
+        hide LW_Color_Norm_c_01
+        show LW_Color_Nor_c_09 at xijena, screen_left_02 
+        show S02 at loposLX onlayer sloi05
         with dissolve
     
         #voice "Voise/LW/p_29147832_653.mp3"
 
         LW "{i}«- Тепловое равновесие!»{/i} "
 
-        hide LW_NorBust_c_09
-        show LW_NorBust_c_22 at xijena, screen_left_02 
+        hide LW_Color_Nor_c_09
+        show LW_Color_Nor_c_22 at xijena, screen_left_02
+        hide S02 onlayer sloi05
         with dissolve
     
         e "Подметила она про себя,"
     
-        hide LW_NorBust_c_22
-        show LW_NorBust_c_11 at xijena, screen_left_02 
+        hide LW_Color_Nor_c_22
+        show LW_Color_Nor_c_11 at xijena, screen_left_02 
         show S01 at loposLX onlayer sloi03
         with dissolve
     
@@ -936,9 +938,9 @@ label chapter1:
         LW "{i}« – Что на улице - то и дома... Прям первое начало термодинамики - ни дать, ни взять.»{/i}"
     
         hide S01 onlayer sloi03
-        show STAR_S at FactorZoom(0.0, 0.1, 0.0, opaque = False), loposLX onlayer sloi03
-        hide LW_NorBust_c_11
-        show LW_NorBust_c_21 at xijena, screen_left_02 
+        show STAR_S at FactorZoom(0.0, 0.2, 0.0, opaque = False), loposLX_01 onlayer sloi03
+        hide LW_Color_Nor_c_11
+        show LW_Color_Nor_c_21 at xijena, screen_left_02 
         with dissolve
     
         #hide S01 onlayer demo
@@ -947,22 +949,25 @@ label chapter1:
         e "Ветер стучался в закрытие ставни, "
     
         hide STAR_S onlayer sloi03
-        hide LW_NorBust_c_21
-        show LW_NorBust_c_20 at xijena, screen_left_02 
+        hide LW_Color_Nor_c_21
+        show LW_Color_Nor_c_20 at xijena, screen_left_02 
         with dissolve
     
         e "а единственным источником света в комнате, кроме алых бликов от огня в печке, была маленькая масленая лампадка."
         e "Тёмно-алая полутьма густых теней выхватывала только общие контуры предметов. "
   
         #play sound "Zvuki/Tea.mp3" fadein 0.5
-        hide LW_NorBust_c_20
+        
         scene bg0047 
         show Alaya_02 onlayer sloi04
+        hide LW_Color_Nor_c_20
         with diss
     
         e "Тем временем, Ведьма заварила травяной чай из душистых, приторных трав,"
         e "которые она нашла и собрала за лето..."
     
+##Сцена 0026
+
         scene bg0048 
         hide Alaya_02 onlayer sloi04
         show Alaya_03 onlayer sloi04
