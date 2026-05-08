@@ -1843,7 +1843,7 @@ define screen_right_03_long = Position(xpos=1500, ypos=50)
 define screen_right_03_long_may = Position(xpos=1500, ypos=90)
 
 define screen_left_02 = Position(xpos=100, ypos=500)
-define screen_left_03 = Position(xpos=270, ypos=1150)
+define screen_left_03 = Position(xpos=470, ypos=1760)
 define screen_Center_02 = Position(xpos=600, ypos=500)  
 
 # переменные для Маленькой Ведьмы на ближный средний и дальный план
@@ -1882,7 +1882,7 @@ define lopoE = Position(xpos = 165, ypos = -180, xanchor = 0, yanchor = 0)
 define lopoLeft = Position(xpos = 0, ypos = 180, xanchor = 0, yanchor = 0)
 define lopoRight = Position(xpos = 709, ypos = 180, xanchor = 0, yanchor = 0)
 define lopo = Position(xpos = 279, ypos = 110, xanchor = 0, yanchor = 0)
-define pos_Cainic = Position(xpos = 512, ypos = 510, xanchor = 0.5, yanchor = 0.5)
+define pos_Cainic = Position(xpos = 780, ypos = 800, xanchor = 0.5, yanchor = 0.5)
 define pos_cen = Position(xpos = 750, ypos = 360, xanchor = 0.5, yanchor = 0.5)
 
 
