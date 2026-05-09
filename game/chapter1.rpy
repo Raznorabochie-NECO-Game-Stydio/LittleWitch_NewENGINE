@@ -1031,17 +1031,15 @@ label chapter1:
         scene bg0050
         show Alaya_04 onlayer sloi02
         show Alaya_05 onlayer sloi03
-        #show fly #onlayer sloi04
+        show fly #onlayer sloi04
         with pixellate
-
-
     
         e "Воспоминания о цветущих садах Азатота, где росли медовые деревья с пурпурными листьями и чудесными сладостными плодами... "
-    
+        
+        scene bg0051
         hide Alaya_04 onlayer sloi02
-        hide Alaya_05 onlayer sloi03
-        #hide fly #onlayer sloi04
-        scene bg0051 
+        hide Alaya_05 onlayer sloi03 
+        hide fly #onlayer sloi04
         show LW_NFM_01 at pos_cen onlayer sloi03
         show Mil_01 at pos_cen onlayer sloi04
         with diss
@@ -1094,7 +1092,7 @@ label chapter1:
         e "......"
         #play music "Sound/3554.mp3" fadein 2.5
         scene bg0050 
-        #show fly onlayer sloi02
+        show fly onlayer sloi02
         with teleport
 
         e "Когда-то Маленькая ведьма жила в причудливом пурпурном мире."
@@ -1112,16 +1110,18 @@ label chapter1:
         e "Она любовалась причудливыми созвездиями, объятыми в царственные облака межзвёздного газа, "
         e "сидя на крытом крылечке своего дома и неспешно потягивая сладкое вино из глиняной кружки. " 
   
+
+        hide fly onlayer sloi02
+        scene bg0000 with dream
+
+        e "..."
+
 ##Сцена 0029
 ## В небе висит огромный мыльный пузырь.
 ## Внутри него — ИГГДРАСИЛЬ, великое Древо Жизни.
 ## Его корни уходят в космос. Ствол необъятен, покрыт мхом и грибными наростами, источающими призрачный свет.
 ## На ветвях блестят хрустальные грозди миров.
 
-        #hide fly onlayer sloi02
-        scene bg0000 with dream
-
-        e "..."
 
         scene bg0063 at Pan((0, 1347), (1019, 0), 40.0)  with pixellate
         show bg0064 at Pan((0, 1000), (0, 0), 38.0) with dissA
