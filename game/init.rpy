@@ -173,9 +173,9 @@ screen my_text_screen(line):
 
 init python:
     def make_fly_swarm(
-        count=30,              # сколько всего светлячков на экране
-        start_spread=250.0,     # насколько растянуть их появление по времени
-        border=850             # зона появления за пределами экрана
+        count=38,              # сколько всего светлячков на экране
+        start_spread=5.0,     # насколько растянуть их появление по времени
+        border=550             # зона появления за пределами экрана
     ):
         flies = []
 
@@ -195,7 +195,7 @@ init python:
                     start=random.uniform(0.0, start_spread),
 
                     # False — не заполнять экран сразу
-                    fast=False
+                    fast=True
                 )
             )
 
@@ -1531,9 +1531,9 @@ image fly4:
     repeat
 
 image fly = make_fly_swarm(
-    count=30,
-    start_spread=250.0,
-    border=850
+    count=38,
+    start_spread=5.0,
+    border=550
 )
 
 #image fly = SnowBlossom(anim.SMAnimation(
