@@ -172,47 +172,71 @@ screen my_text_screen(line):
 #======================================================================
 
 init python:
+    def make_fly_swarm(
+        count=30,              # сколько всего светлячков на экране
+        start_spread=250.0,     # насколько растянуть их появление по времени
+        border=850             # зона появления за пределами экрана
+    ):
+        flies = []
+
+        for i in range(count):
+            flies.append(
+                SnowBlossom(
+                    FlyParticle(),
+                    count=1,
+
+                    border=border,
+
+                    # движение чуть разное у каждого
+                    xspeed=(random.uniform(-70, -25), random.uniform(-60, -30)),
+                    yspeed=(random.uniform(-120, -50), random.uniform(-100, -60)),
+
+                    # каждый появляется в разный момент
+                    start=random.uniform(0.0, start_spread),
+
+                    # False — не заполнять экран сразу
+                    fast=False
+                )
+            )
+
+        return Fixed(*flies)
+init python:
     import random
 
     class FlyParticle(renpy.Displayable):
         def __init__(self, **kwargs):
             super(FlyParticle, self).__init__(**kwargs)
 
-            # 4 варианта (каждый — 2 кадра)
-            self.variants = ["fly1", "fly2", "fly3", "fly4"]
+            # 4 варианта, но уже как displayable, а не строки
+            self.variants = [
+                renpy.displayable("fly1"),
+                renpy.displayable("fly2"),
+                renpy.displayable("fly3"),
+                renpy.displayable("fly4"),
+            ]
 
-            # 1) рассинхрон фазы анимации (кадры внутри filmstrip)
             self.anim_phase_offset = random.uniform(0.0, 1000.0)
-
-            # 2) рассинхрон именно переключения "картинок" (fly01..fly04)
             self.switch_phase_offset = random.uniform(0.0, 1000.0)
 
-            # 3) начальная картинка тоже случайная
             self.current = random.randrange(4)
 
             self.last_switch = None
             self.switch_time = random.uniform(1.5, 6.0)
 
         def copy(self):
-            # SnowBlossom делает копии частиц через copy()
             return FlyParticle()
 
         def render(self, width, height, st, at):
-            # время для фазы анимации (чтобы кадры не совпадали)
             st_anim = st + self.anim_phase_offset
-
-            # время для логики смены вариантов (чтобы смены не совпадали)
             st_switch = st + self.switch_phase_offset
 
             if self.last_switch is None:
                 self.last_switch = st_switch
 
-            # случайная смена варианта, без повтора подряд
             if st_switch - self.last_switch >= self.switch_time:
                 choices = [i for i in range(4) if i != self.current]
                 self.current = random.choice(choices)
 
-                # следующее переключение в другое случайное время
                 self.switch_time = random.uniform(1.5, 6.0)
                 self.last_switch = st_switch
 
@@ -226,7 +250,7 @@ init python:
 
         def visit(self):
             return self.variants
-
+        
 ###########################################################################
 
 #===========================================================
@@ -1461,41 +1485,55 @@ image pe = SnowBlossom("images/Ani/pepel.png",
     
 # светлячки 
 
+
+image fly1_1 = Transform("images/ani/fly01.png", crop=(0, 0, 20, 20))
+image fly1_2 = Transform("images/ani/fly01.png", crop=(20, 0, 20, 20))
+
+image fly2_1 = Transform("images/ani/fly02.png", crop=(0, 0, 20, 20))
+image fly2_2 = Transform("images/ani/fly02.png", crop=(20, 0, 20, 20))
+
+image fly3_1 = Transform("images/ani/fly03.png", crop=(0, 0, 20, 20))
+image fly3_2 = Transform("images/ani/fly03.png", crop=(20, 0, 20, 20))
+
+image fly4_1 = Transform("images/ani/fly04.png", crop=(0, 0, 20, 20))
+image fly4_2 = Transform("images/ani/fly04.png", crop=(20, 0, 20, 20))
+
 image fly1:
     subpixel True
-    "images/ani/fly01.png" crop (0, 0, 20, 20) 
+    "fly1_1"
     pause 0.50
-    "images/ani/fly01.png" crop (20, 0, 20, 20) 
+    "fly1_2"
     pause 0.50
     repeat
 
 image fly2:
     subpixel True
-    "images/ani/fly02.png" crop (0, 0, 20, 20) 
+    "fly2_1"
     pause 0.50
-    "images/ani/fly02.png" crop (20, 0, 20, 20) 
+    "fly2_2"
     pause 0.50
     repeat
 
 image fly3:
     subpixel True
-    "images/ani/fly03.png" crop (0, 0, 20, 20) 
+    "fly3_1"
     pause 0.50
-    "images/ani/fly03.png" crop (20, 0, 20, 20) 
+    "fly3_2"
     pause 0.50
     repeat
 
 image fly4:
     subpixel True
-    "images/ani/fly04.png" crop (0, 0, 20, 20) 
+    "fly4_1"
     pause 0.50
-    "images/ani/fly04.png" crop (20, 0, 20, 20) 
+    "fly4_2"
     pause 0.50
     repeat
 
-image fly = SnowBlossom(
-    FlyParticle(),
-    count=50, border=250, xspeed=(-50, -50), yspeed=(-100, -60), start=45, fast=True
+image fly = make_fly_swarm(
+    count=30,
+    start_spread=250.0,
+    border=850
 )
 
 #image fly = SnowBlossom(anim.SMAnimation(
