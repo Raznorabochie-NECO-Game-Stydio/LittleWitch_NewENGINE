@@ -1157,12 +1157,19 @@ label chapter1:
 
         e "Рядом с Древом Жизни неподвижно висела тёмная луна, покрытая страшными башнями из иссиня-чёрного металла,"
         e" между которыми время от времени мелькали вспышки. "
+
+        scene bg0066a 
+        show starA at zoom_starA_01, Position(xpos = 600, ypos = 490, xanchor = 0.5, yanchor = 0.5) onlayer sloi03
+        with diss
+
         e "Эти башни, попиравшие сами основы законов геометрии, принадлежали покинутому пустому граду, "
         e "когда-то населённому не поддающимися разуму Великими Драконами {w=1}- вечными странниками междумирья, появившимися в начале всех начал."
 
 
-        scene bg0066 with diss
-        show starA at Position(xpos = 370, ypos = 280, xanchor = 0.5, yanchor = 0.5) onlayer sloi03
+        scene bg0066
+        hide starA onlayer sloi03
+        show starA at zoom_starA, Position(xpos = 420, ypos = 250, xanchor = 0.5, yanchor = 0.5) onlayer sloi03
+        with diss
 
         e "И бездны расщелин, уходящими в таинственные глубины под кору вечного чёрного спутника, "
     
