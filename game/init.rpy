@@ -880,6 +880,7 @@ image bg0065:
     yzoom 2.0
 
 image bg0066 = "images/BG/0059.jpg"
+image bg0066a = "images/BG/0059a.jpg"
 image bg0067:
     "images/BG/0057.jpg"
     zoom 1.1
@@ -1360,7 +1361,10 @@ image LW_Spin_c_02 = "images/sprites/SLW/LW_Spin_c_02.png"
 #image LW_NorBust_c_01 = im.FactorScale("images/sprites/SLW/LW_Norma_c_05.png", 0.15, 0.15)
     
 #N обнаженная
-image LW_NFM_01 = im.FactorScale("images/sprites/SLW/LW_Nude_Full_01.png", 0.2, 0.2)
+image LW_NFM_01:
+    "images/sprites/SLW/LW_Nude_Full_01.png"
+    zoom 0.2
+#im.FactorScale("images/sprites/SLW/LW_Nude_Full_01.png", 0.2, 0.2)
 image LW_slip_01 = "images/sprites/SLW/LW_slip_01.png"
 
 
@@ -1416,8 +1420,13 @@ image OB = "images/SD/OB.png"
 image GR = "images/SD/GR.png"
 image LO = "images/SD/LO.png"
 image STAR_S = "images/SD/STAR_IU.png"
-image Cainic = im.FactorScale("images/logo/Cainic.png", 1.7, 1.7)
-image Mil_01 = im.FactorScale(im.Alpha("images/logo/Milnii_01.png", 0.9), 1.6, 1.6)
+image Cainic:
+    "images/logo/Cainic.png"
+    zoom 2.5
+image Mil_01:
+    "images/logo/Milnii_01.png"
+    alpha 0.9
+    zoom 1.6
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
 # Объявляем изображение магического круга.
@@ -1563,15 +1572,39 @@ image fly = make_fly_swarm(
 #    count=50, border=50, xspeed=(-20, -20), yspeed=(-30, -30), start=15,  fast=False
 #    )
     
-image starA = Animation(
-    "images/Ani/5a.png", 2.0, 
-    "images/Ani/5b.png", 2.0, 
-    "images/Ani/5c.png", 2.0, 
-    "images/Ani/5d.png", 2.0,
-    "images/Ani/5e.png", 2.0,
-    "images/Ani/5f.png", 2.0, 
-    "images/Ani/5h.png", 2.0
-    )
+image starA:
+    "images/Ani/5a.png"
+    pause 2.0
+
+    "images/Ani/5b.png"
+    pause 2.0
+
+    "images/Ani/5c.png"
+    pause 2.0
+
+    "images/Ani/5d.png"
+    pause 2.0
+
+    "images/Ani/5e.png"
+    pause 2.0
+
+    "images/Ani/5f.png"
+    pause 2.0
+
+    "images/Ani/5h.png"
+    pause 2.0
+
+    repeat
+
+# = Animation(
+#    "images/Ani/5a.png", 2.0, 
+#    "images/Ani/5b.png", 2.0, 
+#    "images/Ani/5c.png", 2.0, 
+#    "images/Ani/5d.png", 2.0,
+#    "images/Ani/5e.png", 2.0,
+#    "images/Ani/5f.png", 2.0, 
+#    "images/Ani/5h.png", 2.0
+#    )
    
 image STRA = SnowBlossom(anim.Filmstrip(
     "images/Ani/starr.png",
@@ -1890,7 +1923,7 @@ define screen_right_03_long = Position(xpos=1500, ypos=50)
 define screen_right_03_long_may = Position(xpos=1500, ypos=90)
 
 define screen_left_02 = Position(xpos=100, ypos=500)
-define screen_left_03 = Position(xpos=470, ypos=1760)
+define screen_left_03 = Position(xpos=470, ypos=1690)
 define screen_Center_02 = Position(xpos=600, ypos=500)  
 
 # переменные для Маленькой Ведьмы на ближный средний и дальный план
@@ -1930,8 +1963,10 @@ define lopoE = Position(xpos = 165, ypos = -180, xanchor = 0, yanchor = 0)
 define lopoLeft = Position(xpos = 0, ypos = 180, xanchor = 0, yanchor = 0)
 define lopoRight = Position(xpos = 709, ypos = 180, xanchor = 0, yanchor = 0)
 define lopo = Position(xpos = 279, ypos = 110, xanchor = 0, yanchor = 0)
-define pos_Cainic = Position(xpos = 780, ypos = 800, xanchor = 0.5, yanchor = 0.5)
+define pos_Cainic = Position(xpos = 780, ypos = 770, xanchor = 0.5, yanchor = 0.5)
 define pos_cen = Position(xpos = 750, ypos = 360, xanchor = 0.5, yanchor = 0.5)
+define zoom_starA = FactorZoom(2.8, 2.0, 0.0, opaque = False)
+define zoom_starA_01 = FactorZoom(1.8, 1.5, 0.0, opaque = False)
 
 
 define move = MoveTransition(1.5)
