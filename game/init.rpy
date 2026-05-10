@@ -866,17 +866,17 @@ image bg0061 = "images/BG/0055.jpg"
 image bg0062 = "images/BG/0056.jpg"
 image bg0063:
     "images/BG/0057.jpg"
-    zoom 1.27
+    zoom 1.7
     
 image bg0064:
     "images/BG/0058b.png"
-    alpha 0.6
-    xzoom 1.5
-    yzoom 1.0
+    alpha 0.4
+    xzoom 2.5
+    yzoom 2.0
     
 image bg0065:
     "images/BG/0058a.jpg"
-    xzoom 1.8
+    xzoom 2.5
     yzoom 2.0
 
 image bg0066 = "images/BG/0059.jpg"
@@ -912,17 +912,38 @@ image bg0093 = "images/BG/0084.jpg"
 image bg0094 = "images/BG/0085.jpg"
 image bg0095 = "images/BG/0086.jpg"
 image bg0096 = "images/BG/0087.jpg"
+image bg0096a:
+    contains:
+        parallel:
+            "images/BG/0069.jpg" with dissA
+            pause 2.0
+
+            "images/BG/0071.jpg" with dissA
+            pause 2.0
+
+            "images/BG/0072.jpg" with dissA
+            pause 2.0
+
+            "images/BG/0073.jpg" with dissA
+
+    contains:
+        parallel:
+            "images/sprites/SLW/LW_slip_01.png"
+            pos (0, 400)
+
 image bg0097:
-    "images/BG/0071.jpg"
+    contains:
+        "images/BG/0071.jpg"
     contains:
         "images/sprites/SLW/LW_slip_01.png"
-        pos (-60, 150)
+        pos (0, 400)
         
 image bg0098:
-    "images/BG/0072.jpg",
+    contains:
+        "images/BG/0072.jpg"
     contains:
         "images/sprites/SLW/LW_slip_01.png"
-        pos (- 60, 150)
+        pos (0, 400)
 
 image bg0099 = "images/BG/0088.jpg"
 image bg0100 = "images/BG/0089.jpg"
@@ -1372,8 +1393,10 @@ image LW_slip_01 = "images/sprites/SLW/LW_slip_01.png"
 
 
 #Дракон
-image DRC = im.FactorScale(im.Alpha("images/CG/Drakon.png", 0.85), 1.3, 1.3)
-
+image DRC:
+    "images/CG/Drakon.png"
+    alpha 0.85
+    zoom 1.02
 
 
 
