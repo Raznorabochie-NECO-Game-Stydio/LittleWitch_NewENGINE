@@ -1124,7 +1124,7 @@ label chapter1:
 
 
         scene bg0063 at Pan((0, 1347), (1019, 0), 40.0)  with pixellate
-        show bg0064 at Pan((0, 1000), (0, 0), 38.0) with dissA
+        show bg0064 at Pan((0, 1000), (0, 0), 40.0) with dissA
         $ renpy.pause(10.0)
 
         e "Также она любила смотреть на Иггдрасиль - колоссальное Древо Жизни, соединяющего миры.{space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
@@ -1173,14 +1173,14 @@ label chapter1:
 
         e "И бездны расщелин, уходящими в таинственные глубины под кору вечного чёрного спутника, "
     
-        show DRC at Position(xpos = 900, ypos = 350, xanchor = 0.5, yanchor = 0.5) onlayer sloi04 with teleport
+        show DRC at Position(xpos = 1100, ypos = 530, xanchor = 0.5, yanchor = 0.5) onlayer sloi04 with teleport
 
 
         e "не были властны понятия пространства и времени, но магия и время брались оттуда…"
    
+        scene bg0069 
         hide starA onlayer sloi03
         hide DRC onlayer sloi04
-        scene bg0069 
         with dissA
 
         e "Так же говорят, что когда-то, давним давно, там жила настоящая Ведьма, "
@@ -1223,21 +1223,20 @@ label chapter1:
         with dissA
 
         e "Сделав ещё глоток горьковатого напитка, Маленькая Ведьма приготовилась почивать."
-    
-        scene bg0075 with fade
 
 ##Сцена 0033
 ## Маленькая ведьма парит среди множества миров.
 ## Миры проплывают перед ней, как узоры в калейдоскопе: города, леса, океаны, чужие существа, лица, чьи-то жизни.
 
+        scene bg0075 with fade
     
         e "Маленькой ведьме часто снились непонятные сны."
     
-    
-        scene bg0077 with dissA
+        pause 1.0
+        scene bg0096a with dissA # bg0077 with dissA
         hide Alaya_04 onlayer sloi02  with dissA
-        $ renpy.pause(1.0)
-        scene bg0079 
+        #$ renpy.
+        #scene bg0096a #bg0079 
         #show LW_sl_01
         with dissA
 
