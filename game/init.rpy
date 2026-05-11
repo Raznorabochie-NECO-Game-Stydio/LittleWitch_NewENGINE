@@ -1475,7 +1475,72 @@ image Alaya_04:
 image Alaya_05:
     "images/Logo/Alaya_IU_04.png"
     alpha 0.5
-        
+
+image fog_01:
+    parallel:
+        "images/Logo/fog_01.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_02.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_03.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_04.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_05.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_06.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_07.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_08.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_09.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_11.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_12.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_13.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_14.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_13.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_12.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_11.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_10.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_09.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_08.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_07.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_06.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_05.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_04.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_03.png" with dissolve
+        pause 1.0
+        "images/Logo/fog_02.png" with dissolve
+        pause 1.0
+        repeat
+    parallel:
+        alpha 0.7
+        ease 0.5 alpha 0.85
+        pause 25.0
+        ease 0.5 alpha 0.7
+        repeat
+    parallel:
+        matrixcolor BrightnessMatrix(-0.75)
+        easein 0.5 matrixcolor BrightnessMatrix(-0.65)
+        pause 25.0
+        easeout 0.5 matrixcolor BrightnessMatrix(-0.75)
+        repeat
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
 # анимации природных явлений и прочих эффектов
