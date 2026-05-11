@@ -758,7 +758,9 @@ label chapter1:
         e "Растительность здесь была скудная, ибо ветер и волны практически не оставляли на камнях плодородной почвы, "
         e "но каким-то немыслимым чудом – жизнь просачивалась через щели и здесь. "
         
-        scene bg0036a with diss
+        scene bg0036a
+        show fog_01 onlayer sloi04
+        with diss
         
         e "Вдали сквозь туман виднелась старая хижина с ветхой протекающей крышей, "
         e "промерзающая в лютые зимы и подпёртая брёвнами с покосившейся стороны. "
@@ -797,16 +799,19 @@ label chapter1:
         #stop sound fadeout 1.0
         #stop nature fadeout 0.5
         #stop natu fadeout 1.9
-        scene bg0000 
+        scene bg0000
+        hide fog_01 onlayer sloi04
         with tcenteriss
         e "...."
-        #play music "Sound/BGM_002.mp3" fadein 2.0
-        scene bg0038 with diss
 
 ## Сцена 0022
 #сменит фон анимация, возможно отдельная уменщающейся спрайт МВ, 
 #повернутый спиной к игроку, который идет в перспективу фона
-    
+   
+        #play music "Sound/BGM_002.mp3" fadein 2.0
+        scene bg0038 
+        show fog_01 onlayer sloi04
+        with diss
 
         e "Этот дом был каменным."
         e "Сейчас вокруг него стыл сумрак ночи. "
@@ -825,6 +830,7 @@ label chapter1:
 ## В очаге едва тлеют угли.
 
         scene bg0000
+        hide fog_01 onlayer sloi04
         with diss
     
         #play natu "Zvuki/drova.MP3" fadein 0.5
@@ -1263,7 +1269,7 @@ label chapter1:
 ## Но каждый мир начинает распадаться, едва она отводит взгляд.
 
         scene bg0000 with teleport
-        $ renpy.pause(.4)
+        $ renpy.pause(1.0)
         scene bg0078 with dissA
 
         centered "{color=#d16f6a}{i}Мир податлив и мягок – он таков, каким мы его видим. {/i}{/color}"
@@ -1272,7 +1278,7 @@ label chapter1:
     
 
         scene bg0084 with dissA
-        $ renpy.pause(.5)
+        $ renpy.pause(1.0)
         scene bg0085 with dissA
     
 
@@ -1281,7 +1287,7 @@ label chapter1:
         e "Она чувствовала, что постоянно теряет частичку себя в чужих снах. "
     
         scene bg0084 with dissA
-        $ renpy.pause(.5)
+        $ renpy.pause(1.0)
         scene bg0078 with dissA
         $ renpy.pause(1.5)
         scene bg0086 with dissA
@@ -1289,7 +1295,7 @@ label chapter1:
         e "Она погрузилась в бездну воспоминаний и сновидений, которым трудно, а может и невозможно подобрать разумное определение."
    
         scene bg0084 with dissA
-        $ renpy.pause(.5)
+        $ renpy.pause(1.0)
         scene  bg0078 with dissA
         $ renpy.pause(1.5)
         scene bg0095 with dissA
@@ -1404,7 +1410,7 @@ label Cha_001:
                 e " То незыблемое и безмолвно действующее Великое,"
                 e " согласно Которому тьма должна развиваться в свет, смерть - в жизнь, "
     
-                scene bg0107 at Pan((0, 0), (0, 1550), 35.0)
+                scene bg0107 at Pan((0, 0), (0, 1550), 35.0) with dissA
     
                 e "пустота - в полноту, бесформенность - в форму,{space=30}{image=images/SD/SG.png}{alt}SG{/alt} "
                 e "добро - в нечто лучшее, лучшее - в совершеннейшее; {space=30}{image=images/SD/SG.png}{alt}SG{/alt}"
