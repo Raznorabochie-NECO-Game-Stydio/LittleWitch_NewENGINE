@@ -143,6 +143,1236 @@ python:
 
 
 
+
+
+init python:
+
+    class LayoutElementParams:
+        """
+        Параметры элемента лица для конкретного положения головы.
+        
+        offset           — (dx, dy) смещение от BASE
+        rotate           — поворот элемента (float или None)
+        anchor           — точка привязки поворота (ax, ay) или None
+        transform_anchor — компенсировать ли сдвиг при повороте (bool)
+        
+        Используется в LAYOUTS как замена простого tuple offset_*.
+        
+        Приоритет параметров итогового Transform:
+            1. FaceEntry.rotate / anchor (индивидуальный для файла)
+            2. LayoutElementParams.rotate / anchor (для позиции головы)
+            Если у FaceEntry есть rotate — LayoutElementParams.rotate
+            игнорируется (файл уже имеет свой поворот).
+        """
+
+        def __init__(
+            self,
+            offset           = (0, 0),
+            rotate           = None,
+            anchor           = None,
+            transform_anchor = True
+        ):
+            self.offset           = offset
+            self.rotate           = rotate
+            self.anchor           = anchor
+            self.transform_anchor = transform_anchor
+
+        def merge_with_entry(self, entry):
+            """
+            Объединить параметры layout с параметрами FaceEntry.
+            
+            Правило слияния:
+            - offset:   складываются (layout + entry)
+            - rotate:   приоритет у FaceEntry, если у него есть rotate
+                        иначе берём rotate из layout
+            - anchor:   приоритет у FaceEntry, если у него есть anchor
+                        иначе берём anchor из layout
+            - transform_anchor: приоритет у FaceEntry
+            
+            Возвращает dict параметров для Transform().
+            """
+            kwargs = dict(entry.transform)
+
+            # --- rotate ---
+            # FaceEntry.rotate перекрывает layout rotate
+            final_rotate = entry.rotate \
+                if entry.rotate is not None \
+                else self.rotate
+
+            # --- anchor ---
+            final_anchor = entry.anchor \
+                if entry.anchor is not None \
+                else self.anchor
+
+            # --- transform_anchor ---
+            # Если у entry явно задан anchor — берём его transform_anchor
+            # Иначе берём из layout
+            if entry.anchor is not None:
+                final_transform_anchor = entry.transform_anchor
+            else:
+                final_transform_anchor = self.transform_anchor
+
+            # Записываем в kwargs
+            if final_rotate is not None:
+                kwargs['rotate'] = final_rotate
+
+                if final_anchor is not None:
+                    kwargs['anchor']           = final_anchor
+                    kwargs['transform_anchor'] = final_transform_anchor
+                else:
+                    # По умолчанию центр
+                    kwargs['anchor']           = (0.5, 0.5)
+                    kwargs['transform_anchor'] = final_transform_anchor
+
+            elif final_anchor is not None:
+                kwargs['anchor'] = final_anchor
+
+            return kwargs
+
+        def __repr__(self):
+            return (
+                "LayoutElementParams("
+                "offset={}, "
+                "rotate={}, "
+                "anchor={}, "
+                "transform_anchor={}"
+                ")"
+            ).format(
+                self.offset,
+                self.rotate,
+                self.anchor,
+                self.transform_anchor
+            )
+
+    class FaceEntry:
+        """
+        Описание одного файла элемента лица.
+        
+        path             — путь к файлу (обязательно)
+        offset           — (dx, dy) индивидуальное смещение
+                        добавляется ПОВЕРХ смещения из LAYOUTS
+        transform        — dict с параметрами Transform
+                        (zoom, xzoom, alpha ...)
+        rotate           — угол поворота в градусах (float)
+                        None = без поворота
+        anchor           — точка привязки поворота (ax, ay)
+                        значения 0.0-1.0 (относительно размера изображения)
+                        или пиксели (int)
+                        None = (0.5, 0.5) центр
+        transform_anchor — bool: смещать ли позицию при повороте
+                        True  = изображение вращается вокруг anchor,
+                                позиция на холсте НЕ меняется
+                        False = изображение вращается вокруг anchor,
+                                но позиция на холсте сдвигается
+        """
+
+        def __init__(
+            self,
+            path,
+            offset           = (0, 0),
+            transform        = None,
+            rotate           = None,
+            anchor           = None,
+            transform_anchor = True
+        ):
+            self.path             = path
+            self.offset           = offset
+            self.transform        = transform or {}
+            self.rotate           = rotate
+            self.anchor           = anchor
+            self.transform_anchor = transform_anchor
+
+        def build_transform(self):
+            """
+            Собрать итоговый словарь параметров для Transform().
+            
+            Приоритет:
+                1. Явные rotate / anchor / transform_anchor
+                2. Дополнительные параметры из self.transform
+                (zoom, xzoom, alpha и т.д.)
+            
+            Параметры из self.transform НЕ перезаписывают
+            rotate / anchor / transform_anchor если они заданы явно.
+            """
+            # Начинаем с копии доп. параметров
+            kwargs = dict(self.transform)
+
+            # Поворот
+            if self.rotate is not None:
+                kwargs['rotate'] = self.rotate
+
+                # Якорь для поворота
+                if self.anchor is not None:
+                    kwargs['anchor']           = self.anchor
+                    kwargs['transform_anchor'] = self.transform_anchor
+                else:
+                    # По умолчанию — центр изображения
+                    kwargs['anchor']           = (0.5, 0.5)
+                    kwargs['transform_anchor'] = self.transform_anchor
+
+            elif self.anchor is not None:
+                # Якорь без поворота (для позиционирования)
+                kwargs['anchor'] = self.anchor
+
+            return kwargs
+
+        def get_absolute_anchor_offset(self, img_w, img_h):
+            """
+            Вычислить сдвиг позиции из-за якоря в пикселях.
+            
+            Нужно если transform_anchor=False —
+            тогда Ren'Py не компенсирует сдвиг якоря автоматически,
+            и мы делаем это вручную.
+            
+            img_w, img_h — размер изображения в пикселях
+            
+            Возвращает (dx, dy) — поправку к позиции на холсте.
+            """
+            if self.anchor is None:
+                return (0, 0)
+
+            ax, ay = self.anchor
+
+            # Если якорь задан в долях (0.0-1.0)
+            if isinstance(ax, float):
+                ox = int(ax * img_w)
+            else:
+                ox = ax
+
+            if isinstance(ay, float):
+                oy = int(ay * img_h)
+            else:
+                oy = ay
+
+            return (ox, oy)
+
+        def __repr__(self):
+            return (
+                "FaceEntry("
+                "path={!r}, "
+                "offset={}, "
+                "rotate={}, "
+                "anchor={}, "
+                "transform_anchor={}, "
+                "transform={}"
+                ")"
+            ).format(
+                self.path,
+                self.offset,
+                self.rotate,
+                self.anchor,
+                self.transform_anchor,
+                self.transform
+            )
+
+
+    class HeadLayout:
+
+        # ===================================================
+        # НАБОРЫ ФАЙЛОВ для элементов лица
+        # set_01 — для default и left_slant
+        # set_02 — для left, left_down, left_top, right и т.д.
+
+        # FACE_SETS — наборы файлов
+        # Каждый элемент — FaceEntry(path, offset, transform)
+        #
+        # offset    — (dx, dy) сдвиг конкретно этого файла
+        # transform — параметры Transform только для него
+        # 
+        # ===================================================
+
+        FACE_SETS = {
+
+            'set_01': {
+                # Глаза
+                'eyes': {
+                    'eyes_norm_01':               "images/sprites/SLW/SWN/s1/ese_base_01_01.png",
+                    'eyes_norm_02':               "images/sprites/SLW/SWN/s1/ese_base_01_02.png",
+                    'eyes_norm_03':               "images/sprites/SLW/SWN/s1/ese_base_01_03.png",
+                    'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s1/ese_base_02_01.png",
+                    'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s1/ese_base_02_02.png",
+                    'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s1/ese_base_02_03.png",
+                    'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s1/ese_base_02_04.png",
+                    'eyes_left_norm_01':          "images/sprites/SLW/SWN/s1/ese_base_03_01.png",
+                    'eyes_right_norm_01':         "images/sprites/SLW/SWN/s1/ese_base_06_01.png",
+                    'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s1/ese_base_04_01.png",
+                    'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s1/ese_base_05_01.png",
+                    'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s1/ese_base_cray_01_01.png",
+                    'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s1/ese_base_horror_01_01.png",
+                    'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s1/ese_base_horror_01_02.png",
+                    'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s1/ese_base_prizes_01_01.png",
+                    # кадры моргания
+                    'blink_open':                 FaceEntry("images/sprites/SLW/SWN/s1/ese_base_01_01.png", offset = (0, -230)),
+                    'blink_half':                 FaceEntry("images/sprites/SLW/SWN/s1/ese_base_01_02.png", offset = (0, -230)),
+                    'blink_closed':               FaceEntry("images/sprites/SLW/SWN/s1/ese_base_01_03.png", offset = (0, -230)),
+                },
+                # Рот
+                'mouth': {
+                    'norm_smail_01':        "images/sprites/SLW/SWN/s1/mouth_base_smail_01_01.png",
+                    'norm_smail_02':        "images/sprites/SLW/SWN/s1/mouth_base_smail_01_11.png",
+                    'norm_smail_03':        "images/sprites/SLW/SWN/s1/mouth_base_smail_01_06.png",
+                    'norm_conversation_01': "images/sprites/SLW/SWN/s1/mouth_base_smail_01_02.png",
+                    'norm_conversation_02': "images/sprites/SLW/SWN/s1/mouth_base_smail_01_03.png",
+                    'norm_conversation_03': "images/sprites/SLW/SWN/s1/mouth_base_smail_01_07.png",
+                    'norm_conversation_04': "images/sprites/SLW/SWN/s1/mouth_base_smail_01_16.png",
+                    'norm_surprised_01':    "images/sprites/SLW/SWN/s1/mouth_base_smail_01_04.png",
+                    'norm_surprised_02':    "images/sprites/SLW/SWN/s1/mouth_base_smail_01_08.png",
+                    'norm_surprised_03':    "images/sprites/SLW/SWN/s1/mouth_base_smail_01_12.png",
+                    'norm_surprised_04':    "images/sprites/SLW/SWN/s1/mouth_base_smail_01_14.png",
+                    'norm_sour_01':         "images/sprites/SLW/SWN/s1/mouth_base_smail_01_10.png",
+                    'norm_sour_02':         "images/sprites/SLW/SWN/s1/mouth_base_smail_01_13.png",
+                    'norm_sour_03':         "images/sprites/SLW/SWN/s1/mouth_base_smail_01_15.png",
+                    'norm_audacious_01':    "images/sprites/SLW/SWN/s1/mouth_base_smail_01_05.png",
+                    'norm_language_01':     "images/sprites/SLW/SWN/s1/mouth_base_smail_01_09.png",
+                    'default':              "images/sprites/SLW/SWN/s1/mouth_base_01_01.png",
+                },
+                # Брови
+                'brov': {
+                    'brov_surprised_01':   "images/sprites/SLW/SWN/s1/brov_base_01_02.png",
+                    'brov_gloomy_01':      "images/sprites/SLW/SWN/s1/brov_base_01_03.png",
+                    'brov_irritations_01': "images/sprites/SLW/SWN/s1/brov_base_01_04.png",
+                    'brov_sad_01':         "images/sprites/SLW/SWN/s1/brov_base_01_05.png",
+                    'brov_angry_01':       "images/sprites/SLW/SWN/s1/brov_base_01_06.png",
+                    'brov_angry_02':       "images/sprites/SLW/SWN/s1/brov_base_01_07.png",
+                    'brov_angry_03':       "images/sprites/SLW/SWN/s1/brov_base_01_08.png",
+                    'brov_angry_04':       "images/sprites/SLW/SWN/s1/brov_base_01_09.png",
+                    'brov_angry_05':       "images/sprites/SLW/SWN/s1/brov_base_01_10.png",
+                    'brov_angry_06':       "images/sprites/SLW/SWN/s1/brov_base_01_11.png",
+                    'default':             "images/sprites/SLW/SWN/s1/brov_base_01_01.png",
+                },
+                # Веснушки
+                'freckles': {
+                    'norm_01':         "images/sprites/SLW/SWN/s1/freckles_base_01_02.png",
+                    'norm_02':         "images/sprites/SLW/SWN/s1/freckles_base_01_03.png",
+                    'norm_03':         "images/sprites/SLW/SWN/s1/freckles_base_01_04.png",
+                    'norm_04':         "images/sprites/SLW/SWN/s1/freckles_base_01_05.png",
+                    'norm_05':         "images/sprites/SLW/SWN/s1/freckles_base_01_06.png",
+                    'norm_hatching_01':"images/sprites/SLW/SWN/s1/freckles_base_01_07.png",
+                    'norm_blush_01':   "images/sprites/SLW/SWN/s1/freckles_base_01_08.png",
+                    'default':         "images/sprites/SLW/SWN/s1/freckles_base_01_01.png",
+                },
+                # Плач
+                'cry': {
+                    'cry_01': "images/sprites/SLW/SWN/s1/cry_base_01_02.png",
+                    'cry_02': "images/sprites/SLW/SWN/s1/cry_base_01_03.png",
+                    'cry_03': "images/sprites/SLW/SWN/s1/cry_base_01_04.png",
+                    'cry_04': "images/sprites/SLW/SWN/s1/cry_base_01_05.png",
+                    'default':"images/sprites/SLW/SWN/s1/cry_base_01_01.png",
+                },
+            },
+
+            # -----------------------------------------------
+            # set_02 — для left, left_down, left_top,
+            #          right, right_down, right_top
+            # -----------------------------------------------
+
+            'set_02': {
+                'eyes': {
+                    'eyes_norm_01':               "images/sprites/SLW/SWN/ese_base_01_01.png",
+                    'eyes_norm_02':               "images/sprites/SLW/SWN/ese_base_01_02.png",
+                    'eyes_norm_03':               "images/sprites/SLW/SWN/ese_base_01_03.png",
+                    'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/ese_base_02_01.png",
+                    'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/ese_base_02_02.png",
+                    'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/ese_base_02_03.png",
+                    'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/ese_base_02_04.png",
+                    'eyes_left_norm_01':          "images/sprites/SLW/SWN/ese_base_03_01.png",
+                    'eyes_right_norm_01':         "images/sprites/SLW/SWN/ese_base_06_01.png",
+                    'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/ese_base_04_01.png",
+                    'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/ese_base_05_01.png",
+                    'eyes_norm_cray_01':          "images/sprites/SLW/SWN/ese_base_cray_01_01.png",
+                    'eyes_norm_horror_01':        "images/sprites/SLW/SWN/ese_base_horror_01_01.png",
+                    'eyes_norm_horror_02':        "images/sprites/SLW/SWN/ese_base_horror_01_02.png",
+                    'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/ese_base_prizes_01_01.png",
+                    'blink_open':                 "images/sprites/SLW/SWN/ese_base_01_01.png",
+                    'blink_half':                 "images/sprites/SLW/SWN/ese_base_01_02.png",
+                    'blink_closed':               "images/sprites/SLW/SWN/ese_base_01_03.png",
+                },
+                'mouth': {
+                    'norm_smail_01':        "images/sprites/SLW/SWN/mouth_base_smail_01_01.png",
+                    'norm_smail_02':        "images/sprites/SLW/SWN/mouth_base_smail_01_11.png",
+                    'norm_smail_03':        "images/sprites/SLW/SWN/mouth_base_smail_01_06.png",
+                    'norm_conversation_01': "images/sprites/SLW/SWN/mouth_base_smail_01_02.png",
+                    'norm_conversation_02': "images/sprites/SLW/SWN/mouth_base_smail_01_03.png",
+                    'norm_conversation_03': "images/sprites/SLW/SWN/mouth_base_smail_01_07.png",
+                    'norm_conversation_04': "images/sprites/SLW/SWN/mouth_base_smail_01_16.png",
+                    'norm_surprised_01':    "images/sprites/SLW/SWN/mouth_base_smail_01_04.png",
+                    'norm_surprised_02':    "images/sprites/SLW/SWN/mouth_base_smail_01_08.png",
+                    'norm_surprised_03':    "images/sprites/SLW/SWN/mouth_base_smail_01_12.png",
+                    'norm_surprised_04':    "images/sprites/SLW/SWN/mouth_base_smail_01_14.png",
+                    'norm_sour_01':         "images/sprites/SLW/SWN/mouth_base_smail_01_10.png",
+                    'norm_sour_02':         "images/sprites/SLW/SWN/mouth_base_smail_01_13.png",
+                    'norm_sour_03':         "images/sprites/SLW/SWN/mouth_base_smail_01_15.png",
+                    'norm_audacious_01':    "images/sprites/SLW/SWN/mouth_base_smail_01_05.png",
+                    'norm_language_01':     "images/sprites/SLW/SWN/mouth_base_smail_01_09.png",
+                    'default':              "images/sprites/SLW/SWN/mouth_base_01_01.png",
+                },
+                'brov': {
+                    'brov_surprised_01':   "images/sprites/SLW/SWN/brov_base_01_02.png",
+                    'brov_gloomy_01':      "images/sprites/SLW/SWN/brov_base_01_03.png",
+                    'brov_irritations_01': "images/sprites/SLW/SWN/brov_base_01_04.png",
+                    'brov_sad_01':         "images/sprites/SLW/SWN/brov_base_01_05.png",
+                    'brov_angry_01':       "images/sprites/SLW/SWN/brov_base_01_06.png",
+                    'brov_angry_02':       "images/sprites/SLW/SWN/brov_base_01_07.png",
+                    'brov_angry_03':       "images/sprites/SLW/SWN/brov_base_01_08.png",
+                    'brov_angry_04':       "images/sprites/SLW/SWN/brov_base_01_09.png",
+                    'brov_angry_05':       "images/sprites/SLW/SWN/brov_base_01_10.png",
+                    'brov_angry_06':       "images/sprites/SLW/SWN/brov_base_01_11.png",
+                    'default':             "images/sprites/SLW/SWN/brov_base_01_01.png",
+                },
+                'freckles': {
+                    'norm_01':          "images/sprites/SLW/SWN/freckles_base_01_02.png",
+                    'norm_02':          "images/sprites/SLW/SWN/freckles_base_01_03.png",
+                    'norm_03':          "images/sprites/SLW/SWN/freckles_base_01_04.png",
+                    'norm_04':          "images/sprites/SLW/SWN/freckles_base_01_05.png",
+                    'norm_05':          "images/sprites/SLW/SWN/freckles_base_01_06.png",
+                    'norm_hatching_01': "images/sprites/SLW/SWN/freckles_base_01_07.png",
+                    'norm_blush_01':    "images/sprites/SLW/SWN/freckles_base_01_08.png",
+                    'default':          "images/sprites/SLW/SWN/freckles_base_01_01.png",
+                },
+                'cry': {
+                    'cry_01': "images/sprites/SLW/SWN/cry_base_01_02.png",
+                    'cry_02': "images/sprites/SLW/SWN/cry_base_01_03.png",
+                    'cry_03': "images/sprites/SLW/SWN/cry_base_01_04.png",
+                    'cry_04': "images/sprites/SLW/SWN/cry_base_01_05.png",
+                    'default':"images/sprites/SLW/SWN/cry_base_01_01.png",
+                },
+            },
+        }
+
+        # ===================================================
+        # Какой набор файлов использовать для каждой позиции
+        # ===================================================
+
+        HEAD_TO_SET = {
+            'default':    'set_01',   # прямо — набор 01
+            'left_slant': 'set_01',   # наклон — набор 01
+            'left':       'set_02',   # влево   — набор 02
+            'left_down':  'set_02',
+            'left_top':   'set_02',
+            'right':      'set_02',
+            'right_down': 'set_02',
+            'right_top':  'set_02',
+        }
+
+        # 
+        """
+        Таблица смещений элементов лица для каждого положения головы.
+        
+        Структура каждой записи:
+        {
+            'face_pos':  (x, y),      # позиция основы лица
+            'face_zoom': float,       # масштаб лица
+            'face_rotate': float,     # поворот лица (градусы)
+            'face_xzoom': float,      # зеркало по X (1 или -1)
+            'neck_pos':  (x, y),      # позиция шеи (None если нет)
+            'neck_img':  str,         # файл шеи
+            'neck_xzoom': float,      # зеркало шеи
+            'face_img':  str,         # файл лица
+            'canvas':    (w, h),      # размер холста
+            
+            # смещения элементов лица относительно базовых координат
+            'offset_eyes':     (dx, dy),
+            'offset_mouth':    (dx, dy),
+            'offset_brov':     (dx, dy),
+            'offset_freckles': (dx, dy),
+            'offset_cry':      (dx, dy),
+        }
+        """
+
+        # Базовые координаты элементов (для позиции 'default' / 'left')
+        #===================================================
+        # Базовые координаты элементов лица
+        # ===================================================
+        BASE = {
+            'eyes':     (1655, 620),
+            'mouth':    (1950, 980),
+            'brov':     (1650, 530),
+            'freckles': (1750, 810),
+            'cry':      (1730, 750),
+        }
+
+        # Таблица: положение головы -> параметры
+        #===================================================
+        # Параметры головы для каждой позиции
+        # ===================================================
+        LAYOUTS = {
+
+            'left': {
+                'canvas':       (4500, 6200),
+                'neck_img':     "images/sprites/SLW/SWN/neck_01.png",
+                'neck_pos':     (1800, 940),
+                'neck_xzoom':   1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+                'face_pos':     (1255, 35),
+                'face_zoom':    0.93,
+                'face_rotate':  0,
+                'face_xzoom':   1,
+                # смещения элементов лица от BASE
+                'offset_eyes':     (0,    0),
+                'offset_mouth':    (0,    0),
+                'offset_brov':     (0,    0),
+                'offset_freckles': (0,    0),
+                'offset_cry':      (0,    0),
+            },
+            # -----------------------------------------------
+            # Влево наклон — голова повёрнута -10°
+            # Элементы лица тоже поворачиваются вместе с головой
+            # -----------------------------------------------
+
+            'left_slant': {
+                'canvas':       (4500, 6200),
+                'neck_img':     None,
+                'neck_pos':     None,
+                'neck_xzoom':   1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_01_feis_01.png",
+                'face_pos':     (1330, 40),
+                'face_zoom':    1.0,
+                'face_rotate':  -10,
+                'face_xzoom':   1,
+                # голова наклонена — элементы тоже смещаются
+                'offset_eyes': LayoutElementParams(
+                    offset           = (-60, 0),
+                    rotate           = -4,           # вместе с головой
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_mouth': LayoutElementParams(
+                    offset           = (-150, -20),
+                    rotate           = -10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_brov': LayoutElementParams(
+                    offset           = (-180, -30),
+                    rotate           = -10,
+                    anchor           = (0.5, 1.0),    # от нижнего края бровей
+                    transform_anchor = True
+                ),
+                'offset_freckles': LayoutElementParams(
+                    offset           = (-150, -25),
+                    rotate           = -10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_cry': LayoutElementParams(
+                    offset           = (-150, -20),
+                    rotate           = -10,
+                    anchor           = (0.5, 0.0),    # слёзы текут от верха
+                    transform_anchor = True
+                ),
+            },
+
+            # -----------------------------------------------
+            # Влево вниз — голова повёрнута -15°
+            # -----------------------------------------------
+
+            'left_down': {
+                'canvas':       (4500, 6200),
+                'neck_img':     "images/sprites/SLW/SWN/neck_01.png",
+                'neck_pos':     (1790, 940),
+                'neck_xzoom':   1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+                'face_pos':     (1160, 80),
+                'face_zoom':    0.93,
+                'face_rotate':  -15,
+                'face_xzoom':   1,
+                'offset_eyes': LayoutElementParams(
+                    offset           = (-370, -20),
+                    rotate           = -15,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_mouth': LayoutElementParams(
+                    offset           = (-370, -10),
+                    rotate           = -15,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_brov': LayoutElementParams(
+                    offset           = (-370, -20),
+                    rotate           = -15,
+                    anchor           = (0.5, 1.0),
+                    transform_anchor = True
+                ),
+                'offset_freckles': LayoutElementParams(
+                    offset           = (-370, -15),
+                    rotate           = -15,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_cry': LayoutElementParams(
+                    offset           = (-370, -10),
+                    rotate           = -15,
+                    anchor           = (0.5, 0.0),
+                    transform_anchor = True
+                ),
+            },
+
+            # -----------------------------------------------
+            # Влево вверх — голова повёрнута +10°
+            # -----------------------------------------------
+
+            'left_top': {
+                'canvas':       (4500, 6200),
+                'neck_img':     "images/sprites/SLW/SWN/neck_01.png",
+                'neck_pos':     (1800, 940),
+                'neck_xzoom':   1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+                'face_pos':     (1325, 80),
+                'face_zoom':    0.93,
+                'face_rotate':  10,
+                'face_xzoom':   1,
+                'offset_eyes': LayoutElementParams(
+                    offset           = (-220, -20),
+                    rotate           = 10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_mouth': LayoutElementParams(
+                    offset           = (-220, -10),
+                    rotate           = 10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_brov': LayoutElementParams(
+                    offset           = (-220, -20),
+                    rotate           = 10,
+                    anchor           = (0.5, 1.0),
+                    transform_anchor = True
+                ),
+                'offset_freckles': LayoutElementParams(
+                    offset           = (-220, -15),
+                    rotate           = 10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_cry': LayoutElementParams(
+                    offset           = (-220, -10),
+                    rotate           = 10,
+                    anchor           = (0.5, 0.0),
+                    transform_anchor = True
+                ),
+            },
+
+            # -----------------------------------------------
+            # Вправо
+            # -----------------------------------------------
+
+            'right': {
+                'canvas':       (4500, 6200),
+                'neck_img':     "images/sprites/SLW/SWN/neck_02.png",
+                'neck_pos':     (1770, 940),
+                'neck_xzoom':   -1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+                'face_pos':     (1270, 80),
+                'face_zoom':    0.93,
+                'face_rotate':  0,
+                'face_xzoom':   -1,
+                'offset_eyes':     (0,    0),
+                'offset_mouth':    (0,    0),
+                'offset_brov':     (0,    0),
+                'offset_freckles': (0,    0),
+                'offset_cry':      (0,    0),
+            },
+
+            # -----------------------------------------------
+            # Вправо вниз — голова повёрнута +15°
+            # -----------------------------------------------
+
+            'right_down': {
+                'canvas':       (4500, 6200),
+                'neck_img':     "images/sprites/SLW/SWN/neck_02.png",
+                'neck_pos':     (1800, 940),
+                'neck_xzoom':   -1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+                'face_pos':     (1370, 80),
+                'face_zoom':    0.93,
+                'face_rotate':  15,
+                'face_xzoom':   -1,
+                'offset_eyes': LayoutElementParams(
+                    offset           = (-280, -20),
+                    rotate           = 15,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_mouth': LayoutElementParams(
+                    offset           = (-280, -10),
+                    rotate           = 15,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_brov': LayoutElementParams(
+                    offset           = (-280, -20),
+                    rotate           = 15,
+                    anchor           = (0.5, 1.0),
+                    transform_anchor = True
+                ),
+                'offset_freckles': LayoutElementParams(
+                    offset           = (-280, -15),
+                    rotate           = 15,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_cry': LayoutElementParams(
+                    offset           = (-280, -10),
+                    rotate           = 15,
+                    anchor           = (0.5, 0.0),
+                    transform_anchor = True
+                ),
+            },
+
+            # -----------------------------------------------
+            # Вправо вверх — голова повёрнута -10°
+            # -----------------------------------------------
+
+            'right_top': {
+                'canvas':       (4500, 6200),
+                'neck_img':     "images/sprites/SLW/SWN/neck_02.png",
+                'neck_pos':     (1800, 940),
+                'neck_xzoom':   -1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+                'face_pos':     (1240, 80),
+                'face_zoom':    0.93,
+                'face_rotate':  -10,
+                'face_xzoom':   -1,
+                'offset_eyes': LayoutElementParams(
+                    offset           = (-380, -20),
+                    rotate           = -10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_mouth': LayoutElementParams(
+                    offset           = (-380, -10),
+                    rotate           = -10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_brov': LayoutElementParams(
+                    offset           = (-380, -20),
+                    rotate           = -10,
+                    anchor           = (0.5, 1.0),
+                    transform_anchor = True
+                ),
+                'offset_freckles': LayoutElementParams(
+                    offset           = (-380, -15),
+                    rotate           = -10,
+                    anchor           = (0.5, 0.5),
+                    transform_anchor = True
+                ),
+                'offset_cry': LayoutElementParams(
+                    offset           = (-380, -10),
+                    rotate           = -10,
+                    anchor           = (0.5, 0.0),
+                    transform_anchor = True
+                ),
+            },
+
+            # -----------------------------------------------
+            # Default — прямо вперёд
+            # -----------------------------------------------
+
+            # default — прямо вперёд
+            'default': {
+                'canvas':       (4500, 6200),
+                'neck_img':     None,
+                'neck_pos':     None,
+                'neck_xzoom':   1,
+                'face_img':     "images/sprites/SLW/SWN/SLW_01_01_feis_01.png",
+                'face_pos':     (1385, 35),
+                'face_zoom':    1.0,
+                'face_rotate':  0,
+                'face_xzoom':   1,
+                'offset_eyes':     LayoutElementParams(
+                    offset = (0, 0),
+                    rotate = 5,
+                    anchor = (0.5, 0.5),
+                    transform_anchor = True
+                    ),
+                'offset_mouth':    LayoutElementParams(offset = (0, 0)),
+                'offset_brov':     LayoutElementParams(offset = (0, 0)),
+                'offset_freckles': LayoutElementParams(offset = (0, 0)),
+                'offset_cry':      LayoutElementParams(offset = (0, 0)),
+            },
+        }
+
+
+        @staticmethod
+        def get_layout(head_pos):
+            """Вернуть словарь параметров для позиции головы."""
+            return HeadLayout.LAYOUTS.get(
+                head_pos,
+                HeadLayout.LAYOUTS['default']
+            )
+
+        @staticmethod
+        def get_element_params(head_pos, element):
+            """
+            Вернуть LayoutElementParams для элемента.
+            Если не найден — вернуть пустой LayoutElementParams.
+            """
+            layout = HeadLayout.get_layout(head_pos)
+            key    = 'offset_' + element
+            params = layout.get(key)
+
+            # Поддержка старого формата tuple (на случай если где-то осталось)
+            if isinstance(params, tuple):
+                return LayoutElementParams(offset=params)
+
+            # Если не задан совсем
+            if params is None:
+                return LayoutElementParams()
+
+            return params
+
+        @staticmethod
+        def get_set(head_pos):
+            """
+            Вернуть словарь файлов (FACE_SETS[...])
+            для текущего положения головы.
+            """
+            set_name = HeadLayout.HEAD_TO_SET.get(head_pos, 'set_01')
+            return HeadLayout.FACE_SETS[set_name]
+
+        @staticmethod
+        def get_entry(head_pos, element, variant):
+            """
+            Вернуть FaceEntry для элемента и варианта.
+            Если вариант не найден — вернуть 'default'.
+            Если 'default' тоже нет — вернуть None.
+
+            Поддерживает старый формат, когда в FACE_SETS лежит строка.
+            """
+            face_set     = HeadLayout.get_set(head_pos)
+            element_dict = face_set.get(element, {})
+            entry        = element_dict.get(variant)
+
+            if entry is None:
+                entry = element_dict.get('default')
+
+            if entry is None:
+                return None
+
+            if isinstance(entry, FaceEntry):
+                return entry
+
+            if isinstance(entry, str):
+                return FaceEntry(entry)
+
+            return None
+
+        @staticmethod
+        def get_file(head_pos, element, variant):
+            """
+            Получить путь к файлу элемента лица.
+            
+            head_pos — положение головы ('left', 'right', 'default' ...)
+            element  — 'eyes' / 'mouth' / 'brov' / 'freckles' / 'cry'
+            variant  — вариант элемента ('eyes_norm_01', 'norm_smail_01' ...)
+                    если вариант не найден — берём 'default'
+            """
+            face_set = HeadLayout.get_set(head_pos)
+            element_dict = face_set.get(element, {})
+            # Если вариант не найден — пробуем 'default'
+            return element_dict.get(variant, element_dict.get('default', None))
+
+        @staticmethod
+        def face_pos(head_pos, element, entry=None):
+            """
+            Вернуть абсолютную позицию элемента лица
+            с учётом BASE + offset для текущего положения головы.
+            
+            element — 'eyes', 'mouth', 'brov', 'freckles', 'cry'
+
+            Вернуть абсолютную позицию (x, y) элемента лица.
+            BASE + offset для текущего положения головы.
+            Вернуть итоговую позицию (x, y) элемента лица.
+            
+            Итог = BASE[element] 
+                + LAYOUTS offset (общий для всех файлов данной позиции)
+                + FaceEntry.offset (индивидуальный для конкретного файла)
+            
+            entry — FaceEntry (если уже получен, чтобы не искать дважды)
+            """
+            layout_params = HeadLayout.get_element_params(head_pos, element)
+            bx, by        = HeadLayout.BASE[element]
+            dx, dy        = layout_params.offset
+            # Индивидуальное смещение из FaceEntry
+            ex, ey = (0, 0)
+            if entry is not None:
+                ex, ey = entry.offset
+
+            return (bx + dx + ex, by + dy + ey)
+
+        @staticmethod
+        def get(head_pos, key, fallback=None):
+            """
+            Получить любой параметр layout по ключу.
+            Получить параметр для текущего положения головы.
+            head_pos — значение переменной head_LW_01
+            key      — ключ из LAYOUTS (например 'offset_eyes')
+            fallback — значение по умолчанию если позиция неизвестна
+            """
+            layout = HeadLayout.get_layout(head_pos)
+            return layout.get(key, fallback)
+
+    # =======================================================
+    # DynamicDisplayable — строители
+    # =======================================================
+
+    def build_head(st, at):
+        """
+        Строит Composite головы.
+        Автоматически читает head_LW_01 из store.
+        """
+        pos = renpy.store.head_LW_01
+        L   = HeadLayout.get_layout(pos)
+
+        layers = []
+
+        # Шея
+        if L['neck_img'] is not None:
+            layers.append(L['neck_pos'])
+            layers.append(
+                Transform(
+                    L['neck_img'],
+                    xzoom  = L['neck_xzoom'],
+                    anchor = (0.5, 0.5)
+                )
+            )
+
+        # Лицо
+        layers.append(L['face_pos'])
+        has_rotate = (L['face_rotate'] != 0)
+        layers.append(
+            Transform(
+                L['face_img'],
+                zoom             = L['face_zoom'],
+                rotate           = L['face_rotate'],
+                xzoom            = L['face_xzoom'],
+                anchor           = (0.5, 1.0) if has_rotate else (0.5, 0.5),
+                transform_anchor = has_rotate
+            )
+        )
+        # redraw=0 — перестраивать при каждом кадре
+        # (смена head_LW_01 подхватится автоматически)
+        return Composite(L['canvas'], *layers), 0
+
+   
+       
+    # -------------------------------------------------------
+    # Универсальный строитель элемента лица
+    # -------------------------------------------------------
+
+    def make_head_composite():
+        """
+        Строит Composite для текущего положения головы.
+        Вызывается через ConditionSwitch (см. ниже).
+        Используется как callable в Function().
+
+        Фабрика строителей для DynamicDisplayable.
+        
+        element — 'eyes' / 'mouth' / 'brov' / 'freckles' / 'cry'
+        
+        Возвращаемая функция:
+            st, at       — стандартные аргументы DynamicDisplayable
+            variant      — ключ варианта ('eyes_norm_01', 'norm_smail_01' ...)
+            extra_kwargs — доп. параметры для Transform (dict или None)
+        """
+        pos   = head_LW_01 if 'head_LW_01' in dir() else 'default'
+        L     = HeadLayout.LAYOUTS.get(pos, HeadLayout.LAYOUTS['default'])
+
+        layers = []
+
+        # Шея (если есть)
+        if L['neck_img'] is not None:
+            layers.append(L['neck_pos'])
+            neck_t = Transform(
+                L['neck_img'],
+                xzoom=L['neck_xzoom'],
+                anchor=(0.5, 0.5)
+            )
+            layers.append(neck_t)
+
+        # Лицо
+        layers.append(L['face_pos'])
+        face_t = Transform(
+            L['face_img'],
+            zoom       = L['face_zoom'],
+            rotate     = L['face_rotate'],
+            xzoom      = L['face_xzoom'],
+            anchor     = (0.5, 1.0),
+            transform_anchor = (L['face_rotate'] != 0)
+        )
+        layers.append(face_t)
+
+        return Composite(L['canvas'], *layers)
+
+init python:
+
+    # -------------------------------------------------------
+
+    def build_face_element(st, at, element, image_path,
+                        base_x, base_y, extra_transform=None):
+        """
+        Универсальный строитель для элементов лица.
+        
+        element       — 'eyes'/'mouth'/'brov'/'freckles'/'cry'
+        image_path    — путь к файлу (строка)
+        base_x, base_y — базовые координаты из BASE
+        extra_transform — доп. параметры Transform (dict) или None
+        """
+        pos     = renpy.store.head_LW_01
+        abs_pos = HeadLayout.face_pos(pos, element)
+
+        t_kwargs = {}
+        if extra_transform:
+            t_kwargs.update(extra_transform)
+
+        layers = [abs_pos, Transform(image_path, **t_kwargs)]
+        canvas = HeadLayout.get(pos, 'canvas', (4500, 6200))
+
+        return Composite(canvas, *layers), 0
+
+    # -------------------------------------------------------
+    # Фабрики для каждого элемента
+    # Используем замыкания, чтобы не дублировать код
+    # -------------------------------------------------------
+    # -------------------------------------------------------
+    # Универсальная фабрика строителей элементов лица
+    # С поддержкой FaceEntry (offset + transform)
+    # -------------------------------------------------------
+
+
+
+    def _make_element_builder(element):
+        """
+        Фабрика строителей для DynamicDisplayable.
+        
+        element — 'eyes' / 'mouth' / 'brov' / 'freckles' / 'cry'
+        
+        Возвращаемая функция:
+            st, at       — стандартные аргументы DynamicDisplayable
+            variant      — ключ варианта ('eyes_norm_01', 'norm_smail_01' ...)
+            extra_kwargs — доп. параметры для Transform (dict или None)
+
+        Фабрика строителей для DynamicDisplayable.
+        
+        Возвращаемая функция:
+            st, at   — стандартные аргументы DynamicDisplayable
+            variant  — ключ варианта ('eyes_norm_01', 'norm_smail_01' ...)
+        
+        Логика:
+            1. Читаем head_LW_01 из store
+            2. Находим FaceEntry через HeadLayout.get_entry()
+            3. Считаем итоговую позицию:
+            BASE + layout_offset + entry.offset
+            4. Строим Transform с параметрами из entry.transform
+            5. Возвращаем Composite
+        """
+        def builder(st, at, variant):
+            pos           = renpy.store.head_LW_01
+            entry         = HeadLayout.get_entry(pos, element, variant)
+
+            if entry is None:
+                return Null(), 0
+
+            canvas        = HeadLayout.get(pos, 'canvas', (4500, 6200))
+            ax, ay        = HeadLayout.face_pos(pos, element, entry)
+            layout_params = HeadLayout.get_element_params(pos, element)
+            t_kwargs      = layout_params.merge_with_entry(entry)
+
+            d = Composite(
+                canvas,
+                (ax, ay),
+                Transform(entry.path, **t_kwargs)
+            )
+            return d, 0
+
+        return builder
+
+    _build_eyes     = _make_element_builder('eyes')
+    _build_mouth    = _make_element_builder('mouth')
+    _build_brov     = _make_element_builder('brov')
+    _build_freckles = _make_element_builder('freckles')
+    _build_cry      = _make_element_builder('cry')
+
+    # -------------------------------------------------------
+    # Строитель моргания
+    # -------------------------------------------------------
+
+    """
+    Анимация моргания.
+    Кадры берутся из набора текущей позиции головы.
+    """
+    import random
+
+    # ==========================================================
+    # Живое моргание Маленькой Ведьмы
+    # - случайная пауза между морганиями
+    # - редкое двойное моргание
+    # - сброс при смене положения головы
+    # ==========================================================
+
+    slw_blink_state = {
+        "phase": "open",          # open / half1 / closed / half2
+        "timer": 0.0,             # сколько осталось до конца фазы
+        "last_st": None,          # прошлое screen time
+        "last_head": None,        # последнее положение головы
+        "double_pending": False,  # ждёт ли второе моргание подряд
+    }
+
+    def slw_random_blink_delay():
+        """
+        Случайная пауза до следующего моргания.
+
+        Распределение:
+        - 70%: обычная пауза 2.0–4.0 сек
+        - 20%: длиннее 4.0–6.0 сек
+        - 10%: очень быстрое следующее моргание 0.35–0.8 сек
+            (создаёт эффект нервного/живого взгляда)
+        """
+        r = random.random()
+
+        if r < 0.70:
+            return random.uniform(2.0, 4.0)
+        elif r < 0.90:
+            return random.uniform(4.0, 6.0)
+        else:
+            return random.uniform(0.35, 0.8)
+
+    def slw_should_double_blink():
+        """
+        Вероятность двойного моргания.
+        Например 12%.
+        """
+        return random.random() < 0.12
+
+    def reset_slw_blink(head_pos=None):
+        """
+        Сброс состояния моргания.
+        """
+        if head_pos is None:
+            head_pos = getattr(renpy.store, "head_LW_01", "default")
+
+        slw_blink_state["phase"] = "open"
+        slw_blink_state["timer"] = slw_random_blink_delay()
+        slw_blink_state["last_st"] = None
+        slw_blink_state["last_head"] = head_pos
+        slw_blink_state["double_pending"] = False
+
+    def build_eyes_blink(st, at):
+        """
+        Анимация моргания:
+        - учитывает текущее положение головы
+        - использует FaceEntry для кадров
+        - учитывает LayoutElementParams для позиции/rotate/anchor
+        - между морганиями случайная пауза
+        - иногда делает двойное моргание
+        """
+
+        pos = getattr(renpy.store, "head_LW_01", "default")
+
+        # Если положение головы поменялось — сбрасываем таймер,
+        # чтобы не было странных скачков во время смены набора.
+        if slw_blink_state["last_head"] != pos:
+            reset_slw_blink(pos)
+
+        canvas = HeadLayout.get(pos, "canvas", (4500, 6200))
+
+        e_open   = HeadLayout.get_entry(pos, "eyes", "blink_open")
+        e_half   = HeadLayout.get_entry(pos, "eyes", "blink_half")
+        e_closed = HeadLayout.get_entry(pos, "eyes", "blink_closed")
+
+        state = slw_blink_state
+
+        # Первый вызов
+        if state["last_st"] is None:
+            state["last_st"] = st
+
+        dt = st - state["last_st"]
+        state["last_st"] = st
+
+        # защита от отрицательного/странного dt
+        if dt < 0:
+            dt = 0
+
+        state["timer"] -= dt
+
+        # Длительности фаз моргания
+        HALF_TIME   = 0.10
+        CLOSED_TIME = 0.08
+        HALF2_TIME  = 0.10
+
+        # Пока таймер исчерпан — двигаем фазы дальше
+        while state["timer"] <= 0:
+
+            if state["phase"] == "open":
+                state["phase"] = "half1"
+                state["timer"] += HALF_TIME
+
+            elif state["phase"] == "half1":
+                state["phase"] = "closed"
+                state["timer"] += CLOSED_TIME
+
+            elif state["phase"] == "closed":
+                state["phase"] = "half2"
+                state["timer"] += HALF2_TIME
+
+            elif state["phase"] == "half2":
+                state["phase"] = "open"
+
+                # Если уже запланировано второе моргание — делаем короткую паузу
+                if state["double_pending"]:
+                    state["double_pending"] = False
+                    state["timer"] += random.uniform(0.12, 0.28)
+
+                else:
+                    # Иногда после завершённого моргания планируем второе
+                    if slw_should_double_blink():
+                        state["double_pending"] = True
+                        state["timer"] += random.uniform(0.12, 0.28)
+                    else:
+                        state["timer"] += slw_random_blink_delay()
+
+        # Выбор текущего кадра
+        if state["phase"] == "open":
+            entry = e_open
+        elif state["phase"] == "half1":
+            entry = e_half
+        elif state["phase"] == "closed":
+            entry = e_closed
+        elif state["phase"] == "half2":
+            entry = e_half
+        else:
+            entry = e_open
+
+        redraw = max(0.01, state["timer"])
+
+        if entry is None:
+            return Null(), redraw
+
+        ax, ay = HeadLayout.face_pos(pos, "eyes", entry)
+        layout_params = HeadLayout.get_element_params(pos, "eyes")
+        t_kwargs = layout_params.merge_with_entry(entry)
+
+        d = Composite(
+            canvas,
+            (ax, ay),
+            Transform(entry.path, **t_kwargs)
+        )
+
+        return d, redraw
+
+
+
+
+
+
+
+
+
+
+
 #=============================================================
 #карты таро
 #=============================================================
@@ -1051,32 +2281,32 @@ image DEnd:
 # Вариант 1 — слабый ветер
 image SLW_kassa_wind_01:
     Composite(
-        (5000, 6800),
-        (1000, 630),
+        (1500, 2040),
+        (500, 300),
         "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png"
     )
     pause 0.5
     Composite(
-        (5000, 6800),
-        (1150, 600),
+        (1500, 2040),
+        (500, 300),
         "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
     )
     pause 0.5
     Composite(
-        (5000, 6800),
-        (1300, 580),
+        (1500, 2040),
+        (500, 300),
         "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png"
     )
     pause 0.5
     Composite(
-        (5000, 6800),
-        (1500, 670),
+        (1500, 2040),
+        (500, 300),
         "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png"
     )
     pause 0.5
     Composite(
-        (5000, 6800),
-        (1150, 600),
+        (1500, 2040),
+        (500, 300),
         "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
     )
     pause 0.5
@@ -1084,48 +2314,47 @@ image SLW_kassa_wind_01:
 
 # Вариант 2 — средний ветер
 image SLW_kassa_wind_02:
-    contains:
-        # Покадровая анимация кадров
-        Composite(
-            (5000, 6800),
-            (2000, 630),
+    parallel:
+        contains:
+            # Покадровая анимация кадров
+            
             "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png"
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2150, 600),
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2300, 580),
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png"
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2500, 670),
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2150, 600),
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
-        )
-        pause 0.5
-        repeat
+            pos (500, -250)
+        
+            pause 0.5
 
-    # Качание всей анимации
-    rotate_pad False
-    xanchor 0.5
-    yanchor 0.0
-    block:
-        ease 0.5 rotate 7
-        easeout 1.5 rotate -3
-        repeat
+           
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
+            pos (500, -250)
+        
+            pause 0.5
+
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png"
+            pos (500, -250)
+        
+            pause 0.5
+
+            
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
+            pos (500, -250)
+        
+            pause 0.5
+        
+            
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
+            pos (500, -250)
+        
+            pause 0.5
+            repeat
+    parallel:
+        # Качание всей анимации
+        #rotate_pad False
+        xanchor 0.0
+        yanchor 0.0
+        block:
+            ease 0.5 rotate -7
+            easeout 1.5 rotate -9
+            repeat
 
 # Вариант 3 — сильный ветер
 # ИСПРАВЛЕНО: убран некорректный parallel внутри image ATL
@@ -1133,71 +2362,56 @@ image SLW_kassa_wind_02:
 # Отдельные кадры кассы
 # Финальная сборка с rotate отдельно
 image SLW_kassa_wind_03:
-    contains:
+    parallel:
+        contains:
         # Покадровая анимация кадров
-        Composite(
-            (5000, 6800),
-            (2000, 630),
-            Transform(
-                "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png",
-                zoom=0.75
-            )
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2150, 600),
-            Transform(
-                "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
-                zoom=0.75
-            )
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2300, 580),
-            Transform(
-                "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png",
-                zoom=0.75
-            )
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2500, 670),
-            Transform(
-                "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
-                zoom=0.75
-            )
-        )
-        pause 0.5
-        Composite(
-            (5000, 6800),
-            (2150, 600),
-            Transform(
-                "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
-                zoom=0.75
-            )
-        )
-        pause 0.5
-        repeat
+        
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png",
+            pos (700, -250)
+         
+        
+            pause 0.5
+        
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
+            pos (700, -250)
+      
+            pause 0.5
+        
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png",
+            pos (700, -250)
+            
+        
+            pause 0.5
+        
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
+            pos (700, -250)
+            
 
-    # Качание всей анимации
-    rotate_pad False
-    xanchor 0.5
-    yanchor 0.0
-    block:
-        ease 0.2 rotate 15
-        easeout 0.8 rotate 3
-        ease 0.4 rotate 8
-        easeout 1.5 rotate -4
-        repeat
+            pause 0.5
+        
+            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
+            pos (700, -250)
+            
+        
+            pause 0.5
+            repeat
+    parallel:
+        # Качание всей анимации
+        #rotate_pad False
+        xanchor 0.0
+        yanchor 0.0
+        block:
+            ease 0.2 rotate -15
+            easeout 0.8 rotate -10
+            ease 0.4 rotate -8
+            easeout 1.5 rotate -12
+            repeat
 
 # Статичная коса (без ветра)
 image SLW_kassa_still:
     Composite(
-        (5000, 6800),
-        (2500, 600),
+        (1500, 2040),
+        (500, 300),
         "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png"
     )
 
@@ -1208,6 +2422,654 @@ image SLW_kassa_01 = ConditionSwitch(
     "wind_01 == 3", "SLW_kassa_wind_03",
     "True",         "SLW_kassa_still"
 )
+
+
+# ===================================================
+# ГОЛОВА
+# ===================================================
+
+#image LWS_head = DynamicDisplayable(build_head)
+
+#image LWS_head = ConditionSwitch(
+
+#    "head_LW_01 == 'left'",
+#    Composite(
+#        (4500, 6200),
+#        (1800, 940), "images/sprites/SLW/SWN/neck_01.png",
+#        (1530, 140),
+#        Transform(
+#            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+#            zoom=0.93
+#        )
+#    ),
+
+#    "head_LW_01 == 'left_slant'",
+#    Composite(
+#        (4500, 6200),
+#        (1330, 40),
+#        Transform(
+#            "images/sprites/SLW/SWN/SLW_01_01_feis_01.png",
+#            rotate=-10,
+#            anchor=(0.5, 1.0),
+#            transform_anchor=True
+#        )
+#    ),
+
+#    "head_LW_01 == 'left_down'",
+#    Composite(
+#        (4500, 6200),
+#        (1800, 940), "images/sprites/SLW/SWN/neck_01.png",
+#        (1160, 80),
+#        Transform(
+#            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+#            zoom=0.93,
+#            rotate=-15,
+#            anchor=(0.5, 1.0),
+#            transform_anchor=True
+#        )
+#    ),
+
+#    "head_LW_01 == 'left_top'",
+#    Composite(
+#        (4500, 6200),
+#        (1800, 940), "images/sprites/SLW/SWN/neck_01.png",
+#        (1325, 80),
+#        Transform(
+#            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+#            zoom=0.93,
+#            rotate=10,
+#            anchor=(0.5, 1.0),
+#            transform_anchor=True
+#        )
+#    ),
+
+#    "head_LW_01 == 'right'",
+#    Composite(
+#        (4500, 6200),
+#        (1760, 940), 
+#        Transform(
+#            "images/sprites/SLW/SWN/neck_02.png",
+#            xzoom=-1,
+#            anchor=(0.5, 0.5)
+#        ),
+#        (1560, 140),
+#        Transform(
+#            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+#            zoom=0.93,
+#            xzoom=-1,
+#            anchor=(0.5, 0.5)
+#        )
+#    ),
+
+#    "head_LW_01 == 'right_down'",
+#    Composite(
+#        (4500, 6200),
+#        (1800, 940), 
+#        Transform(
+#            "images/sprites/SLW/SWN/neck_02.png",
+#            xzoom=-1,
+#            anchor=(0.5, 0.5)
+#        ),
+#        (1370, 80),
+#        Transform(
+#            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+#            zoom=0.93,
+#            rotate=15,
+#            xzoom=-1,
+#            anchor=(0.5, 1.0),
+#            transform_anchor=True
+#        )
+#    ),
+
+#    "head_LW_01 == 'right_top'",
+#    Composite(
+#        (4500, 6200),
+#        (1800, 940), 
+#        Transform(
+#            "images/sprites/SLW/SWN/neck_02.png",
+#            xzoom=-1,
+#            anchor=(0.5, 0.5)
+#        ),
+#        (1240, 80),
+#        Transform(
+#            "images/sprites/SLW/SWN/SLW_01_02_feis_01.png",
+#            zoom=0.93,
+#            rotate=-10,
+#            xzoom=-1,
+#            anchor=(0.5, 1.0),
+#            transform_anchor=True
+#        )
+#    ),
+
+#    "True",
+#    Composite(
+#        (4500, 6200),
+#        (1590, 160),
+#        "images/sprites/SLW/SWN/SLW_01_01_feis_01.png"
+#    )
+#)
+
+
+# ===================================================
+# ВОЛОСЫ
+# ===================================================
+
+# Медленный ветер
+image SLW_hair_wind_slow:
+    Composite(
+        (4500, 6000),
+        (1327, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
+    )
+    pause 0.5
+    Composite(
+        (4500, 6000),
+        (1332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+    )
+    pause 0.5
+    Composite(
+        (4500, 6000),
+        (1318, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_03.png"
+    )
+    pause 0.5
+    Composite(
+        (4500, 6000),
+        (1332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+    )
+    pause 0.5
+    repeat
+
+# Быстрый ветер
+image SLW_hair_wind_fast:
+    Composite(
+        (4500, 6000),
+        (1327, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
+    )
+    pause 0.2
+    Composite(
+        (4500, 6000),
+        (1332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+    )
+    pause 0.2
+    Composite(
+        (4500, 6000),
+        (1318, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_03.png"
+    )
+    pause 0.2
+    Composite(
+        (4500, 6000),
+        (1332, 46), "images/sprites/SLW/SWN/SLW_01_01_hair_01_02.png"
+    )
+    pause 0.2
+    repeat
+
+# Статичные волосы
+image SLW_hair_static:
+    Composite(
+        (4500, 6000),
+        (1327, 58), "images/sprites/SLW/SWN/SLW_01_01_hair_01_01.png"
+    )
+
+# Выбор волос через ConditionSwitch
+image SLW_hair_01 = ConditionSwitch(
+    "wind_01 == 1",              "SLW_hair_wind_slow",
+    "wind_01 == 2 or wind_01 == 3", "SLW_hair_wind_fast",
+    "True",                      "SLW_hair_static"
+)
+
+# ===================================================
+# ГЛАЗА
+# ===================================================
+
+image SLW_eyes_blink_01 = DynamicDisplayable(build_eyes_blink)
+
+image SLW_eyes_01 = ConditionSwitch(
+
+    "eyes_LW_01 == 'eyes_norm_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_01'),
+
+    "eyes_LW_01 == 'eyes_norm_02'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_02'),
+
+    "eyes_LW_01 == 'eyes_norm_03'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_03'),
+
+    "eyes_LW_01 == 'eyes_norm_blindfold_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_blindfold_01'),
+
+    "eyes_LW_01 == 'eyes_norm_blindfold_02'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_blindfold_02'),
+
+    "eyes_LW_01 == 'eyes_norm_blindfold_03'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_blindfold_03'),
+
+    "eyes_LW_01 == 'eyes_norm_blindfold_04'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_blindfold_04'),
+
+    "eyes_LW_01 == 'eyes_left_norm_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_left_norm_01'),
+
+    "eyes_LW_01 == 'eyes_right_norm_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_right_norm_01'),
+
+    "eyes_LW_01 == 'eyes_left_norm_he_winks_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_left_norm_he_winks_01'),
+
+    "eyes_LW_01 == 'eyes_right_norm_he_winks_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_right_norm_he_winks_01'),
+
+    "eyes_LW_01 == 'eyes_norm_cray_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_cray_01'),
+
+    "eyes_LW_01 == 'eyes_norm_horror_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_horror_01'),
+
+    "eyes_LW_01 == 'eyes_norm_horror_02'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_horror_02'),
+
+    "eyes_LW_01 == 'eyes_norm_prizes_01'",
+    DynamicDisplayable(_build_eyes, 'eyes_norm_prizes_01'),
+
+    "True",
+    DynamicDisplayable(build_eyes_blink)
+)
+
+# Анимация моргания (базовая)
+#image SLW_eyes_blink_01:
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
+#    )
+#    pause 1.0
+#    choice:
+#        Composite(
+#            (4500, 6200),
+#           (1655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
+#        )
+#        pause 1.0
+#    choice:
+#        Composite(
+#            (4500, 6200),
+#            (1655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
+#        )
+#        pause 0.25
+#       Composite(
+#            (4500, 6200),
+#           (1655, 620), "images/sprites/SLW/SWN/ese_base_01_03.png"
+#        )
+#        pause 0.25
+#        Composite(
+#            (4500, 6200),
+#            (1655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
+#        )
+#        pause 0.5
+#    repeat
+
+# Выбор варианта глаз
+# ИСПРАВЛЕНО: "Trye" -> "True"
+#image SLW_eyes_01 = ConditionSwitch(
+
+#    "eyes_LW_01 == 'eyes_norm_01'",
+#   Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_01_01.png"
+#    ),
+
+#    "eyes_LW_01 == 'eyes_norm_02'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_01_02.png"
+#    ),
+
+#    "eyes_LW_01 == 'eyes_norm_03'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_01_03.png"
+#    ),
+
+#    "eyes_LW_01 == 'eyes_norm_blindfold_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_02_01.png"
+#    ),
+
+#    "eyes_LW_01 == 'eyes_norm_blindfold_02'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_02_02.png"
+#    ),
+
+#    "eyes_LW_01 == 'eyes_norm_blindfold_03'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_02_03.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_norm_blindfold_04'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_02_04.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_left_norm_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_03_01.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_right_norm_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_06_01.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_left_norm_he_winks_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_04_01.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_right_norm_he_winks_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 600), "images/sprites/SLW/SWN/ese_base_05_01.png"
+#    ),
+
+#    "eyes_LW_01 == 'eyes_norm_cray_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_cray_01_01.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_norm_horror_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_horror_01_01.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_norm_horror_02'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_horror_01_02.png"
+#    ),
+#
+#    "eyes_LW_01 == 'eyes_norm_prizes_01'",
+#    Composite(
+#        (4500, 6200),
+#        (1655, 620), "images/sprites/SLW/SWN/ese_base_prizes_01_01.png"
+#    ),
+
+#    "True", "SLW_eyes_blink_01"   # ИСПРАВЛЕНО: было "Trye"
+#)
+
+# ===================================================
+# ПЛАЧ
+# ===================================================
+
+image SLW_cry_01 = ConditionSwitch(
+
+    "cry_LW_01 == 'no'", Null(),
+
+    "cry_LW_01 == 'cry_01'", 
+    Composite(
+        (4500, 6200),
+        (1680, 750), "images/sprites/SLW/SWN/cry_base_01_02.png"
+    ),
+
+    "cry_LW_01 == 'cry_02'", 
+    Composite(
+        (4500, 6200),
+        (1730, 750), "images/sprites/SLW/SWN/cry_base_01_03.png"
+    ),
+
+    "cry_LW_01 == 'cry_03'", 
+    Composite(
+        (4500, 6200),
+        (1730, 750), "images/sprites/SLW/SWN/cry_base_01_04.png"
+    ),
+
+    "cry_LW_01 == 'cry_04'", 
+    Composite(
+        (4500, 6200),
+        (1730, 750), "images/sprites/SLW/SWN/cry_base_01_05.png"
+    ),
+
+    "True", 
+    Composite(
+        (4500, 6200),
+        (1730, 750), "images/sprites/SLW/SWN/cry_base_01_01.png"
+    )
+)
+
+# ===================================================
+# ВЕСНУШКИ
+# ===================================================
+
+# ИСПРАВЛЕНО: "Trye" -> "True"
+image SLW_freckles_01 = ConditionSwitch(
+
+    "freckles_LW_01 == 'no'", Null(),
+
+    "freckles_LW_01 == 'norm_01'",
+    Composite(
+        (4500, 6200),
+        (1750, 810), "images/sprites/SLW/SWN/freckles_base_01_02.png"
+    ),
+
+    "freckles_LW_01 == 'norm_02'",
+    Composite(
+        (4500, 6200),
+        (1750, 810), "images/sprites/SLW/SWN/freckles_base_01_03.png"
+    ),
+
+    "freckles_LW_01 == 'norm_03'",
+    Composite(
+        (4500, 6200),
+        (1750, 810), "images/sprites/SLW/SWN/freckles_base_01_04.png"
+    ),
+
+    "freckles_LW_01 == 'norm_04'",
+    Composite(
+        (4500, 6200),
+        (1750, 810), "images/sprites/SLW/SWN/freckles_base_01_05.png"
+    ),
+
+    "freckles_LW_01 == 'norm_05'",
+    Composite(
+        (4500, 6200),
+        (1750, 810), "images/sprites/SLW/SWN/freckles_base_01_06.png"
+    ),
+
+    "freckles_LW_01 == 'norm_hatching_01'",
+    Composite(
+        (4500, 6200),
+        (1750, 810), "images/sprites/SLW/SWN/freckles_base_01_07.png"
+    ),
+
+    "freckles_LW_01 == 'norm_blush_01'",
+    Composite(
+        (4500, 6200),
+        (1150, 810), "images/sprites/SLW/SWN/freckles_base_01_08.png"
+    ),
+
+    "True",                         # ИСПРАВЛЕНО: было "Trye"
+    Composite(
+        (4500, 6200),
+        (1750, 810), "images/sprites/SLW/SWN/freckles_base_01_01.png"
+    )
+)
+
+# ===================================================
+# РОТ
+# ===================================================
+
+image SLW_mouth_01 = ConditionSwitch(
+
+    "mouth_LW_01 == 'norm_smail_01'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_01.png"
+    ),
+
+    "mouth_LW_01 == 'norm_smail_02'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_11.png"
+    ),
+
+    "mouth_LW_01 == 'norm_smail_03'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_06.png"
+    ),
+
+    "mouth_LW_01 == 'norm_conversation_01'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_02.png"
+    ),
+
+    "mouth_LW_01 == 'norm_conversation_02'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_03.png"
+    ),
+
+    "mouth_LW_01 == 'norm_conversation_03'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_07.png"
+    ),
+
+    "mouth_LW_01 == 'norm_conversation_04'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_16.png"
+    ),
+
+    "mouth_LW_01 == 'norm_surprised_01'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_04.png"
+    ),
+
+    "mouth_LW_01 == 'norm_surprised_02'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_08.png"
+    ),
+
+    "mouth_LW_01 == 'norm_surprised_03'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_12.png"
+    ),
+
+    "mouth_LW_01 == 'norm_surprised_04'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_14.png"
+    ),
+
+    "mouth_LW_01 == 'norm_sour_01'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_10.png"
+    ),
+
+    "mouth_LW_01 == 'norm_sour_02'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_13.png"
+    ),
+
+    "mouth_LW_01 == 'norm_sour_03'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_15.png"
+    ),
+
+    "mouth_LW_01 == 'norm_audacious_01'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_05.png"
+    ),
+
+    "mouth_LW_01 == 'norm_language_01'",
+    Composite(
+        (4500, 6200),
+        (1950, 980), "images/sprites/SLW/SWN/mouth_base_smail_01_09.png"
+    ),
+
+    "True",
+    Composite(
+        (4500, 6200),
+        (1970, 980), "images/sprites/SLW/SWN/mouth_base_01_01.png"
+    )
+)
+
+#====================================================
+#БРОВИ
+#====================================================
+
+image SLW_brov_01 = ConditionSwitch(
+
+    "brov_LW_01 == 'brov_surprised_01'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_02.png"
+            ),
+
+    "brov_LW_01 == 'brov_gloomy_01'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_03.png"
+            ),
+
+    "brov_LW_01 == 'brov_irritations_01'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_04.png"
+            ),
+
+    "brov_LW_01 == 'brov_sad_01'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_05.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_01'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_06.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_02'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_07.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_03'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_08.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_04'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_09.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_05'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_10.png"
+            ),
+
+    "brov_LW_01 == 'brov_angry_06'", Composite(
+                (4500, 6200),
+                (1650, 530), "images/sprites/SLW/SWN/brov_base_01_11.png"
+            ),
+
+    "True", Composite(
+                (4500, 6200),
+                (1665, 550), "images/sprites/SLW/SWN/brov_base_01_01.png"
+            )
+)
+
+
 
 # ===================================================
 # LAYEREDIMAGE — Маленькая Ведьма
@@ -1224,7 +3086,64 @@ layeredimage Little_witch:
 
     # Коса
     attribute kassa_01 default:
+
         "SLW_kassa_01"
+
+    # Тело
+    
+#    attribute bodu_01_nude default:
+
+#        "LWS_bodu"
+            
+# заглушка
+#    attribute SH:# default:
+#        Composite(
+#            (2500, 6200),
+#            (1556, 130), "images/sprites/SLW/SWN/SLW_H.png"
+#        )
+
+
+    # Голова
+    #attribute head default:
+    #    "LWS_head"
+   
+    #attribute brov_01:# default:
+        # Брови (одна группа, один вариант по умолчанию)
+        # ИСПРАВЛЕНО: была дублирующая group brov с im.Alpha
+    #    "SLW_brov_01"
+
+    #attribute eyes_01 default:
+        # Глаза
+    #    "SLW_eyes_01"
+
+    #attribute cry_01:# default:
+        #плач
+    #    "SLW_cry_01"
+ 
+    #attribute freckles_01:# default:
+        # Веснушки
+    #    "SLW_freckles_01"
+
+    #attribute mouth_01:# default:
+        # Рот
+    #   "SLW_mouth_01"
+
+    
+    #attribute hair_01:# default:
+        # Волосы
+    #    "SLW_hair_01"
+
+    #attribute brov_alpha_01:# default:
+        #брови альфа канал.
+    #    Transform("SLW_brov_01", alpha=0.7)
+
+    #group censorship:
+        # Цензура (не default — показывается только явным вызовом)
+    #    attribute censorship_01:
+    #        Composite(
+    #            (3500, 6000),
+    #            (-390, 80), "images/sprites/SLW/SWN/censorship_01_01_base.png"
+    #        )
 
 
 # цветные спрайты
