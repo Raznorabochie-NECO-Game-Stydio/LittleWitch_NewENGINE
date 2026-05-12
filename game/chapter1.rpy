@@ -1477,6 +1477,43 @@ label Cha_001:
 ## Маленькая ведьма мягкой походкой спускается с небольшого холма, покрытого высокой травой.
 ## На траве блестят большие капли воды после дождя. На серой земле под стеблями лежат студенистые лужицы.
 ## Ведьма останавливается, втягивает носом воздух.
+
+
+        #default head_LW_01 = "left_down"
+        #default head_LW_01 = 'default'
+        $ wind_01 = 3
+        #default eyes_LW_01 = True
+        #default cry_LW_01 = 'no'
+        #default freckles_LW_01 = 'norm_01'
+        #default mouth_LW_01 = True
+        #default brov_LW_01 = True
+
+        show Little_witch at LW_long_range, screen_center_03_long onlayer sloi02
+        #show LW n at left with moveinleft
+        #show TR at Position(xpos = 400, ypos = 0, xanchor = 0, yanchor = 0)
+        #show plate at right
+        #show HM n at right onlayer xra 
+        #with teleport
+        #$ head_LW_01 = 'left_slant'
+
+
+        #$ head_LW_01 = 'default'
+        #show HM s01 at right onlayer xra with dissolve
+        #hide Little_witch onlayer sloi02
+        # LW open ""
+        # show LW -open
+
+
+
+
+
+
+
+
+
+
+
+
     
         e "Уже наступили сумерки, и было темно. "
         e "Недавно прошедшая гроза разлила по воздуху запах озона, а высокая трава колыхалась от дуновений бодрого ветерка, "
