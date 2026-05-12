@@ -149,7 +149,7 @@ init python:
 
     class LayoutElementParams:
         """
-        Параметры элемента лица для конкретного положения головы.
+        Параметры элемента лица для конкретного положения головы и тела.
         
         offset           — (dx, dy) смещение от BASE
         rotate           — поворот элемента (float или None)
@@ -591,7 +591,7 @@ init python:
             'cry':      (1730, 750),
         }
 
-        # Таблица: положение головы -> параметры
+        # Таблица: положение головы, тела -> параметры
         #===================================================
         # Параметры головы для каждой позиции
         # ===================================================
@@ -2425,10 +2425,10 @@ image SLW_kassa_01 = ConditionSwitch(
 
 
 # ===================================================
-# ГОЛОВА
+# ТЕЛО
 # ===================================================
 
-#image LWS_head = DynamicDisplayable(build_head)
+image LWS_head = DynamicDisplayable(build_head)
 
 #image LWS_head = ConditionSwitch(
 
@@ -3091,9 +3091,9 @@ layeredimage Little_witch:
 
     # Тело
     
-#    attribute bodu_01_nude default:
+    attribute bodu_01_nude default:
 
-#        "LWS_bodu"
+        "SLW_bodu_01"
             
 # заглушка
 #    attribute SH:# default:
