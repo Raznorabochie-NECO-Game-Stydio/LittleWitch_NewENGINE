@@ -1482,7 +1482,7 @@ label Cha_001:
         #default head_LW_01 = "left_down"
         #default head_LW_01 = 'default'
         #default SLW_bodu_01 =""
-        $ wind_01 = 3
+        #$ wind_01 = 3
         #default eyes_LW_01 = True
         #default cry_LW_01 = 'no'
         #default freckles_LW_01 = 'norm_01'
@@ -1490,7 +1490,7 @@ label Cha_001:
         #default brov_LW_01 = True
         
 
-        show Little_witch at LW_long_range, screen_center_03_long onlayer sloi02
+        #show Little_witch at LW_long_range, screen_center_03_long onlayer sloi02
         #show LW n at left with moveinleft
         #show TR at Position(xpos = 400, ypos = 0, xanchor = 0, yanchor = 0)
         #show plate at right
