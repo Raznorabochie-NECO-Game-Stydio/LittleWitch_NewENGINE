@@ -142,10 +142,349 @@ python:
 #define Cha_01 = mci
 
 
+init python:
+
+    import random
+
+    CANVAS = (1500, 2130)
+
+    # =====================================================
+    # 1. ТЕЛА
+    # =====================================================
+    SLW_BODIES = {
+        "bodu_01_left":            "images/sprites/SLW/SWN/bodu/SLW_01_01_bodu_base_left.png",
+        "bodu_01_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_01_bodu_base_left_down.png",
+        "bodu_01_left_slant":      "images/sprites/SLW/SWN/bodu/SLW_01_01_bodu_base_left_slant.png",
+        "bodu_02_left":            "images/sprites/SLW/SWN/bodu/SLW_01_02_bodu_base_left.png",
+        "bodu_02_left_slant":      "images/sprites/SLW/SWN/bodu/SLW_01_02_bodu_base_left_slant.png",
+        "bodu_02_default":         "images/sprites/SLW/SWN/bodu/SLW_01_02_bodu_default.png",
+        "bodu_02_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_02_bodu_left_down.png",
+        "bodu_03_default":         "images/sprites/SLW/SWN/bodu/SLW_01_03_bodu_base_default.png",
+        "bodu_03_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_03_bodu_base_left_down.png",
+        "bodu_03_full_face":       "images/sprites/SLW/SWN/bodu/SLW_01_03_bodu_full_face.png",
+        "bodu_03_left_down_slant": "images/sprites/SLW/SWN/bodu/SLW_01_03_bodu_left_down_slant.png",
+        "bodu_04_default":         "images/sprites/SLW/SWN/bodu/SLW_01_04_bodu_default.png",
+        "bodu_04_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_04_bodu_base_left_down.png",
+        "bodu_04_full_face":       "images/sprites/SLW/SWN/bodu/SLW_01_04_bodu_full_face.png",
+        "bodu_04_full_face_slant": "images/sprites/SLW/SWN/bodu/SLW_01_04_bodu_full_face_slant.png",
+        "bodu_05_default":         "images/sprites/SLW/SWN/bodu/SLW_01_05_bodu_default.png",
+        "bodu_05_full_face":       "images/sprites/SLW/SWN/bodu/SLW_01_05_bodu_full_face.png",
+        "bodu_05_full_face_slant": "images/sprites/SLW/SWN/bodu/SLW_01_05_bodu_full_face_slant.png",
+        "bodu_05_left":            "images/sprites/SLW/SWN/bodu/SLW_01_05_bodu_left.png",
+        "bodu_05_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_05_bodu_left_down.png",
+        "bodu_06_default":         "images/sprites/SLW/SWN/bodu/SLW_01_06_bodu_default.png",
+        "bodu_06_left":            "images/sprites/SLW/SWN/bodu/SLW_01_06_bodu_left.png",
+        "bodu_06_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_06_bodu_left_down.png",
+        "bodu_06_left_slant":      "images/sprites/SLW/SWN/bodu/SLW_01_06_bodu_left_slant.png",
+        "bodu_07_default":         "images/sprites/SLW/SWN/bodu/SLW_01_07_bodu_default.png",
+        "bodu_08_default":         "images/sprites/SLW/SWN/bodu/SLW_01_08_bodu_default.png",
+        "bodu_08_left":            "images/sprites/SLW/SWN/bodu/SLW_01_08_bodu_left.png",
+        "bodu_08_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_08_bodu_left_down.png",
+        "bodu_08_left_slant":      "images/sprites/SLW/SWN/bodu/SLW_01_08_bodu_left_slant.png",
+        "bodu_09_default":         "images/sprites/SLW/SWN/bodu/SLW_01_09_bodu_default.png",
+        "bodu_09_left":            "images/sprites/SLW/SWN/bodu/SLW_01_09_bodu_left.png",
+        "bodu_09_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_09_bodu_left_down.png",
+        "bodu_09_left_slant":      "images/sprites/SLW/SWN/bodu/SLW_01_09_bodu_left_slant.png",
+        "bodu_12_base":            "images/sprites/SLW/SWN/bodu/SLW_01_12_bodu_base.png",
+        "bodu_13_base":            "images/sprites/SLW/SWN/bodu/SLW_01_13_bodu_base.png",
+        "default":                 "images/sprites/SLW/SWN/bodu/SLW_01_01_bodu_base_default.png",
+    }
+
+    # =====================================================
+    # 2. ШАБЛОН ЭМОЦИЙ/ОДЕЖДЫ
+    #    Кадры моргания: blink_open / blink_half / blink_closed
+    # =====================================================
+    SLW_FACE_TEMPLATE = {
+
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s1/eyes/ese_base_01_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s1/eyes/ese_base_01_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s1/eyes/ese_base_01_03.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s1/eyes/ese_base_02_01.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s1/eyes/ese_base_02_02.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s1/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s1/eyes/ese_base_02_04.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s1/eyes/ese_base_03_01.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s1/eyes/ese_base_06_01.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s1/eyes/ese_base_04_01.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s1/eyes/ese_base_05_01.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s1/eyes/ese_base_cray_01_01.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s1/eyes/ese_base_horror_01_01.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s1/eyes/ese_base_horror_01_02.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s1/eyes/ese_base_prizes_01_01.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s1/eyes/ese_base_01_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s1/eyes/ese_base_01_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s1/eyes/ese_base_01_03.png",
+        },
+
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_01.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_11.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_06.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_02.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_07.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_16.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_04.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_08.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_12.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_14.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_10.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_13.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_15.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_05.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_09.png",
+            'default':              "images/sprites/SLW/SWN/s1/mouth/mouth_base_01_01.png",
+        },
+
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s1/brov/brov_base_01_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s1/brov/brov_base_01_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s1/brov/brov_base_01_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s1/brov/brov_base_01_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s1/brov/brov_base_01_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s1/brov/brov_base_01_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s1/brov/brov_base_01_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s1/brov/brov_base_01_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s1/brov/brov_base_01_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s1/brov/brov_base_01_11.png",
+            'default':             "images/sprites/SLW/SWN/s1/brov/brov_base_01_01.png",
+        },
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_06.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s1/freckles/freckles_base_01_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_08.png",
+            'default':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s1/cry/cry_base_01_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s1/cry/cry_base_01_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s1/cry/cry_base_01_04.png",
+            'cry_04': "images/sprites/SLW/SWN/s1/cry/cry_base_01_05.png",
+            'default':"images/sprites/SLW/SWN/s1/cry/cry_base_01_01.png",
+        
+        },
+
+        "clothes": {
+            "dress_01": "images/sprites/SLW/SWN/clothes/dress_01.png",
+        },
+
+        # Кадры косы (ветер). Можно переопределять для тел.
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
+        },
+    }
+
+    # =====================================================
+    # 3. ПЕРЕОПРЕДЕЛЕНИЯ для конкретных тел
+    # =====================================================
+    SLW_OVERRIDES = {
+        "bodu_05_full_face": {
+            "eyes": {
+                "eyes_norm_01":        "images/sprites/SLW/SWN/eyes/05_ff_norm_01.png",
+                "eyes_norm_horror_01": "images/sprites/SLW/SWN/eyes/05_ff_horror_01.png",
+                "blink_open":          "images/sprites/SLW/SWN/eyes/05_ff_blink_01.png",
+                "blink_half":          "images/sprites/SLW/SWN/eyes/05_ff_blink_02.png",
+                "blink_closed":        "images/sprites/SLW/SWN/eyes/05_ff_blink_03.png",
+            },
+        },
+    }
+
+    # =====================================================
+    # Сборка таблицы SLW (тело -> наборы файлов)
+    # =====================================================
+    def _slw_merge(base, override):
+        result = {}
+        for slot, keys in base.items():
+            result[slot] = dict(keys)
+        for slot, keys in (override or {}).items():
+            result.setdefault(slot, {})
+            result[slot].update(keys)
+        return result
+
+    SLW = {}
+    for body_key, body_path in SLW_BODIES.items():
+        face = _slw_merge(SLW_FACE_TEMPLATE, SLW_OVERRIDES.get(body_key))
+        face["body"] = body_path
+        SLW[body_key] = face
+
+    # Порядок слоёв снизу вверх. kassa за телом (рисуем первой).
+    SLW_LAYER_ORDER = ["kassa", "body", "clothes", "brov", "freckles", "eyes", "cry", "mouth"]
 
 
+    # =====================================================
+    # 4. СОСТОЯНИЕ ПЕРСОНАЖА
+    # =====================================================
+    class SLWState(object):
+        def __init__(self):
+            self.body       = None #"default"
+            self.eyes       = None #"eyes_norm_01"   # или "blink" для анимации моргания
+            self.freckles   = None
+            self.cry        = None
+            self.mouth      = None
+            self.brov       = None
+            self.clothes    = None
+
+    if not hasattr(store, "slw"):
+        store.slw = SLWState()
+
+    # wind_01: 0 нет ветра, 1 слабый, 2 средний, 3 сильный
+    if not hasattr(store, "wind_01"):
+        store.wind_01 = 0
 
 
+    # =====================================================
+    # 5. АНИМАЦИЯ КОСЫ (как Displayable, кадрами)
+    #    Скорость зависит от wind_01.
+    # =====================================================
+    _KASSA_FRAMES = ["k1", "k2", "k3", "k4", "k2"]
+
+    def build_kassa(st, at):
+        wind = getattr(store, "wind_01", 0)
+        if wind <= 0:
+            # без ветра — статичный первый кадр
+            kassa = SLW.get(store.slw.body, SLW["default"]).get("kassa", {})
+            path = kassa.get("k1")
+            if path is None:
+                return Null(), 0
+            return Composite(CANVAS, (0, 0), path), 0
+
+        # скорость кадра по силе ветра
+        frame_time = {1: 0.5, 2: 0.35, 3: 0.2}.get(wind, 0.5)
+
+        kassa = SLW.get(store.slw.body, SLW["default"]).get("kassa", {})
+        idx = int(st / frame_time) % len(_KASSA_FRAMES)
+        path = kassa.get(_KASSA_FRAMES[idx])
+
+        if path is None:
+            return Null(), 0
+
+        d = Composite(CANVAS, (0, 0), path)
+        # перерисовать к следующему кадру
+        return d, frame_time - (st % frame_time)
+
+
+   
+    # =====================================================
+    # 7. ГЛАВНЫЙ СТРОИТЕЛЬ
+    # =====================================================
+    def build_slw(st, at):
+        s = store.slw
+        data = SLW.get(s.body, SLW["default"])
+
+        layers = []
+        for slot in SLW_LAYER_ORDER:
+
+            if slot == "body":
+                layers += [(0, 0), data["body"]]
+                continue
+
+            if slot == "kassa":
+                # анимированная коса как вложенный DynamicDisplayable
+                layers += [(0, 0), slw_kassa_displayable]   # переиспользуем
+                continue
+
+            if slot == "eyes":
+                key = getattr(s, "eyes", None)
+                if key == "blink":
+                    layers += [(0, 0), slw_eyes_blink_displayable]
+       
+                    continue
+
+            key = getattr(s, slot, None)
+            if key is None:
+                continue
+            slot_dict = data.get(slot, {})
+            path = slot_dict.get(key) or slot_dict.get("default")
+            if path:
+                layers += [(0, 0), path]
+
+        return Composite(CANVAS, *layers), 0
+
+
+    # =====================================================
+    # СОСТОЯНИЕ МОРГАНИЯ
+    # =====================================================
+    # ==========================================================
+    # Живое моргание Маленькой Ведьмы
+    # - случайная пауза между морганиями
+    # - редкое двойное моргание
+    # - сброс при смене положения головы
+    # ==========================================================
+    
+    import time
+
+    # Глобальное состояние моргания (НЕ в blink_state, а снаружи —
+    # одно на всех, не зависит от контекста рендера)
+    _blink = {"start": None, "next": None}
+
+    def build_eyes_blink(st, at):
+        eyes = SLW.get(store.slw.body, SLW["default"]).get("eyes", {})
+        e_open   = eyes.get("blink_open")
+        e_half   = eyes.get("blink_half")
+        e_closed = eyes.get("blink_closed")
+
+        HALF   = 0.15
+        CLOSED = 0.25
+        DUR    = HALF + CLOSED + HALF
+
+        now = time.time()   # абсолютное время — не зависит от контекста!
+
+        b = _blink
+
+        # первичная инициализация
+        if b["next"] is None:
+            b["next"] = now + random.uniform(2.0, 4.0)
+
+        # === ГЛАЗА ОТКРЫТЫ ===
+        if b["start"] is None:
+            if now >= b["next"]:
+                b["start"] = now
+            else:
+                return _slw_eyes_render(e_open), 0.05
+
+        # === ИДЁТ МОРГАНИЕ ===
+        t = now - b["start"]
+
+        if t < HALF:
+            return _slw_eyes_render(e_half), 0.02
+        elif t < HALF + CLOSED:
+            return _slw_eyes_render(e_closed), 0.02
+        elif t < DUR:
+            return _slw_eyes_render(e_half), 0.02
+        else:
+            # моргание завершено
+            b["start"] = None
+            if random.random() < 0.12:
+                b["next"] = now + random.uniform(0.15, 0.3)   # двойное
+            else:
+                b["next"] = now + random.uniform(3.0, 6.0)
+            return _slw_eyes_render(e_open), 0.02
+
+
+    def _slw_eyes_render(path):
+        if path is None:
+            return Null()
+        return Composite(CANVAS, (0, 0), path)
+
+
+    # БЕЗ blink_state — теперь состояние глобальное
+    slw_eyes_blink_displayable = DynamicDisplayable(build_eyes_blink)
+
+    slw_kassa_displayable = DynamicDisplayable(build_kassa)
 
 
 #=============================================================
@@ -1057,158 +1396,6 @@ image DEnd:
 #МАЛЕНЬКАЯ ВЕДЬМА
 #составные спрайты
 
-# ===================================================
-# АНИМИРОВАННАЯ КОСА
-# ===================================================
-
-# Вариант 1 — слабый ветер
-image SLW_kassa_wind_01:
-    Composite(
-        (1500, 2040),
-        (500, 300),
-        "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png"
-    )
-    pause 0.5
-    Composite(
-        (1500, 2040),
-        (500, 300),
-        "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
-    )
-    pause 0.5
-    Composite(
-        (1500, 2040),
-        (500, 300),
-        "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png"
-    )
-    pause 0.5
-    Composite(
-        (1500, 2040),
-        (500, 300),
-        "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png"
-    )
-    pause 0.5
-    Composite(
-        (1500, 2040),
-        (500, 300),
-        "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
-    )
-    pause 0.5
-    repeat
-
-# Вариант 2 — средний ветер
-image SLW_kassa_wind_02:
-    parallel:
-        contains:
-            # Покадровая анимация кадров
-            
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png"
-            pos (500, -250)
-        
-            pause 0.5
-
-           
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
-            pos (500, -250)
-        
-            pause 0.5
-
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png"
-            pos (500, -250)
-        
-            pause 0.5
-
-            
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
-            pos (500, -250)
-        
-            pause 0.5
-        
-            
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png"
-            pos (500, -250)
-        
-            pause 0.5
-            repeat
-    parallel:
-        # Качание всей анимации
-        #rotate_pad False
-        xanchor 0.0
-        yanchor 0.0
-        block:
-            ease 0.5 rotate -7
-            easeout 1.5 rotate -9
-            repeat
-
-# Вариант 3 — сильный ветер
-# ИСПРАВЛЕНО: убран некорректный parallel внутри image ATL
-# Используем простое чередование кадров с разными позициями
-# Отдельные кадры кассы
-# Финальная сборка с rotate отдельно
-image SLW_kassa_wind_03:
-    parallel:
-        contains:
-        # Покадровая анимация кадров
-        
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png",
-            pos (700, -250)
-         
-        
-            pause 0.5
-        
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
-            pos (700, -250)
-      
-            pause 0.5
-        
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png",
-            pos (700, -250)
-            
-        
-            pause 0.5
-        
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
-            pos (700, -250)
-            
-
-            pause 0.5
-        
-            "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
-            pos (700, -250)
-            
-        
-            pause 0.5
-            repeat
-    parallel:
-        # Качание всей анимации
-        #rotate_pad False
-        xanchor 0.0
-        yanchor 0.0
-        block:
-            ease 0.2 rotate -15
-            easeout 0.8 rotate -10
-            ease 0.4 rotate -8
-            easeout 1.5 rotate -12
-            repeat
-
-# Статичная коса (без ветра)
-image SLW_kassa_still:
-    Composite(
-        (1500, 2040),
-        (500, 300),
-        "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png"
-    )
-
-# Выбор анимации косы с учётом ветра
-image SLW_kassa_01 = ConditionSwitch(
-    "wind_01 == 1", "SLW_kassa_wind_01",
-    "wind_01 == 2", "SLW_kassa_wind_02",
-    "wind_01 == 3", "SLW_kassa_wind_03",
-    "True",         "SLW_kassa_still"
-)
-
-
-
-
 
 # ===================================================
 # LAYEREDIMAGE — Маленькая Ведьма
@@ -1218,21 +1405,27 @@ image SLW_kassa_01 = ConditionSwitch(
 #   - brov_norm_01 оставлен в одной группе (непрозрачный вариант)
 #   - атрибут SH помечен default
 
-layeredimage Little_witch:
+image little_witch = DynamicDisplayable(build_slw)
 
-    always:
-        Null()
+#layeredimage Little_witch:
+
+#    always:
+#        Null()
 
     # Коса
-    attribute kassa_01 default:
+#    attribute kassa_01 default:
 
-        "SLW_kassa_01"
+#        "SLW_kassa_01"
 
     # Тело
     
-    attribute bodu_01_nude default:
+#    attribute bodu_nude_01 default:
 
-        "SLW_bodu_01"
+#        "LW_bodu"
+
+    #group clothes:
+
+
             
 # заглушка
 #    attribute SH:# default:
@@ -2166,7 +2359,7 @@ define screen_left_02_medium = Position(xpos=200, ypos=0)
 define screen_left_03_long = Position(xpos=270, ypos=0)
 define screen_center_01_short = Position(xpos=300, ypos=0)
 define screen_center_02_medium  = Position(xpos=400, ypos=0)
-define screen_center_03_long  = Position(xpos=650, ypos=50)
+define screen_center_03_long  = Position(xpos=950, ypos=1050)
 define screen_right_01_short = Position(xpos=900, ypos=0)
 define screen_right_02_medium = Position(xpos=1100, ypos=0)
 define screen_right_03_long = Position(xpos=1500, ypos=50)
@@ -2177,9 +2370,14 @@ define screen_left_03 = Position(xpos=470, ypos=1690)
 define screen_Center_02 = Position(xpos=600, ypos=500)  
 
 # переменные для Маленькой Ведьмы на ближный средний и дальный план
-define LW_short_range = FactorZoom(1.5, 1.5, 0.0, opaque = False)
-define LW_medium_range = FactorZoom(1.0, 1.0, 0.0, opaque = False)
-define LW_long_range = FactorZoom(0.5, 0.5, 0.0, opaque = False)
+transform LW_short_range:
+    zoom 1.5
+
+transform LW_medium_range:
+    zoom 1.0
+
+transform LW_long_range:
+    zoom 0.5
 
 # переменные для Маленькой Ведьмы для эмодзи
 
