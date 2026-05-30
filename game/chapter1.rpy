@@ -1479,10 +1479,12 @@ label Cha_001:
 ## Ведьма останавливается, втягивает носом воздух.
 
 
-        #default head_LW_01 = "left_down"
-        #default head_LW_01 = 'default'
-        #default SLW_bodu_01 =""
-        #$ wind_01 = 3
+        $ slw.body = "default"
+        $ wind_01 = 1
+        $ slw.eyes = "blink"
+        #$ reset_slw_blink()
+        
+
         #default eyes_LW_01 = True
         #default cry_LW_01 = 'no'
         #default freckles_LW_01 = 'norm_01'
@@ -1490,12 +1492,76 @@ label Cha_001:
         #default brov_LW_01 = True
         
 
-        #show Little_witch at LW_long_range, screen_center_03_long onlayer sloi02
-        #show LW n at left with moveinleft
-        #show TR at Position(xpos = 400, ypos = 0, xanchor = 0, yanchor = 0)
-        #show plate at right
-        #show HM n at right onlayer xra 
-        #with teleport
+        show little_witch at LW_long_range, screen_center_03_long onlayer sloi02
+        
+        e "...."
+        $ slw.body = "bodu_01_left"
+        e "...."
+        $ slw.body = "bodu_01_left_down"
+        e "...."
+        $ slw.body = "bodu_01_left_slant"
+        e "...."
+        $ slw.body = "bodu_02_left"
+        e "...."
+        $ slw.body = "bodu_02_left_slant"
+        e "...."
+        $ slw.body = "bodu_02_default"
+        e "...."
+        $ slw.body = "bodu_02_left_down"
+        e "...."
+        $ slw.body = "bodu_03_default"
+        e "...."
+        $ slw.body = "bodu_03_left_down"
+        e "...."
+        $ slw.body = "bodu_03_left_down_slant"
+        e "...."
+        $ slw.body = "bodu_04_default"
+        e "...."
+        $ slw.body = "bodu_04_left_down"
+        e "...."
+        $ slw.body = "bodu_04_full_face"
+        e "...."
+        $ slw.body = "bodu_04_full_face_slant"
+        e "...."
+        $ slw.body = "bodu_05_default"
+        e "...."
+        $ slw.body = "bodu_05_full_face"
+        e "...."
+        $ slw.body = "bodu_05_full_face_slant"
+        e "...."
+        $ slw.body = "bodu_05_left"
+        e "...."
+        $ slw.body = "bodu_05_left_down"
+        e "...."
+        $ slw.body = "bodu_06_default"
+        e "...."
+        $ slw.body = "bodu_06_left"
+        e "...."
+        $ slw.body = "bodu_05_full_face"
+        e "...."
+        $ slw.body = "bodu_06_left_down"
+        e "...."
+        $ slw.body = "bodu_06_left_slant"
+        e "...."
+        $ slw.body = "bodu_07_default"
+        e "...."
+        $ slw.body = "bodu_08_default"
+        e "...."
+        $ slw.body = "bodu_08_left"
+        e "...."
+        $ slw.body = "bodu_08_left_down"
+        e "...."
+        $ slw.body = "bodu_08_left_slant"
+        e "...."
+        $ slw.body = "bodu_09_left"
+        e "...."
+        $ slw.body = "bodu_09_left_down"
+        e "...."
+        $ slw.body = "bodu_12_base"
+        e "...."
+        $ slw.body = "bodu_13_base"
+
+       
         #$ head_LW_01 = 'left_slant'
 
 
@@ -1509,9 +1575,9 @@ label Cha_001:
 
 
 
+        e "v"
 
-
-
+        hide little_witch onlayer sloi02
 
 
 
