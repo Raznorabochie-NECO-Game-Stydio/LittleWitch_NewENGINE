@@ -1482,6 +1482,24 @@ label Cha_001:
         $ slw.body = "default"
         $ wind_01 = 1
         $ slw.eyes = "blink"
+        $ slw.brov = "brov_angry_01"
+        $ slw.freckles = "norm_01"
+        $ slw.cry = "no"
+        $ slw.mouth = "default"
+        #$ slw.hat = "hat_01"
+        $ slw.hat = "no"
+        $ slw.panties = "no"
+        #$ slw.panties = "panties_white"
+        #$ slw.pantaloons = "pantaloons_short"
+        $ slw.pantaloons = "pantaloons_long"
+        #$ slw.pantaloons = "no"
+        #$ slw.top = "top_black"
+        $ slw.top = "no"
+        $ slw.clothes = "no"
+        $ slw.gloves_left = "gloves_left_01"
+        $ slw.gloves_right = "gloves_right_01"
+        $ slw.boots_left = "boots_left_01"
+        $ slw.boots_right = "boots_right_01"
         #$ reset_slw_blink()
         
 
@@ -1495,6 +1513,13 @@ label Cha_001:
         show little_witch at LW_long_range, screen_center_03_long onlayer sloi02
         
         e "...."
+
+        $ slw.mouth = "norm_surprised_03"
+        $ slw.brov = "brov_angry_05"
+        $ slw.eyes = "eyes_norm_horror_02"
+        $ slw.freckles = "norm_hatching_01"
+        #$ slw.pantaloons = "pantaloons_long"
+        #$ slw.top = "top_01"
         $ slw.body = "bodu_01_left"
         e "...."
         $ slw.body = "bodu_01_left_down"
