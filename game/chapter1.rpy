@@ -1510,7 +1510,7 @@ label Cha_001:
         #default brov_LW_01 = True
         
 
-        show little_witch at LW_long_range, screen_center_03_long onlayer sloi02
+        show little_witch at LW_long_range_01, screen_center_long onlayer sloi02
         
         e "...."
 
