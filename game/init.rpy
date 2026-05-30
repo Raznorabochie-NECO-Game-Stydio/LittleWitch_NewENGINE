@@ -141,16 +141,36 @@ python:
 #$ mci = rgen.rgen()
 #define Cha_01 = mci
 
-
+# ════════════════════════════════════════════════════════════════════
+#  СИСТЕМА СОСТАВНОГО ПЕРСОНАЖА «МАЛЕНЬКАЯ ВЕДЬМА» (SLW)
+# ────────────────────────────────────────────────────────────────────
+#  Идея: персонаж собирается из множества PNG-слоёв (тело, глаза, рот,
+#  брови, веснушки, плач, волосы, шляпа, бельё, одежда, перчатки, сапоги,
+#  коса). Какие именно картинки рисовать — определяется текущим
+#  состоянием store.slw (объект SLWState) и текущей силой ветра wind_01.
+#
+#  Слои собираются в Composite на холсте CANVAS, а итог отдаётся через
+#  DynamicDisplayable build_slw — поэтому достаточно изменить slw.xxx,
+#  и на следующем кадре отрисовка обновится.
+# ════════════════════════════════════════════════════════════════════
 init python:
 
     import random
 
+    # Размер «холста», на котором собирается персонаж.
+    # Все PNG-слои должны быть нарисованы в этом же размере и УЖЕ
+    # выровнены друг под друга (поэтому везде позиция (0, 0)).
+
     CANVAS = (1500, 2130)
 
-    # =====================================================
+    # ════════════════════════════════════════════════════════════════
     # 1. ТЕЛА
-    # =====================================================
+    # ────────────────────────────────────────────────────────────────
+    # Словарь: "имя позы/ракурса тела" -> "путь к PNG".
+    # Это базовый слой. Какое тело показать — определяется slw.body.
+    # Если slw.body указывает на несуществующий ключ — берётся "default".
+    # ════════════════════════════════════════════════════════════════
+
     SLW_BODIES = {
         "bodu_01_left":            "images/sprites/SLW/SWN/bodu/SLW_01_01_bodu_base_left.png",
         "bodu_01_left_down":       "images/sprites/SLW/SWN/bodu/SLW_01_01_bodu_base_left_down.png",
@@ -187,16 +207,24 @@ init python:
         "bodu_09_left_slant":      "images/sprites/SLW/SWN/bodu/SLW_01_09_bodu_left_slant.png",
         "bodu_12_base":            "images/sprites/SLW/SWN/bodu/SLW_01_12_bodu_base.png",
         "bodu_13_base":            "images/sprites/SLW/SWN/bodu/SLW_01_13_bodu_base.png",
+        # Запасной вариант на случай некорректного значения slw.body.
         "default":                 "images/sprites/SLW/SWN/bodu/SLW_01_01_bodu_base_default.png",
     }
 
-    # =====================================================
-    # 2. ШАБЛОН ЭМОЦИЙ/ОДЕЖДЫ
-    #    Кадры моргания: blink_open / blink_half / blink_closed
-    # =====================================================
+    # ════════════════════════════════════════════════════════════════
+    # 2. ШАБЛОН СЛОЁВ ДЛЯ ВСЕХ ТЕЛ (база, набор «по умолчанию»).
+    # ────────────────────────────────────────────────────────────────
+    # Структура: { "слот": { "имя_варианта": "путь_к_PNG" } }.
+    # Это базовый набор «лица + одежды», применяемый ко ВСЕМ телам.
+    # В SLW_OVERRIDES отдельные слоты можно переопределить под конкретное тело.
+    #
+    # В слоте "eyes" есть служебные ключи:
+    #   blink_open  / blink_half / blink_closed
+    # Это три кадра моргания, их использует анимация в build_eyes_blink.
+    # ════════════════════════════════════════════════════════════════
     SLW_FACE_TEMPLATE = {
 
-        #глаза
+        # ── ГЛАЗА ── варианты выражений + 3 кадра моргания (внизу словаря)
 
         "eyes": {
             'eyes_norm_01':               "images/sprites/SLW/SWN/s1/eyes/ese_base_01_01.png",
@@ -217,13 +245,13 @@ init python:
             'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s1/eyes/ese_base_horror_01_02.png",
             'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s1/eyes/ese_base_prizes_01_01.png",
             'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s1/eyes/ese_base_prizes_02_01.png",
-            # кадры моргания
+            # Кадры моргания — используются, когда slw.eyes == "blink".
             "blink_open":          "images/sprites/SLW/SWN/s1/eyes/ese_base_01_01.png",
             "blink_half":          "images/sprites/SLW/SWN/s1/eyes/ese_base_01_02.png",
             "blink_closed":        "images/sprites/SLW/SWN/s1/eyes/ese_base_01_03.png",
         },
 
-        #рот
+        # ── РОТ ── варианты эмоций + 'default' (резервный, если ключ не найден)
 
         "mouth": {
             'norm_smail_01':        "images/sprites/SLW/SWN/s1/mouth/mouth_base_01_01.png",
@@ -245,7 +273,11 @@ init python:
             'default':              "images/sprites/SLW/SWN/s1/mouth/mouth_base_smail_01_01.png",
         },
 
-        #бров
+        # ── БРОВИ ── варианты + 'default'.
+        # ВАЖНО: тот же набор используется ДВА раза:
+        #   1) слот "brov"  — основной (под волосами, непрозрачный).
+        #   2) слот "brov2" — поверх волос, с alpha=0.8 (см. build_slw),
+        #      причём он берёт значение ИЗ slw.brov (одна переменная).
 
         "brov": {
             'brov_surprised_01':   "images/sprites/SLW/SWN/s1/brov/brov_base_01_02.png",
@@ -262,7 +294,7 @@ init python:
         },
 
 
-        # Веснушки
+        # ── ВЕСНУШКИ ── косметическое наложение на лицо.
         "freckles": {
             'norm_01':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_02.png",
             'norm_02':         "images/sprites/SLW/SWN/s1/freckles/freckles_base_01_03.png",
@@ -276,7 +308,7 @@ init python:
 
         },
 
-        # Плач
+        # ── ПЛАЧ ── слёзы (наложение поверх лица)
         "cry": {
             'cry_01': "images/sprites/SLW/SWN/s1/cry/cry_base_01_02.png",
             'cry_02': "images/sprites/SLW/SWN/s1/cry/cry_base_01_03.png",
@@ -286,7 +318,9 @@ init python:
         
         },
 
-        #Волосы
+        # ── ВОЛОСЫ ── три кадра (h1, h2, h3) для анимации развевания.
+        # Используются функцией build_hair. h1 — статичный кадр без ветра.
+
         "hair": {
 
             'h1': "images/sprites/SLW/SWN/hair/S_01/SLW_01_01_hair_01_01.png",
@@ -295,7 +329,10 @@ init python:
 
         },
 
-        #шляпа (задняя часть — под волосами)
+        # ── ШЛЯПА (задняя часть) ── рисуется ПОД волосами (в начале стопки).
+        # Значение берётся из slw.hat. Одна переменная управляет ОБОИМИ
+        # слоями шляпы (задним и передним).
+
         "hat":{
 
             "hat_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_down_01.png",
@@ -304,27 +341,34 @@ init python:
 
         },
 
-        #шляпа (передняя часть — поверх волос, ДРУГИЕ спрайты)
+        # ── ШЛЯПА (передняя часть) ── рисуется ПОВЕРХ волос.
+        # КЛЮЧИ совпадают с "hat" — но картинки ДРУГИЕ (передние спрайты).
+        # В build_slw слот "hat_front" специально читает значение из slw.hat,
+        # а картинку — отсюда. Так обе части шляпы синхронны.
+
         "hat_front": {
             "hat_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_top_01.png",
             "hat_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_top_02.png",
         },
 
-        #трусики
+        # ── ТРУСИКИ ── нижнее бельё (первый слой одежды).
+
         "panties": {
             "panties_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_white_01.png",
             "panties_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_black_01.png",
 
         },
 
-        #панталоны
+        # ── ПАНТАЛОНЫ ── поверх трусиков.
+
         "pantaloons": {
             "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_01.png",
             "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_02.png",
 
         },
 
-        #топ
+        # ── ТОП ── верхнее бельё / майка.
+
         "top": {
 
             "top_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_01.png",
@@ -334,37 +378,44 @@ init python:
 
         },
 
-        #одежда
+        # ── ОДЕЖДА ── поверх белья (ночная рубашка / платье и т.п.).
 
         "clothes": {
             "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
         },
 
-        #перчатки левая
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
         "gloves_left":{
             "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_gloves_01.png",
 
         },
 
-        #перчатка правая
+        # ── ПЕРЧАТКА ПРАВАЯ ──
         "gloves_right": {
             "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_right_gloves_01.png",
 
         },
 
-        #сапог левый
+        # ── САПОГ ЛЕВЫЙ ── аналогично перчаткам — раздельно.
         "boots_left": {
             "boots_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_boot_01.png",
 
         },
 
-        #сапог правый
+        # ── САПОГ ПРАВЫЙ ──
+        # ВНИМАНИЕ: в имени файла "righ_boot" (без 't') — это уже путь
+        # к реальному файлу на диске. Проверь, что файл назван именно так.
+
         "boots_right": {
             "boots_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_righ_boot_01.png",
 
         },
 
-        # Кадры косы (ветер). Можно переопределять для тел.
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
         "kassa": {
             "k1": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png",
             "k2": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
@@ -373,11 +424,28 @@ init python:
         },
     }
 
-    # =====================================================
+    # ════════════════════════════════════════════════════════════════
     # 3. ПЕРЕОПРЕДЕЛЕНИЯ для конкретных тел
-    # =====================================================
+    # ────────────────────────────────────────────────────────────────
+    # Когда конкретное тело (например, "bodu_01_left") требует ИНЫЕ
+    # картинки лица/одежды (другой ракурс глаз, другая коса волос и т.д.),
+    # для него прописывается «дельта»: какие слоты и какие ключи заменить.
+    #
+    # Логика слияния (_slw_merge ниже):
+    #   - берётся SLW_FACE_TEMPLATE как основа
+    #   - сверху накладывается соответствующий блок из SLW_OVERRIDES
+    #   - совпадающие ключи перезаписываются, остальные остаются
+    # ════════════════════════════════════════════════════════════════
+
     SLW_OVERRIDES = {
+
+    # ────────────────────────────────────────────────────────────
+    # ТЕЛО "bodu_01_left" — использует набор лица S2 (другой ракурс
+    # глаз/рта/бровей), волосы S_02, тот же набор одежды.
+    # ────────────────────────────────────────────────────────────   
         "bodu_01_left": {
+            # Глаза S2 — другой набор PNG, но ключи такие же, как в шаблоне,
+            # чтобы остальной код мог обращаться по тем же именам.
             "eyes": {
             'eyes_norm_01':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
             'eyes_norm_02':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
@@ -397,11 +465,13 @@ init python:
             'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_06.png",
             'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_16.png",
             'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_17.png",
-            # кадры моргания
+            # Кадры моргания для этого ракурса.
             "blink_open":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
             "blink_half":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
             "blink_closed":        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
         },
+
+        # Рот S2.
 
         "mouth": {
             'norm_smail_01':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_12.png",
@@ -424,6 +494,8 @@ init python:
             'default':              "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_01.png",
         },
 
+        # Брови S2.
+
         "brov": {
             'brov_surprised_01':   "images/sprites/SLW/SWN/s2/brov/brov_base_02_02.png",
             'brov_gloomy_01':      "images/sprites/SLW/SWN/s2/brov/brov_base_02_03.png",
@@ -438,6 +510,8 @@ init python:
             'default':             "images/sprites/SLW/SWN/s2/brov/brov_base_02_01.png",
         },
 
+        # Веснушки S2.
+
         "freckles": {
             'norm_01':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_02.png",
             'norm_02':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_03.png",
@@ -451,7 +525,8 @@ init python:
 
         },
 
-        # Плач
+        # Плач S2.
+
         "cry": {
             'cry_01': "images/sprites/SLW/SWN/s2/cry/cry_base_02_02.png",
             'cry_02': "images/sprites/SLW/SWN/s2/cry/cry_base_02_03.png",
@@ -461,13 +536,164 @@ init python:
         
         },
 
-        #Волосы
+        # Волосы S_02 — другой набор кадров.
+
         "hair": {
 
             'h1': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_01.png",
             'h2': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_02.png",
             'h3': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_03.png",
 
+        },
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
+
+        #трусики
+        "panties": {
+            "panties_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_white_01.png",
+            "panties_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_black_01.png",
+
+        },
+
+        #панталоны
+        "pantaloons": {
+            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_01.png",
+            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_02.png",
+
+        },
+        
+        #топ
+        "top": {
+
+            "top_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_01.png",
+            "top_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_02.png",
+            "top_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_03.png",
+            "top_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_04.png",
+
+        },
+
+        #одежда
+
+        "clothes": {
+            "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
+        },
+
+        #перчатки левая
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        #перчатка правая
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
+
+        #сапог левый
+        "boots_left": {
+            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_boot_01.png",
+
+        },
+
+        #сапог правый
+        "boots_right": {
+            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_righ_boot_01.png",
+
+        },
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_01_left_down" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_01_left_down": {
+
+            "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s4/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s4/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s4/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_17.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+        },
+
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_01.png",
+        },
+
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s4/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s4/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s4/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s4/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s4/brov/brov_base_02_01.png",
+        },
+
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s4/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s4/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s4/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+        
         },
 
         #трусики
@@ -524,8 +750,6 @@ init python:
 
         },
 
-        "bodu_01_left_down": {
-
             #Волосы
         "hair": {
 
@@ -535,11 +759,14 @@ init python:
 
         },
 
-
         },
 
-
-        },
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_01_left_slant" — наклонённый ракурс.
+        # Использует набор лица S3 (s3/eyes, s3/mouth, s3/brov, ...),
+        # волосы S_04 и стандартную одежду.
+        # Структура полностью аналогична блоку bodu_01_left.
+        # ────────────────────────────────────────────────────────────
 
         "bodu_01_left_slant": {
             #глаза
@@ -618,7 +845,7 @@ init python:
             'norm_06':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_09.png",
             'norm_hatching_01':"images/sprites/SLW/SWN/s3/freckles/freckles_base_01_07.png",
             'norm_blush_01':   "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_08.png",
-            'default':         "images/sprites/SLW/SWN/03/freckles/freckles_base_01_01.png",
+            'default':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_01.png",
 
         },
 
@@ -708,7 +935,7 @@ init python:
         "boots_right": {
             "boots_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_righ_boot_01.png",
 
-        },
+            },
 
         },
 
@@ -724,72 +951,137 @@ init python:
         },
     }
 
-    # =====================================================
-    # Сборка таблицы SLW (тело -> наборы файлов)
-    # =====================================================
+    # ════════════════════════════════════════════════════════════════
+    #  СБОРКА ИТОГОВОЙ ТАБЛИЦЫ SLW (тело -> полный набор слоёв)
+    # ════════════════════════════════════════════════════════════════
+
     def _slw_merge(base, override):
+
+        # Сливает базовый шаблон (SLW_FACE_TEMPLATE) с переопределениями
+        # для конкретного тела (запись из SLW_OVERRIDES).
+        #
+        # Логика «глубокого» слияния по слотам:
+        #   1) копируем КАЖДЫЙ слот базы в новый словарь (dict(keys) —
+        #      делаем КОПИЮ, чтобы не портить общий шаблон при .update);
+        #   2) поверх накладываем переопределения: совпадающие ключи
+        #      внутри слота перезаписываются, новые — добавляются.
+
         result = {}
         for slot, keys in base.items():
-            result[slot] = dict(keys)
-        for slot, keys in (override or {}).items():
-            result.setdefault(slot, {})
-            result[slot].update(keys)
+            result[slot] = dict(keys)                   # копия словаря слота
+        for slot, keys in (override or {}).items():     
+            result.setdefault(slot, {})                 # если слота не было — создаём
+            result[slot].update(keys)                   # накладываем дельту
         return result
+
+    # Строим финальную таблицу: для каждого тела — готовый набор слоёв
+    # (лицо + одежда из шаблона/оверрайдов) ПЛЮС путь к самому телу.
 
     SLW = {}
     for body_key, body_path in SLW_BODIES.items():
         face = _slw_merge(SLW_FACE_TEMPLATE, SLW_OVERRIDES.get(body_key))
-        face["body"] = body_path
+        face["body"] = body_path                                            # добавляем слой "body"
         SLW[body_key] = face
 
-    # Порядок слоёв снизу вверх. kassa за телом (рисуем первой).
+    # ────────────────────────────────────────────────────────────────
+    # ПОРЯДОК СЛОЁВ (снизу вверх — кто раньше в списке, тот ниже).
+    #   hat        — задняя часть шляпы (под всем)
+    #   kassa      — коса (за телом)
+    #   body       — само тело
+    #   brov       — брови (основные, под волосами)
+    #   freckles   — веснушки
+    #   eyes       — глаза
+    #   cry        — слёзы
+    #   mouth      — рот
+    #   hair       — волосы (перекрывают часть лица/плеч)
+    #   brov2      — брови ВТОРОЙ раз, полупрозрачно ПОВЕРХ волос
+    #                (чтобы бровь читалась сквозь чёлку)
+    #   hat_front  — передняя часть шляпы (поверх волос)
+    #   далее одежда: обувь -> бельё -> панталоны -> топ -> платье -> перчатки
+    # ────────────────────────────────────────────────────────────────
+
     SLW_LAYER_ORDER = ["hat", "kassa", "body", "brov", "freckles", "eyes", "cry", "mouth", "hair", "brov2", "hat_front", "boots_left", "boots_right", "panties", "pantaloons", "top", "clothes", "gloves_left", "gloves_right"]
 
-
-    # =====================================================
+    # ════════════════════════════════════════════════════════════════
     # 4. СОСТОЯНИЕ ПЕРСОНАЖА
-    # =====================================================
+    # ────────────────────────────────────────────────────────────────
+    # Объект хранит, что СЕЙЧАС надето/показано. Каждое поле — это либо:
+    #   None        — слой не рисуется,
+    #   "no"        — служебное значение «принудительно не рисовать»,
+    #   "ключ"      — имя варианта из соответствующего слота в SLW.
+    # Особый случай: eyes == "blink" включает анимацию моргания.
+    # ════════════════════════════════════════════════════════════════
+
     class SLWState(object):
         def __init__(self):
-            self.body       = None #"default"
-            self.eyes       = None #"eyes_norm_01"   # или "blink" для анимации моргания
-            self.freckles   = None
-            self.cry        = None
-            self.mouth      = None
-            self.brov       = None
-            self.clothes    = None
-            self.hair       = None   # ← добавь (если ещё нет)
-            self.hat        = None   # ← добавь: одна переменная для обоих слоёв шляпы
+            self.body       = None #"default" поза тела (ключ из SLW_BODIES)
+            self.eyes       = None #"eyes_norm_01"   # или "blink" для анимации моргания выражение глаз ИЛИ "blink" (анимация)
+            self.freckles   = None # веснушки
+            self.cry        = None # слёзы
+            self.mouth      = None # рот
+            self.brov       = None # брови (управляет и brov, и brov2)
+            self.hair       = None   # ← добавь (если ещё нет) волосы (анимируются на ветру)
+            self.hat        = None   # ← добавь: одна переменная для обоих слоёв шляпы шляпа (одна переменная на обе части)
+            # --- одежда ---
+            self.boots_left    = None
+            self.boots_right   = None
+            self.panties       = None
+            self.pantaloons    = None
+            self.top           = None
+            self.clothes       = None # платье / ночнушка
+            self.gloves_left   = None
+            self.gloves_right  = None
+
+    # ПРИМЕЧАНИЕ: убери дубликат self.clothes из верхней части —
+    # он был объявлен дважды (см. прошлую правку).
+
+    # Создаём глобальный объект состояния один раз (переживает rollback,
+    # т.к. лежит в store). hasattr защищает от пересоздания при reload.
             
 
     if not hasattr(store, "slw"):
         store.slw = SLWState()
 
+    # Сила ветра, влияет на скорость анимации косы и волос:
+    #   0 — нет ветра (статичный кадр), 1 — слабый, 2 — средний, 3 — сильный.
+
     # wind_01: 0 нет ветра, 1 слабый, 2 средний, 3 сильный
     if not hasattr(store, "wind_01"):
         store.wind_01 = 0
 
-
+    #
     # =====================================================
     # 5. АНИМАЦИЯ КОСЫ (как Displayable, кадрами)
     #    Скорость зависит от wind_01.
-    # =====================================================
+    #────────────────────────────────────────────────────────────────
+    # Покадровая анимация. Последовательность кадров «туда-сюда»:
+    # k1 → k2 → k3 → k4 → k2 → (цикл). Скорость зависит от ветра.
+    # ════════════════════════════════════════════════════════════════
+
     _KASSA_FRAMES = ["k1", "k2", "k3", "k4", "k2"]
 
     def build_kassa(st, at):
+
+        # st — время (в секундах) с момента старта этого Displayable.
+
         wind = getattr(store, "wind_01", 0)
         if wind <= 0:
             # без ветра — статичный первый кадр
+            # Нет ветра — показываем статичный первый кадр и не перерисовываем
+            # (второй элемент кортежа 0 = «не планировать следующий кадр»).
             kassa = SLW.get(store.slw.body, SLW["default"]).get("kassa", {})
             path = kassa.get("k1")
             if path is None:
-                return Null(), 0
+                return Null(), 0 # нет картинки — пустышка
             return Composite(CANVAS, (0, 0), path), 0
 
         # скорость кадра по силе ветра
+        # Время показа одного кадра в зависимости от силы ветра
+        # (чем сильнее ветер — тем быстрее смена кадров).
         frame_time = {1: 0.5, 2: 0.35, 3: 0.2}.get(wind, 0.5)
 
         kassa = SLW.get(store.slw.body, SLW["default"]).get("kassa", {})
+        # Номер текущего кадра: сколько «слотов времени» прошло, по кругу.
         idx = int(st / frame_time) % len(_KASSA_FRAMES)
         path = kassa.get(_KASSA_FRAMES[idx])
 
@@ -798,11 +1090,17 @@ init python:
 
         d = Composite(CANVAS, (0, 0), path)
         # перерисовать к следующему кадру
+        # Второй элемент — через сколько секунд перерисовать (до след. кадра).
         return d, frame_time - (st % frame_time)
 
-    # =====================================================
-    # 5b. АНИМАЦИЯ ВОЛОС (синхронно с косой, скорость от wind_01)
-    # =====================================================
+    # ════════════════════════════════════════════════════════════════
+    # 5b. АНИМАЦИЯ ВОЛОС (синхронно с косой)
+    # ────────────────────────────────────────────────────────────────
+    # Та же логика, что у косы, но кадры h1..h3 и цикл h1→h2→h3→h2.
+    # Используется ТА ЖЕ формула frame_time, чтобы волосы и коса
+    # колыхались в одном ритме.
+    # ════════════════════════════════════════════════════════════════
+
     _HAIR_FRAMES = ["h1", "h2", "h3", "h2"]
 
     def build_hair(st, at):
@@ -812,6 +1110,7 @@ init python:
 
         if wind <= 0:
             # без ветра — статичный первый кадр
+            # Без ветра — статичный кадр h1.
             path = hair.get("h1")
             if path is None:
                 return Null(), 0
@@ -829,26 +1128,39 @@ init python:
         d = Composite(CANVAS, (0, 0), path)
         return d, frame_time - (st % frame_time)
 
+    # ════════════════════════════════════════════════════════════════
+    # 7. ГЛАВНЫЙ СТРОИТЕЛЬ ПЕРСОНАЖА
+    # ────────────────────────────────────────────────────────────────
+    # Проходит по SLW_LAYER_ORDER и для каждого слота добавляет в список
+    # `layers` пару [(позиция), картинка_или_Displayable]. Затем собирает
+    # всё в один Composite. Возвращает (Composite, 0) — статичная сборка,
+    # а анимации внутри (kassa/hair/eyes) перерисовывают себя сами.
+    # ════════════════════════════════════════════════════════════════
 
-   
-    # =====================================================
-    # 7. ГЛАВНЫЙ СТРОИТЕЛЬ
-    # =====================================================
     def build_slw(st, at):
-        s = store.slw
-        data = SLW.get(s.body, SLW["default"])
+        s = store.slw  # текущее состояние
+        data = SLW.get(s.body, SLW["default"]) # набор файлов для этого тела
 
         layers = []
         for slot in SLW_LAYER_ORDER:
+
+            # ── ТЕЛО ── всегда рисуем (путь лежит в data["body"]).
 
             if slot == "body":
                 layers += [(0, 0), data["body"]]
                 continue
 
+            # ── ТЕЛО ── всегда рисуем (путь лежит в data["body"]).
+
             if slot == "kassa":
                 # анимированная коса как вложенный DynamicDisplayable
                 layers += [(0, 0), slw_kassa_displayable]   # переиспользуем
                 continue
+
+            # ── ГЛАЗА (режим моргания) ── если slw.eyes == "blink",
+            # вставляем анимацию моргания вместо статичной картинки.
+            # ВНИМАНИЕ: если eyes НЕ "blink", этот if ничего не делает,
+            # и слот глаз обработается ниже общим кодом (статичный спрайт).
 
             if slot == "eyes":
                 key = getattr(s, "eyes", None)
@@ -857,10 +1169,16 @@ init python:
        
                     continue
 
+            # ── ВОЛОСЫ ── вставляем анимированный Displayable.
+
             if slot == "hair":
                 # анимированные волосы (синхронно с косой)
                 layers += [(0, 0), slw_hair_displayable]
                 continue
+
+            # ── БРОВИ ВТОРОЙ РАЗ (поверх волос, полупрозрачно) ──
+            # Берём значение из slw.brov (не из отдельной переменной),
+            # картинку — из набора "brov", и накрываем Transform(alpha=0.8).
 
             if slot == "brov2":
                 # ВТОРОЙ слой бровей = то же значение, что и основной brov
@@ -877,6 +1195,10 @@ init python:
                     layers += [(0, 0), Transform(path, alpha=0.8)]
                 continue
 
+            # ── ПЕРЕДНЯЯ ЧАСТЬ ШЛЯПЫ (поверх волос) ──
+            # Управляется тем же slw.hat, что и задняя часть, но картинки
+            # берутся из отдельного набора "hat_front".
+
             if slot == "hat_front":                      # ← НОВОЕ
                 key = getattr(s, "hat", None)
                 if key is None or key == "no":
@@ -890,27 +1212,41 @@ init python:
                     layers += [(0, 0), path]
                 continue
 
+            # ── ОБЩИЙ СЛУЧАЙ (все остальные слоты) ──
+            # Достаём имя варианта из состояния по имени слота.
+
             key = getattr(s, slot, None)
-            if key is None:
+            if key is None:                 # слой не задан — пропускаем
                 continue
-            if key == "no":                 # ← служебное: не рисовать слой
+            if key == "no":                 # ← служебное: не рисовать слой принудительно скрыт — пропускаем
                 continue
 
             slot_dict = data.get(slot, {})
             if key in slot_dict:
-                path = slot_dict[key]
+                path = slot_dict[key]       # нашли точное совпадение
             else:
-                path = slot_dict.get("default")
+                path = slot_dict.get("default") # иначе — запасной вариант
 
-            if path:                        # None/пусто — не рисуем
+            if path:                        # None/пусто — не рисуем пустой путь не добавляем
                 layers += [(0, 0), path]
+
+        # Собираем все слои в один холст. 0 = не перерисовывать автоматически
+        # (внутренние анимированные слои сами просят перерисовку).
 
         return Composite(CANVAS, *layers), 0
 
 
-    # =====================================================
-    # СОСТОЯНИЕ МОРГАНИЯ
-    # =====================================================
+    # ════════════════════════════════════════════════════════════════
+    #  ЖИВОЕ МОРГАНИЕ
+    # ────────────────────────────────────────────────────────────────
+    #  Логика:
+    #   - персонаж держит глаза открытыми случайное время;
+    #   - затем проигрывается моргание: half → closed → half → open;
+    #   - иногда (12%) делает «двойное» моргание (короткая пауза и ещё раз);
+    #   - состояние хранится в ГЛОБАЛЬНОМ словаре _blink (одно на всех),
+    #     потому что DynamicDisplayable может вызываться в разных контекстах,
+    #     и локальное состояние «сбрасывалось» бы.
+    # ════════════════════════════════════════════════════════════════
     # ==========================================================
     # Живое моргание Маленькой Ведьмы
     # - случайная пауза между морганиями
@@ -920,66 +1256,83 @@ init python:
     
     import time
 
+    # start — время начала текущего моргания (None = глаза открыты);
+    # next  — момент времени, когда нужно начать следующее моргание.
+
     # Глобальное состояние моргания (НЕ в blink_state, а снаружи —
     # одно на всех, не зависит от контекста рендера)
     _blink = {"start": None, "next": None}
 
     def build_eyes_blink(st, at):
+        # Берём кадры моргания для текущего тела.
         eyes = SLW.get(store.slw.body, SLW["default"]).get("eyes", {})
         e_open   = eyes.get("blink_open")
         e_half   = eyes.get("blink_half")
         e_closed = eyes.get("blink_closed")
 
-        HALF   = 0.15
-        CLOSED = 0.25
-        DUR    = HALF + CLOSED + HALF
+        # Длительности фаз (в секундах):
+        HALF   = 0.15                   # полуприкрытые
+        CLOSED = 0.25                   # полностью закрытые
+        DUR    = HALF + CLOSED + HALF   # полная длительность моргания
 
-        now = time.time()   # абсолютное время — не зависит от контекста!
+        now = time.time()   # абсолютное время — не зависит от контекста! АБСОЛЮТНОЕ время — не зависит от st (контекста)
 
         b = _blink
 
         # первичная инициализация
+        # Первый запуск: назначаем время первого моргания.
         if b["next"] is None:
             b["next"] = now + random.uniform(2.0, 4.0)
 
         # === ГЛАЗА ОТКРЫТЫ ===
         if b["start"] is None:
             if now >= b["next"]:
-                b["start"] = now
+                b["start"] = now # пора моргнуть — стартуем
             else:
+                # ещё рано: показываем открытые глаза,
+                # перепроверяем через 0.05 с.
                 return _slw_eyes_render(e_open), 0.05
 
-        # === ИДЁТ МОРГАНИЕ ===
+        # === ИДЁТ МОРГАНИЕ === t — сколько прошло с начала.
         t = now - b["start"]
 
         if t < HALF:
-            return _slw_eyes_render(e_half), 0.02
+            return _slw_eyes_render(e_half), 0.02    # прикрываются
         elif t < HALF + CLOSED:
-            return _slw_eyes_render(e_closed), 0.02
+            return _slw_eyes_render(e_closed), 0.02  # закрыты
         elif t < DUR:
-            return _slw_eyes_render(e_half), 0.02
+            return _slw_eyes_render(e_half), 0.02    # открываются
         else:
-            # моргание завершено
+            # моргание завершено Моргание завершено — сбрасываем и планируем следующее.
             b["start"] = None
             if random.random() < 0.12:
+                # 12% шанс на «двойное» моргание — короткая пауза.
                 b["next"] = now + random.uniform(0.15, 0.3)   # двойное
             else:
+                # обычная пауза до следующего моргания.
                 b["next"] = now + random.uniform(3.0, 6.0)
             return _slw_eyes_render(e_open), 0.02
 
 
     def _slw_eyes_render(path):
+        # Вспомогательная: оборачивает путь в Composite на холсте.
+        # Если кадра нет (None) — возвращает пустышку Null().
         if path is None:
             return Null()
         return Composite(CANVAS, (0, 0), path)
 
-
+    # ════════════════════════════════════════════════════════════════
+    #  РЕГИСТРАЦИЯ DYNAMIC-DISPLAYABLE-ОВ
+    # ────────────────────────────────────────────────────────────────
+    #  DynamicDisplayable(func) каждый кадр вызывает func(st, at) и
+    #  показывает то, что она вернёт. Так анимации «живут» сами.
+    # ════════════════════════════════════════════════════════════════
     # БЕЗ blink_state — теперь состояние глобальное
-    slw_eyes_blink_displayable = DynamicDisplayable(build_eyes_blink)
+    slw_eyes_blink_displayable = DynamicDisplayable(build_eyes_blink)   # моргание
 
-    slw_kassa_displayable = DynamicDisplayable(build_kassa)
+    slw_kassa_displayable = DynamicDisplayable(build_kassa)             # коса
 
-    slw_hair_displayable = DynamicDisplayable(build_hair)
+    slw_hair_displayable = DynamicDisplayable(build_hair)               # волосы
 
 
 #=============================================================
@@ -1893,12 +2246,19 @@ image DEnd:
 
 
 # ===================================================
-# LAYEREDIMAGE — Маленькая Ведьма
+#  Маленькая Ведьма
 # ===================================================
 # ИСПРАВЛЕНО:
 #   - убрано дублирование group brov
 #   - brov_norm_01 оставлен в одной группе (непрозрачный вариант)
 #   - атрибут SH помечен default
+# ════════════════════════════════════════════════════════════════════
+#  РЕГИСТРАЦИЯ ИЗОБРАЖЕНИЯ ПЕРСОНАЖА
+# ────────────────────────────────────────────────────────────────────
+#  build_slw собирает все слои в Composite. Теперь его можно
+#  показывать как обычный спрайт: show little_witch
+# ════════════════════════════════════════════════════════════════════
+
 
 image little_witch = DynamicDisplayable(build_slw)
 
@@ -2783,7 +3143,7 @@ define screen_left_02_medium = Position(xpos=200, ypos=0)
 define screen_left_03_long = Position(xpos=270, ypos=0)
 define screen_center_01_short = Position(xpos=300, ypos=0)
 define screen_center_02_medium  = Position(xpos=400, ypos=0)
-define screen_center_03_long  = Position(xpos=950, ypos=1050)
+define screen_center_03_long  = Position(xpos=650, ypos=50)
 define screen_right_01_short = Position(xpos=900, ypos=0)
 define screen_right_02_medium = Position(xpos=1100, ypos=0)
 define screen_right_03_long = Position(xpos=1500, ypos=50)
@@ -2794,13 +3154,22 @@ define screen_left_03 = Position(xpos=470, ypos=1690)
 define screen_Center_02 = Position(xpos=600, ypos=500)  
 
 # переменные для Маленькой Ведьмы на ближный средний и дальный план
-transform LW_short_range:
+define LW_short_range = FactorZoom(1.5, 1.5, 0.0, opaque = False)
+define LW_medium_range = FactorZoom(1.0, 1.0, 0.0, opaque = False)
+define LW_long_range = FactorZoom(0.5, 0.5, 0.0, opaque = False)
+
+#Для маленькой ведьмы для ч/б спрайтов
+
+define screen_center_long = Position(xpos=950, ypos=1050)
+
+# переменные для Маленькой Ведьмы на ближный средний и дальный план для других спрайтов
+transform LW_short_range_01:
     zoom 1.5
 
-transform LW_medium_range:
+transform LW_medium_range_01:
     zoom 1.0
 
-transform LW_long_range:
+transform LW_long_range_01:
     zoom 0.5
 
 # переменные для Маленькой Ведьмы для эмодзи
