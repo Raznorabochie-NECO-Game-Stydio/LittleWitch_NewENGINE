@@ -1491,18 +1491,18 @@ label Cha_001:
         $ slw.panties = "no"
         #$ slw.panties = "panties_white"
         #$ slw.pantaloons = "pantaloons_short"
-        $ slw.pantaloons = "pantaloons_long"
+        #$ slw.pantaloons = "pantaloons_long"
         #$ slw.pantaloons = "no"
         #$ slw.top = "top_black"
         $ slw.top = "no"
         #$ slw.clothes = "no"
-        $ slw.clothes = "dresses_01"
-        $ slw.exercise = "exercise_01"
-        $ slw.carset = "Carset_01"
-        $ slw.gloves_left = "gloves_left_01"
-        $ slw.gloves_right = "gloves_right_01"
-        $ slw.boots_left = "boots_left_01"
-        $ slw.boots_right = "boots_right_01"
+        #$ slw.clothes = "dresses_01"
+        #$ slw.exercise = "exercise_01"
+        #$ slw.carset = "Carset_01"
+        #$ slw.gloves_left = "gloves_left_01"
+        #$ slw.gloves_right = "gloves_right_01"
+        #$ slw.boots_left = "boots_left_01"
+        #$ slw.boots_right = "boots_right_01"
         #$ reset_slw_blink()
         
 
@@ -1513,11 +1513,12 @@ label Cha_001:
         #default brov_LW_01 = True
         
 
-        show little_witch at LW_long_range_01, screen_center_long onlayer sloi02
+        #show little_witch at LW_long_range_01, screen_center_long onlayer sloi02
+        show little_witch at LW_short_range_01, screen_center_short onlayer sloi02
         
         e "...."
 
-        $ slw.mouth = "norm_surprised_03"
+        $ slw.mouth = "norm_surprised_01"
         $ slw.brov = "brov_angry_05"
         $ slw.eyes = "eyes_norm_horror_02"
         $ slw.freckles = "norm_hatching_01"
@@ -1526,7 +1527,7 @@ label Cha_001:
         $ slw.body = "bodu_01_left"
         e "...."
 
-        show little_witch at LW_short_range_01, screen_center_short onlayer sloi02
+        #show little_witch at LW_short_range_01, screen_center_short onlayer sloi02
         $ slw.body = "bodu_01_left_down"
         e "...."
         $ slw.body = "bodu_01_left_slant"
