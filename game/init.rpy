@@ -382,6 +382,19 @@ init python:
 
         "clothes": {
             "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_01.png",
+        },
+
+        #упраж
+        "exercise": {
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+
+        },
+
+        #Карсет
+        "carset": {
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+
         },
 
         # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
@@ -472,7 +485,6 @@ init python:
         },
 
         # Рот S2.
-
         "mouth": {
             'norm_smail_01':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_12.png",
             'norm_smail_02':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_07.png",
@@ -495,7 +507,6 @@ init python:
         },
 
         # Брови S2.
-
         "brov": {
             'brov_surprised_01':   "images/sprites/SLW/SWN/s2/brov/brov_base_02_02.png",
             'brov_gloomy_01':      "images/sprites/SLW/SWN/s2/brov/brov_base_02_03.png",
@@ -511,7 +522,6 @@ init python:
         },
 
         # Веснушки S2.
-
         "freckles": {
             'norm_01':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_02.png",
             'norm_02':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_03.png",
@@ -526,7 +536,6 @@ init python:
         },
 
         # Плач S2.
-
         "cry": {
             'cry_01': "images/sprites/SLW/SWN/s2/cry/cry_base_02_02.png",
             'cry_02': "images/sprites/SLW/SWN/s2/cry/cry_base_02_03.png",
@@ -537,7 +546,6 @@ init python:
         },
 
         # Волосы S_02 — другой набор кадров.
-
         "hair": {
 
             'h1': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_01.png",
@@ -578,6 +586,19 @@ init python:
 
         "clothes": {
             "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_02.png",
+        },
+
+        #упраж
+        "exercise": {
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+
+        },
+
+        #Карсет
+        "carset": {
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+
         },
 
         #перчатки левая
@@ -604,6 +625,16 @@ init python:
 
         },
 
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -613,7 +644,8 @@ init python:
 
         "bodu_01_left_down": {
 
-            "eyes": {
+        #глаза
+        "eyes": {
             'eyes_norm_01':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
             'eyes_norm_02':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
             'eyes_norm_03':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
@@ -638,6 +670,7 @@ init python:
             "blink_closed":        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
         },
 
+        #рот
         "mouth": {
             'norm_smail_01':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_12.png",
             'norm_smail_02':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_07.png",
@@ -659,6 +692,7 @@ init python:
             'default':              "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_01.png",
         },
 
+        #бров
         "brov": {
             'brov_surprised_01':   "images/sprites/SLW/SWN/s4/brov/brov_base_02_02.png",
             'brov_gloomy_01':      "images/sprites/SLW/SWN/s4/brov/brov_base_02_03.png",
@@ -673,6 +707,7 @@ init python:
             'default':             "images/sprites/SLW/SWN/s4/brov/brov_base_02_01.png",
         },
 
+        # Веснушки
         "freckles": {
             'norm_01':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_02.png",
             'norm_02':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_03.png",
@@ -721,10 +756,23 @@ init python:
         },
 
         #одежда
-
         "clothes": {
             "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_01.png",
         },
+
+        #упраж
+        "exercise": {
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+
+        },
+
+        #Карсет
+        "carset": {
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+
+        },
+
 
         #перчатки левая
         "gloves_left":{
@@ -750,12 +798,12 @@ init python:
 
         },
 
-            #Волосы
+        #Волосы
         "hair": {
 
-            'h1': "images/sprites/SLW/SWN/hair/S_04/SLW_01_01_hair_04_01.png",
-            'h2': "images/sprites/SLW/SWN/hair/S_04/SLW_01_01_hair_04_02.png",
-            'h3': "images/sprites/SLW/SWN/hair/S_04/SLW_01_01_hair_04_03.png",
+            'h1': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
 
         },
 
@@ -769,8 +817,8 @@ init python:
         # ────────────────────────────────────────────────────────────
 
         "bodu_01_left_slant": {
-            #глаза
-
+        
+        #глаза
         "eyes": {
             'eyes_norm_01':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_01.png",
             'eyes_norm_02':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_02.png",
@@ -797,7 +845,6 @@ init python:
         },
 
         #рот
-
         "mouth": {
             'norm_smail_01':        "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_01.png",
             'norm_smail_02':        "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_11.png",
@@ -819,7 +866,6 @@ init python:
         },
 
         #бров
-
         "brov": {
             'brov_surprised_01':   "images/sprites/SLW/SWN/s3/brov/brov_base_01_02.png",
             'brov_gloomy_01':      "images/sprites/SLW/SWN/s3/brov/brov_base_01_03.png",
@@ -908,9 +954,21 @@ init python:
         },
 
         #одежда
-
         "clothes": {
             "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_01.png",
+        },
+
+        #упраж
+        "exercise": {
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+
+        },
+
+        #Карсет
+        "carset": {
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+
         },
 
         #перчатки левая
@@ -1000,7 +1058,7 @@ init python:
     #   далее одежда: обувь -> бельё -> панталоны -> топ -> платье -> перчатки
     # ────────────────────────────────────────────────────────────────
 
-    SLW_LAYER_ORDER = ["hat", "kassa", "body", "brov", "freckles", "eyes", "cry", "mouth", "hair", "brov2", "hat_front", "boots_left", "boots_right", "panties", "pantaloons", "top", "clothes", "gloves_left", "gloves_right"]
+    SLW_LAYER_ORDER = ["hat", "kassa", "body", "brov", "freckles", "eyes", "cry", "mouth", "hair", "brov2", "hat_front", "boots_left", "boots_right", "panties", "pantaloons", "top", "gloves_left", "gloves_right", "clothes", "exercise", "carset"]
 
     # ════════════════════════════════════════════════════════════════
     # 4. СОСТОЯНИЕ ПЕРСОНАЖА
@@ -1029,6 +1087,8 @@ init python:
             self.pantaloons    = None
             self.top           = None
             self.clothes       = None # платье / ночнушка
+            self.exercise      = None
+            self.carset        = None
             self.gloves_left   = None
             self.gloves_right  = None
 
@@ -3148,7 +3208,6 @@ define screen_right_01_short = Position(xpos=900, ypos=0)
 define screen_right_02_medium = Position(xpos=1100, ypos=0)
 define screen_right_03_long = Position(xpos=1500, ypos=50)
 define screen_right_03_long_may = Position(xpos=1500, ypos=90)
-
 define screen_left_02 = Position(xpos=100, ypos=500)
 define screen_left_03 = Position(xpos=470, ypos=1690)
 define screen_Center_02 = Position(xpos=600, ypos=500)  
@@ -3160,6 +3219,7 @@ define LW_long_range = FactorZoom(0.5, 0.5, 0.0, opaque = False)
 
 #Для маленькой ведьмы для ч/б спрайтов
 
+define screen_center_short = Position(xpos=950, ypos=2850)
 define screen_center_long = Position(xpos=950, ypos=1050)
 
 # переменные для Маленькой Ведьмы на ближный средний и дальный план для других спрайтов
