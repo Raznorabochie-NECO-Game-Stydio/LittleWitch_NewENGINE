@@ -1469,7 +1469,7 @@ label Cha_001:
         e "вздымающемся в бесконечном стремлении к переменам…"
 
 
-        scene black
+        #scene black
 
         #(Вариант Saitar1337)
 ## Сцена 0036
@@ -1518,10 +1518,10 @@ label Cha_001:
         
         e "...."
 
-        $ slw.mouth = "norm_surprised_01"
+        #$ slw.mouth = "norm_surprised_01"
         $ slw.brov = "brov_angry_05"
-        $ slw.eyes = "eyes_norm_horror_02"
-        $ slw.freckles = "norm_hatching_01"
+        #$ slw.eyes = "eyes_norm_horror_02"
+        #$ slw.freckles = "norm_hatching_01"
         #$ slw.pantaloons = "pantaloons_long"
         #$ slw.top = "top_01"
         $ slw.body = "bodu_01_left"
