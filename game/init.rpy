@@ -153,6 +153,17 @@ python:
 #  DynamicDisplayable build_slw — поэтому достаточно изменить slw.xxx,
 #  и на следующем кадре отрисовка обновится.
 # ════════════════════════════════════════════════════════════════════
+# ── КАК ПОЛЬЗОВАТЬСЯ ──────────────────────────────────────────────
+#   $ slw.body  = "bodu_03_default"     # поза/ракурс
+#   $ slw.eyes  = "blink"               # или "eyes_norm_01" и т.п.
+#   $ slw.mouth = "norm_smail_01"
+#   $ slw.brov  = "brov_angry_01"
+#   $ slw.hair  = "h1"                  # волосы (нужно задать!)
+#   $ slw.clothes = "dresses_01"
+#   $ slw.panties = "no"                # "no" = принудительно скрыть
+#   $ wind_01   = 2                     # 0..3 — ветер для косы/волос
+#   show little_witch at center
+# ──────────────────────────────────────────────────────────────────
 init python:
 
     import random
@@ -162,6 +173,84 @@ init python:
     # выровнены друг под друга (поэтому везде позиция (0, 0)).
 
     CANVAS = (1500, 2130)
+    # ↓↓↓ ДОБАВЛЕНО ДЛЯ LIP-SYNC ↓↓↓
+    import time, re
+    # Кадры рта для речи (ключи совпадают с теми, что в твоём слоте "mouth").
+    # ── Кадры рта по типам артикуляции ──
+    # Широко открытый — для гласных (а, о, э, и т.п.)
+    SLW_MOUTH_WIDE = [           # широко открытый — гласные
+        "norm_surprised_01", "norm_surprised_02",
+        "norm_surprised_03", "norm_surprised_04",
+    ]
+    SLW_MOUTH_OPEN = [           # приоткрытый — согласные  Приоткрытый — для согласных / обычной речи
+        "norm_conversation_01", "norm_conversation_02",
+        "norm_conversation_03", "norm_conversation_04",
+    ]
+    SLW_MOUTH_CLOSED = [         # закрытый — паузы, смыкание, знаки препинания
+        "default", "norm_sour_01", "norm_smail_01",
+    ]
+
+    # Классификация символов.
+    SLW_VOWELS      = set("аеёиоуыэюяaeiouy")   # рус + лат гласные
+    SLW_PAUSE_SHORT = set(",;:—–-")             # длинная пауза (конец фразы)
+    SLW_PAUSE_LONG  = set(".!?…")
+    SLW_SPACE       = set(" \n\t")              # пробелы — лёгкое смыкание
+
+    # Состояние lip-sync (глобальное).
+    _lip = {
+        "next": 0.0,            # время смены кадра
+        "cur": None,            # текущий ключ рта
+        "open": False,          # фаза (открыт/закрыт)
+        "text": "",             # ЧИСТЫЙ текст текущей реплики
+        "start": 0.0,           # время начала печати
+        "cps": 30.0,            # символов в секунду (скорость печати)
+        "pause_until": 0.0,     # держим рот закрытым до этого времени (знак преп.)
+    }
+
+    _SLW_TAG_RE = re.compile(r"\{[^}]*\}")
+
+    def _slw_clean_text(s):
+        if not s:
+            return ""
+        s = _SLW_TAG_RE.sub("", s)
+        s = s.replace("[[", "[").replace("{{", "{")
+        return s
+
+    def slw_set_text(what):
+        _lip["text"] = _slw_clean_text(what)
+
+    def slw_talk_start():
+        l = _lip
+        l["start"] = time.time()
+        l["next"] = 0.0
+        l["cur"] = None
+        l["open"] = False
+        l["pause_until"] = 0.0
+        cps = getattr(store.preferences, "text_cps", 0)
+        l["cps"] = float(cps) if cps and cps > 0 else 30.0
+        store.slw_talking = True
+        renpy.restart_interaction()
+
+    def slw_talk_stop():
+        store.slw_talking = False
+        renpy.restart_interaction()
+
+    def slw_say_callback(event, **kwargs):
+        if event == "begin":
+            slw_talk_start()
+        elif event in ("slow_done", "end"):
+            slw_talk_stop()
+
+    if not hasattr(store, "slw_talking"):
+        store.slw_talking = False
+    # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ ↑↑↑
+
+    # ↓↓↓ ДОБАВЛЕНО ДЛЯ LIP-SYNC: класс, перехватывающий текст реплики ↓↓↓
+    class LipSyncCharacter(renpy.character.ADVCharacter):
+        def do_display(self, who, what, *args, **kwargs):
+            slw_set_text(what)
+            return super(LipSyncCharacter, self).do_display(who, what, *args, **kwargs)
+    # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ ↑↑↑
 
     # ════════════════════════════════════════════════════════════════
     # 1. ТЕЛА
@@ -1205,6 +1294,7 @@ init python:
 
 
         },
+
         # ────────────────────────────────────────────────────────────
         # ТЕЛО "bodu_02_default"
         # Использует стандартный набор лица,
@@ -1893,10 +1983,7 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
-
-
         },
-
 
         # ────────────────────────────────────────────────────────────
         # ТЕЛО "bodu_04_full_face"
@@ -1918,12 +2005,814 @@ init python:
 
         # ────────────────────────────────────────────────────────────
         # ТЕЛО "bodu_04_full_face_slant"
-        # Использует набор лица S2
+        # Использует набор лица S6
         # волосы S_04 стандартную одежды -----.
         # Структура полностью аналогична блоку bodu_01_left.
         # ────────────────────────────────────────────────────────────
 
         "bodu_04_full_face_slant":{
+        #глаза
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s6/eyes/ese_base_01_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s6/eyes/ese_base_01_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s6/eyes/ese_base_01_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s6/eyes/ese_base_01_02.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s6/eyes/ese_base_01_03.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s6/eyes/ese_base_02_01.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s6/eyes/ese_base_02_02.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s6/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s6/eyes/ese_base_02_04.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s6/eyes/ese_base_03_01.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s6/eyes/ese_base_06_01.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s6/eyes/ese_base_04_01.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s6/eyes/ese_base_05_01.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s6/eyes/ese_base_cray_01_01.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s6/eyes/ese_base_horror_01_01.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s6/eyes/ese_base_horror_01_02.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s6/eyes/ese_base_prizes_01_01.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s6/eyes/ese_base_prizes_02_01.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s6/eyes/ese_base_01_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s6/eyes/ese_base_01_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s6/eyes/ese_base_01_03.png",
+        },
+
+        #рот
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_01.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_11.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_06.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_02.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_07.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_16.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_04.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_08.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_12.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_14.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_10.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_13.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_15.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_05.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s6/mouth/mouth_base_01_09.png",
+            'default':              "images/sprites/SLW/SWN/s6/mouth/mouth_base_smail_01_01.png",
+        },
+
+        #бров
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s6/brov/brov_base_01_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s6/brov/brov_base_01_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s6/brov/brov_base_01_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s6/brov/brov_base_01_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s6/brov/brov_base_01_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s6/brov/brov_base_01_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s6/brov/brov_base_01_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s6/brov/brov_base_01_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s6/brov/brov_base_01_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s6/brov/brov_base_01_11.png",
+            'default':             "images/sprites/SLW/SWN/s6/brov/brov_base_01_01.png",
+        },
+
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s6/freckles/freckles_base_01_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_08.png",
+            'default':         "images/sprites/SLW/SWN/s6/freckles/freckles_base_01_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s6/cry/cry_base_01_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s6/cry/cry_base_01_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s6/cry/cry_base_01_04.png",
+            'cry_04': "images/sprites/SLW/SWN/s6/cry/cry_base_01_05.png",
+            'default':"images/sprites/SLW/SWN/s6/cry/cry_base_01_01.png",
+        
+        },
+
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_10/SLW_01_01_hair_01_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_10/SLW_01_01_hair_01_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_10/SLW_01_01_hair_01_03.png",
+
+        },
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_05_default" — левый ракурс.
+        # Использует набор лица S7
+        # волосы S_04 стандартную одежды -----.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_05_default": {
+
+        #глаза
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s7/eyes/ese_base_01_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s7/eyes/ese_base_01_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s7/eyes/ese_base_01_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s7/eyes/ese_base_01_02.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s7/eyes/ese_base_01_03.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s7/eyes/ese_base_02_01.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s7/eyes/ese_base_02_02.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s7/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s7/eyes/ese_base_02_04.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s7/eyes/ese_base_03_01.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s7/eyes/ese_base_06_01.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s7/eyes/ese_base_04_01.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s7/eyes/ese_base_05_01.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s7/eyes/ese_base_cray_01_01.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s7/eyes/ese_base_horror_01_01.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s7/eyes/ese_base_horror_01_02.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s7/eyes/ese_base_prizes_01_01.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s7/eyes/ese_base_prizes_02_01.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s7/eyes/ese_base_01_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s7/eyes/ese_base_01_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s7/eyes/ese_base_01_03.png",
+        },
+
+        #рот
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_01.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_11.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_06.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_02.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_07.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_16.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_04.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_08.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_12.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_14.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_10.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_13.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_15.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_05.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s7/mouth/mouth_base_01_09.png",
+            'default':              "images/sprites/SLW/SWN/s7/mouth/mouth_base_smail_01_01.png",
+        },
+
+        #бров
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s7/brov/brov_base_01_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s7/brov/brov_base_01_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s7/brov/brov_base_01_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s7/brov/brov_base_01_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s7/brov/brov_base_01_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s7/brov/brov_base_01_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s7/brov/brov_base_01_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s7/brov/brov_base_01_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s7/brov/brov_base_01_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s7/brov/brov_base_01_11.png",
+            'default':             "images/sprites/SLW/SWN/s7/brov/brov_base_01_01.png",
+        },
+
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s7/freckles/freckles_base_01_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_08.png",
+            'default':         "images/sprites/SLW/SWN/s7/freckles/freckles_base_01_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s7/cry/cry_base_01_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s7/cry/cry_base_01_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s7/cry/cry_base_01_04.png",
+            'cry_04': "images/sprites/SLW/SWN/s7/cry/cry_base_01_05.png",
+            'default':"images/sprites/SLW/SWN/s7/cry/cry_base_01_01.png",
+        
+        },
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_04/SLW_01_01_hair_04_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_04/SLW_01_01_hair_04_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_04/SLW_01_01_hair_04_03.png",
+
+        },
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_05_full_face" — наклонённый ракурс.
+        # Использует набор лица S3 (s3/eyes, s3/mouth, s3/brov, ...),
+        # волосы S_04 и стандартную одежду.
+        # Структура полностью аналогична блоку bodu_01_left.
+        # ────────────────────────────────────────────────────────────
+
+
+        "bodu_05_full_face": {
+            
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_05_full_face_slant" — наклонённый ракурс.
+        # Использует набор лица S3 (s3/eyes, s3/mouth, s3/brov, ...),
+        # волосы S_04 и стандартную одежду.
+        # Структура полностью аналогична блоку bodu_01_left.
+        # ────────────────────────────────────────────────────────────
+        "bodu_05_full_face_slant":{
+            #глаза
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_02.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_03.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s3/eyes/ese_base_02_01.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s3/eyes/ese_base_02_02.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s3/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s3/eyes/ese_base_02_04.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s3/eyes/ese_base_03_01.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s3/eyes/ese_base_06_01.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s3/eyes/ese_base_04_01.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s3/eyes/ese_base_05_01.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s3/eyes/ese_base_cray_01_01.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s3/eyes/ese_base_horror_01_01.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s3/eyes/ese_base_horror_01_02.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s3/eyes/ese_base_prizes_01_01.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s3/eyes/ese_base_prizes_02_01.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s3/eyes/ese_base_01_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s3/eyes/ese_base_01_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s3/eyes/ese_base_01_03.png",
+        },
+
+        #рот
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_01.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_11.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_06.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_02.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_07.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_16.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_04.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_08.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_12.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_14.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_10.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_13.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_15.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_05.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s3/mouth/mouth_base_01_09.png",
+            'default':              "images/sprites/SLW/SWN/s3/mouth/mouth_base_smail_01_01.png",
+        },
+
+        #бров
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s3/brov/brov_base_01_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s3/brov/brov_base_01_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s3/brov/brov_base_01_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s3/brov/brov_base_01_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s3/brov/brov_base_01_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s3/brov/brov_base_01_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s3/brov/brov_base_01_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s3/brov/brov_base_01_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s3/brov/brov_base_01_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s3/brov/brov_base_01_11.png",
+            'default':             "images/sprites/SLW/SWN/s3/brov/brov_base_01_01.png",
+        },
+
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s3/freckles/freckles_base_01_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_08.png",
+            'default':         "images/sprites/SLW/SWN/s3/freckles/freckles_base_01_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s3/cry/cry_base_01_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s3/cry/cry_base_01_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s3/cry/cry_base_01_04.png",
+            'cry_04': "images/sprites/SLW/SWN/s3/cry/cry_base_01_05.png",
+            'default':"images/sprites/SLW/SWN/s3/cry/cry_base_01_01.png",
+        
+        },
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_03.png",
+
+        },
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_05_left" — использует набор лица S2 (другой ракурс
+        # глаз/рта/бровей), волосы S_02, тот же набор одежды.
+        # ────────────────────────────────────────────────────────────  
+        "bodu_05_left": {
+        # Глаза S2 — другой набор PNG, но ключи такие же, как в шаблоне,
+        # чтобы остальной код мог обращаться по тем же именам.
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s2/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s2/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s2/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_17.png",
+            # Кадры моргания для этого ракурса.
+            "blink_open":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+        },
+
+        # Рот S2.
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_01.png",
+        },
+
+        # Брови S2.
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s2/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s2/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s2/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s2/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s2/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки S2.
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s2/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач S2.
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s2/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s2/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+        
+        },
+
+        # Волосы S_02 — другой набор кадров.
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_03.png",
+
+        },
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
+        
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+      
+
+        }, 
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_05_left_down" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+        "bodu_05_left_down": {
+
+        #глаза
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s4/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s4/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s4/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_17.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+        },
+
+        #рот
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_01.png",
+        },
+
+        #бров
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s4/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s4/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s4/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s4/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s4/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s4/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s4/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s4/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+        
+        },
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
+
+        },
+
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_06_default"
+        # Использует стандартный набор лица,
+        # волосы стандартны.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_06_default": {
+
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_06_left" — использует набор лица S2 (другой ракурс
+        # глаз/рта/бровей), волосы S_02, тот же набор одежды.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_06_left": {
+        # Глаза S2 — другой набор PNG, но ключи такие же, как в шаблоне,
+            # чтобы остальной код мог обращаться по тем же именам.
+            "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s2/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s2/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s2/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_17.png",
+            # Кадры моргания для этого ракурса.
+            "blink_open":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+        },
+
+        # Рот S2.
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_01.png",
+        },
+
+        # Брови S2.
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s2/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s2/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s2/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s2/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s2/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки S2.
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s2/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач S2.
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s2/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s2/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+        
+        },
+
+        # Волосы S_02 — другой набор кадров.
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_03.png",
+
+        },
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
+
+
+
+        },  
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_06_left_down" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_06_left_down": {
+        #глаза
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s4/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s4/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s4/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_17.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+        },
+
+        #рот
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_01.png",
+        },
+
+        #бров
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s4/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s4/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s4/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s4/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s4/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s4/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s4/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s4/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+        
+        },
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
+
+        },
+
+
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_06_left_slant" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_06_left_slant": {
+
         #глаза
         "eyes": {
             'eyes_norm_01':               "images/sprites/SLW/SWN/s3/eyes/ese_base_01_01.png",
@@ -2011,25 +2900,321 @@ init python:
         
         },
 
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_03.png",
+
+        },
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_07_default" — отличается волосами (S_04).
+        # отсутстуют элементы лица так как оно одно на спрайте.
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_07_default": {
+        #глаза
+        "eyes": "no",
+        #рот
+        "mouth": "no",
+        #бров
+        "brov": "no",
+        # Веснушки
+        "freckles": "no",
+        # Плач
+        "cry": "no",
+
 
         #Волосы
         "hair": {
 
-            'h1': "images/sprites/SLW/SWN/hair/S_10/SLW_01_01_hair_01_01.png",
-            'h2': "images/sprites/SLW/SWN/hair/S_10/SLW_01_01_hair_01_02.png",
-            'h3': "images/sprites/SLW/SWN/hair/S_10/SLW_01_01_hair_01_03.png",
+            'h1': "images/sprites/SLW/SWN/hair/S_05/SLW_01_01_hair_05_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_05/SLW_01_01_hair_05_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_05/SLW_01_01_hair_05_03.png",
 
         },
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
+
 
         },
 
         # ────────────────────────────────────────────────────────────
-        # ТЕЛО "bodu_05_default" — левый ракурс.
-        # Использует набор лица S6
-        # волосы S_04 стандартную одежды -----.
+        # ТЕЛО "bodu_08_default" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
         # ────────────────────────────────────────────────────────────
 
-        "bodu_05_default": {
+        "bodu_08_default": {
+
+
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_08_left" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_08_left": {
+
+        # Глаза S2 — другой набор PNG, но ключи такие же, как в шаблоне,
+        # чтобы остальной код мог обращаться по тем же именам.
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s2/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s2/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s2/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_17.png",
+            # Кадры моргания для этого ракурса.
+            "blink_open":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+        },
+
+        # Рот S2.
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_01.png",
+        },
+
+        # Брови S2.
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s2/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s2/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s2/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s2/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s2/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки S2.
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s2/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач S2.
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s2/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s2/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+        
+        },
+
+        # Волосы S_02 — другой набор кадров.
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_03.png",
+
+        },
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
+
+
+
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_08_left_down" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_08_left_down":{
+        
+        #глаза
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s4/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s4/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s4/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_17.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+        },
+
+        #рот
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_01.png",
+        },
+
+        #бров
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s4/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s4/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s4/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s4/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s4/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s4/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s4/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s4/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+        
+        },
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
+
+        },
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
+
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_08_left_slant" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_08_left_slant": {
 
         #глаза
         "eyes": {
@@ -2130,16 +3315,373 @@ init python:
 
         },
 
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_09_left" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
 
-        "bodu_05_full_face": {
-            "eyes": {
-                "eyes_norm_01":        "images/sprites/SLW/SWN/eyes/05_ff_norm_01.png",
-                "eyes_norm_horror_01": "images/sprites/SLW/SWN/eyes/05_ff_horror_01.png",
-                "blink_open":          "images/sprites/SLW/SWN/eyes/05_ff_blink_01.png",
-                "blink_half":          "images/sprites/SLW/SWN/eyes/05_ff_blink_02.png",
-                "blink_closed":        "images/sprites/SLW/SWN/eyes/05_ff_blink_03.png",
-            },
+        "bodu_09_left": {
+
+        # Глаза S2 — другой набор PNG, но ключи такие же, как в шаблоне,
+        # чтобы остальной код мог обращаться по тем же именам.
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s2/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s2/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s2/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s2/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s2/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_17.png",
+            # Кадры моргания для этого ракурса.
+            "blink_open":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s2/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s2/eyes/ese_base_02_03.png",
         },
+
+        # Рот S2.
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s2/mouth/mouth_base_02_01.png",
+        },
+
+        # Брови S2.
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s2/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s2/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s2/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s2/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s2/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s2/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки S2.
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s2/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s2/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач S2.
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s2/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s2/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s2/cry/cry_base_02_01.png",
+        
+        },
+
+        # Волосы S_02 — другой набор кадров.
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_03.png",
+
+        },
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
+
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_09_left_down" — отличается ТОЛЬКО волосами (S_04).
+        # Остальное наследуется из SLW_FACE_TEMPLATE без изменений.
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_09_left_down": {
+
+        #глаза
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_05.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_15.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_08.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_12.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s4/eyes/ese_base_02_14.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_10.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s4/eyes/ese_base_02_07.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s4/eyes/ese_base_02_13.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s4/eyes/ese_base_02_09.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_11.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_04.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_06.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_16.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_17.png",
+            # кадры моргания
+            "blink_open":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s4/eyes/ese_base_02_03.png",
+        },
+
+        #рот
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s4/mouth/mouth_base_02_01.png",
+        },
+
+        #бров
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s4/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s4/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s4/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s4/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s4/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s4/brov/brov_base_02_01.png",
+        },
+
+        # Веснушки
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s4/freckles/freckles_base_02_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_08.png",
+            'default':         "images/sprites/SLW/SWN/s4/freckles/freckles_base_02_01.png",
+
+        },
+
+        # Плач
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s4/cry/cry_base_02_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s4/cry/cry_base_02_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'cry_04': "images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+            'default':"images/sprites/SLW/SWN/s4/cry/cry_base_02_01.png",
+        
+        },
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
+
+        },
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
+        },
+
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_12_base".
+        # 
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_12_base": {
+
+            # ── ГЛАЗА ── варианты выражений + 3 кадра моргания (внизу словаря)
+
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s8/eyes/ese_base_01_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s8/eyes/ese_base_01_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s8/eyes/ese_base_01_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s8/eyes/ese_base_01_02.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s8/eyes/ese_base_01_03.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s8/eyes/ese_base_02_01.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s8/eyes/ese_base_02_02.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s8/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s8/eyes/ese_base_02_04.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s8/eyes/ese_base_03_01.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s8/eyes/ese_base_06_01.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s8/eyes/ese_base_04_01.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s8/eyes/ese_base_05_01.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s8/eyes/ese_base_cray_01_01.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s8/eyes/ese_base_horror_01_01.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s8/eyes/ese_base_horror_01_02.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s8/eyes/ese_base_prizes_01_01.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s8/eyes/ese_base_prizes_02_01.png",
+            # Кадры моргания — используются, когда slw.eyes == "blink".
+            "blink_open":          "images/sprites/SLW/SWN/s8/eyes/ese_base_01_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s8/eyes/ese_base_01_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s8/eyes/ese_base_01_03.png",
+        },
+
+        # ── РОТ ── варианты эмоций + 'default' (резервный, если ключ не найден)
+
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_01.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_11.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_06.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_02.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_07.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_16.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_04.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_08.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_12.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_14.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_10.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_13.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_15.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_05.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s8/mouth/mouth_base_01_09.png",
+            'default':              "images/sprites/SLW/SWN/s8/mouth/mouth_base_smail_01_01.png",
+        },
+
+        # ── БРОВИ ── варианты + 'default'.
+        # ВАЖНО: тот же набор используется ДВА раза:
+        #   1) слот "brov"  — основной (под волосами, непрозрачный).
+        #   2) слот "brov2" — поверх волос, с alpha=0.8 (см. build_slw),
+        #      причём он берёт значение ИЗ slw.brov (одна переменная).
+
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s8/brov/brov_base_01_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s8/brov/brov_base_01_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s8/brov/brov_base_01_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s8/brov/brov_base_01_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s8/brov/brov_base_01_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s8/brov/brov_base_01_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s8/brov/brov_base_01_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s8/brov/brov_base_01_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s8/brov/brov_base_01_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s8/brov/brov_base_01_11.png",
+            'default':             "images/sprites/SLW/SWN/s8/brov/brov_base_01_01.png",
+        },
+
+
+        # ── ВЕСНУШКИ ── косметическое наложение на лицо.
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s8/freckles/freckles_base_01_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_08.png",
+            'default':         "images/sprites/SLW/SWN/s8/freckles/freckles_base_01_01.png",
+
+        },
+
+        # ── ПЛАЧ ── слёзы (наложение поверх лица)
+        "cry": {
+            'cry_01': "images/sprites/SLW/SWN/s8/cry/cry_base_01_02.png",
+            'cry_02': "images/sprites/SLW/SWN/s8/cry/cry_base_01_03.png",
+            'cry_03': "images/sprites/SLW/SWN/s8/cry/cry_base_01_04.png",
+            'cry_04': "images/sprites/SLW/SWN/s8/cry/cry_base_01_05.png",
+            'default':"images/sprites/SLW/SWN/s8/cry/cry_base_01_01.png",
+        
+        },
+
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_11/SLW_01_01_hair_01_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_11/SLW_01_01_hair_01_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_11/SLW_01_01_hair_01_03.png",
+
+        },
+
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/s2/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s2/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s2/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s2/SLW_01_01_kassa_04.png",
+        },
+
+        },
+
+
+
+
     }
 
     # ════════════════════════════════════════════════════════════════
@@ -2147,22 +3689,34 @@ init python:
     # ════════════════════════════════════════════════════════════════
 
     def _slw_merge(base, override):
-
         # Сливает базовый шаблон (SLW_FACE_TEMPLATE) с переопределениями
         # для конкретного тела (запись из SLW_OVERRIDES).
         #
-        # Логика «глубокого» слияния по слотам:
-        #   1) копируем КАЖДЫЙ слот базы в новый словарь (dict(keys) —
-        #      делаем КОПИЮ, чтобы не портить общий шаблон при .update);
-        #   2) поверх накладываем переопределения: совпадающие ключи
-        #      внутри слота перезаписываются, новые — добавляются.
+        # Логика:
+        #   1) копируем каждый слот базы;
+        #   2) если в override стоит "no" — полностью отключаем слот;
+        #   3) если в override словарь — накладываем его поверх базы.
 
         result = {}
+
         for slot, keys in base.items():
-            result[slot] = dict(keys)                   # копия словаря слота
-        for slot, keys in (override or {}).items():     
-            result.setdefault(slot, {})                 # если слота не было — создаём
-            result[slot].update(keys)                   # накладываем дельту
+            result[slot] = dict(keys)
+
+        for slot, keys in (override or {}).items():
+
+            # Если слот в оверрайде отключён строкой "no",
+            # например: "mouth": "no"
+            if keys == "no":
+                result[slot] = "no"
+                continue
+
+            # Если слот новый или раньше был отключён, создаём словарь.
+            if not isinstance(result.get(slot), dict):
+                result[slot] = {}
+
+            # Накладываем словарь переопределений.
+            result[slot].update(keys)
+
         return result
 
     # Строим финальную таблицу: для каждого тела — готовый набор слоёв
@@ -2321,6 +3875,81 @@ init python:
         d = Composite(CANVAS, (0, 0), path)
         return d, frame_time - (st % frame_time)
 
+    # ↓↓↓ ДОБАВЛЕНО ДЛЯ LIP-SYNC ↓↓↓
+    def build_mouth(st, at):
+        data = SLW.get(store.slw.body, SLW["default"])
+        mouth = data.get("mouth", {})
+
+        # ↓↓↓ ДОБАВЛЕНО: если рот отключён для этого тела ("no"),
+        # НЕ рисуем рот вообще — ни эмоцию, ни анимацию разговора.
+        if mouth == "no":
+            return Null(), 0
+        # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ
+
+        def render(key):
+            path = mouth.get(key) or mouth.get("default")
+            return Null() if path is None else Composite(CANVAS, (0, 0), path)
+
+        # НЕ говорит — показываем эмоцию из slw.mouth (или закрытый рот).
+        if not getattr(store, "slw_talking", False):
+            key = getattr(store.slw, "mouth", None)
+            if key is None or key == "no":
+                return render("default"), 0
+            return render(key), 0
+
+        # Если печать мгновенная (cps=0) — рот не дёргаем.
+        real_cps = getattr(store.preferences, "text_cps", 0)
+        if not real_cps or real_cps <= 0:
+            key = getattr(store.slw, "mouth", None)
+            return render(key if key and key != "no" else "default"), 0
+
+        now = time.time()
+        l = _lip
+
+        elapsed = now - l["start"]
+        char_index = int(elapsed * l["cps"])
+        text = l["text"]
+
+        if char_index >= len(text):
+            return render("default"), 0.05
+
+        ch = text[char_index].lower()
+
+        # Держим паузу на знаке препинания.
+        if now < l["pause_until"]:
+            return render(l["cur"]), max(0.01, l["pause_until"] - now)
+
+        if ch in SLW_PAUSE_LONG:
+            l["pause_until"] = now + random.uniform(0.25, 0.40)
+            l["cur"] = random.choice(SLW_MOUTH_CLOSED)
+            return render(l["cur"]), l["pause_until"] - now
+
+        if ch in SLW_PAUSE_SHORT:
+            l["pause_until"] = now + random.uniform(0.12, 0.20)
+            l["cur"] = random.choice(SLW_MOUTH_CLOSED)
+            return render(l["cur"]), l["pause_until"] - now
+
+        if now >= l["next"] or l["cur"] is None:
+            if ch in SLW_VOWELS:
+                l["cur"] = random.choice(SLW_MOUTH_WIDE)
+                l["next"] = now + random.uniform(0.10, 0.17)
+                l["open"] = True
+            elif ch in SLW_SPACE:
+                l["cur"] = random.choice(SLW_MOUTH_CLOSED)
+                l["next"] = now + random.uniform(0.04, 0.08)
+                l["open"] = False
+            else:
+                l["open"] = not l["open"]
+                if l["open"]:
+                    l["cur"] = random.choice(SLW_MOUTH_OPEN)
+                    l["next"] = now + random.uniform(0.06, 0.11)
+                else:
+                    l["cur"] = random.choice(SLW_MOUTH_CLOSED)
+                    l["next"] = now + random.uniform(0.04, 0.08)
+
+        return render(l["cur"]), max(0.01, l["next"] - now)
+    # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ ↑↑↑
+
     # ════════════════════════════════════════════════════════════════
     # 7. ГЛАВНЫЙ СТРОИТЕЛЬ ПЕРСОНАЖА
     # ────────────────────────────────────────────────────────────────
@@ -2369,6 +3998,12 @@ init python:
                 layers += [(0, 0), slw_hair_displayable]
                 continue
 
+            # ↓↓↓ ДОБАВЛЕНО ДЛЯ LIP-SYNC ↓↓↓
+            if slot == "mouth":
+                layers += [(0, 0), slw_mouth_displayable]
+                continue
+            # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ ↑↑↑
+
             # ── БРОВИ ВТОРОЙ РАЗ (поверх волос, полупрозрачно) ──
             # Берём значение из slw.brov (не из отдельной переменной),
             # картинку — из набора "brov", и накрываем Transform(alpha=0.8).
@@ -2380,6 +4015,12 @@ init python:
                     continue
                 # картинку берём из словаря "brov" (тот же набор)
                 slot_dict = data.get("brov", {})
+
+                # ↓↓↓ ДОБАВЛЕНО: брови отключены для этого тела ("no").
+                if slot_dict == "no":
+                    continue
+                # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ
+
                 if key in slot_dict:
                     path = slot_dict[key]
                 else:
@@ -2415,6 +4056,12 @@ init python:
                 continue
 
             slot_dict = data.get(slot, {})
+
+            # ↓↓↓ ДОБАВЛЕНО: слот отключён для этого тела ("no") — пропускаем.
+            if slot_dict == "no":
+                continue
+            # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ
+
             if key in slot_dict:
                 path = slot_dict[key]       # нашли точное совпадение
             else:
@@ -2459,6 +4106,12 @@ init python:
     def build_eyes_blink(st, at):
         # Берём кадры моргания для текущего тела.
         eyes = SLW.get(store.slw.body, SLW["default"]).get("eyes", {})
+
+        # ↓↓↓ ДОБАВЛЕНО: если глаза отключены ("no") — ничего не рисуем.
+        if eyes == "no":
+            return Null(), 0
+        # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ
+
         e_open   = eyes.get("blink_open")
         e_half   = eyes.get("blink_half")
         e_closed = eyes.get("blink_closed")
@@ -2526,6 +4179,10 @@ init python:
     slw_kassa_displayable = DynamicDisplayable(build_kassa)             # коса
 
     slw_hair_displayable = DynamicDisplayable(build_hair)               # волосы
+
+    # ↓↓↓ ДОБАВЛЕНО ДЛЯ LIP-SYNC ↓↓↓
+    slw_mouth_displayable = DynamicDisplayable(build_mouth)            # рот (lip-sync)
+    # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ ↑↑↑
 
 
 #=============================================================
@@ -2871,7 +4528,8 @@ define nn = Character(None,
 #=================================================================
 
 #image='Little_witch'
-define LW = Character('Маленькая ведьма', 
+define LW = LipSyncCharacter('Маленькая ведьма', 
+        callback=slw_say_callback,
         color="#6f0ead",
         outlines = [ (2, "#000000") ],
         what_size = 35,
