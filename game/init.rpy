@@ -418,6 +418,18 @@ init python:
 
         },
 
+        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa": {
+            "k1": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
+        },
+
+        "kassa_2": "no",
+
         # ── ШЛЯПА (задняя часть) ── рисуется ПОД волосами (в начале стопки).
         # Значение берётся из slw.hat. Одна переменная управляет ОБОИМИ
         # слоями шляпы (задним и передним).
@@ -515,15 +527,7 @@ init python:
 
         },
 
-        # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
-        # Используется в build_kassa. Без ветра показывается k1.
-
-        "kassa": {
-            "k1": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_01.png",
-            "k2": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_02.png",
-            "k3": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_03.png",
-            "k4": "images/sprites/SLW/SWN/kassa/SLW_01_01_kassa_04.png",
-        },
+        
     }
 
     # ════════════════════════════════════════════════════════════════
@@ -642,6 +646,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_03.png",
 
         },
+
+        "kassa_2": "no",
 
         # Одежда — дублирует базу. Это сделано «на всякий случай»,
         # чтобы при необходимости легко поменять только под это тело,
@@ -811,6 +817,18 @@ init python:
         
         },
 
+        #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
+
+        },
+
+        "kassa_2": "no",
+
+        #Одежда
         #трусики
         "panties": {
             "panties_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_white_01.png",
@@ -878,15 +896,7 @@ init python:
 
         },
 
-        #Волосы
-        "hair": {
-
-            'h1': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_01.png",
-            'h2': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_02.png",
-            'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
-
-        },
-
+        
         },
 
         # ────────────────────────────────────────────────────────────
@@ -993,6 +1003,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_03.png",
 
         },
+
+        "kassa_2": "no",
 
         #шляпа (задняя часть — под волосами)
         "hat":{
@@ -1182,6 +1194,8 @@ init python:
 
         },
 
+        "kassa_2": "no",
+
         # Одежда
 
         
@@ -1292,6 +1306,8 @@ init python:
 
         },
 
+        "kassa_2": "no",
+
 
         },
 
@@ -1304,7 +1320,9 @@ init python:
         "bodu_02_default":{
 
 
-            #одежда
+        "kassa_2": "no",
+
+        #одежда
 
         },
 
@@ -1314,7 +1332,8 @@ init python:
         # ────────────────────────────────────────────────────────────
 
         "bodu_02_left_down": {
-            #глаза
+        
+        #глаза
         "eyes": {
             'eyes_norm_01':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_01.png",
             'eyes_norm_02':               "images/sprites/SLW/SWN/s4/eyes/ese_base_02_02.png",
@@ -1409,6 +1428,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_07/SLW_01_01_hair_02_03.png",
 
         },
+
+        "kassa_2": "no",
 
 
 
@@ -1529,6 +1550,8 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
 
         },
 
@@ -1644,6 +1667,8 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
 
 
         }, 
@@ -1752,6 +1777,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_03.png",
 
         }, 
+
+        "kassa_2": "no",
 
 
         },
@@ -1870,6 +1897,8 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -1983,6 +2012,8 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -2000,6 +2031,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_09/SLW_01_01_hair_01_03.png",
 
         },
+
+        "kassa_2": "no",
 
         },
 
@@ -2107,6 +2140,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_10/SLW_01_01_hair_01_03.png",
 
         },
+
+        "kassa_2": "no",
 
         },
 
@@ -2224,6 +2259,8 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -2235,6 +2272,15 @@ init python:
 
 
         "bodu_05_full_face": {
+
+
+
+
+        "kassa_2": "no",
+
+        # Одежда — дублирует базу. Это сделано «на всякий случай»,
+        # чтобы при необходимости легко поменять только под это тело,
+        # ничего не трогая в общем шаблоне.
             
         },
 
@@ -2340,6 +2386,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_03.png",
 
         },
+
+        "kassa_2": "no",
 
         },
 
@@ -2458,6 +2506,8 @@ init python:
             "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
+
+        "kassa_2": "no",
       
 
         }, 
@@ -2575,6 +2625,8 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
 
         },
 
@@ -2585,6 +2637,8 @@ init python:
         # ────────────────────────────────────────────────────────────
 
         "bodu_06_default": {
+
+        "kassa_2": "no",
 
 
         },
@@ -2691,6 +2745,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_02/SLW_01_01_hair_02_03.png",
 
         },
+
+        "kassa_2": "no",
 
         # Одежда — дублирует базу. Это сделано «на всякий случай»,
         # чтобы при необходимости легко поменять только под это тело,
@@ -2802,6 +2858,8 @@ init python:
 
         },
 
+        "kassa_2": "no",
+
 
 
         },
@@ -2909,6 +2967,8 @@ init python:
 
         },
 
+        "kassa_2": "no",
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -2949,7 +3009,7 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
-
+        "kassa_2": "no",
 
         },
 
@@ -2960,7 +3020,8 @@ init python:
 
         "bodu_08_default": {
 
-
+        
+        "kassa_2": "no",
 
         },
 
@@ -3078,11 +3139,12 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
 
         # Одежда — дублирует базу. Это сделано «на всякий случай»,
         # чтобы при необходимости легко поменять только под это тело,
         # ничего не трогая в общем шаблоне.
-
 
 
 
@@ -3201,6 +3263,8 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
 
         # Одежда — дублирует базу. Это сделано «на всякий случай»,
         # чтобы при необходимости легко поменять только под это тело,
@@ -3311,6 +3375,8 @@ init python:
             'h3': "images/sprites/SLW/SWN/hair/S_06/SLW_01_01_hair_01_03.png",
 
         },
+
+        "kassa_2": "no",
 
 
         },
@@ -3428,6 +3494,8 @@ init python:
             "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
+
+        "kassa_2": "no",
 
 
         # Одежда — дублирует базу. Это сделано «на всякий случай»,
@@ -3549,6 +3617,8 @@ init python:
             "k3": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_03.png",
             "k4": "images/sprites/SLW/SWN/kassa/s1/SLW_01_01_kassa_04.png",
         },
+
+        "kassa_2": "no",
 
 
         # Одежда — дублирует базу. Это сделано «на всякий случай»,
@@ -3677,6 +3747,81 @@ init python:
             "k4": "images/sprites/SLW/SWN/kassa/s2/SLW_01_01_kassa_04.png",
         },
 
+        "kassa_2": "no",
+
+        },
+
+        # ────────────────────────────────────────────────────────────
+        # ТЕЛО "bodu_13_base".
+        # 
+        # ────────────────────────────────────────────────────────────
+
+        "bodu_13_base":{
+
+            # ── ГЛАЗА ── варианты выражений + 3 кадра моргания (внизу словаря)
+
+        "eyes": {
+            'eyes_norm_01':               "images/sprites/SLW/SWN/s9/eyes/ese_base_01_01.png",
+            'eyes_norm_02':               "images/sprites/SLW/SWN/s9/eyes/ese_base_01_02.png",
+            'eyes_norm_03':               "images/sprites/SLW/SWN/s9/eyes/ese_base_01_03.png",
+            'eyes_norm_04':               "images/sprites/SLW/SWN/s9/eyes/ese_base_01_02.png",
+            'eyes_norm_05':               "images/sprites/SLW/SWN/s9/eyes/ese_base_01_03.png",
+            'eyes_norm_blindfold_01':     "images/sprites/SLW/SWN/s9/eyes/ese_base_02_01.png",
+            'eyes_norm_blindfold_02':     "images/sprites/SLW/SWN/s9/eyes/ese_base_02_02.png",
+            'eyes_norm_blindfold_03':     "images/sprites/SLW/SWN/s9/eyes/ese_base_02_03.png",
+            'eyes_norm_blindfold_04':     "images/sprites/SLW/SWN/s9/eyes/ese_base_02_04.png",
+            'eyes_left_norm_01':          "images/sprites/SLW/SWN/s9/eyes/ese_base_03_01.png",
+            'eyes_right_norm_01':         "images/sprites/SLW/SWN/s9/eyes/ese_base_06_01.png",
+            'eyes_left_norm_he_winks_01': "images/sprites/SLW/SWN/s9/eyes/ese_base_04_01.png",
+            'eyes_right_norm_he_winks_01':"images/sprites/SLW/SWN/s9/eyes/ese_base_05_01.png",
+            'eyes_norm_cray_01':          "images/sprites/SLW/SWN/s9/eyes/ese_base_cray_01_01.png",
+            'eyes_norm_horror_01':        "images/sprites/SLW/SWN/s9/eyes/ese_base_horror_01_01.png",
+            'eyes_norm_horror_02':        "images/sprites/SLW/SWN/s9/eyes/ese_base_horror_01_02.png",
+            'eyes_norm_prizes_01':        "images/sprites/SLW/SWN/s9/eyes/ese_base_prizes_01_01.png",
+            'eyes_norm_prizes_02':        "images/sprites/SLW/SWN/s9/eyes/ese_base_prizes_02_01.png",
+            # Кадры моргания — используются, когда slw.eyes == "blink".
+            "blink_open":          "images/sprites/SLW/SWN/s9/eyes/ese_base_01_01.png",
+            "blink_half":          "images/sprites/SLW/SWN/s9/eyes/ese_base_01_02.png",
+            "blink_closed":        "images/sprites/SLW/SWN/s9/eyes/ese_base_01_03.png",
+        },
+
+        # Брови S2.
+        "brov": {
+            'brov_surprised_01':   "images/sprites/SLW/SWN/s9/brov/brov_base_02_02.png",
+            'brov_gloomy_01':      "images/sprites/SLW/SWN/s9/brov/brov_base_02_03.png",
+            'brov_irritations_01': "images/sprites/SLW/SWN/s9/brov/brov_base_02_04.png",
+            'brov_sad_01':         "images/sprites/SLW/SWN/s9/brov/brov_base_02_05.png",
+            'brov_angry_01':       "images/sprites/SLW/SWN/s9/brov/brov_base_02_06.png",
+            'brov_angry_02':       "images/sprites/SLW/SWN/s9/brov/brov_base_02_07.png",
+            'brov_angry_03':       "images/sprites/SLW/SWN/s9/brov/brov_base_02_08.png",
+            'brov_angry_04':       "images/sprites/SLW/SWN/s9/brov/brov_base_02_09.png",
+            'brov_angry_05':       "images/sprites/SLW/SWN/s9/brov/brov_base_02_10.png",
+            'brov_angry_06':       "images/sprites/SLW/SWN/s9/brov/brov_base_02_10.png",
+            'default':             "images/sprites/SLW/SWN/s9/brov/brov_base_02_01.png",
+        },
+
+            #Волосы
+        "hair": {
+
+            'h1': "images/sprites/SLW/SWN/hair/S_12/SLW_01_01_hair_01_01.png",
+            'h2': "images/sprites/SLW/SWN/hair/S_12/SLW_01_01_hair_01_02.png",
+            'h3': "images/sprites/SLW/SWN/hair/S_12/SLW_01_01_hair_01_03.png",
+
+        },
+
+        "kassa": "no",
+
+            # ── КОСА ── 4 кадра (k1..k4) для анимации развевания на ветру.
+        # Используется в build_kassa. Без ветра показывается k1.
+
+        "kassa_2": {
+            "k1": "images/sprites/SLW/SWN/kassa/s3/SLW_01_01_kassa_01.png",
+            "k2": "images/sprites/SLW/SWN/kassa/s3/SLW_01_01_kassa_02.png",
+            "k3": "images/sprites/SLW/SWN/kassa/s3/SLW_01_01_kassa_03.png",
+            "k4": "images/sprites/SLW/SWN/kassa/s3/SLW_01_01_kassa_04.png",
+        },
+
+
         },
 
 
@@ -3693,14 +3838,18 @@ init python:
         # для конкретного тела (запись из SLW_OVERRIDES).
         #
         # Логика:
-        #   1) копируем каждый слот базы;
+        #   1) копируем каждый слот базы (учитывая, что он может быть "no" или dict);
         #   2) если в override стоит "no" — полностью отключаем слот;
         #   3) если в override словарь — накладываем его поверх базы.
 
         result = {}
 
         for slot, keys in base.items():
-            result[slot] = dict(keys)
+            # Если в базе слот отключён строкой "no" — копируем как есть
+            if isinstance(keys, dict):
+                result[slot] = dict(keys)
+            else:
+                result[slot] = keys   # например, "no"
 
         for slot, keys in (override or {}).items():
 
@@ -3738,6 +3887,7 @@ init python:
     #   eyes       — глаза
     #   cry        — слёзы
     #   mouth      — рот
+    #   kassa_2    - коса под волосами но перед телом
     #   hair       — волосы (перекрывают часть лица/плеч)
     #   brov2      — брови ВТОРОЙ раз, полупрозрачно ПОВЕРХ волос
     #                (чтобы бровь читалась сквозь чёлку)
@@ -3745,7 +3895,7 @@ init python:
     #   далее одежда: обувь -> бельё -> панталоны -> топ -> платье -> перчатки
     # ────────────────────────────────────────────────────────────────
 
-    SLW_LAYER_ORDER = ["hat", "kassa", "body", "brov", "freckles", "eyes", "cry", "mouth", "hair", "brov2", "hat_front", "boots_left", "boots_right", "panties", "pantaloons", "top", "gloves_left", "gloves_right", "clothes", "exercise", "carset"]
+    SLW_LAYER_ORDER = ["hat", "kassa", "body", "brov", "freckles", "eyes", "cry", "mouth", "kassa_2", "hair", "brov2", "hat_front", "boots_left", "boots_right", "panties", "pantaloons", "top", "gloves_left", "gloves_right", "clothes", "exercise", "carset"]
 
     # ════════════════════════════════════════════════════════════════
     # 4. СОСТОЯНИЕ ПЕРСОНАЖА
@@ -3759,6 +3909,8 @@ init python:
 
     class SLWState(object):
         def __init__(self):
+            #self.kassa      = None
+            #self.kassa_2    = None
             self.body       = None #"default" поза тела (ключ из SLW_BODIES)
             self.eyes       = None #"eyes_norm_01"   # или "blink" для анимации моргания выражение глаз ИЛИ "blink" (анимация)
             self.freckles   = None # веснушки
@@ -3812,6 +3964,13 @@ init python:
         # st — время (в секундах) с момента старта этого Displayable.
 
         wind = getattr(store, "wind_01", 0)
+
+        kassa = SLW.get(store.slw.body, SLW["default"]).get("kassa", {})
+
+        # Слот отключён ("no") или пустой — ничего не рисуем.
+        if not isinstance(kassa, dict) or not kassa:
+            return Null(), 0
+
         if wind <= 0:
             # без ветра — статичный первый кадр
             # Нет ветра — показываем статичный первый кадр и не перерисовываем
@@ -3840,6 +3999,31 @@ init python:
         # Второй элемент — через сколько секунд перерисовать (до след. кадра).
         return d, frame_time - (st % frame_time)
 
+    def build_kassa_2(st, at):
+        wind = getattr(store, "wind_01", 0)
+
+        kassa = SLW.get(store.slw.body, SLW["default"]).get("kassa_2", {})
+
+        if not isinstance(kassa, dict) or not kassa:
+            return Null(), 0
+
+        if wind <= 0:
+            path = kassa.get("k1")
+            if path is None:
+                return Null(), 0
+            return Composite(CANVAS, (0, 0), path), 0
+
+        frame_time = {1: 0.5, 2: 0.35, 3: 0.2}.get(wind, 0.5)
+
+        idx = int(st / frame_time) % len(_KASSA_FRAMES)
+        path = kassa.get(_KASSA_FRAMES[idx])
+
+        if path is None:
+            return Null(), 0
+
+        d = Composite(CANVAS, (0, 0), path)
+        return d, frame_time - (st % frame_time)
+
     # ════════════════════════════════════════════════════════════════
     # 5b. АНИМАЦИЯ ВОЛОС (синхронно с косой)
     # ────────────────────────────────────────────────────────────────
@@ -3854,6 +4038,10 @@ init python:
         wind = getattr(store, "wind_01", 0)
 
         hair = SLW.get(store.slw.body, SLW["default"]).get("hair", {})
+
+        # Слот отключён ("no") или пустой — ничего не рисуем.
+        if not isinstance(hair, dict) or not hair:
+            return Null(), 0
 
         if wind <= 0:
             # без ветра — статичный первый кадр
@@ -3978,6 +4166,11 @@ init python:
                 # анимированная коса как вложенный DynamicDisplayable
                 layers += [(0, 0), slw_kassa_displayable]   # переиспользуем
                 continue
+
+            if slot == "kassa_2":
+                layers += [(0, 0), slw_kassa_2_displayable]
+                continue
+
 
             # ── ГЛАЗА (режим моргания) ── если slw.eyes == "blink",
             # вставляем анимацию моргания вместо статичной картинки.
@@ -4183,6 +4376,8 @@ init python:
     # ↓↓↓ ДОБАВЛЕНО ДЛЯ LIP-SYNC ↓↓↓
     slw_mouth_displayable = DynamicDisplayable(build_mouth)            # рот (lip-sync)
     # ↑↑↑ КОНЕЦ ДОБАВЛЕНИЯ ↑↑↑
+
+    slw_kassa_2_displayable = DynamicDisplayable(build_kassa_2)         # коса №2
 
 
 #=============================================================
