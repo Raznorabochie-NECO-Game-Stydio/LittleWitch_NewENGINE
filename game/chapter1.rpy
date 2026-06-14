@@ -1776,7 +1776,11 @@ label Cha_001:
         e "...."
         $ slw.body = "bodu_13_base"
 
-       
+        $ slw.eyes = "eyes_norm_prizes_02"
+        $ slw.mouth = "norm_language_01"
+        $ slw.freckles = "norm_04"
+        $ slw.brov = "brov_irritations_01"
+
         #$ head_LW_01 = 'left_slant'
 
 
@@ -1787,14 +1791,157 @@ label Cha_001:
         # show LW -open
 
 
+        e "v"
+        hide little_witch onlayer sloi02
 
+        $ slw.body = "default"
+        $ wind_01 = 1
+        $ slw.eyes = "blink"
+        $ slw.brov = "brov_angry_01"
+        $ slw.freckles = "norm_01"
+        $ slw.cry = "no"
+        $ slw.mouth = "default"
+        #$ slw.hat = "hat_02"
+        $ slw.hat = "no"
+        $ slw.panties = "no"
+        #$ slw.panties = "panties_white"
+        #$ slw.pantaloons = "pantaloons_short"
+        $ slw.pantaloons = "pantaloons_long"
+        #$ slw.pantaloons = "no"
+        #$ slw.top = "top_black"
+        $ slw.top = "no"
+        #$ slw.clothes = "no"
+        #$ slw.clothes = "dresses_01"
+        #$ slw.exercise = "exercise_01"
+        #$ slw.carset = "Carset_01"
+        #$ slw.gloves_left = "gloves_left_01"
+        #$ slw.gloves_right = "gloves_right_01"
+        #$ slw.boots_left = "boots_left_01"
+        #$ slw.boots_right = "boots_right_01"
+        #$ reset_slw_blink()
+        
+
+        #default eyes_LW_01 = True
+        #default cry_LW_01 = 'no'
+        #default freckles_LW_01 = 'norm_01'
+        #default mouth_LW_01 = True
+        #default brov_LW_01 = True
+        
+
+        #show little_witch at LW_long_range_01, screen_center_long onlayer sloi02
+        show little_witch at LW_medium_range_01, screen_center_medium onlayer sloi02
+        
+        e "...."
+
+        $ slw.eyes = "eyes_right_norm_01"
+
+        LW "Привет! Эта фраза печатается, и всё это время мой рот шевелится."
+        
+        LW "А на точках, запятых — рот смыкается. Удивительно?"
+
+        #$ slw.mouth = "norm_surprised_01"
+        $ slw.brov = "brov_angry_05"
+        #$ slw.eyes = "eyes_norm_horror_02"
+        #$ slw.freckles = "norm_hatching_01"
+        #$ slw.pantaloons = "pantaloons_long"
+        #$ slw.top = "top_01"
+        $ slw.body = "bodu_01_left"
+        e "...."
+
+        LW "Привет! Эта фраза печатается, и всё это время мой рот шевелится."
+
+        LW "А на точках, запятых — рот смыкается. Удивительно?"
+
+        $ slw.eyes = "eyes_norm_blindfold_02"
+
+        #show little_witch at LW_short_range_01, screen_center_short onlayer sloi02
+        $ slw.body = "bodu_01_left_down"
+        e "...."
+        $ slw.body = "bodu_01_left_slant"
+        e "...."
+
+        $ slw.pantaloons = "no"
+        $ slw.body = "bodu_02_left"
+        e "...."
+        $ slw.body = "bodu_02_left_slant"
+        e "...."
+        $ slw.body = "bodu_02_default"
+        e "...."
+        $ slw.eyes = "blink" 
+        $ slw.body = "bodu_02_left_down"
+        e "...."
+        $ slw.body = "bodu_03_default"
+        e "...."
+        $ slw.body = "bodu_03_left_down"
+        e "...."
+        $ slw.body = "bodu_03_left_down_slant"
+        e "...."
+        $ slw.body = "bodu_04_default"
+        e "...."
+        $ slw.body = "bodu_04_left_down"
+        e "...."
+        $ slw.body = "bodu_04_full_face"
+        e "...."
+        $ slw.body = "bodu_04_full_face_slant"
+        e "...."
+        $ slw.body = "bodu_05_default"
+        e "...."
+        $ slw.body = "bodu_05_full_face"
+        e "...."
+        $ slw.body = "bodu_05_full_face_slant"
+        e "...."
+        $ slw.body = "bodu_05_left"
+        e "...."
+        $ slw.body = "bodu_05_left_down"
+        e "...."
+        $ slw.body = "bodu_06_default"
+        e "...."
+        $ slw.body = "bodu_06_left"
+        e "...."
+        $ slw.body = "bodu_05_full_face"
+        e "...."
+        $ slw.body = "bodu_06_left_down"
+        e "...."
+        $ slw.body = "bodu_06_left_slant"
+        e "...."
+        $ slw.body = "bodu_07_default"
+        e "...."
+        $ slw.body = "bodu_08_default"
+        e "...."
+        $ slw.body = "bodu_08_left"
+        e "...."
+        $ slw.body = "bodu_08_left_down"
+        e "...."
+        $ slw.body = "bodu_08_left_slant"
+        e "...."
+        $ slw.body = "bodu_09_left"
+        e "...."
+        $ slw.body = "bodu_09_left_down"
+        e "...."
+        $ slw.body = "bodu_12_base"
+        e "...."
+        $ slw.body = "bodu_13_base"
+
+        $ slw.eyes = "eyes_norm_prizes_02"
+        $ slw.mouth = "norm_language_01"
+        $ slw.freckles = "norm_04"
+        $ slw.brov = "brov_irritations_01"
+
+        #$ head_LW_01 = 'left_slant'
+
+
+        #$ head_LW_01 = 'default'
+        #show HM s01 at right onlayer xra with dissolve
+        #hide Little_witch onlayer sloi02
+        # LW open ""
+        # show LW -open
 
 
         e "v"
 
         hide little_witch onlayer sloi02
 
-        $ renpy.call("slw_viewer")
+        #$ renpy.call("slw_viewer")
 
 
 
