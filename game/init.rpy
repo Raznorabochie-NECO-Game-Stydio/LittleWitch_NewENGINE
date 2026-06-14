@@ -436,8 +436,8 @@ init python:
 
         "hat":{
 
-            "hat_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_down_01.png",
-            "hat_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_down_02.png",
+            "hat_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_down_01.png",
+            "hat_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_down_02.png",
 
 
         },
@@ -448,23 +448,23 @@ init python:
         # а картинку — отсюда. Так обе части шляпы синхронны.
 
         "hat_front": {
-            "hat_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_top_01.png",
-            "hat_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_top_02.png",
+            "hat_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_top_01.png",
+            "hat_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_top_02.png",
         },
 
         # ── ТРУСИКИ ── нижнее бельё (первый слой одежды).
 
         "panties": {
-            "panties_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_white_01.png",
-            "panties_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_black_01.png",
+            "panties_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_white_01.png",
+            "panties_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_black_01.png",
 
         },
 
         # ── ПАНТАЛОНЫ ── поверх трусиков.
 
         "pantaloons": {
-            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_01.png",
-            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_02.png",
+            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_01.png",
+            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_02.png",
 
         },
 
@@ -472,29 +472,29 @@ init python:
 
         "top": {
 
-            "top_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_01.png",
-            "top_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_02.png",
-            "top_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_03.png",
-            "top_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_04.png",
+            "top_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_01.png",
+            "top_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_02.png",
+            "top_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_03.png",
+            "top_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_04.png",
 
         },
 
         # ── ОДЕЖДА ── поверх белья (ночная рубашка / платье и т.п.).
 
         "clothes": {
-            "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
-            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_01.png",
+            "nightie_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_dresses_01.png",
         },
 
         #упраж
         "exercise": {
-            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_exercise_01.png",
 
         },
 
         #Карсет
         "carset": {
-            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_Carset_01.png",
 
         },
 
@@ -502,19 +502,19 @@ init python:
         # надеть только одну (например, лишь левую при определённом сюжете).
 
         "gloves_left":{
-            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_gloves_01.png",
 
         },
 
         # ── ПЕРЧАТКА ПРАВАЯ ──
         "gloves_right": {
-            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_right_gloves_01.png",
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_right_gloves_01.png",
 
         },
 
         # ── САПОГ ЛЕВЫЙ ── аналогично перчаткам — раздельно.
         "boots_left": {
-            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_boot_01.png",
+            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_boot_01.png",
 
         },
 
@@ -523,7 +523,7 @@ init python:
         # к реальному файлу на диске. Проверь, что файл назван именно так.
 
         "boots_right": {
-            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_righ_boot_01.png",
+            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_righ_boot_01.png",
 
         },
 
@@ -655,68 +655,68 @@ init python:
 
         #трусики
         "panties": {
-            "panties_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_white_01.png",
-            "panties_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_black_01.png",
+            "panties_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_white_01.png",
+            "panties_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_black_01.png",
 
         },
 
         #панталоны
         "pantaloons": {
-            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_01.png",
-            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_02.png",
+            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_01.png",
+            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_02.png",
 
         },
         
         #топ
         "top": {
 
-            "top_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_01.png",
-            "top_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_02.png",
-            "top_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_03.png",
-            "top_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_04.png",
+            "top_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_01.png",
+            "top_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_02.png",
+            "top_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_03.png",
+            "top_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_04.png",
 
         },
 
         #одежда
 
         "clothes": {
-            "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
-            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_02.png",
+            "nightie_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_dresses_02.png",
         },
 
         #упраж
         "exercise": {
-            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_exercise_01.png",
 
         },
 
         #Карсет
         "carset": {
-            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_Carset_01.png",
 
         },
 
         #перчатки левая
         "gloves_left":{
-            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_gloves_01.png",
 
         },
 
         #перчатка правая
         "gloves_right": {
-            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_right_gloves_01.png",
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_right_gloves_01.png",
 
         },
 
         #сапог левый
         "boots_left": {
-            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_boot_01.png",
+            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_boot_01.png",
 
         },
 
         #сапог правый
         "boots_right": {
-            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_righ_boot_01.png",
+            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_righ_boot_01.png",
 
         },
 
@@ -831,68 +831,68 @@ init python:
         #Одежда
         #трусики
         "panties": {
-            "panties_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_white_01.png",
-            "panties_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_black_01.png",
+            "panties_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_white_01.png",
+            "panties_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_black_01.png",
 
         },
 
         #панталоны
         "pantaloons": {
-            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_01.png",
-            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_02.png",
+            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_01.png",
+            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_02.png",
 
         },
         
         #топ
         "top": {
 
-            "top_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_01.png",
-            "top_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_02.png",
-            "top_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_03.png",
-            "top_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_04.png",
+            "top_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_01.png",
+            "top_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_02.png",
+            "top_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_03.png",
+            "top_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_04.png",
 
         },
 
         #одежда
         "clothes": {
-            "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
-            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_03.png",
+            "nightie_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_dresses_03.png",
         },
 
         #упраж
         "exercise": {
-            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_exercise_01.png",
 
         },
 
         #Карсет
         "carset": {
-            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_Carset_01.png",
 
         },
 
 
         #перчатки левая
         "gloves_left":{
-            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_gloves_01.png",
 
         },
 
         #перчатка правая
         "gloves_right": {
-            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_right_gloves_01.png",
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_right_gloves_01.png",
 
         },
 
         #сапог левый
         "boots_left": {
-            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_boot_01.png",
+            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_boot_01.png",
 
         },
 
         #сапог правый
         "boots_right": {
-            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_righ_boot_01.png",
+            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_righ_boot_01.png",
 
         },
 
@@ -1009,81 +1009,81 @@ init python:
         #шляпа (задняя часть — под волосами)
         "hat":{
 
-            "hat_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_down_01.png",
-            "hat_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_down_02.png",
+            "hat_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_down_01.png",
+            "hat_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_down_02.png",
 
 
         },
 
         #шляпа (передняя часть — поверх волос, ДРУГИЕ спрайты)
         "hat_front": {
-            "hat_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_top_01.png",
-            "hat_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_hat_top_02.png",
+            "hat_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_top_01.png",
+            "hat_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_hat_top_02.png",
         },
 
         #трусики
         "panties": {
-            "panties_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_white_01.png",
-            "panties_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_panties_black_01.png",
+            "panties_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_white_01.png",
+            "panties_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_panties_black_01.png",
 
         },
 
         #панталоны
         "pantaloons": {
-            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_01.png",
-            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_pantaloons_02.png",
+            "pantaloons_long": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_01.png",
+            "pantaloons_short": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_pantaloons_02.png",
 
         },
 
         #топ
         "top": {
 
-            "top_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_01.png",
-            "top_02": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_02.png",
-            "top_white": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_03.png",
-            "top_black": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_top_04.png",
+            "top_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_01.png",
+            "top_02": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_02.png",
+            "top_white": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_03.png",
+            "top_black": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_top_04.png",
 
         },
 
         #одежда
         "clothes": {
-            "nightie_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_nightie_01.png",
-            "dresses_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_dresses_01.png",
+            "nightie_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_nightie_01.png",
+            "dresses_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_dresses_01.png",
         },
 
         #упраж
         "exercise": {
-            "exercise_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_exercise_01.png",
+            "exercise_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_exercise_01.png",
 
         },
 
         #Карсет
         "carset": {
-            "Carset_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_Carset_01.png",
+            "Carset_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_Carset_01.png",
 
         },
 
         #перчатки левая
         "gloves_left":{
-            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_gloves_01.png",
 
         },
 
         #перчатка правая
         "gloves_right": {
-            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_right_gloves_01.png",
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_right_gloves_01.png",
 
         },
 
         #сапог левый
         "boots_left": {
-            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_left_boot_01.png",
+            "boots_left_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_left_boot_01.png",
 
         },
 
         #сапог правый
         "boots_right": {
-            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01-02/SLW_01_01_bodu_base_default_righ_boot_01.png",
+            "boots_right_01": "images/sprites/SLW/SWN/clothes/S01/SLW_01_01_bodu_base_default_righ_boot_01.png",
 
             },
 
@@ -3785,7 +3785,7 @@ init python:
             "blink_closed":        "images/sprites/SLW/SWN/s9/eyes/ese_base_01_03.png",
         },
 
-        # Брови S2.
+        # Брови S9.
         "brov": {
             'brov_surprised_01':   "images/sprites/SLW/SWN/s9/brov/brov_base_02_02.png",
             'brov_gloomy_01':      "images/sprites/SLW/SWN/s9/brov/brov_base_02_03.png",
@@ -3800,6 +3800,42 @@ init python:
             'default':             "images/sprites/SLW/SWN/s9/brov/brov_base_02_01.png",
         },
 
+        # Веснушки S9.
+        "freckles": {
+            'norm_01':         "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_02.png",
+            'norm_02':         "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_03.png",
+            'norm_03':         "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_04.png",
+            'norm_04':         "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_05.png",
+            'norm_05':         "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_06.png",
+            'norm_06':         "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_09.png",
+            'norm_hatching_01':"images/sprites/SLW/SWN/s9/freckles/freckles_base_01_07.png",
+            'norm_blush_01':   "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_08.png",
+            'default':         "images/sprites/SLW/SWN/s9/freckles/freckles_base_01_01.png",
+
+        },
+        
+        # Рот S9.
+        "mouth": {
+            'norm_smail_01':        "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_12.png",
+            'norm_smail_02':        "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_07.png",
+            'norm_smail_03':        "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_09.png",
+            'norm_smail_04':        "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_10.png",
+            'norm_conversation_01': "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_05.png",
+            'norm_conversation_02': "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_03.png",
+            'norm_conversation_03': "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_04.png",
+            'norm_conversation_04': "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_05.png",
+            'norm_surprised_01':    "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_02.png",
+            'norm_surprised_02':    "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_03.png",
+            'norm_surprised_03':    "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_04.png",
+            'norm_surprised_04':    "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_02.png",
+            'norm_sour_01':         "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_08.png",
+            'norm_sour_02':         "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_11.png",
+            'norm_sour_03':         "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_13.png",
+            'norm_audacious_01':    "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_06.png",
+            'norm_language_01':     "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_14.png",
+            'default':              "images/sprites/SLW/SWN/s9/mouth/mouth_base_02_01.png",
+        },
+        
             #Волосы
         "hair": {
 
@@ -3846,6 +3882,7 @@ init python:
 
         for slot, keys in base.items():
             # Если в базе слот отключён строкой "no" — копируем как есть
+            # В базе слот может быть словарём ИЛИ строкой "no" — учитываем оба случая.
             if isinstance(keys, dict):
                 result[slot] = dict(keys)
             else:
@@ -6206,6 +6243,7 @@ define LW_long_range = FactorZoom(0.5, 0.5, 0.0, opaque = False)
 #Для маленькой ведьмы для ч/б спрайтов
 
 define screen_center_short = Position(xpos=950, ypos=2850)
+define screen_center_medium = Position(xpos=950, ypos=1950)
 define screen_center_long = Position(xpos=950, ypos=1050)
 
 # переменные для Маленькой Ведьмы на ближный средний и дальный план для других спрайтов
