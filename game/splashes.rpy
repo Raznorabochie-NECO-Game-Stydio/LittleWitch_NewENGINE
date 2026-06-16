@@ -1,4 +1,5 @@
 label splashscreen:
+    # MOKOt
     scene start_splash 
     $ renpy.pause(1.5)
     show text "{=typewr}{color=#909090}{size=65}NECO Game Stydio{/size}{/color}{/}" with Dissolve(1.5)
@@ -113,7 +114,6 @@ screen chapt_splashscr_01(line):
 # text_font = "GOST_A.ttf"
 
 label chapt0_splashscr:
-
     show screen chapt_splashscr("{font=fonts/CeltesSP2.otf}{size=65}Привет, путник!{/size}{/font}")
     with dissolve
     pause 4.0
@@ -243,42 +243,11 @@ label chapt_01_1_splashscr:
 
 label chapt_01_2_splashscr:
 
-    show screen chapt_splashscr_01("Когда вечности суть я познала сама,")
+    show screen chapt_splashscr_01("Когда вечности суть я познала сама,\n Я тебя здесь уже найти не смогла,\n В тумане снов своих плывёт\n Ярких звёзд водоворот.\n Сон единый я создам, о цветах в серебряной ночи,\n Как тени этого яркого мира засыпают вечным сном.")
     with dissolve
-    pause 5.0
+    pause 10.0
     hide screen chapt_splashscr_01
     with dissolve
-
-    show screen chapt_splashscr_01("Я тебя здесь уже найти не смогла,")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("В тумане снов своих плывёт")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Ярких звёзд водоворот.")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Сон единый я создам, о цветах в серебряной ночи,")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
-    show screen chapt_splashscr_01("Как тени этого яркого мира засыпают вечным сном.")
-    with dissolve
-    pause 5.0
-    hide screen chapt_splashscr_01
-    with dissolve
-
 
     return
 
