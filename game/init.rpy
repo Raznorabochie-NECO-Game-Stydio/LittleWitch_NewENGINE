@@ -1198,8 +1198,19 @@ init python:
 
         # Одежда
 
-        
-        
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": "no",
+
+
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -1308,6 +1319,19 @@ init python:
 
         "kassa_2": "no",
 
+        # Одежда
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": "no",
+
 
         },
 
@@ -1322,7 +1346,20 @@ init python:
 
         "kassa_2": "no",
 
-        #одежда
+        # Одежда
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": "no",
+
+       
 
         },
 
@@ -1430,6 +1467,19 @@ init python:
         },
 
         "kassa_2": "no",
+
+        # Одежда
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S02/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": "no",
 
 
 
@@ -1552,6 +1602,23 @@ init python:
 
         "kassa_2": "no",
 
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S03/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S03/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
+
+
 
         },
 
@@ -1669,7 +1736,21 @@ init python:
 
         "kassa_2": "no",
 
+        # ── ОДЕЖДА ── 
 
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S03/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S03/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
 
         }, 
 
@@ -1780,6 +1861,21 @@ init python:
 
         "kassa_2": "no",
 
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S03/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S03/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
 
         },
 
@@ -1899,6 +1995,23 @@ init python:
 
         "kassa_2": "no",
 
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
+
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -2014,6 +2127,23 @@ init python:
 
         "kassa_2": "no",
 
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
+
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -2033,6 +2163,23 @@ init python:
         },
 
         "kassa_2": "no",
+
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
+
 
         },
 
@@ -2142,6 +2289,23 @@ init python:
         },
 
         "kassa_2": "no",
+
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S04/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
+
 
         },
 
@@ -2261,6 +2425,22 @@ init python:
 
         "kassa_2": "no",
 
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
+
         },
 
         # ────────────────────────────────────────────────────────────
@@ -2273,14 +2453,25 @@ init python:
 
         "bodu_05_full_face": {
 
-
-
-
         "kassa_2": "no",
 
         # Одежда — дублирует базу. Это сделано «на всякий случай»,
         # чтобы при необходимости легко поменять только под это тело,
         # ничего не трогая в общем шаблоне.
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
             
         },
 
@@ -2388,6 +2579,22 @@ init python:
         },
 
         "kassa_2": "no",
+
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
 
         },
 
@@ -2508,6 +2715,22 @@ init python:
         },
 
         "kassa_2": "no",
+
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
       
 
         }, 
@@ -2626,6 +2849,22 @@ init python:
         },
 
         "kassa_2": "no",
+
+        # ── ОДЕЖДА ── 
+
+        # ── ПЕРЧАТКА ЛЕВАЯ ── разделена на левую/правую, чтобы можно было
+        # надеть только одну (например, лишь левую при определённом сюжете).
+
+        "gloves_left":{
+            "gloves_left_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_left_gloves_01.png",
+
+        },
+
+        # ── ПЕРЧАТКА ПРАВАЯ ──
+        "gloves_right": {
+            "gloves_right_01": "images/sprites/SLW/SWN/clothes/S05/SLW_01_01_bodu_base_default_right_gloves_01.png",
+
+        },
 
 
         },
