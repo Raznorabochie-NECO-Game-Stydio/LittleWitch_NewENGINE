@@ -113,7 +113,7 @@ screen say(who, what):
     ## По стандарту не показывается на варианте для мобильных устройств — мало
     ## места.
     if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
+        add SideImage() xalign 0.0 yalign 1.0 yoffset 50
 
 
 ## Делает namebox доступным для стилизации через объект Character.
@@ -144,7 +144,7 @@ style namebox:
     ypos gui.name_ypos
     ysize gui.namebox_height
 
-    background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    background Frame("gui/ramka.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
     padding gui.namebox_borders.padding
 
 style say_label:
@@ -261,7 +261,11 @@ screen quick_menu():
 ## Данный код гарантирует, что экран быстрого меню будет показан в игре в любое
 ## время, если только игрок не скроет интерфейс.
 init python:
-    config.overlay_screens.append("quick_menu")
+    #config.overlay_screens.append("quick_menu")
+    if persistent.QMenu == True:
+        config.overlay_screens.append("quick_menu")
+    else:
+        pass
 
 default quick_menu = True
 
@@ -491,7 +495,7 @@ style game_menu_outer_frame:
     bottom_padding 45
     top_padding 180
 
-    background Movie(play="gui/main_menu/main_menu.webm")
+    background Movie(play="gui/game_menu/game_menu.webm", size=(1920, 1080))
 
 style game_menu_navigation_frame:
     xsize 420
@@ -715,6 +719,21 @@ style slot_button_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
+init python:
+    class OneTimeReload(Action):
+        def __init__(self):
+            self.used = False
+        
+        def __call__(self):
+            if not self.used:
+                self.used = True
+                renpy.reload_script()
+            return
+        
+        def get_sensitive(self):
+            return not self.used
+
+
 screen preferences():
 
     tag menu
@@ -740,6 +759,12 @@ screen preferences():
                     textbutton _("Всего текста") action Preference("skip", "toggle")
                     textbutton _("После выборов") action Preference("after choices", "toggle")
                     textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
+
+                vbox:
+                    style_prefix "radio"
+                    label _("Быстрое меню")
+                    textbutton _("Есть") action [SetVariable("persistent.QMenu", True), OneTimeReload()]
+                    textbutton _("Нету") action [SetVariable("persistent.QMenu", False), OneTimeReload()]
 
                 ## Дополнительные vbox'ы типа "radio_pref" или "check_pref"
                 ## могут быть добавлены сюда для добавления новых настроек.
