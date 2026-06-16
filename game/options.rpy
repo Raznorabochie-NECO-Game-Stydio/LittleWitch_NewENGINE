@@ -23,16 +23,19 @@ define gui.show_name = True
 
 ## Версия игры.
 
-define config.version = "0.0.3"
+define config.version = "0.0.4.5"
 
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
 ## Для отделения абзацев оставляйте между ними пустую строку.
 
 define gui.about = _p("""
-Автор/Главный кодер/Художник - AngelRanga\n
-Кодер поменьше - M0K0t\n
+Автор, Главный кодер, Художник - AngelRanga\n
+Бета ридер, соавтор - Saitar1337\n
+Запертый в подвале кодер - M0K0t\n
 Используемые материалы принадлежат их правообладателям.\n
+Шахматный движок принадлежит его автору - {a=https://lynnzheng.netlify.app/}Линн Женг{/a} по \n
+{a=https://github.com/RuolinZheng08/renpy-chess/?tab=MIT-1-ov-file#}лицензии MIT{/a}.
 """)
 
 
@@ -76,23 +79,23 @@ define config.has_voice = True
 
 ## Вход и выход в игровое меню.
 
-define config.enter_transition = dissolve
-define config.exit_transition = dissolve
+define config.enter_transition = pixellate
+define config.exit_transition = pixellate
 
 
 ## Переход между экранами игрового меню.
 
-define config.intra_transition = dissolve
+define config.intra_transition = pixellate
 
 
 ## Переход, используемый после загрузки слота сохранения.
 
-define config.after_load_transition = None
+define config.after_load_transition = pixellate
 
 
 ## Используется при входе в главное меню после того, как игра закончится.
 
-define config.end_game_transition = None
+define config.end_game_transition = pixellate
 
 
 ## Переменная, устанавливающая переход, когда старт игры не существует. Вместо
@@ -212,3 +215,4 @@ init python:
 ## разделённые дробью.
 
 # define build.itch_project = "renpytom/test-project"
+default persistent.QMenu = True
