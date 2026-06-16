@@ -1814,8 +1814,8 @@ label Cha_001:
         #$ slw.clothes = "dresses_01"
         #$ slw.exercise = "exercise_01"
         #$ slw.carset = "Carset_01"
-        #$ slw.gloves_left = "gloves_left_01"
-        #$ slw.gloves_right = "gloves_right_01"
+        $ slw.gloves_left = "gloves_left_01"
+        $ slw.gloves_right = "gloves_right_01"
         #$ slw.boots_left = "boots_left_01"
         #$ slw.boots_right = "boots_right_01"
         #$ reset_slw_blink()
