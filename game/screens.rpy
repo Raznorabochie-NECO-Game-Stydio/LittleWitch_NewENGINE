@@ -261,7 +261,7 @@ screen quick_menu():
 ## Данный код гарантирует, что экран быстрого меню будет показан в игре в любое
 ## время, если только игрок не скроет интерфейс.
 init python:
-
+    #config.overlay_screens.append("quick_menu")
     if persistent.QMenu == True:
         config.overlay_screens.append("quick_menu")
     else:
@@ -733,6 +733,7 @@ init python:
         def get_sensitive(self):
             return not self.used
 
+
 screen preferences():
 
     tag menu
@@ -758,13 +759,6 @@ screen preferences():
                     textbutton _("Всего текста") action Preference("skip", "toggle")
                     textbutton _("После выборов") action Preference("after choices", "toggle")
                     textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
-                    
-                vbox:
-                    style_prefix "radio"
-                    label _("Быстрое меню")
-                    textbutton _("Есть") action [SetVariable("persistent.QMenu", True), OneTimeReload()]
-                    textbutton _("Нету") action [SetVariable("persistent.QMenu", False), OneTimeReload()]
-
 
                 vbox:
                     style_prefix "radio"
