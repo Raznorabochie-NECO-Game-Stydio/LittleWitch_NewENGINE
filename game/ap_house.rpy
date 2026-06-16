@@ -1,6 +1,8 @@
 #ЛЕСТНИЦЫ
 label lest1:
     # 1 этаж Йесод (Форма):
+    
+
     if traces_01 == False:
         $ traces_01 = True
 
@@ -58,12 +60,13 @@ label lest1:
                 LW "«- Я пойду»."
 
                 e "Следы вывели ее на площадку пятого этажа. "
+
                 e "Тусклый свет единственной лампы дрожал, отбрасывая причудливые тени, которые будто пытались, что-то скрыть."
                 e "Ведьма остановилась, прислушиваясь: ни шагов, ни голосов."
+
                 e "Следы, до этого неуклонно ведущие вверх, исчезли на пороге двери ведущей в коридор этого этажа. "
 
                 jump hallway_05
-
 
 
             "Осмотру этажи":
@@ -74,6 +77,7 @@ label lest1:
                         jump podezd
 
                     "На этаж 01":
+
                         if hallway_002 == False:
 
                             e "В полутьме лестничной клетки. "
@@ -131,9 +135,11 @@ label lest1:
             
             "На следующий этаж":
                 jump lest2
-
+        
+    
     return
-
+    
+    
 label lest2:
     # 2 этаж Ход (Слава)
     menu:
@@ -282,6 +288,7 @@ label lest5:
     
 label lest6:
     # 6 этаж Хесед (Милосердие):
+
     menu:
 
         "Куда пойти?"
@@ -308,15 +315,17 @@ label lest6:
                 pass
 
             jump hallway_06
+
             
         "Между" if enigma_01 and enigma_02 and TV_01 == True:
             jump lest6_5
              
         "На следующий этаж":
             jump lest7
-                     
+            
+    
+            
     return    
-
 label lest6_5:
     # 6,5 этаж скрытий Даат
     menu:
@@ -342,7 +351,7 @@ label lest7:
         "Куда пойти?"
         "Ниже":
             jump lest6
-
+        
         "Между" if enigma_01 and enigma_02 and TV_01 == True:
             jump lest6_5
             
@@ -417,7 +426,7 @@ label roof:
 
     # Крыша Кетер (Корона):
     $ hallway_011 = True
-
+    
     menu:
         #"Say Statement"
         "Вернутся вниз":
@@ -435,157 +444,6 @@ label suicide:
     
     return
     
-#ДВЕРКИ
-label door1j:
-    
-    jump room1j
 
-    return
-    
-label door2j:
-
-    jump room2j
-    
-    return
-    
-label door3j:
-
-    jump kor7
-    
-    return
-    
-label door4j:
-
-    jump room4j
-    
-    return
-    
-label door5j:
-
-    jump kor7
-    
-    return
-    
-label door6j:
-
-    jump room6j
-    
-    return
-    
-label door1z:
-
-    return
-    
-label door2z:
-    
-    return
-    
-label door3z:
-
-    return
-    
-label door4z:
-    
-    return
-    
-label door5z:
-    
-    return
-    
-label door6z:
-
-    return
-    
 #КОРИДОРЫ
-label kor6_5:
 
-    return
-    
-label kor7:
-
-    menu:
-        "Куда пойти?"
-        "Обратно, на лестничную площадку":
-            jump lest7
-            
-        "В первую дверь":
-            jump door1j
-            
-        "Во вторую дверь":
-            jump door2j
-            
-        "В третью дверь":
-            jump door3j
-            
-        "В четвёртую дверь":
-            jump door4j
-            
-        "В пятую дверь":
-            jump door5j
-            
-        "В шестую дверь":
-            jump door6j
-
-    return
-    
-label kor8:
-    menu:
-        "Куда пойти?"
-        "В первую дверь":
-            jump door1z
-        "Во вторую дверь":
-            jump door2z
-        "В третью дверь":
-            jump door3z
-        "В четвёртую дверь":
-            jump door4z
-        "В пятую дверь":
-            jump door5z
-        "В шестую дверь":
-            jump door6z
-            
-    return
-    
-#КОМНАТЫ
-label room1j:
-    
-    jump kor7
-
-    return
-    
-label room2j:
-
-    menu:
-        "Куда пойти?"
-        "В другую комнату":
-            jump room2j2
-         
-        "Выйти в коридор":
-            jump kor7
-            
-    return
-    
-label room2j2:
-    
-    jump kor7
-    
-    return
-    
-label room4j:
-
-    jump kor7
-    
-    return
-    
-label room6j:
-    menu:
-        "Куда пойти?"
-        "Вернутся сюда же":
-        
-            jump room6j
-            
-        "Выйти в коридор":
-        
-            jump kor7
-            
-    return
