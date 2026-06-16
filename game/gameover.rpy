@@ -5,7 +5,7 @@ label game_over:
         
         #scene bg000b with dissolve
         #show STRA
-        #play music BGM_008 fadein 1.5
+        #play music  "Sound/BGM_008.mp3" fadein 1.5
         centered "{color=#7fbdbf}{i}И вместе смотреть будем сны{/i}{/color}"
         centered "{color=#7fbdbf}{i}В просторах космоса безбрежном{/i}{/color}"
         centered "{color=#7fbdbf}{i}И убаюкивать в ночи{/i}{/color}"
@@ -547,7 +547,7 @@ label game_over:
         #show OB at loposR onlayer dexm
     
         HM "- Нет,{w=1} ты ведь знаешь все истории известных миров."
-
+    
         #show HM s05 at right onlayer xra with dissolve
         #hide OB onlayer dexm
         #show LW s15 at razgavor, left with dissolve
@@ -558,7 +558,7 @@ label game_over:
         #show LW rn at razgavor, left with dissolve
         #hide V onlayer demo
         #show S02 at loposL onlayer demo
-
+    
         LW "Не хочешь ли ты мне сказать, мудрая Наставница,{w=1} что миры Великого Древа — всё, что существует?"
     
         #show LW s01 at left with dissolve
@@ -597,8 +597,8 @@ label game_over:
         #show HM r03 at razgavor, right onlayer xra with dissolve
         #hide S01 onlayer dexm
         #show LW n at left with dissolve
-        #show ST at loposR onlayer dexm 
-        
+        #show ST at loposR onlayer dexm
+    
         HM "Тихоня — но уж больно любопытная! Порой меня, саму меня в неловкое положение ставишь... "
         HM "Ладно, расскажу. "
     
@@ -878,7 +878,6 @@ label game_over:
     
         HM "- Идём же, "
     
-
         #show HM r03 at razgavor, right onlayer xra with dissolve
     
         #HM "Мне самой не терпится увидеть...{w=1} Коллегу..."
@@ -1158,7 +1157,6 @@ label game_over:
     
         e "Тихоня мягко улыбнулась, глядя в сверкающие розовой радужкой глаза карликовой Хранительницы иных миров."
     
-
         #show CC rn at razgavor, center with dissolve
         #show S01 at loposC onlayer demo
     
@@ -1208,7 +1206,7 @@ label game_over:
         e "Да, странное поведение для той, кто старше звёзд — думала Тихоня. "
         e "Но комментировать было бы грубо."
         e "Наконец, просмеявшись, она просто спросила."
-
+    
         #show LW v03 at razgavor, left with dissolve
         #show B at loposL onlayer demo
     
@@ -1228,7 +1226,7 @@ label game_over:
         #show D at loposL onlayer demo
     
         LW "- Син-Син? А что это значит?"
-        
+    
         #show LW s03 at left with dissolve
         #hide D onlayer demo
         #show CC smail 01 at center with dissolve
@@ -1342,7 +1340,7 @@ label game_over:
          
     elif ppoints  >= 4 and ppoints <= 5:
         
-        scene bg0000 with dissolve
+        scene bg000 with dissolve
         #планета юготт
         
         e "Эпилог 4"
@@ -1351,7 +1349,7 @@ label game_over:
         
     elif ppoints >= 6 and ppoints <= 8:
         
-        scene bg0000b with dissolve
+        scene bg000b with dissolve
         #арка скарлет
         
         
@@ -1361,7 +1359,7 @@ label game_over:
         
     elif ppoints >= 9:
         
-        scene bg0000b with dissolve
+        scene bg000b with dissolve
         
         show STRA
         play music  "Sound/BGM_008.mp3" fadein 1.5
@@ -1370,7 +1368,7 @@ label game_over:
         centered "{color=#7fbdbf}{i}Наше время, наши дни...{/i}{/color}"
 
         hide STRA
-        scene bg0000 with diss
+        scene bg000 with diss
         
         if PP == 0:
             
