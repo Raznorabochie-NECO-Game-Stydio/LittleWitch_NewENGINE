@@ -1941,7 +1941,7 @@ label Cha_001:
 
         hide little_witch onlayer sloi02
 
-        #$ renpy.call("slw_viewer")
+        $ renpy.call("slw_viewer")
 
 
 
