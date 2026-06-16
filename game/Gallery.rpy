@@ -3,7 +3,7 @@ init python:
 
     g.transition = dissolve
 
-screen gallery:
+screen gallery():
     tag menu
     add Movie(play="gui/main_menu/main_menu.webm")
     grid 3 3:
