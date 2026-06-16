@@ -90,6 +90,22 @@ label living_room_002_01:
 
     e "...."
 
+    menu:
+        #"Say Statement"
+        "тумбачка":
+            #block of code to run
+
+            e "Это был младший аркан таро."
+
+            $ Minor_Arcane_Taro = 2
+            call Minor_Arcane
+
+            pass
+        "комната":
+            #block of code to run
+            pass
+                
+
     jump hallway_flat_002_01
 
     return
