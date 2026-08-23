@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'SuperNat-kg';
+    src: url('supernatural-kg.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+p {
+  line-height: 1.5;
+  color: #8FA4B5;
+  display: inline;
+}
+
+body {
+    background: url('../Data/background2.jpg') bottom center / cover fixed no-repeat;
+    font-size: 24px;
+    font-family: SuperNat-kg, arial, sans-serif;
+    color:  #AAAAAAFF;
+}
+
+header {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    background: #FFFFFF;
+    font-size: 18px;
+    font-weight: 800;
+    gap: 15px;
+    border-bottom: 1px solid #AAAAAAFF;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+header p {
+    display: flex;
+    text-align: center;
+}
+
+main {
+    font-size: 16px;
+    display: flex;
+    height: 770px;
+    align-items: center;
+    justify-content: center;
+    gap: 200px;
+    margin: 0 auto;
+}
+
+footer {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px !important;
+    border-top: 1px solid #AAAAAAFF;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+a {
+    color: #00D2C6;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.2s linear;
+}
+
+a:hover {
+    color: #5FFBF1;
+    text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 210, 198, 0.6);
+
+}
+
+.box {
+    display: flex;
+    width: 900px; 
+    font-size: 30px;
+    overflow-wrap: break-word;
+    text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 210, 198, 0.6);
+}
